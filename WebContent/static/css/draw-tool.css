@@ -1,0 +1,80 @@
+.drawing-toolbarx {
+	position: absolute;
+	z-index: 10;
+	bottom: auto;
+	left: 5px;
+	top: 5px;
+	right: auto;
+	background-color:#DEDEDE;
+}
+
+.drawing-panel {
+	height: 47px;
+	border: 1px solid #666;
+	border-radius: 5px;
+	overflow: hidden;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+	float: left
+}
+
+.drawing-toolbar .drawing-toolbox {
+	border-right: 1px solid #d2d2d2;
+	float: left;
+	height: 100%;
+	width: 64px;
+	height: 100%;
+	background-color:red;
+	cursor: pointer
+}
+
+.drawing-toolbar .tool-last {
+	border-right: 0
+}
+
+.drawing-toolbar .tool-pan {
+	background-position: 0 0
+}
+
+.drawing-toolbar .tool-pan-hover {
+	background-position: 0 -52px
+}
+
+.drawing-toolbar .tool-drawPoint {
+	background-position: -65px 0
+}
+
+.drawing-toolbar .tool-drawPoint-hover {
+	background-position: -65px -52px
+}
+
+.drawing-toolbar .tool-drawCircle {
+	background-position: -130px 0
+}
+
+.drawing-toolbar .tool-drawCircle-hover {
+	background-position: -130px -52px
+}
+
+.drawing-toolbar .tool-drawPolyline {
+	background-position: -195px 0
+}
+
+.drawing-toolbar .tool-drawPolyline-hover {
+	background-position: -195px -52px
+}
+
+.drawing-toolbar .tool-drawPolygon {
+	background-position: -260px 0
+}
+
+.drawing-toolbar .tool-drawPolygon-hover {
+	background-position: -260px -52px
+}
+
+.drawing-toolbar .tool-drawRect {
+	background-position: -325px 0
+}
+
+.drawing-toolbar .tool-drawRect-hover {
+	background-position: -325px -52px
+}

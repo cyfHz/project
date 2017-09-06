@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.auth.organization.mapper.OrganizationMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.auth.organization.model.Organization" >
+    <id column="ORGNA_ID" property="orgna_id" jdbcType="VARCHAR" />
+    <result column="ORGNA_CODE" property="orgna_code" jdbcType="VARCHAR" />
+    <result column="ORGNA_NAME" property="orgna_name" jdbcType="VARCHAR" />
+    <result column="ORGNA_JC" property="orgna_jc" jdbcType="VARCHAR" />
+    <result column="ORGNA_TYPE" property="orgna_type" jdbcType="VARCHAR" />
+    <result column="ORGNA_PROPERTY" property="orgna_property" jdbcType="VARCHAR" />
+    <result column="ORGNA_LEVEL" property="orgna_level" jdbcType="VARCHAR" />
+    <result column="ORGNA_ADDRESS" property="orgna_address" jdbcType="VARCHAR" />
+    <result column="ORGNA_ZIPCODE" property="orgna_zipcode" jdbcType="VARCHAR" />
+    <result column="ORGNA_TEL" property="orgna_tel" jdbcType="VARCHAR" />
+    <result column="ORGNA_FAX" property="orgna_fax" jdbcType="VARCHAR" />
+    <result column="ORGNA_EMAIL" property="orgna_email" jdbcType="VARCHAR" />
+    <result column="PORGNA_ID" property="porgna_id" jdbcType="VARCHAR" />
+    <result column="ENTORGNA_ID" property="entorgna_id" jdbcType="VARCHAR" />
+    <result column="AREA_ID" property="area_id" jdbcType="VARCHAR" />
+    <result column="ENABLED" property="enabled" jdbcType="CHAR" />
+    <result column="ORGNA_VALIDITY_START" property="orgna_validity_start" jdbcType="VARCHAR" />
+    <result column="ORGNA_VALIDITY_END" property="orgna_validity_end" jdbcType="VARCHAR" />
+    <result column="CCH" property="cch" jdbcType="DECIMAL" />
+    <result column="CCBZ" property="ccbz" jdbcType="VARCHAR" />
+    <result column="HZBZ" property="hzbz" jdbcType="CHAR" />
+    <result column="OPRATETIME" property="opratetime" jdbcType="VARCHAR" />
+    <result column="ORGNA_ORDER" property="orgna_order" jdbcType="VARCHAR" />
+    <result column="BZ0" property="bz0" jdbcType="VARCHAR" />
+    <result column="BZ1" property="bz1" jdbcType="VARCHAR" />
+    <result column="BZ2" property="bz2" jdbcType="VARCHAR" />
+    <result column="BZ3" property="bz3" jdbcType="VARCHAR" />
+    <result column="BZ4" property="bz4" jdbcType="VARCHAR" />
+    <result column="BZ5" property="bz5" jdbcType="VARCHAR" />
+    <result column="BZ6" property="bz6" jdbcType="VARCHAR" />
+    <result column="BZ7" property="bz7" jdbcType="VARCHAR" />
+    <result column="MOVESIGN" property="movesign" jdbcType="VARCHAR" />
+    <result column="ORGNA_HISCHILDNODE" property="orgna_hischildnode" jdbcType="DECIMAL" />
+    <result column="ORGNA_YXX" property="orgna_yxx" jdbcType="VARCHAR" />
+    <result column="SFZSJ" property="sfzsj" jdbcType="VARCHAR" />
+    <result column="ORGNA_GSDM" property="orgna_gsdm" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ORGNA_ID, ORGNA_CODE, ORGNA_NAME, ORGNA_JC, ORGNA_TYPE, ORGNA_PROPERTY, ORGNA_LEVEL, 
+    ORGNA_ADDRESS, ORGNA_ZIPCODE, ORGNA_TEL, ORGNA_FAX, ORGNA_EMAIL, PORGNA_ID, ENTORGNA_ID, 
+    AREA_ID, ENABLED, ORGNA_VALIDITY_START, ORGNA_VALIDITY_END, CCH, CCBZ, HZBZ, OPRATETIME, 
+    ORGNA_ORDER, BZ0, BZ1, BZ2, BZ3, BZ4, BZ5, BZ6, BZ7, MOVESIGN, ORGNA_HISCHILDNODE, 
+    ORGNA_YXX, SFZSJ
+  </sql>
+ 
+  
+    <!--########################################################### --><!-- ORGNA_LEVEL as NODETYPE 0704-->
+    <select id="selectOrgTreeNodeById" resultType="java.util.Map" parameterType="String">
+		SELECT ORGNA_ID as NODEID,ORGNA_NAME as NODETEXT,ORGNA_TYPE as NODETYPE
+		FROM APP_ORGANIZATION where ORGNA_ID = #{orgna_id,jdbcType=VARCHAR} ORDER BY NODEID
+	</select>
+	
+  	<select id="selectChildList" resultType="java.util.Map" parameterType="String">
+		SELECT ORGNA_ID as NODEID,ORGNA_NAME as NODETEXT,ORGNA_TYPE as NODETYPE,ORGNA_TYPE
+		FROM APP_ORGANIZATION
+		<include refid="selectChild_where" />
+		ORDER BY NODEID
+	</select>
+<!-- 0704 -->
+   <select id="selectChildListType" resultType="java.util.Map" parameterType="String">
+		SELECT ORGNA_ID as NODEID,ORGNA_NAME as NODETEXT,'3' as NODETYPE,ORGNA_TYPE
+		FROM APP_ORGANIZATION
+		WHERE 1=1
+		and (ORGNA_TYPE ='0' or ORGNA_TYPE ='1' or ORGNA_TYPE ='2' or ORGNA_TYPE ='3')
+		and  ENABLED='1'
+		and ORGNA_ID=#{ORGNA_ID}
+		ORDER BY NODEID
+	</select>
+
+	<select id="selectChildCount" resultType="java.lang.Long" parameterType="String">
+		select count(1) from APP_ORGANIZATION
+		<include refid="selectChild_where" />
+	</select>
+	
+	<sql id="selectChild_where">
+		WHERE 1=1
+		and (ORGNA_TYPE ='0' or ORGNA_TYPE ='1' or ORGNA_TYPE ='2' or ORGNA_TYPE ='3')
+		and  ENABLED='1'
+		<choose>
+			<when test="_parameter == null">
+				AND PORGNA_ID is null
+			</when>
+			<otherwise>
+				AND PORGNA_ID = #{id}
+			</otherwise>
+		</choose>
+	</sql>
+  
+  <!--########################################################### -->
+  
+  	<select id="selectOrgByUserId" resultMap="BaseResultMap" parameterType="String">
+		SELECT 
+        O.ORGNA_ID,
+        O.ORGNA_CODE,
+        O.ORGNA_NAME,
+        O.ORGNA_TYPE,
+        O.SFZSJ
+        FROM 
+        APP_ORGANIZATION_USER U,APP_ORGANIZATION O
+        WHERE 
+            U.ORGNA_ID=O.ORGNA_ID 
+        AND 
+        	U.APPUSER_ID=#{appuser_id,jdbcType=VARCHAR}
+	</select>
+	
+	
+	<select id="selectOrgById" resultMap="BaseResultMap" parameterType="String">
+		SELECT 
+	        O.ORGNA_ID,
+	        O.ORGNA_CODE,
+	        O.ORGNA_NAME,
+	        O.PORGNA_ID,
+	        O.ORGNA_JC,
+	        O.ORGNA_TYPE,
+	        O.ORGNA_ADDRESS,
+	        O.ORGNA_ZIPCODE,
+	        O.ORGNA_TEL,
+	        O.ORGNA_FAX,
+	        O.SFZSJ
+        FROM 
+        APP_ORGANIZATION O
+        WHERE 
+            O.ORGNA_ID =#{orgna_id,jdbcType=VARCHAR}
+	</select>
+	
+		<select id="selectOrgByCode" resultMap="BaseResultMap" parameterType="String">
+		SELECT 
+	        O.ORGNA_ID,
+	        O.ORGNA_CODE,
+	        O.ORGNA_NAME,
+	        O.PORGNA_ID,
+	        O.ORGNA_JC,
+	        O.ORGNA_TYPE,
+	        O.ORGNA_ADDRESS,
+	        O.ORGNA_ZIPCODE,
+	        O.ORGNA_TEL,
+	        O.ORGNA_FAX,
+	        O.SFZSJ
+        FROM 
+        APP_ORGANIZATION O
+        WHERE 
+            O.ORGNA_CODE =#{orgna_code,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectOrgCodeByPorgId" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT   
+			O.ORGNA_CODE  
+		 FROM  APP_ORGANIZATION O 
+		WHERE 1=1
+		and (O.ORGNA_TYPE ='0' or O.ORGNA_TYPE ='1' or O.ORGNA_TYPE ='2' or O.ORGNA_TYPE ='3')
+		and  O.ENABLED='1'
+		and O.PORGNA_ID =#{porg_id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectOrgByPorgId" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT   
+		    O.ORGNA_ID,
+	        O.ORGNA_CODE,
+	        O.ORGNA_NAME,
+	        O.PORGNA_ID,
+	        O.ORGNA_JC,
+	        O.ORGNA_TYPE,
+	        O.SFZSJ
+	       FROM  APP_ORGANIZATION O 
+		WHERE 1=1
+		and (O.ORGNA_TYPE ='0' or O.ORGNA_TYPE ='1' or O.ORGNA_TYPE ='2' or O.ORGNA_TYPE ='3')
+		and  O.ENABLED='1'
+		and O.PORGNA_ID =#{porg_id,jdbcType=VARCHAR}
+		order by  O.ORGNA_CODE
+	</select>
+	<select id="selectOrgCodeByIds" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT   
+			O.ORGNA_CODE  
+		FROM  APP_ORGANIZATION O 
+		WHERE 1=1
+		and (O.ORGNA_TYPE ='0' or O.ORGNA_TYPE ='1' or O.ORGNA_TYPE ='2' or O.ORGNA_TYPE ='3')
+		and  O.ENABLED='1'
+		and O.ORGNA_ID in 
+		<foreach collection="ids" item="orgna_id"
+                    index="index" open="(" close=")" separator=",">
+                    #{orgna_id,jdbcType=VARCHAR}
+                </foreach>  
+	</select>
+	
+	<select id="selectOrgByIds" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT  
+			O.ORGNA_ID,
+	        O.ORGNA_CODE,
+	        O.ORGNA_NAME,
+	        O.PORGNA_ID,
+	        O.ORGNA_TYPE
+	        O.ORGNA_JC,
+	        O.SFZSJ
+	        from  APP_ORGANIZATION O 
+	        WHERE 1=1
+	    and (O.ORGNA_TYPE ='0' or O.ORGNA_TYPE ='1' or O.ORGNA_TYPE ='2' or O.ORGNA_TYPE ='3')
+		and  O.ENABLED='1'
+		and O.ORGNA_ID in 
+		<foreach collection="ids" item="orgna_id"
+                    index="index" open="(" close=")" separator=",">
+                    #{orgna_id,jdbcType=VARCHAR}
+        </foreach>  
+	</select>
+	
+	<insert id="insertSelective" parameterType="com.kingmon.project.auth.organization.model.Organization" >
+    insert into APP_ORGANIZATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgna_id != null" >
+        ORGNA_ID,
+      </if>
+      <if test="orgna_code != null" >
+        ORGNA_CODE,
+      </if>
+      <if test="orgna_name != null" >
+        ORGNA_NAME,
+      </if>
+      <if test="orgna_jc != null" >
+        ORGNA_JC,
+      </if>
+      <if test="orgna_type != null" >
+        ORGNA_TYPE,
+      </if>
+      <if test="orgna_property != null" >
+        ORGNA_PROPERTY,
+      </if>
+      <if test="orgna_level != null" >
+        ORGNA_LEVEL,
+      </if>
+      <if test="orgna_address != null" >
+        ORGNA_ADDRESS,
+      </if>
+      <if test="orgna_zipcode != null" >
+        ORGNA_ZIPCODE,
+      </if>
+      <if test="orgna_tel != null" >
+        ORGNA_TEL,
+      </if>
+      <if test="orgna_fax != null" >
+        ORGNA_FAX,
+      </if>
+      <if test="orgna_email != null" >
+        ORGNA_EMAIL,
+      </if>
+      <if test="porgna_id != null" >
+        PORGNA_ID,
+      </if>
+      <if test="entorgna_id != null" >
+        ENTORGNA_ID,
+      </if>
+      <if test="area_id != null" >
+        AREA_ID,
+      </if>
+      <if test="enabled != null" >
+        ENABLED,
+      </if>
+      <if test="orgna_validity_start != null" >
+        ORGNA_VALIDITY_START,
+      </if>
+      <if test="orgna_validity_end != null" >
+        ORGNA_VALIDITY_END,
+      </if>
+      <if test="cch != null" >
+        CCH,
+      </if>
+      <if test="ccbz != null" >
+        CCBZ,
+      </if>
+      <if test="hzbz != null" >
+        HZBZ,
+      </if>
+      <if test="opratetime != null" >
+        OPRATETIME,
+      </if>
+      <if test="orgna_order != null" >
+        ORGNA_ORDER,
+      </if>
+      <if test="bz0 != null" >
+        BZ0,
+      </if>
+      <if test="bz1 != null" >
+        BZ1,
+      </if>
+      <if test="bz2 != null" >
+        BZ2,
+      </if>
+      <if test="bz3 != null" >
+        BZ3,
+      </if>
+      <if test="bz4 != null" >
+        BZ4,
+      </if>
+      <if test="bz5 != null" >
+        BZ5,
+      </if>
+      <if test="bz6 != null" >
+        BZ6,
+      </if>
+      <if test="bz7 != null" >
+        BZ7,
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN,
+      </if>
+      <if test="orgna_hischildnode != null" >
+        ORGNA_HISCHILDNODE,
+      </if>
+      <if test="orgna_yxx != null" >
+        ORGNA_YXX,
+      </if>
+      <if test="sfzsj != null" >
+        SFZSJ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgna_id != null" >
+        #{orgna_id,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_code != null" >
+        #{orgna_code,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_name != null" >
+        #{orgna_name,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_jc != null" >
+        #{orgna_jc,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_type != null" >
+        #{orgna_type,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_property != null" >
+        #{orgna_property,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_level != null" >
+        #{orgna_level,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_address != null" >
+        #{orgna_address,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_zipcode != null" >
+        #{orgna_zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_tel != null" >
+        #{orgna_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_fax != null" >
+        #{orgna_fax,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_email != null" >
+        #{orgna_email,jdbcType=VARCHAR},
+      </if>
+      <if test="porgna_id != null" >
+        #{porgna_id,jdbcType=VARCHAR},
+      </if>
+      <if test="entorgna_id != null" >
+        #{entorgna_id,jdbcType=VARCHAR},
+      </if>
+      <if test="area_id != null" >
+        #{area_id,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="orgna_validity_start != null" >
+        #{orgna_validity_start,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_validity_end != null" >
+        #{orgna_validity_end,jdbcType=VARCHAR},
+      </if>
+      <if test="cch != null" >
+        #{CCH,jdbcType=DECIMAL},
+      </if>
+      <if test="ccbz != null" >
+        #{ccbz,jdbcType=VARCHAR},
+      </if>
+      <if test="hzbz != null" >
+        #{hzbz,jdbcType=CHAR},
+      </if>
+      <if test="opratetime != null" >
+        #{opratetime,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_order != null" >
+        #{orgna_order,jdbcType=VARCHAR},
+      </if>
+      <if test="bz0 != null" >
+        #{bz0,jdbcType=VARCHAR},
+      </if>
+      <if test="bz1 != null" >
+        #{bz1,jdbcType=VARCHAR},
+      </if>
+      <if test="bz2 != null" >
+        #{bz2,jdbcType=VARCHAR},
+      </if>
+      <if test="bz3 != null" >
+        #{bz3,jdbcType=VARCHAR},
+      </if>
+      <if test="bz4 != null" >
+        #{bz4,jdbcType=VARCHAR},
+      </if>
+      <if test="bz5 != null" >
+        #{bz5,jdbcType=VARCHAR},
+      </if>
+      <if test="bz6 != null" >
+        #{bz6,jdbcType=VARCHAR},
+      </if>
+      <if test="bz7 != null" >
+        #{bz7,jdbcType=VARCHAR},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_hischildnode != null" >
+        #{orgna_hischildnode,jdbcType=DECIMAL},
+      </if>
+      <if test="orgna_yxx != null" >
+        #{orgna_yxx,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzsj != null" >
+        #{sfzsj,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.auth.organization.model.Organization" >
+    update APP_ORGANIZATION
+    <set >
+      <if test="orgna_code != null" >
+        ORGNA_CODE = #{orgna_code,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_name != null" >
+        ORGNA_NAME = #{orgna_name,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_jc != null" >
+        ORGNA_JC = #{orgna_jc,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_type != null" >
+        ORGNA_TYPE = #{orgna_type,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_property != null" >
+        ORGNA_PROPERTY = #{orgna_property,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_level != null" >
+        ORGNA_LEVEL = #{orgna_level,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_address != null" >
+        ORGNA_ADDRESS = #{orgna_address,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_zipcode != null" >
+        ORGNA_ZIPCODE = #{orgna_zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_tel != null" >
+        ORGNA_TEL = #{orgna_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_fax != null" >
+        ORGNA_FAX = #{orgna_fax,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_email != null" >
+        ORGNA_EMAIL = #{orgna_email,jdbcType=VARCHAR},
+      </if>
+      <if test="porgna_id != null" >
+        PORGNA_ID = #{porgna_id,jdbcType=VARCHAR},
+      </if>
+      <if test="entorgna_id != null" >
+        ENTORGNA_ID = #{entorgna_id,jdbcType=VARCHAR},
+      </if>
+      <if test="area_id != null" >
+        AREA_ID = #{area_id,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        ENABLED = #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="orgna_validity_start != null" >
+        ORGNA_VALIDITY_START = #{orgna_validity_start,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_validity_end != null" >
+        ORGNA_VALIDITY_END = #{orgna_validity_end,jdbcType=VARCHAR},
+      </if>
+      <if test="cch != null" >
+        CCH = #{cch,jdbcType=DECIMAL},
+      </if>
+      <if test="ccbz != null" >
+        CCBZ = #{ccbz,jdbcType=VARCHAR},
+      </if>
+      <if test="hzbz != null" >
+        HZBZ = #{hzbz,jdbcType=CHAR},
+      </if>
+      <if test="opratetime != null" >
+        OPRATETIME = #{opratetime,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_order != null" >
+        ORGNA_ORDER = #{orgna_order,jdbcType=VARCHAR},
+      </if>
+      <if test="bz0 != null" >
+        BZ0 = #{bz0,jdbcType=VARCHAR},
+      </if>
+      <if test="bz1 != null" >
+        BZ1 = #{bz1,jdbcType=VARCHAR},
+      </if>
+      <if test="bz2 != null" >
+        BZ2 = #{bz2,jdbcType=VARCHAR},
+      </if>
+      <if test="bz3 != null" >
+        BZ3 = #{bz3,jdbcType=VARCHAR},
+      </if>
+      <if test="bz4 != null" >
+        BZ4 = #{bz4,jdbcType=VARCHAR},
+      </if>
+      <if test="bz5 != null" >
+        BZ5 = #{bz5,jdbcType=VARCHAR},
+      </if>
+      <if test="bz6 != null" >
+        BZ6 = #{bz6,jdbcType=VARCHAR},
+      </if>
+      <if test="bz7 != null" >
+        BZ7 = #{bz7,jdbcType=VARCHAR},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_hischildnode != null" >
+        ORGNA_HISCHILDNODE = #{orgna_hischildnode,jdbcType=DECIMAL},
+      </if>
+      <if test="orgna_yxx != null" >
+        ORGNA_YXX = #{orgna_yxx,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzsj != null" >
+        SFZSJ = #{sfzsj,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORGNA_ID = #{orgna_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

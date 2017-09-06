@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.auth.role.mapper.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.auth.role.model.Role" >
+    <id column="ROLE_ID" property="role_id" jdbcType="VARCHAR" />
+    <result column="ROLE_NAME" property="role_name" jdbcType="VARCHAR" />
+    <result column="ROLE_DESC" property="role_desc" jdbcType="VARCHAR" />
+    <result column="ROLE_CODE" property="role_code" jdbcType="VARCHAR" />
+    <result column="ENABLED" property="enabled" jdbcType="CHAR" />
+    <result column="OPRATETIME" property="opratetime" jdbcType="VARCHAR" />
+    <result column="AREA_ID" property="area_id" jdbcType="VARCHAR" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+    <result column="ORGANID" property="organid" jdbcType="VARCHAR" />
+    <result column="CREATEUSER" property="createuser" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ROLE_ID, ROLE_NAME, ROLE_DESC, ROLE_CODE, ENABLED, OPRATETIME, AREA_ID, MOVESIGN, 
+    ORGANID, CREATEUSER
+  </sql>
+  <!--  -->
+    <select id="selectRoleListByByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+	    R.ROLE_ID, 
+	    R.ROLE_NAME,
+	    R.ROLE_CODE, 
+	    R.ORGANID
+    from APP_ROLE R, APP_ROLE_USER RU 
+    where 1=1 
+    AND RU.ENABLED='1'
+    AND R.ENABLED='1'
+    AND RU.ROLE_ID = R.ROLE_ID 
+    AND RU.APPUSER_ID = #{APPUSER_ID,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

@@ -1,0 +1,49 @@
+#添加字段
+PUT /psam/_mapping/mlph
+{
+  "mlph": {
+    "properties": {
+      "MAC_ADDRESS": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "TF_CARD_NUM": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "IMEI_NUM": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "SIM_NUM": {
+        "type": "string",
+        "index": "not_analyzed"
+      }
+    }
+  }
+}
+
+
+PUT /psam/_mapping/jzwjbxx
+{
+  "jzwjbxx": {
+    "properties": {
+      "MAC_ADDRESS": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "TF_CARD_NUM": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "IMEI_NUM": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "SIM_NUM": {
+        "type": "string",
+        "index": "not_analyzed"
+      }
+    }
+  }
+}

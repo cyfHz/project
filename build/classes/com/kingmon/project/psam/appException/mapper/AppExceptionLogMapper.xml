@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.appException.mapper.AppExceptionLogMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.appException.model.AppExceptionLog" >
+     <id column="ID" property="id" jdbcType="VARCHAR" />
+     <result column="APPUSER_ID" property="appuser_id" jdbcType="VARCHAR" />
+     <result column="SBID" property="sbid" jdbcType="VARCHAR" />
+     <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+     <result column="CLASSES" property="classes" jdbcType="VARCHAR" />
+     <result column="MOTHOD" property="mothod" jdbcType="VARCHAR" />
+     <result column="MESSAGE" property="message" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, APPUSER_ID, SBID,CREATETIME,CLASSES,MOTHOD,MESSAGE
+  </sql>
+ 
+ <!--通用分页 -->
+	<sql id="Paging_Start">
+		SELECT * FROM (
+		SELECT T_.*, rownum rn_ FROM (
+	</sql>
+	<sql id="Paging_end">
+		) T_ WHERE rownum &lt;= ${pageend}
+		) WHERE rn_ &gt; ${pagestart}
+	</sql>
+ 
+ 
+ 
+ <select id="selectAppException" resultType="map" parameterType="map">
+    <include refid="Paging_Start" />
+		SELECT
+		<include refid="Base_Column_List" />
+			FROM APP_EXCEPTION_LOG
+		<if test="sort != null">
+			ORDER BY T1.${sort} ${order}
+		</if>
+		<include refid="Paging_end" />
+ </select>
+ 
+ 
+  <insert id="insertAppException" parameterType="map">
+     insert into APP_EXCEPTION_LOG 
+     <trim prefix="(" suffix=")" suffixOverrides=",">
+       <if test="id!=null">ID,</if>
+       <if test="appuser_id!=null">APPUSER_ID,</if>
+       <if test="sbid!=null">SBID,</if>
+       <if test="createtime!=null">CREATETIME,</if>
+       <if test="classes!=null">CLASSES,</if>
+       <if test="mothod!=null">MOTHOD,</if>
+       <if test="message!=null">MESSAGE</if>
+     </trim>
+     <trim prefix="values (" suffix=")" suffixOverrides=",">
+       <if test="id!=null">#{id,jdbcType=VARCHAR},</if>
+       <if test="appuser_id!=null">#{appuser_id,jdbcType=VARCHAR},</if>
+       <if test="sbid!=null">#{sbid,jdbcType=VARCHAR},</if>
+       <if test="createtime!=null">#{createtime,jdbcType=TIMESTAMP},</if>
+       <if test="classes!=null">#{classes,jdbcType=VARCHAR},</if>
+       <if test="mothod!=null">#{mothod,jdbcType=VARCHAR},</if>
+       <if test="message!=null">#{message,jdbcType=VARCHAR}</if>
+     </trim>
+  </insert>
+
+
+
+  
+</mapper>

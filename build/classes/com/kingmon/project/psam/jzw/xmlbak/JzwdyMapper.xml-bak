@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.jzw.mapper.JzwdyMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.jzw.model.Jzwdy" >
+    <id column="JZWDYID" property="jzwdyid" jdbcType="VARCHAR" />
+    <result column="JZWJGID" property="jzwjgid" jdbcType="VARCHAR" />
+    <result column="DYXH" property="dyxh" jdbcType="VARCHAR" />
+    <result column="DYMC" property="dymc" jdbcType="VARCHAR" />
+    <result column="LCS" property="lcs" jdbcType="DECIMAL" />
+    <result column="DYMS" property="dyms" jdbcType="DECIMAL" />
+    <result column="ZHGXRQ" property="zhgxrq" jdbcType="TIMESTAMP" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    JZWDYID, JZWJGID, DYXH, DYMC, LCS, DYMS, ZHGXRQ, MOVESIGN
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DZ_JZWDY
+    where JZWDYID = #{jzwdyid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DZ_JZWDY
+    where JZWDYID = #{jzwdyid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kingmon.project.psam.jzw.model.Jzwdy" >
+    insert into DZ_JZWDY (JZWDYID, JZWJGID, DYXH, 
+      DYMC, LCS, DYMS, ZHGXRQ, 
+      MOVESIGN)
+    values (#{jzwdyid,jdbcType=VARCHAR}, #{jzwjgid,jdbcType=VARCHAR}, #{dyxh,jdbcType=VARCHAR}, 
+      #{dymc,jdbcType=VARCHAR}, #{lcs,jdbcType=DECIMAL}, #{dyms,jdbcType=DECIMAL}, #{zhgxrq,jdbcType=TIMESTAMP}, 
+      #{movesign,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwdy" >
+    insert into DZ_JZWDY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jzwdyid != null" >
+        JZWDYID,
+      </if>
+      <if test="jzwjgid != null" >
+        JZWJGID,
+      </if>
+      <if test="dyxh != null" >
+        DYXH,
+      </if>
+      <if test="dymc != null" >
+        DYMC,
+      </if>
+      <if test="lcs != null" >
+        LCS,
+      </if>
+      <if test="dyms != null" >
+        DYMS,
+      </if>
+      <if test="zhgxrq != null" >
+        ZHGXRQ,
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jzwdyid != null" >
+        #{jzwdyid,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwjgid != null" >
+        #{jzwjgid,jdbcType=VARCHAR},
+      </if>
+      <if test="dyxh != null" >
+        #{dyxh,jdbcType=VARCHAR},
+      </if>
+      <if test="dymc != null" >
+        #{dymc,jdbcType=VARCHAR},
+      </if>
+      <if test="lcs != null" >
+        #{lcs,jdbcType=DECIMAL},
+      </if>
+      <if test="dyms != null" >
+        #{dyms,jdbcType=DECIMAL},
+      </if>
+      <if test="zhgxrq != null" >
+        #{zhgxrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwdy" >
+    update DZ_JZWDY
+    <set >
+      <if test="jzwjgid != null" >
+        JZWJGID = #{jzwjgid,jdbcType=VARCHAR},
+      </if>
+      <if test="dyxh != null" >
+        DYXH = #{dyxh,jdbcType=VARCHAR},
+      </if>
+      <if test="dymc != null" >
+        DYMC = #{dymc,jdbcType=VARCHAR},
+      </if>
+      <if test="lcs != null" >
+        LCS = #{lcs,jdbcType=DECIMAL},
+      </if>
+      <if test="dyms != null" >
+        DYMS = #{dyms,jdbcType=DECIMAL},
+      </if>
+      <if test="zhgxrq != null" >
+        ZHGXRQ = #{zhgxrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=CHAR},
+      </if>
+    </set>
+    where JZWDYID = #{jzwdyid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.psam.jzw.model.Jzwdy" >
+    update DZ_JZWDY
+    set JZWJGID = #{jzwjgid,jdbcType=VARCHAR},
+      DYXH = #{dyxh,jdbcType=VARCHAR},
+      DYMC = #{dymc,jdbcType=VARCHAR},
+      LCS = #{lcs,jdbcType=DECIMAL},
+      DYMS = #{dyms,jdbcType=DECIMAL},
+      ZHGXRQ = #{zhgxrq,jdbcType=TIMESTAMP},
+      MOVESIGN = #{movesign,jdbcType=CHAR}
+    where JZWDYID = #{jzwdyid,jdbcType=VARCHAR}
+  </update>
+</mapper>

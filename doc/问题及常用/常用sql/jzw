@@ -1,0 +1,16 @@
+select  j.*, j.rowid from dz_jzwjg j where j.jzwjgid='A3CBCE83-6D71-CC95-1E83-538867716475';
+
+select * from dz_jzwfj f where f.jzwjgid='A3CBCE83-6D71-CC95-1E83-538867716475';
+
+select DISTINCT(LCXH) from DZ_JZWLC where JZWJGID = 'A3CBCE83-6D71-CC95-1E83-538867716475' order by to_number(LCXH) DESC 
+  
+  select JZWFJID, FJXH, FJMC,SHOWINFO
+    from DZ_JZWFJ  where  CHANGESIGN is null and (DELTAG is null or DELTAG='0') order by FJXH,FJMC;
+    
+    select count(1) from DZ_JZWFJ
+  ------------------------  
+ delete from dz_jzwfj  where jzwjgid='244a65d3-550c-4b81-9d8c-099903c0506a';
+ delete from dz_jzwlc  where jzwjgid='244a65d3-550c-4b81-9d8c-099903c0506a';
+ delete from dz_jzwdy   where  jzwjgid='244a65d3-550c-4b81-9d8c-099903c0506a';
+delete from dz_jzwjg where jzwjgid='244a65d3-550c-4b81-9d8c-099903c0506a';
+    

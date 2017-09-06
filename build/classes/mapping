@@ -1,0 +1,78 @@
+PUT /psam
+{
+  "settings": {
+    "refresh_interval": "5s",
+    "number_of_shards": 10,
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "psam": {
+      "properties": {
+        "location": {
+          "type": "geo_point",
+          "lat_lon": true,
+          "geohash_prefix": true,
+          "fielddata": {
+            "format": "compressed",
+            "precision": "1m"
+          }
+        },
+        "jzwmc": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik",
+          "fields": {
+            "py": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_ik",
+              "boost": 5
+            }
+          }
+        },
+        "dzmc": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik",
+          "fields": {
+            "py": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_ik",
+              "boost": 5
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "organ": {
+          "type": "nested",
+          "fields": {
+            "sj": {
+              "type": "string",
+              "index": "not_analyzed"
+            },
+            "fj": {
+              "type": "string",
+              "index": "not_analyzed"
+            },
+            "pcs": {
+              "type": "string",
+              "index": "not_analyzed"
+            },
+            "jwq": {
+              "type": "string",
+              "index": "not_analyzed"
+            }
+          }
+        },
+        "status": {
+          "type": "string",
+          "index": "not_analyzed"
+        }
+      }
+    }
+  }
+}

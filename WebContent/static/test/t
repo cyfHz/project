@@ -1,0 +1,7 @@
+'<a class="drawing-toolbox tool-pan" 			drawingtype="pan" 			href="javascript:void(0)" title="拖动地图" onfocus="this.blur()"></a>'
+'<a class="drawing-toolbox tool-drawPoint" 		drawingtype="drawPoint" 	href="javascript:void(0)" title="画点" onfocus="this.blur()"></a>'
+'<a class="drawing-toolbox tool-drawCircle" 	drawingtype="drawCircle" 	href="javascript:void(0)" title="画圆" onfocus="this.blur()"></a>'
+'<a class="drawing-toolbox tool-drawPolyline" 	drawingtype="drawPolyline" 	href="javascript:void(0)" title="画折线" onfocus="this.blur()"></a>'
+'<a class="drawing-toolbox tool-drawPolygon" 	drawingtype="drawPolygon" 	href="javascript:void(0)" title="画多边形" onfocus="this.blur()"></a>'
+'<a class="drawing-toolbox tool-drawRect tool-last" drawingtype="drawRect" 	href="javascript:void(0)" title="画矩形" onfocus="this.blur()"></a>'
+clear

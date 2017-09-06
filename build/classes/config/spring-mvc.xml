@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd">
+		
+	<context:property-placeholder location="classpath*:/config/application.properties"/>
+   	<context:component-scan base-package="com.kingmon"  use-default-filters="false">
+   	    
+	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	
+	</context:component-scan>
+	
+	<mvc:default-servlet-handler /><!-- 静态文件 servlet-handler? -->
+	
+<!-- ========================= contentNegotiationManager定义 ========================= -->	
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">  
+	    <property name="favorPathExtension" value="true" />  <!-- 扩展名至mimeType的映射,即 /user.json => application/json -->
+	    <property name="favorParameter" value="true" />  <!-- 用于开启 /userinfo/123?format=json 的支持 -->
+	    <property name="parameterName" value="format"/>
+	    <property name="ignoreAcceptHeader" value="true"/><!-- 是否忽略Accept Header -->
+	  <!--  <property name="defaultContentType" value="text/html;charset=UTF-8"/>  -->
+	    <property name="mediaTypes" >  
+	        <value>  
+	            json=application/json;charset=UTF-8  
+	            html=text/html;charset=UTF-8 
+	            xml=application/xml;charset=UTF-8 
+	            text=application/text;charset=UTF-8 
+	            *=*/*;charset=UTF-8 
+	        </value>  
+	    </property>  
+	</bean> 
+	
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" p:order="0">
+        <property name="contentNegotiationManager" ref="contentNegotiationManager"/>
+        <property name="defaultViews">
+            <list>
+                <bean class="com.alibaba.fastjson.support.spring.FastJsonJsonView" />
+                <!--<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>-->
+                <!--<bean class="org.springframework.web.servlet.view.xml.MarshallingView"/>-->
+            </list>
+        </property>
+    </bean>    
+    
+<!-- ========================= mvc:annotation-driven 定义 ========================= -->    
+	<mvc:annotation-driven 
+			    conversion-service="conversionService"
+			    content-negotiation-manager="contentNegotiationManager"
+			    enable-matrix-variables="true"><!-- 接收URL的path中的矩阵参数:XXX/XXX/path;name=value;name=value --> 
+			     
+		<mvc:message-converters register-defaults="true">
+			<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+			<!-- 默认 sream没有关闭   ??  <bean class="com.kingmon.base.web.FastjsonHttpMessageConverter"> -->
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+						<value>application/json</value>
+					</list>
+				</property>
+				<property name="features">
+					<list>
+			            <value>WriteMapNullValue</value>
+			            <value>WriteNullListAsEmpty</value>
+			            <value>QuoteFieldNames</value>
+			            <value>WriteNullStringAsEmpty</value>
+			            <value>WriteDateUseDateFormat</value>
+			        </list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+<!-- ========================= mvc:interceptors 定义 ========================= -->  	
+	<mvc:interceptors>
+	    <bean id="webContentInterceptor"    class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+	        <property name="cacheSeconds" value="0"/>
+	        <property name="useExpiresHeader" value="true"/>
+	        <property name="useCacheControlHeader" value="true"/>
+	        <property name="useCacheControlNoStore" value="true"/>
+	    </bean>
+	    
+	<mvc:interceptor>
+        <mvc:mapping path="/**"/>
+      	  <bean class="com.kingmon.common.interceptor.ZayAppAuthInterceptor">
+      	   <property name="ignorUrls">  
+            <list>  
+             <value>/psamloginCallback/**</value>  
+              <value>/static/**</value>  
+              <value>/meta/**</value>
+               <value>/login.jsp</value> 
+              <value>/login</value>    
+              <value>/device/login</value>
+            </list>  
+          </property> 
+        </bean>
+    </mvc:interceptor>
+	     <!--  -->
+	<mvc:interceptor>
+        <mvc:mapping path="/**"/>
+      	  <bean class="com.kingmon.common.interceptor.LoginInterceptor">
+      	   <property name="ignorUrls">  
+            <list>  
+             <value>/psamloginCallback/**</value>  
+              <value>/static/**</value>  
+              <value>/meta/**</value>
+               <value>/login.jsp</value> 
+              <value>/login</value>    
+              <value>/device/login</value>
+            </list>  
+          </property> 
+        </bean>
+    </mvc:interceptor>
+    
+   
+   
+	 <mvc:interceptor>
+        <mvc:mapping path="/**"/>
+        <bean class="com.kingmon.common.interceptor.RequestThreadLocalInterceptor">
+        <property name="ignorUrls">  
+            <list> 
+            <value>/psamloginCallback/**</value> 
+              <value>/static/**</value>
+              <value>/meta/**</value>
+              <value>/login.jsp</value> 
+               <value>/login</value>   
+               <value>/device/login</value>
+              <!--  <value>/device/**</value> -->
+            </list>  
+          </property> 
+        </bean>
+
+    </mvc:interceptor>  
+    
+	 <mvc:interceptor>
+        <mvc:mapping path="/**"/>
+        <bean class="com.kingmon.common.interceptor.WidgetRuleInterceptor">
+        <property name="ignorUrls">  
+            <list>  
+            <value>/psamloginCallback/**</value>
+              <value>/static/**</value>
+              <value>/meta/**</value>
+              <value>/login.jsp</value> 
+               <value>/login</value>
+               <value>/core</value>
+               <value>/auth/loadMenus</value> 
+                  <value>/device/**</value>  
+            </list>  
+          </property> 
+        </bean>
+    </mvc:interceptor>
+
+       
+
+	 <mvc:interceptor>
+        <mvc:mapping path="/**"/>
+      	  <bean class="com.kingmon.common.interceptor.LogOperateInterceptor">
+      	   <property name="ignorUrls">  
+            <list> 
+            	<value>/static/**</value>  
+             	<value>/meta/**</value> 
+            </list>  
+          </property> 
+        </bean>
+    </mvc:interceptor>
+     
+	</mvc:interceptors>
+<!-- ========================= 静态文件 ========================= -->  
+	<mvc:resources mapping="/static/**" location="/static/" cache-period="0" />
+	
+	 <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">  
+	     <property name="urlMap">  
+	         <map>  
+	              <entry key="/static/**" value="staticResourceHandler" />  
+	         </map>  
+	     </property>  
+	     <property name="order" value="100000" />         
+	</bean>  
+	
+	<bean id="staticResourceHandler"  class="org.springframework.web.servlet.resource.ResourceHttpRequestHandler">  
+	      <property name="locations" value="/static/" />  
+	      <property name="supportedMethods">  
+	         <list>  
+	            <value>GET</value>  
+	            <value>HEAD</value>  
+	            <value>POST</value>  
+	         </list>  
+	     </property>  
+	</bean>
+<!-- ========================= view 定义 ========================= -->  
+
+	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="contentType" value="text/html;charset=utf-8" />
+		<property name="prefix" value="/WEB-INF/pages/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+<!-- ========================= upload files 定义 ========================= -->  
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="-1" />
+	</bean>
+</beans>

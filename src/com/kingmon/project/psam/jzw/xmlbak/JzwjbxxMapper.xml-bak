@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.jzw.mapper.JzwjbxxMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.jzw.model.Jzwjbxx" >
+    <id column="DZBM" property="dzbm" jdbcType="VARCHAR" />
+    <result column="DZYSLXDM" property="dzyslxdm" jdbcType="VARCHAR" />
+    <result column="DZMC" property="dzmc" jdbcType="VARCHAR" />
+    <result column="JZWMC" property="jzwmc" jdbcType="VARCHAR" />
+    <result column="BMJC" property="bmjc" jdbcType="VARCHAR" />
+    <result column="ZXDHZB" property="zxdhzb" jdbcType="DECIMAL" />
+    <result column="ZXDZZB" property="zxdzzb" jdbcType="DECIMAL" />
+    <result column="ZAGLSSJWZRQDM" property="zaglssjwzrqdm" jdbcType="VARCHAR" />
+    <result column="SSZDYJXZQY_DZBM" property="sszdyjxzqy_dzbm" jdbcType="VARCHAR" />
+    <result column="SSJLXXQ_DZBM" property="ssjlxxq_dzbm" jdbcType="VARCHAR" />
+    <result column="DZZCZBZ" property="dzzczbz" jdbcType="CHAR" />
+    <result column="DZZZYBS" property="dzzzybs" jdbcType="CHAR" />
+    <result column="GXSJ" property="gxsj" jdbcType="TIMESTAMP" />
+    <result column="QYRQ" property="qyrq" jdbcType="TIMESTAMP" />
+    <result column="TYRQ" property="tyrq" jdbcType="TIMESTAMP" />
+    <result column="DJDW_GAJGJGDM" property="djdw_gajgjgdm" jdbcType="VARCHAR" />
+    <result column="DJDW_GAJGMC" property="djdw_gajgmc" jdbcType="VARCHAR" />
+    <result column="DJR_XM" property="djr_xm" jdbcType="VARCHAR" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+    <result column="ZJF" property="zjf" jdbcType="VARCHAR" />
+    <result column="DJR" property="djr" jdbcType="VARCHAR" />
+    <result column="DJDW" property="djdw" jdbcType="VARCHAR" />
+    <result column="DJSJ" property="djsj" jdbcType="TIMESTAMP" />
+    <result column="XGR" property="xgr" jdbcType="VARCHAR" />
+    <result column="XGDW" property="xgdw" jdbcType="VARCHAR" />
+    <result column="ENABLE" property="enable" jdbcType="CHAR" />
+    <result column="CHILDCOUNT" property="childcount" jdbcType="DECIMAL" />
+    <result column="ZAGLSSJWZRQMC" property="zaglssjwzrqmc" jdbcType="VARCHAR" />
+    <result column="DELTIME" property="deltime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DZBM, DZYSLXDM, DZMC, JZWMC, BMJC, ZXDHZB, ZXDZZB, ZAGLSSJWZRQDM, SSZDYJXZQY_DZBM, 
+    SSJLXXQ_DZBM, DZZCZBZ, DZZZYBS, GXSJ, QYRQ, TYRQ, DJDW_GAJGJGDM, DJDW_GAJGMC, DJR_XM, 
+    MOVESIGN, ZJF, DJR, DJDW, DJSJ, XGR, XGDW, ENABLE, CHILDCOUNT, ZAGLSSJWZRQMC, DELTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DZ_JZWJBXX
+    where DZBM = #{dzbm,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DZ_JZWJBXX
+    where DZBM = #{dzbm,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kingmon.project.psam.jzw.model.Jzwjbxx" >
+    insert into DZ_JZWJBXX (DZBM, DZYSLXDM, DZMC, 
+      JZWMC, BMJC, ZXDHZB, 
+      ZXDZZB, ZAGLSSJWZRQDM, SSZDYJXZQY_DZBM, 
+      SSJLXXQ_DZBM, DZZCZBZ, DZZZYBS, 
+      GXSJ, QYRQ, TYRQ, 
+      DJDW_GAJGJGDM, DJDW_GAJGMC, DJR_XM, 
+      MOVESIGN, ZJF, DJR, DJDW, 
+      DJSJ, XGR, XGDW, 
+      ENABLE, CHILDCOUNT, ZAGLSSJWZRQMC, 
+      DELTIME)
+    values (#{dzbm,jdbcType=VARCHAR}, #{dzyslxdm,jdbcType=VARCHAR}, #{dzmc,jdbcType=VARCHAR}, 
+      #{jzwmc,jdbcType=VARCHAR}, #{bmjc,jdbcType=VARCHAR}, #{zxdhzb,jdbcType=DECIMAL}, 
+      #{zxdzzb,jdbcType=DECIMAL}, #{zaglssjwzrqdm,jdbcType=VARCHAR}, #{sszdyjxzqy_dzbm,jdbcType=VARCHAR}, 
+      #{ssjlxxq_dzbm,jdbcType=VARCHAR}, #{dzzczbz,jdbcType=CHAR}, #{dzzzybs,jdbcType=CHAR}, 
+      #{gxsj,jdbcType=TIMESTAMP}, #{qyrq,jdbcType=TIMESTAMP}, #{tyrq,jdbcType=TIMESTAMP}, 
+      #{djdw_gajgjgdm,jdbcType=VARCHAR}, #{djdw_gajgmc,jdbcType=VARCHAR}, #{djr_xm,jdbcType=VARCHAR}, 
+      #{movesign,jdbcType=CHAR}, #{zjf,jdbcType=VARCHAR}, #{djr,jdbcType=VARCHAR}, #{djdw,jdbcType=VARCHAR}, 
+      #{djsj,jdbcType=TIMESTAMP}, #{xgr,jdbcType=VARCHAR}, #{xgdw,jdbcType=VARCHAR}, 
+      #{enable,jdbcType=CHAR}, #{childcount,jdbcType=DECIMAL}, #{zaglssjwzrqmc,jdbcType=VARCHAR}, 
+      #{deltime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwjbxx" >
+    insert into DZ_JZWJBXX
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dzbm != null" >
+        DZBM,
+      </if>
+      <if test="dzyslxdm != null" >
+        DZYSLXDM,
+      </if>
+      <if test="dzmc != null" >
+        DZMC,
+      </if>
+      <if test="jzwmc != null" >
+        JZWMC,
+      </if>
+      <if test="bmjc != null" >
+        BMJC,
+      </if>
+      <if test="zxdhzb != null" >
+        ZXDHZB,
+      </if>
+      <if test="zxdzzb != null" >
+        ZXDZZB,
+      </if>
+      <if test="zaglssjwzrqdm != null" >
+        ZAGLSSJWZRQDM,
+      </if>
+      <if test="sszdyjxzqy_dzbm != null" >
+        SSZDYJXZQY_DZBM,
+      </if>
+      <if test="ssjlxxq_dzbm != null" >
+        SSJLXXQ_DZBM,
+      </if>
+      <if test="dzzczbz != null" >
+        DZZCZBZ,
+      </if>
+      <if test="dzzzybs != null" >
+        DZZZYBS,
+      </if>
+      <if test="gxsj != null" >
+        GXSJ,
+      </if>
+      <if test="qyrq != null" >
+        QYRQ,
+      </if>
+      <if test="tyrq != null" >
+        TYRQ,
+      </if>
+      <if test="djdw_gajgjgdm != null" >
+        DJDW_GAJGJGDM,
+      </if>
+      <if test="djdw_gajgmc != null" >
+        DJDW_GAJGMC,
+      </if>
+      <if test="djr_xm != null" >
+        DJR_XM,
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN,
+      </if>
+      <if test="zjf != null" >
+        ZJF,
+      </if>
+      <if test="djr != null" >
+        DJR,
+      </if>
+      <if test="djdw != null" >
+        DJDW,
+      </if>
+      <if test="djsj != null" >
+        DJSJ,
+      </if>
+      <if test="xgr != null" >
+        XGR,
+      </if>
+      <if test="xgdw != null" >
+        XGDW,
+      </if>
+      <if test="enable != null" >
+        ENABLE,
+      </if>
+      <if test="childcount != null" >
+        CHILDCOUNT,
+      </if>
+      <if test="zaglssjwzrqmc != null" >
+        ZAGLSSJWZRQMC,
+      </if>
+      <if test="deltime != null" >
+        DELTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dzbm != null" >
+        #{dzbm,jdbcType=VARCHAR},
+      </if>
+      <if test="dzyslxdm != null" >
+        #{dzyslxdm,jdbcType=VARCHAR},
+      </if>
+      <if test="dzmc != null" >
+        #{dzmc,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwmc != null" >
+        #{jzwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="bmjc != null" >
+        #{bmjc,jdbcType=VARCHAR},
+      </if>
+      <if test="zxdhzb != null" >
+        #{zxdhzb,jdbcType=DECIMAL},
+      </if>
+      <if test="zxdzzb != null" >
+        #{zxdzzb,jdbcType=DECIMAL},
+      </if>
+      <if test="zaglssjwzrqdm != null" >
+        #{zaglssjwzrqdm,jdbcType=VARCHAR},
+      </if>
+      <if test="sszdyjxzqy_dzbm != null" >
+        #{sszdyjxzqy_dzbm,jdbcType=VARCHAR},
+      </if>
+      <if test="ssjlxxq_dzbm != null" >
+        #{ssjlxxq_dzbm,jdbcType=VARCHAR},
+      </if>
+      <if test="dzzczbz != null" >
+        #{dzzczbz,jdbcType=CHAR},
+      </if>
+      <if test="dzzzybs != null" >
+        #{dzzzybs,jdbcType=CHAR},
+      </if>
+      <if test="gxsj != null" >
+        #{gxsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qyrq != null" >
+        #{qyrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tyrq != null" >
+        #{tyrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="djdw_gajgjgdm != null" >
+        #{djdw_gajgjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw_gajgmc != null" >
+        #{djdw_gajgmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djr_xm != null" >
+        #{djr_xm,jdbcType=VARCHAR},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="zjf != null" >
+        #{zjf,jdbcType=VARCHAR},
+      </if>
+      <if test="djr != null" >
+        #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw != null" >
+        #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xgr != null" >
+        #{xgr,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdw != null" >
+        #{xgdw,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=CHAR},
+      </if>
+      <if test="childcount != null" >
+        #{childcount,jdbcType=DECIMAL},
+      </if>
+      <if test="zaglssjwzrqmc != null" >
+        #{zaglssjwzrqmc,jdbcType=VARCHAR},
+      </if>
+      <if test="deltime != null" >
+        #{deltime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwjbxx" >
+    update DZ_JZWJBXX
+    <set >
+      <if test="dzyslxdm != null" >
+        DZYSLXDM = #{dzyslxdm,jdbcType=VARCHAR},
+      </if>
+      <if test="dzmc != null" >
+        DZMC = #{dzmc,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwmc != null" >
+        JZWMC = #{jzwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="bmjc != null" >
+        BMJC = #{bmjc,jdbcType=VARCHAR},
+      </if>
+      <if test="zxdhzb != null" >
+        ZXDHZB = #{zxdhzb,jdbcType=DECIMAL},
+      </if>
+      <if test="zxdzzb != null" >
+        ZXDZZB = #{zxdzzb,jdbcType=DECIMAL},
+      </if>
+      <if test="zaglssjwzrqdm != null" >
+        ZAGLSSJWZRQDM = #{zaglssjwzrqdm,jdbcType=VARCHAR},
+      </if>
+      <if test="sszdyjxzqy_dzbm != null" >
+        SSZDYJXZQY_DZBM = #{sszdyjxzqy_dzbm,jdbcType=VARCHAR},
+      </if>
+      <if test="ssjlxxq_dzbm != null" >
+        SSJLXXQ_DZBM = #{ssjlxxq_dzbm,jdbcType=VARCHAR},
+      </if>
+      <if test="dzzczbz != null" >
+        DZZCZBZ = #{dzzczbz,jdbcType=CHAR},
+      </if>
+      <if test="dzzzybs != null" >
+        DZZZYBS = #{dzzzybs,jdbcType=CHAR},
+      </if>
+      <if test="gxsj != null" >
+        GXSJ = #{gxsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qyrq != null" >
+        QYRQ = #{qyrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tyrq != null" >
+        TYRQ = #{tyrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="djdw_gajgjgdm != null" >
+        DJDW_GAJGJGDM = #{djdw_gajgjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw_gajgmc != null" >
+        DJDW_GAJGMC = #{djdw_gajgmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djr_xm != null" >
+        DJR_XM = #{djr_xm,jdbcType=VARCHAR},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="zjf != null" >
+        ZJF = #{zjf,jdbcType=VARCHAR},
+      </if>
+      <if test="djr != null" >
+        DJR = #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw != null" >
+        DJDW = #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        DJSJ = #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xgr != null" >
+        XGR = #{xgr,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdw != null" >
+        XGDW = #{xgdw,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        ENABLE = #{enable,jdbcType=CHAR},
+      </if>
+      <if test="childcount != null" >
+        CHILDCOUNT = #{childcount,jdbcType=DECIMAL},
+      </if>
+      <if test="zaglssjwzrqmc != null" >
+        ZAGLSSJWZRQMC = #{zaglssjwzrqmc,jdbcType=VARCHAR},
+      </if>
+      <if test="deltime != null" >
+        DELTIME = #{deltime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DZBM = #{dzbm,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.psam.jzw.model.Jzwjbxx" >
+    update DZ_JZWJBXX
+    set DZYSLXDM = #{dzyslxdm,jdbcType=VARCHAR},
+      DZMC = #{dzmc,jdbcType=VARCHAR},
+      JZWMC = #{jzwmc,jdbcType=VARCHAR},
+      BMJC = #{bmjc,jdbcType=VARCHAR},
+      ZXDHZB = #{zxdhzb,jdbcType=DECIMAL},
+      ZXDZZB = #{zxdzzb,jdbcType=DECIMAL},
+      ZAGLSSJWZRQDM = #{zaglssjwzrqdm,jdbcType=VARCHAR},
+      SSZDYJXZQY_DZBM = #{sszdyjxzqy_dzbm,jdbcType=VARCHAR},
+      SSJLXXQ_DZBM = #{ssjlxxq_dzbm,jdbcType=VARCHAR},
+      DZZCZBZ = #{dzzczbz,jdbcType=CHAR},
+      DZZZYBS = #{dzzzybs,jdbcType=CHAR},
+      GXSJ = #{gxsj,jdbcType=TIMESTAMP},
+      QYRQ = #{qyrq,jdbcType=TIMESTAMP},
+      TYRQ = #{tyrq,jdbcType=TIMESTAMP},
+      DJDW_GAJGJGDM = #{djdw_gajgjgdm,jdbcType=VARCHAR},
+      DJDW_GAJGMC = #{djdw_gajgmc,jdbcType=VARCHAR},
+      DJR_XM = #{djr_xm,jdbcType=VARCHAR},
+      MOVESIGN = #{movesign,jdbcType=CHAR},
+      ZJF = #{zjf,jdbcType=VARCHAR},
+      DJR = #{djr,jdbcType=VARCHAR},
+      DJDW = #{djdw,jdbcType=VARCHAR},
+      DJSJ = #{djsj,jdbcType=TIMESTAMP},
+      XGR = #{xgr,jdbcType=VARCHAR},
+      XGDW = #{xgdw,jdbcType=VARCHAR},
+      ENABLE = #{enable,jdbcType=CHAR},
+      CHILDCOUNT = #{childcount,jdbcType=DECIMAL},
+      ZAGLSSJWZRQMC = #{zaglssjwzrqmc,jdbcType=VARCHAR},
+      DELTIME = #{deltime,jdbcType=TIMESTAMP}
+    where DZBM = #{dzbm,jdbcType=VARCHAR}
+  </update>
+</mapper>

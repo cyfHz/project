@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:cache="http://www.springframework.org/schema/cache"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx 
+	   http://www.springframework.org/schema/tx/spring-tx.xsd
+	   http://www.springframework.org/schema/cache 
+       http://www.springframework.org/schema/cache/spring-cache.xsd"
+       default-lazy-init="true">
+  	<!-- 启动EHCache -->
+	<cache:annotation-driven />
+	<!-- cacheManager工厂类 -->
+	<bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:/config/ehcache.xml"></property>
+		<property name="shared" value="false"></property>
+	</bean>
+
+	<!-- 声明cacheManager -->
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="cacheManagerFactory" />
+	</bean>
+	
+	<bean id="managementService"
+			class="net.sf.ehcache.management.ManagementService"
+			init-method="init"
+			destroy-method="dispose">
+			<constructor-arg ref="cacheManager"/>
+			<constructor-arg ref="mbeanServer"/>
+			<constructor-arg index="2" value="true"/>
+			<constructor-arg index="3" value="true"/>
+			<constructor-arg index="4" value="true"/>
+			<constructor-arg index="5" value="true"/>
+
+	</bean>
+
+	<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean">
+      <property name="locateExistingServerIfPossible" value="true"/>
+	</bean>
+	
+	
+</beans>   

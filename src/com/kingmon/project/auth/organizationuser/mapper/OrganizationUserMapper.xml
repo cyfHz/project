@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.auth.organizationuser.mapper.OrganizationUserMapper" >
+    
+  <resultMap id="BaseResultMap" type="com.kingmon.project.auth.organizationuser.model.OrganizationUser" >
+    <id column="APPUSER_ID" property="appuser_id" jdbcType="VARCHAR" />
+    <result column="AREA_ID" property="area_id" jdbcType="VARCHAR" />
+    <result column="ORGNA_ID" property="orgna_id" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="user_id" jdbcType="VARCHAR" />
+    <result column="USER_LOGINNAME" property="user_loginname" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="user_name" jdbcType="VARCHAR" />
+    <result column="USER_SEX" property="user_sex" jdbcType="VARCHAR" />
+    <result column="USER_PASSWORD" property="user_password" jdbcType="VARCHAR" />
+    <result column="USER_DESC" property="user_desc" jdbcType="VARCHAR" />
+    <result column="USER_VALIDITY_START" property="user_validity_start" jdbcType="VARCHAR" />
+    <result column="USER_VALIDITY_END" property="user_validity_end" jdbcType="VARCHAR" />
+    <result column="USER_IP" property="user_ip" jdbcType="VARCHAR" />
+    <result column="USER_XSQSY" property="user_xsqsy" jdbcType="CHAR" />
+    <result column="USER_SFSD" property="user_sfsd" jdbcType="CHAR" />
+    <result column="USER_DLCS" property="user_dlcs" jdbcType="DECIMAL" />
+    <result column="USER_OUTBH" property="user_outbh" jdbcType="VARCHAR" />
+    <result column="ENABLED" property="enabled" jdbcType="CHAR" />
+    <result column="OPRATETIME" property="opratetime" jdbcType="VARCHAR" />
+    <result column="BZ0" property="bz0" jdbcType="VARCHAR" />
+    <result column="BZ1" property="bz1" jdbcType="VARCHAR" />
+    <result column="BZ2" property="bz2" jdbcType="VARCHAR" />
+    <result column="BZ3" property="bz3" jdbcType="VARCHAR" />
+    <result column="BZ4" property="bz4" jdbcType="VARCHAR" />
+    <result column="BZ5" property="bz5" jdbcType="VARCHAR" />
+    <result column="BZ6" property="bz6" jdbcType="VARCHAR" />
+    <result column="BZ7" property="bz7" jdbcType="VARCHAR" />
+    <result column="USER_SFZH" property="user_sfzh" jdbcType="VARCHAR" />
+    <result column="SSFJ" property="ssfj" jdbcType="VARCHAR" />
+    <result column="SSPCS" property="sspcs" jdbcType="VARCHAR" />
+    <result column="SSJWQ" property="ssjwq" jdbcType="VARCHAR" />
+    <result column="SSJB" property="ssjb" jdbcType="VARCHAR" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+    <result column="USER_MOBILE" property="user_mobile" jdbcType="VARCHAR" />
+    <result column="USER_EMAIL" property="user_email" jdbcType="VARCHAR" />
+    <result column="UKEYID" property="ukeyid" jdbcType="VARCHAR" />
+    <result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <resultMap id="ResultMapWithBLOBs" type="com.kingmon.project.auth.organizationuser.model.OrganizationUser" extends="BaseResultMap" >
+    <result column="ZP" property="zp" jdbcType="BLOB" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    APPUSER_ID, AREA_ID, ORGNA_ID, USER_ID, USER_LOGINNAME, USER_NAME, USER_SEX, USER_PASSWORD, 
+    USER_DESC, USER_VALIDITY_START, USER_VALIDITY_END, USER_IP, USER_XSQSY, USER_SFSD, 
+    USER_DLCS, USER_OUTBH, ENABLED, OPRATETIME, BZ0, BZ1, BZ2, BZ3, BZ4, BZ5, BZ6, BZ7, 
+    USER_SFZH, SSFJ, SSPCS, SSJWQ, SSJB, MOVESIGN, USER_MOBILE, USER_EMAIL, UKEYID, CREATEDATE
+  </sql>
+  
+  <sql id="Blob_Column_List" >
+    ZP
+  </sql>
+  
+   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+      select 
+	   <include refid="Base_Column_List" />
+	    from APP_ORGANIZATION_USER u 
+	    where u.APPUSER_ID=#{appuser_id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectOrganizationUserByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+      select 
+	   <!--  u.APPUSER_ID , 
+	    u.ORGNA_ID, 
+	    u.USER_LOGINNAME, 
+	    u.USER_NAME, 
+	    u.USER_SFZH, 
+	    u.ENABLED, 
+	    u.SSFJ, 
+	    u.SSPCS, 
+	    u.SSJWQ, 
+	    u.SSJB  -->
+	     <include refid="Base_Column_List" />
+	    from APP_ORGANIZATION_USER u 
+	    where u.APPUSER_ID=#{appuser_id,jdbcType=VARCHAR}
+  </select>
+  
+    <select id="selectOrganizationUserBySfzh" resultMap="BaseResultMap" parameterType="java.lang.String" >
+      select 
+	    u.APPUSER_ID , 
+	    u.ORGNA_ID, 
+	    u.USER_LOGINNAME, 
+	    u.USER_NAME, 
+	    u.USER_SFZH, 
+	    u.ENABLED, 
+	    u.SSFJ, 
+	    u.SSPCS, 
+	    u.SSJWQ, 
+	    u.SSJB 
+	    from APP_ORGANIZATION_USER u 
+	    where u.USER_SFZH=#{sfzh,jdbcType=VARCHAR}
+  </select>
+  
+     <select id="selectOrganUserByLoginnameAndPws" resultMap="BaseResultMap" parameterType="java.lang.String" >
+      select 
+	    u.APPUSER_ID , 
+	    u.ORGNA_ID, 
+	    u.USER_LOGINNAME, 
+	    u.USER_NAME, 
+	    u.USER_SFZH, 
+	    u.ENABLED, 
+	    u.SSFJ, 
+	    u.SSPCS, 
+	    u.SSJWQ, 
+	    u.SSJB 
+	    from APP_ORGANIZATION_USER u 
+	    where 
+	    	u.user_loginname=#{loginname,jdbcType=VARCHAR} 
+	    and 
+	     	u.user_password=#{password,jdbcType=VARCHAR} 
+  </select>
+     <select id="selectOrgUserByOrgCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+      select 
+	   u.APPUSER_ID , 
+	    u.ORGNA_ID, 
+	    u.USER_LOGINNAME, 
+	    u.USER_NAME, 
+	    u.USER_SFZH, 
+	    u.ENABLED, 
+	    u.SSFJ, 
+	    u.SSPCS, 
+	    u.SSJWQ, 
+	    u.SSJB 
+	    from APP_ORGANIZATION_USER u 
+	  where  
+	    u.ORGNA_ID=#{org_id,jdbcType=VARCHAR} 
+
+  </select>
+  
+  
+  <select id="loadUserInfoByUserId" resultType="java.util.Map" parameterType="java.lang.String" >
+      select 
+	    u.USER_LOGINNAME, 
+	    u.USER_NAME, 
+	    u.USER_MOBILE, 
+	    u.USER_EMAIL, 
+	 	o.ORGNA_CODE,
+	 	o.ORGNA_NAME 
+	    from APP_ORGANIZATION_USER u 
+	    left join APP_ORGANIZATION o on o.ORGNA_ID = u.ORGNA_ID 
+	    where u.APPUSER_ID=#{appuser_id,jdbcType=VARCHAR}
+  </select>
+  
+    <update id="assignedJy" parameterType="java.util.Map" >
+   update 
+   APP_ORGANIZATION_USER
+   set SSJWQ = #{ssjwq,jdbcType=VARCHAR},
+        OPRATETIME = #{opratetime,jdbcType=VARCHAR}
+         where APPUSER_ID in
+             <foreach collection="appuser_id" item="appuser_id"
+                    index="index" open="(" close=")" separator=",">
+                    #{appuser_id,jdbcType=VARCHAR}
+                </foreach>        
+  </update>
+  
+  
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.auth.organizationuser.model.OrganizationUser" >
+    update APP_ORGANIZATION_USER
+    <set >
+      <if test="area_id != null" >
+        AREA_ID = #{area_id,jdbcType=VARCHAR},
+      </if>
+      <if test="orgna_id != null" >
+        ORGNA_ID = #{orgna_id,jdbcType=VARCHAR},
+      </if>
+      <if test="user_id != null" >
+        USER_ID = #{user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="user_loginname != null" >
+        USER_LOGINNAME = #{user_loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="user_name != null" >
+        USER_NAME = #{user_name,jdbcType=VARCHAR},
+      </if>
+      <if test="user_sex != null" >
+        USER_SEX = #{user_sex,jdbcType=VARCHAR},
+      </if>
+      <if test="user_password != null" >
+        USER_PASSWORD = #{user_password,jdbcType=VARCHAR},
+      </if>
+      <if test="user_desc != null" >
+        USER_DESC = #{user_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="user_validity_start != null" >
+        USER_VALIDITY_START = #{user_validity_start,jdbcType=VARCHAR},
+      </if>
+      <if test="user_validity_end != null" >
+        USER_VALIDITY_END = #{user_validity_end,jdbcType=VARCHAR},
+      </if>
+      <if test="user_ip != null" >
+        USER_IP = #{user_ip,jdbcType=VARCHAR},
+      </if>
+      <if test="user_xsqsy != null" >
+        USER_XSQSY = #{user_xsqsy,jdbcType=CHAR},
+      </if>
+      <if test="user_sfsd != null" >
+        USER_SFSD = #{user_sfsd,jdbcType=CHAR},
+      </if>
+      <if test="user_dlcs != null" >
+        USER_DLCS = #{user_dlcs,jdbcType=DECIMAL},
+      </if>
+      <if test="user_outbh != null" >
+        USER_OUTBH = #{user_outbh,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        ENABLED = #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="opratetime != null" >
+        OPRATETIME = #{opratetime,jdbcType=VARCHAR},
+      </if>
+      <if test="bz0 != null" >
+        BZ0 = #{bz0,jdbcType=VARCHAR},
+      </if>
+      <if test="bz1 != null" >
+        BZ1 = #{bz1,jdbcType=VARCHAR},
+      </if>
+      <if test="bz2 != null" >
+        BZ2 = #{bz2,jdbcType=VARCHAR},
+      </if>
+      <if test="bz3 != null" >
+        BZ3 = #{bz3,jdbcType=VARCHAR},
+      </if>
+      <if test="bz4 != null" >
+        BZ4 = #{bz4,jdbcType=VARCHAR},
+      </if>
+      <if test="bz5 != null" >
+        BZ5 = #{bz5,jdbcType=VARCHAR},
+      </if>
+      <if test="bz6 != null" >
+        BZ6 = #{bz6,jdbcType=VARCHAR},
+      </if>
+      <if test="bz7 != null" >
+        BZ7 = #{bz7,jdbcType=VARCHAR},
+      </if>
+      <if test="user_sfzh != null" >
+        USER_SFZH = #{user_sfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="ssfj != null" >
+        SSFJ = #{ssfj,jdbcType=VARCHAR},
+      </if>
+      <if test="sspcs != null" >
+        SSPCS = #{sspcs,jdbcType=VARCHAR},
+      </if>
+      <if test="ssjwq != null" >
+        SSJWQ = #{ssjwq,jdbcType=VARCHAR},
+      </if>
+      <if test="ssjb != null" >
+        SSJB = #{ssjb,jdbcType=VARCHAR},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="user_mobile != null" >
+        USER_MOBILE = #{user_mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="user_email != null" >
+        USER_EMAIL = #{user_email,jdbcType=VARCHAR},
+      </if>
+      <if test="ukeyid != null" >
+        UKEYID = #{ukeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zp != null" >
+        ZP = #{zp,jdbcType=BLOB},
+      </if>
+    </set>
+    where APPUSER_ID = #{appuser_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

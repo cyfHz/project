@@ -1,0 +1,50 @@
+select count(1) from dz_mlph;--7082538 门楼牌号数量
+select count(1) from dz_mlph m where m.sjgsdwdm is null;--1176264 门楼牌号数量
+select count(1) from dz_mlph m where m.sjgsdwdm is not  null;--5906274 门楼牌号数量
+
+select count(1) from dz_mlph m where m.jwqbh  is null;--6721281 
+select count(1) from dz_mlph m where m.sspcs  is null;--70 
+select count(1) from dz_mlph m where m.ssfj  is null;--70 
+select count(1) from dz_mlph m where m.sssj  is null;--70 
+
+select count(1) from dz_jzwjbxx;--7075735 建筑物数量
+
+select count(1) from dz_jzwjbxx j where j.zaglssjwzrqdm is  null;--0 建筑物数量
+select count(1) from dz_jzwjbxx j where j.zaglssjwzrqdm is not null;--7075749 建筑物数量
+
+
+select count(1) from dz_mlph m where m.ssjzw_dzbm is null;--545234 门楼牌号没有（不是？）建筑物的数量
+
+select count(1) from dz_jzwjbxx j where j.dzbm  in (select m.ssjzw_dzbm from dz_mlph m);--5931503 建筑物有门楼牌号
+
+select count(1) from dz_jzwjbxx j where j.dzbm  not in (select m.ssjzw_dzbm from dz_mlph m where m.ssjzw_dzbm is not null);--1144246
+
+select count(1) from dz_jzwjbxx j where j.dzbm  in (select m.ssjzw_dzbm from dz_mlph m where m.ssjzw_dzbm is not null) or j.dzbm  in (select m.ywlsh from dz_mlph m) ;--6726843
+
+select count(1) from (select m.ssjzw_dzbm from dz_mlph m  group by m.ssjzw_dzbm  having count(m.ssjzw_dzbm) > 1);--184965 所属建筑物重复
+
+select count(1) from dz_mlph m where m.ssjlxxq_dzbm not in (select x.dzbm from dz_jlx x);--386591 所属街路巷小区找不到
+
+select count(1) from dz_jzwjbxx j where j.ssjlxxq_dzbm not in (select x.dzbm from dz_jlx x);--422188 所属街路巷小区找不到
+
+
+select count(1) from dz_mlph m where m.sjgsdwdm like '3704%' ;--1057683 门楼牌号数量
+select count(1) from dz_mlph m where m.sjgsdwdm is null and m.sjgsdwdm like '3704%' ;
+select count(1) from dz_mlph m where m.ssjzw_dzbm is null  and m.sjgsdwdm like '3704%' ;
+select count(1) from dz_mlph m where m.ssjlxxq_dzbm not in (select x.dzbm from dz_jlx x) and m.sjgsdwdm like '3704%' ;--386591 所属街路巷小区找不到
+select count(1) from (select m.ssjzw_dzbm from dz_mlph m where m.sjgsdwdm like '3704%'  group by m.ssjzw_dzbm  having count(m.ssjzw_dzbm) > 1);--184965 所属建筑物重复
+
+select count(1) from dz_mlph m where m.sjgsdwdm not in (select j.jwqbh from ent_jwq j )  and m.sjgsdwdm like '3704%' ;-- 55564
+
+select count(1) from dz_mlph m where m.sjgsdwdm not in (select o.ORGNA_ID from app_organization o)  and m.sjgsdwdm like '3704%' ;-- 1054920
+
+select count(1) from dz_mlph m where (m.sjgsdwdm not in (select o.ORGNA_ID from app_organization o)) and ( m.sjgsdwdm not in (select j.jwqbh from ent_jwq j )) and m.sjgsdwdm like '3704%' ;-- 52801
+
+select count(1) from dz_jzwjbxx j where j.ssjlxxq_dzbm not in (select x.dzbm from dz_jlx x) and j.zaglssjwzrqdm like '3704%' ;--422188 所属街路巷小区找不到
+
+select count(1) from dz_jzwjbxx j where j.dzbm  not in (select m.ssjzw_dzbm from dz_mlph m where m.ssjzw_dzbm is not null) and j.zaglssjwzrqdm like '3704%' ;--1144246
+
+select count(1) from dz_jzwjbxx j where (j.zaglssjwzrqdm not in (select o.ORGNA_ID from app_organization o)) and (j.zaglssjwzrqdm not in (select j.jwqbh from ent_jwq j )) and j.zaglssjwzrqdm like '3704%' ;-- 52801
+
+
+select count(1) from dz_jzwfj t where t.jzwjgid in (select j.JZWJGID from dz_jzwjg j where j.JZWID in(select jz.DZBM from dz_jzwjbxx jz) ) 属于建筑物的房间数

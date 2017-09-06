@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.jzw.mapper.JzwfjMapper" >
+
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.jzw.model.Jzwfj" >
+    <id column="JZWFJID" property="jzwfjid" jdbcType="VARCHAR" />
+    <result column="JZWJGID" property="jzwjgid" jdbcType="VARCHAR" />
+    <result column="JZWDYID" property="jzwdyid" jdbcType="VARCHAR" />
+    <result column="JZWLCID" property="jzwlcid" jdbcType="VARCHAR" />
+    <result column="FJXH" property="fjxh" jdbcType="VARCHAR" />
+    <result column="FJMC" property="fjmc" jdbcType="VARCHAR" />
+    <result column="ZHGXRQ" property="zhgxrq" jdbcType="TIMESTAMP" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+    <result column="CREATEDBY" property="createdby" jdbcType="VARCHAR" />
+    <result column="CREATED" property="created" jdbcType="TIMESTAMP" />
+    <result column="UPDATEDBY" property="updatedby" jdbcType="VARCHAR" />
+    <result column="UPDATED" property="updated" jdbcType="TIMESTAMP" />
+    <result column="DELTAG" property="deltag" jdbcType="CHAR" />
+    <result column="DELUSER" property="deluser" jdbcType="VARCHAR" />
+    <result column="DELTIME" property="deltime" jdbcType="TIMESTAMP" />
+    <result column="SHOWINFO" property="showInfo" jdbcType="VARCHAR" />
+    <result column="SHOWMODE" property="showMode" jdbcType="VARCHAR" />
+    <result column="CHANGESIGN" property="changeSign" jdbcType="CHAR" />
+        <!-- 要求新加 -->
+     <!-- <result column="QR_CODE" property="qrCode" jdbcType="CLOB" /> -->
+     <result column="MAC_ADDRESS" property="macAddress" jdbcType="VARCHAR" />
+     <result column="TF_CARD_NUM" property="tfCardNum" jdbcType="VARCHAR" />
+     <result column="IMEI_NUM" property="imeiNum" jdbcType="VARCHAR" />
+     <result column="SIM_NUM" property="simNum" jdbcType="VARCHAR" />
+     <result column="GPS_X" property="gpsX" jdbcType="VARCHAR" />
+     <result column="GPS_Y" property="gpsY" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    JZWFJID, JZWJGID, JZWDYID, JZWLCID, FJXH, FJMC, ZHGXRQ, MOVESIGN, CREATEDBY, CREATED, 
+    UPDATEDBY, UPDATED, DELTAG, DELUSER, DELTIME,SHOWINFO,SHOWMODE,CHANGESIGN,
+   MAC_ADDRESS, TF_CARD_NUM, IMEI_NUM, SIM_NUM, GPS_X, GPS_Y
+  </sql>
+   <sql id="Simple_Column_List" >
+    	JZWFJID, JZWJGID, JZWDYID, JZWLCID, FJXH, FJMC, DELTAG, SHOWINFO,SHOWMODE,CHANGESIGN
+  </sql>
+    <sql id="Alias_Base_Column_List" >
+    ${alias}.JZWFJID, ${alias}.JZWJGID, ${alias}.JZWDYID, ${alias}.JZWLCID, ${alias}.FJXH, 
+    ${alias}.FJMC, ${alias}.ZHGXRQ, ${alias}.MOVESIGN, ${alias}.CREATEDBY, ${alias}.CREATED, 
+    ${alias}.UPDATEDBY, ${alias}.UPDATED, ${alias}.DELTAG, ${alias}.DELUSER, ${alias}.DELTIME,
+    ${alias}.SHOWINFO,${alias}.SHOWMODE,${alias}.CHANGESIGN,
+    ${alias}.MAC_ADDRESS, ${alias}.TF_CARD_NUM, ${alias}.IMEI_NUM, ${alias}.SIM_NUM, ${alias}.GPS_X, ${alias}.GPS_Y
+  </sql>
+  
+  <!-- ################################################################# --> 
+   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />
+    from DZ_JZWFJ  where JZWFJID = #{jzwfjid,jdbcType=VARCHAR}
+  </select>
+     
+    <delete id="deletejzwfjByLcid" parameterType="java.lang.String" >
+    delete from DZ_JZWFJ
+    where JZWLCID = #{jzwlcid,jdbcType=VARCHAR}
+  </delete>
+<!-- #######################insertSelective########################################### --> 
+    <insert id="insertSelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwfj" >
+    insert into DZ_JZWFJ
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jzwfjid != null" > JZWFJID, </if>
+      <if test="jzwjgid != null" > JZWJGID, </if>
+      <if test="jzwdyid != null" > JZWDYID, </if>
+      <if test="jzwlcid != null" > JZWLCID,</if>
+      <if test="fjxh != null" > FJXH,</if>
+      <if test="fjmc != null" > FJMC,</if>
+      <if test="zhgxrq != null" > ZHGXRQ,</if>
+      <if test="movesign != null" > MOVESIGN, </if>
+      <if test="createdby != null" > CREATEDBY,</if>
+      <if test="created != null" > CREATED,</if>
+      <if test="updatedby != null" > UPDATEDBY, </if>
+      <if test="updated != null" > UPDATED,</if>
+      <if test="deltag != null" > DELTAG,</if>
+      <if test="deluser != null" > DELUSER, </if>
+      <if test="deltime != null" > DELTIME, </if> 
+      <if test="showInfo != null" > SHOWINFO, </if>
+      <if test="showMode != null" > SHOWMODE,</if>
+      <if test="changeSign != null" > CHANGESIGN,</if>
+      
+ <!--      <if test="qrCode != null" >  QR_CODE, </if> -->
+      <if test="macAddress != null" >  MAC_ADDRESS, </if>
+      <if test="tfCardNum != null" >  TF_CARD_NUM, </if>
+      <if test="imeiNum != null" >  IMEI_NUM, </if>
+      <if test="simNum != null" >  SIM_NUM, </if>
+      <if test="gpsX != null" >  GPS_X, </if>
+      <if test="gpsY != null" >  GPS_Y, </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jzwfjid != null" >#{jzwfjid,jdbcType=VARCHAR},</if>
+      <if test="jzwjgid != null" > #{jzwjgid,jdbcType=VARCHAR}, </if>
+      <if test="jzwdyid != null" > #{jzwdyid,jdbcType=VARCHAR}, </if>
+      <if test="jzwlcid != null" >#{jzwlcid,jdbcType=VARCHAR}, </if>
+      <if test="fjxh != null" > #{fjxh,jdbcType=VARCHAR},</if>
+      <if test="fjmc != null" > #{fjmc,jdbcType=VARCHAR},</if>
+      <if test="zhgxrq != null" > #{zhgxrq,jdbcType=TIMESTAMP}, </if>
+      <if test="movesign != null" > #{movesign,jdbcType=CHAR},</if>
+      <if test="createdby != null" >#{createdby,jdbcType=VARCHAR}, </if>
+      <if test="created != null" > #{created,jdbcType=TIMESTAMP},</if>
+      <if test="updatedby != null" > #{updatedby,jdbcType=VARCHAR},</if>
+      <if test="updated != null" > #{updated,jdbcType=TIMESTAMP},</if>
+      <if test="deltag != null" > #{deltag,jdbcType=CHAR}, </if>
+      <if test="deluser != null" > #{deluser,jdbcType=VARCHAR},</if>
+      <if test="deltime != null" > #{deltime,jdbcType=TIMESTAMP}, </if>
+      <if test="showInfo != null" > #{showInfo,jdbcType=VARCHAR},</if>
+      <if test="showMode != null" > #{showMode,jdbcType=VARCHAR},</if>     
+      <if test="changeSign != null" > #{changeSign,jdbcType=CHAR},</if>
+      
+        <!-- <if test="qrCode != null" >  #{qrCode,jdbcType=CLOB}, </if> -->
+        <if test="macAddress != null" >  #{macAddress,jdbcType=VARCHAR}, </if> 
+        <if test="tfCardNum != null" >  #{tfCardNum,jdbcType=VARCHAR}, </if>
+        <if test="imeiNum != null" >  #{imeiNum,jdbcType=VARCHAR}, </if>
+        <if test="simNum != null" >  #{simNum,jdbcType=VARCHAR}, </if>
+        <if test="gpsX != null" >  #{gpsX,jdbcType=VARCHAR}, </if>
+        <if test="gpsY != null" >  #{gpsY,jdbcType=VARCHAR}, </if>
+    </trim>
+  </insert>
+ <!-- update selective -->
+ <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwfj">
+		update DZ_JZWFJ
+		<set>
+		      <if test="jzwjgid != null" >JZWJGID = #{jzwjgid,jdbcType=VARCHAR}, </if>
+		      <if test="jzwdyid != null" >JZWDYID = #{jzwdyid,jdbcType=VARCHAR}, </if>
+		      <if test="jzwlcid != null" >JZWLCID = #{jzwlcid,jdbcType=VARCHAR}, </if>
+		      <if test="fjxh != null" >FJXH = #{fjxh,jdbcType=VARCHAR},</if>
+		      <if test="fjmc != null" >FJMC = #{fjmc,jdbcType=VARCHAR},</if>
+		      <if test="zhgxrq != null" >ZHGXRQ = #{zhgxrq,jdbcType=TIMESTAMP}, </if>
+		      <if test="movesign != null" >MOVESIGN = #{movesign,jdbctype=CHAR},</if>
+		      <if test="createdby != null" >CREATEDBY = #{createdby,jdbcType=VARCHAR}, </if>
+		      <if test="created != null" >CREATED = #{created,jdbcType=TIMESTAMP},</if>
+		      <if test="updatedby != null" >UPDATEDBY = #{updatedby,jdbcType=VARCHAR},</if>
+		      <if test="updated != null" >UPDATED = #{updated,jdbcType=TIMESTAMP},</if>
+		      <if test="deltag != null" >DELTAG = #{deltag,jdbcType=CHAR}, </if>
+		      <if test="deluser != null" >DELUSER = #{deluser,jdbcType=VARCHAR},</if>
+		      <if test="deltime != null" >DELTIME = #{deltime,jdbcType=TIMESTAMP}, </if>
+		      <if test="showInfo != null" >SHOWINFO = #{showInfo,jdbcType=VARCHAR},</if>
+		      <if test="showMode != null" >SHOWMODE = #{showMode,jdbcType=VARCHAR},</if>     
+		      <if test="changeSign != null" >CHANGESIGN = #{changeSign,jdbcType=CHAR},</if>
+	     <!--    <if test="qrCode != null" >  QR_CODE=#{qrCode,jdbcType=CLOB}, </if> -->
+	        <if test="macAddress != null" >  MAC_ADDRESS=#{macAddress,jdbcType=VARCHAR}, </if> 
+	        <if test="tfCardNum != null" > TF_CARD_NUM= #{tfCardNum,jdbcType=VARCHAR}, </if>
+	        <if test="imeiNum != null" >  IMEI_NUM=#{imeiNum,jdbcType=VARCHAR}, </if>
+	        <if test="simNum != null" >  SIM_NUM=#{simNum,jdbcType=VARCHAR}, </if>
+	        <if test="gpsX != null" >  GPS_X=#{gpsX,jdbcType=VARCHAR}, </if>
+	        <if test="gpsY != null" > GPS_Y= #{gpsY,jdbcType=VARCHAR}, </if>
+		</set>
+		where JZWFJID = #{jzwfjid,jdbcType=VARCHAR}
+	</update>
+ 
+   	<insert id="batchInsertJzwfj" parameterType="java.util.List">
+		insert into DZ_JZWFJ (   
+		JZWFJID, JZWJGID, JZWDYID, JZWLCID, FJXH, FJMC, ZHGXRQ, MOVESIGN, CREATEDBY, CREATED, 
+   		UPDATEDBY, UPDATED, DELTAG, DELUSER, DELTIME,SHOWINFO,SHOWMODE,CHANGESIGN )
+		<foreach collection="list" item="item" index="index" open="(" separator="union" close=")">
+		select
+		 		#{item.jzwfjid,jdbcType=VARCHAR}, 
+		        #{item.jzwjgid,jdbcType=VARCHAR}, 
+		        #{item.jzwdyid,jdbcType=VARCHAR}, 
+		        #{item.jzwlcid,jdbcType=VARCHAR}, 
+		        #{item.fjxh,jdbcType=VARCHAR},
+		        #{item.fjmc,jdbcType=VARCHAR},
+		        #{item.zhgxrq,jdbcType=TIMESTAMP}, 
+		        #{item.movesign,jdbcType=CHAR},
+		        #{item.createdby,jdbcType=VARCHAR}, 
+		        #{item.created,jdbcType=TIMESTAMP},
+		        #{item.updatedby,jdbcType=VARCHAR},
+		      	#{item.updated,jdbcType=TIMESTAMP},
+		      	#{item.deltag,jdbcType=CHAR}, 
+		        #{item.deluser,jdbcType=VARCHAR},
+		      	#{item.deltime,jdbcType=TIMESTAMP}, 
+		      	#{item.showInfo,jdbcType=VARCHAR},
+		      	#{item.showMode,jdbcType=VARCHAR},     
+		        #{item.changeSign,jdbcType=CHAR}
+			from dual
+		</foreach>
+	</insert>
+	
+	<update id="batchUpdateJzwfj" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" open="begin" close=";end;" separator=";">
+         update DZ_JZWFJ 
+             <set>
+                <if test="item.jzwjgid!=null">JZWJGID =#{item.jzwjgid,jdbcType=VARCHAR}, </if>
+	            <if test="item.jzwdyid!=null">JZWDYID = #{item.jzwdyid,jdbcType=VARCHAR},</if>
+		        <if test="item.jzwlcid!=null">JZWLCID =#{item.jzwlcid,jdbcType=VARCHAR}, </if>
+		        <if test="item.fjxh!=null">FJXH    =#{item.fjxh,jdbcType=VARCHAR},</if>
+		        <if test="item.fjmc!=null">FJMC    =#{item.fjmc,jdbcType=VARCHAR},</if>
+		        <if test="item.zhgxrq!=null">ZHGXRQ =#{item.zhgxrq,jdbcType=TIMESTAMP}, </if>
+		        <if test="item.movesign!=null">MOVESIGN =#{item.movesign,jdbcType=CHAR},</if>
+		        <if test="item.createdby!=null">CREATEDBY =#{item.createdby,jdbcType=VARCHAR}, </if>
+		        <if test="item.created!=null">CREATED =#{item.created,jdbcType=TIMESTAMP},</if>
+		        <if test="item.updatedby!=null">UPDATEDBY =#{item.updatedby,jdbcType=VARCHAR},</if>
+		      	<if test="item.updated!=null">UPDATED =#{item.updated,jdbcType=TIMESTAMP},</if>
+		      	<if test="item.deltag!=null">DELTAG =#{item.deltag,jdbcType=CHAR}, </if>
+		        <if test="item.deluser!=null">DELUSER =#{item.deluser,jdbcType=VARCHAR},</if>
+		      	<if test="item.deltime!=null">DELTIME =#{item.deltime,jdbcType=TIMESTAMP}, </if>
+		      	<if test="item.showInfo!=null">SHOWINFO =#{item.showInfo,jdbcType=VARCHAR},</if>
+		      	<if test="item.showMode!=null">SHOWMODE =#{item.showMode,jdbcType=VARCHAR},</if>     
+		        <if test="item.changeSign!=null">CHANGESIGN =#{item.changeSign,jdbcType=CHAR},</if>
+		<!--<if test="item.qrCode != null" >  QR_CODE = #{item.qrCode,jdbcType=CLOB}, </if>  -->
+        <if test="item.macAddress != null" > MAC_ADDRESS= #{item.macAddress,jdbcType=VARCHAR}, </if> 
+        <if test="item.tfCardNum != null" > TF_CARD_NUM= #{item.tfCardNum,jdbcType=VARCHAR}, </if>
+        <if test="item.imeiNum != null" > IMEI_NUM =#{item.imeiNum,jdbcType=VARCHAR}, </if>
+        <if test="item.simNum != null" >  SIM_NUM=#{item.simNum,jdbcType=VARCHAR}, </if>
+        <if test="item.gpsX != null" >  GPS_X=#{item.gpsX,jdbcType=VARCHAR}, </if>
+        <if test="item.gpsY != null" >  GPS_Y=#{item.gpsY,jdbcType=VARCHAR}, </if>
+             </set>
+                where jzwfjid =#{item.jzwfjid,jdbcType=VARCHAR}
+       </foreach>
+    </update>
+    
+   <!-- #######################by jg################################## -->  
+   <select id="selectFjByJzwjgId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select  <include refid="Simple_Column_List" /> 
+    from DZ_JZWFJ  where JZWJGID = #{jzwjgid,jdbcType=VARCHAR} and CHANGESIGN is null and (DELTAG is null or DELTAG='0')
+  </select>
+  
+<!--    <select id="selectSortedFjByJzwjgId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select  <include refid="Alias_Base_Column_List" ><property name="alias" value="f" /></include>
+	    from DZ_JZWFJ f
+	    left join dz_jzwlc l on f.jzwlcid=l.jzwlcid
+		left join dz_jzwdy d on f.jzwdyid=d.jzwdyid 
+    where f.JZWJGID = #{jzwjgid,jdbcType=VARCHAR} 
+    and CHANGESIGN is null and (DELTAG is null or DELTAG='0')
+     order by to_number(d.dyxh),to_number(l.lcxh),to_number(f.FJXH)
+  </select> -->
+     <select id="selectSortedFjByJzwjgId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	    select  <include refid="Simple_Column_List" /> 
+	    from DZ_JZWFJ  where JZWJGID = #{jzwjgid,jdbcType=VARCHAR} 
+	    and CHANGESIGN is null and (DELTAG is null or DELTAG='0')
+	     order by JZWDYID, JZWLCID,to_number(FJXH)
+  </select>
+  
+   <select id="selectFjShowMapByJzwjgId" resultType="java.util.Map" parameterType="java.lang.String" >
+    select JZWFJID, FJXH, FJMC,SHOWINFO,SHOWMODE  
+    from DZ_JZWFJ  where JZWJGID = #{jzwjgid,jdbcType=VARCHAR} and CHANGESIGN is null and (DELTAG is null or DELTAG='0')
+  </select>
+     <!-- #######################by dy################################## -->  
+<!--  -->
+ <select id="selectJzwfjByJzwDyId" resultType="com.kingmon.project.psam.jzw.model.Jzwfj" parameterType="java.lang.String" >
+	  select <include refid="Simple_Column_List" />  from DZ_JZWFJ  where  JZWDYID = #{jzwdyId,jdbcType=VARCHAR} and  (DELTAG is null or DELTAG='0')
+	   and CHANGESIGN is null
+  </select>
+   <select id="selectJzwfjCountByJzwDyId" resultType="java.lang.Long" parameterType="java.lang.String" >
+	  select count(1) from DZ_JZWFJ  where JZWDYID = #{jzwdyId,jdbcType=VARCHAR} and CHANGESIGN is null and  (DELTAG is null or DELTAG='0')  
+  </select>
+  
+    <!-- #######################by lc################################## -->  
+  <select id="selectSortedJzwfjByJzwlcId" resultType="com.kingmon.project.psam.jzw.model.Jzwfj" parameterType="java.lang.String" >
+    select <include refid="Simple_Column_List" /> 
+      from DZ_JZWFJ  where JZWLCID = #{jzwlcid,jdbcType=VARCHAR} and CHANGESIGN is null and (DELTAG is null or DELTAG='0') order by FJXH,FJMC 
+    <!--from DZ_JZWFJ  where JZWLCID = #{jzwlcid,jdbcType=VARCHAR} and CHANGESIGN is null and (DELTAG is null or DELTAG='0') order by to_number(FJXH),FJMC-->
+  </select>
+
+  
+ <select id="selectJzwfjByJzwLcId" resultType="com.kingmon.project.psam.jzw.model.Jzwfj" parameterType="java.lang.String" >
+	  select JZWFJID, JZWJGID, JZWDYID, JZWLCID, FJXH, FJMC from DZ_JZWFJ  where  nvl(DELTAG,'0') &lt;&gt; '1' and JZWLCID = #{jzwlcId,jdbcType=VARCHAR} and CHANGESIGN is null
+  </select> 
+  
+   <select id="selectJzwfjCountByJzwLcId" resultType="java.lang.Long" parameterType="java.lang.String" >
+	  select count(1) from DZ_JZWFJ  where  JZWLCID = #{jzwlcId,jdbcType=VARCHAR} and CHANGESIGN is null and (DELTAG is null or DELTAG='0')  
+	  and SHOWINFO is not null
+  </select>
+</mapper>

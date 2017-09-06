@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.auth.resource.mapper.ResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.auth.resource.model.Resource" >
+    <result column="RES_ID" property="res_id" jdbcType="VARCHAR" />
+    <result column="AREA_ID" property="area_id" jdbcType="VARCHAR" />
+    <result column="RES_NAME" property="res_name" jdbcType="VARCHAR" />
+    <result column="RES_DESC" property="res_desc" jdbcType="VARCHAR" />
+    <result column="RES_TYPE" property="res_type" jdbcType="VARCHAR" />
+    <result column="RES_PATHTYPE" property="res_pathtype" jdbcType="VARCHAR" />
+    <result column="RES_PVALUE" property="res_pvalue" jdbcType="VARCHAR" />
+    <result column="RES_ORDER" property="res_order" jdbcType="VARCHAR" />
+    <result column="RES_CODE" property="res_code" jdbcType="VARCHAR" />
+    <result column="RES_PID" property="res_pid" jdbcType="VARCHAR" />
+    <result column="DHSXS" property="dhsxs" jdbcType="CHAR" />
+    <result column="SFYZ" property="sfyz" jdbcType="CHAR" />
+    <result column="ENABLED" property="enabled" jdbcType="CHAR" />
+    <result column="OPRATETIME" property="opratetime" jdbcType="VARCHAR" />
+    <result column="IS_HREF" property="is_href" jdbcType="CHAR" />
+    <result column="IS_MAP_OP" property="is_map_op" jdbcType="CHAR" />
+    <result column="MAP_OP_RESOURCE" property="map_op_resource" jdbcType="VARCHAR" />
+    <result column="CJ_MODE" property="cj_mode" jdbcType="CHAR" />
+    <result column="DJR" property="djr" jdbcType="VARCHAR" />
+    <result column="DJDW" property="djdw" jdbcType="VARCHAR" />
+    <result column="DJSJ" property="djsj" jdbcType="TIMESTAMP" />
+    <result column="XGR" property="xgr" jdbcType="VARCHAR" />
+    <result column="XGDW" property="xgdw" jdbcType="VARCHAR" />
+    <result column="ZHXGXJ" property="zhxgxj" jdbcType="TIMESTAMP" />
+    <result column="ZXBJ" property="zxbj" jdbcType="CHAR" />
+    <result column="ZXRQ" property="zxrq" jdbcType="TIMESTAMP" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+    <result column="IMAGEBIG_VALUE" property="imagebig_value" jdbcType="VARCHAR" />
+    <result column="IMAGESMALL_VALUE" property="imagesmall_value" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.kingmon.project.auth.resource.model.Resource" >
+    insert into APP_RESOURCE (RES_ID, AREA_ID, RES_NAME, 
+      RES_DESC, RES_TYPE, RES_PATHTYPE, 
+      RES_PVALUE, RES_ORDER, RES_CODE, 
+      RES_PID, DHSXS, SFYZ, ENABLED, 
+      OPRATETIME, IS_HREF, IS_MAP_OP, 
+      MAP_OP_RESOURCE, CJ_MODE, DJR, 
+      DJDW, DJSJ, XGR, 
+      XGDW, ZHXGXJ, ZXBJ, 
+      ZXRQ, MOVESIGN, IMAGEBIG_VALUE, 
+      IMAGESMALL_VALUE)
+    values 
+    (#{res_id,jdbcType=VARCHAR},
+     #{area_id,jdbcType=VARCHAR},
+      #{res_name,jdbcType=VARCHAR}, 
+      #{res_desc,jdbcType=VARCHAR},
+       #{res_type,jdbcType=VARCHAR}, 
+       #{res_pathtype,jdbcType=VARCHAR}, 
+      #{res_pvalue,jdbcType=VARCHAR},
+       #{res_order,jdbcType=VARCHAR}, 
+       #{res_code,jdbcType=VARCHAR}, 
+      #{res_pid,jdbcType=VARCHAR}, 
+      #{dhsxs,jdbcType=CHAR},
+       #{sfyz,jdbcType=CHAR}, 
+       #{enabled,jdbcType=CHAR}, 
+      #{opratetime,jdbcType=VARCHAR},
+       #{is_href,jdbcType=CHAR},
+        #{is_map_op,jdbcType=CHAR}, 
+      #{map_op_resource,jdbcType=VARCHAR},
+       #{cj_mode,jdbcType=CHAR},
+        #{djr,jdbcType=VARCHAR}, 
+      #{djdw,jdbcType=VARCHAR}, 
+      #{djsj,jdbcType=TIMESTAMP},
+       #{xgr,jdbcType=VARCHAR}, 
+      #{xgdw,jdbcType=VARCHAR}, 
+      #{zhxgxj,jdbcType=TIMESTAMP},
+       #{zxbj,jdbcType=CHAR}, 
+      #{zxrq,jdbcType=TIMESTAMP},
+       #{movesign,jdbcType=CHAR}, 
+       #{imagebig_value,jdbcType=VARCHAR}, 
+      #{imagesmall_value,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kingmon.project.auth.resource.model.Resource" >
+    insert into APP_RESOURCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="res_id != null" >
+        RES_ID,
+      </if>
+      <if test="area_id != null" >
+        AREA_ID,
+      </if>
+      <if test="res_name != null" >
+        RES_NAME,
+      </if>
+      <if test="res_desc != null" >
+        RES_DESC,
+      </if>
+      <if test="res_type != null" >
+        RES_TYPE,
+      </if>
+      <if test="res_pathtype != null" >
+        RES_PATHTYPE,
+      </if>
+      <if test="res_pvalue != null" >
+        RES_PVALUE,
+      </if>
+      <if test="res_order != null" >
+        RES_ORDER,
+      </if>
+      <if test="res_code != null" >
+        RES_CODE,
+      </if>
+      <if test="res_pid != null" >
+        RES_PID,
+      </if>
+      <if test="dhsxs != null" >
+        DHSXS,
+      </if>
+      <if test="sfyz != null" >
+        SFYZ,
+      </if>
+      <if test="enabled != null" >
+        ENABLED,
+      </if>
+      <if test="opratetime != null" >
+        OPRATETIME,
+      </if>
+      <if test="is_href != null" >
+        IS_HREF,
+      </if>
+      <if test="is_map_op != null" >
+        IS_MAP_OP,
+      </if>
+      <if test="map_op_resource != null" >
+        MAP_OP_RESOURCE,
+      </if>
+      <if test="cj_mode != null" >
+        CJ_MODE,
+      </if>
+      <if test="djr != null" >
+        DJR,
+      </if>
+      <if test="djdw != null" >
+        DJDW,
+      </if>
+      <if test="djsj != null" >
+        DJSJ,
+      </if>
+      <if test="xgr != null" >
+        XGR,
+      </if>
+      <if test="xgdw != null" >
+        XGDW,
+      </if>
+      <if test="zhxgxj != null" >
+        ZHXGXJ,
+      </if>
+      <if test="zxbj != null" >
+        ZXBJ,
+      </if>
+      <if test="zxrq != null" >
+        ZXRQ,
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN,
+      </if>
+      <if test="imagebig_value != null" >
+        IMAGEBIG_VALUE,
+      </if>
+      <if test="imagesmall_value != null" >
+        IMAGESMALL_VALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="res_id != null" >
+        #{res_id,jdbcType=VARCHAR},
+      </if>
+      <if test="area_id != null" >
+        #{area_id,jdbcType=VARCHAR},
+      </if>
+      <if test="res_name != null" >
+        #{res_name,jdbcType=VARCHAR},
+      </if>
+      <if test="res_desc != null" >
+        #{res_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="res_type != null" >
+        #{res_type,jdbcType=VARCHAR},
+      </if>
+      <if test="res_pathtype != null" >
+        #{res_pathtype,jdbcType=VARCHAR},
+      </if>
+      <if test="res_pvalue != null" >
+        #{res_pvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="res_order != null" >
+        #{res_order,jdbcType=VARCHAR},
+      </if>
+      <if test="res_code != null" >
+        #{res_code,jdbcType=VARCHAR},
+      </if>
+      <if test="res_pid != null" >
+        #{res_pid,jdbcType=VARCHAR},
+      </if>
+      <if test="dhsxs != null" >
+        #{dhsxs,jdbcType=CHAR},
+      </if>
+      <if test="sfyz != null" >
+        #{sfyz,jdbcType=CHAR},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="opratetime != null" >
+        #{opratetime,jdbcType=VARCHAR},
+      </if>
+      <if test="is_href != null" >
+        #{is_href,jdbcType=CHAR},
+      </if>
+      <if test="is_map_op != null" >
+        #{is_map_op,jdbcType=CHAR},
+      </if>
+      <if test="map_op_resource != null" >
+        #{map_op_resource,jdbcType=VARCHAR},
+      </if>
+      <if test="cj_mode != null" >
+        #{cj_mode,jdbcType=CHAR},
+      </if>
+      <if test="djr != null" >
+        #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw != null" >
+        #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xgr != null" >
+        #{xgr,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdw != null" >
+        #{xgdw,jdbcType=VARCHAR},
+      </if>
+      <if test="zhxgxj != null" >
+        #{zhxgxj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zxbj != null" >
+        #{zxbj,jdbcType=CHAR},
+      </if>
+      <if test="zxrq != null" >
+        #{zxrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="imagebig_value != null" >
+        #{imagebig_value,jdbcType=VARCHAR},
+      </if>
+      <if test="imagesmall_value != null" >
+        #{imagesmall_value,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+<select id="selectResourceListByByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+     select 
+      r.RES_ID ,
+      r.RES_NAME,
+      r.RES_CODE,
+      r.RES_TYPE ,
+      r.RES_PVALUE,
+      r.RES_ORDER,
+      r.RES_PID,
+      r.ENABLED,
+      r.IS_HREF,
+      IMAGEBIG_VALUE,
+      IMAGESMALL_VALUE
+   from
+     APP_RESOURCE r, 
+     APP_ROLE_RESOURCE rr,
+     app_role_user ru
+     where 1=1
+     and r.enabled='1'
+     and rr.enabled='1'
+     and ru.enabled='1'
+     and  r.res_id=rr.res_id
+     and rr.role_id=ru.role_id
+     and ru.appuser_id=#{appuser_id,jdbcType=VARCHAR}
+  </select>
+  
+<select id="selectResourceListByByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+     select 
+      r.RES_ID ,
+      r.RES_NAME,
+      r.RES_TYPE ,
+      r.RES_CODE,
+      r.RES_PVALUE,
+      r.RES_ORDER,
+      r.RES_PID,
+      r.ENABLED,
+      r.IS_HREF,
+      r.IMAGEBIG_VALUE,
+      r.IMAGESMALL_VALUE
+   from
+     APP_RESOURCE r, 
+     APP_ROLE_RESOURCE rr
+     where 1=1
+     and r.enabled='1'
+     and rr.enabled='1'
+     and r.res_id=rr.res_id
+     and rr.role_id=#{role_id,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectResourceListByPResId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+     select 
+      r.RES_ID ,
+      r.RES_NAME,
+      r.RES_TYPE ,
+      r.RES_CODE,
+      r.RES_PVALUE,
+      r.RES_ORDER,
+      r.RES_PID,
+      r.ENABLED,
+      r.IS_HREF,
+      r.IMAGEBIG_VALUE,
+      r.IMAGESMALL_VALUE
+   from
+     APP_RESOURCE r, 
+     APP_ROLE_RESOURCE rr
+     where 1=1
+     and r.enabled='1'
+     and rr.enabled='1'
+     and r.res_id=rr.res_id
+     and rr.role_id=#{role_id,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

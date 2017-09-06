@@ -1,0 +1,178 @@
+alter table JINING_DZ_MLPH add constraint PK_JINING_DZ_MLPH_YWLSH primary key (YWLSH);
+create index I_JINING_DZ_MLPH_ZXDZZB on JINING_DZ_MLPH (ZXDZZB);
+create index I_JINING_DZ_MLPH_ZXDHZB on JINING_DZ_MLPH (ZXDHZB);
+create index I_JINING_DZ_MLPH_JWQBH on JINING_DZ_MLPH (JWQBH);
+create index I_JINING_DZ_MLPH_SJGSDWDM on JINING_DZ_MLPH (SJGSDWDM);
+create index I_JINING_DZ_MLPH_2 on JINING_DZ_MLPH (SUBSTR(SJGSDWDM,1,2));
+create index I_JINING_DZ_MLPH_4 on JINING_DZ_MLPH (SUBSTR(SJGSDWDM,1,4));
+create index I_JINING_DZ_MLPH_6 on JINING_DZ_MLPH (SUBSTR(SJGSDWDM,1,6));
+create index I_JINING_DZ_MLPH_9 on JINING_DZ_MLPH (SUBSTR(SJGSDWDM,1,9));
+create index I_JINING_DZ_MLPH_SSSJ on JINING_DZ_MLPH (SSSJ);
+create index I_JINING_DZ_MLPH_SSPCS on JINING_DZ_MLPH (SSPCS);
+create index I_JINING_DZ_MLPH_SSFJ on JINING_DZ_MLPH (SSFJ);
+--
+alter table jinan_dz_mlph_true add constraint PK_jinan_dz_mlph_true_YWLSH primary key (YWLSH);
+create index I_jinan_dz_mlph_true_ZXDZZB on jinan_dz_mlph_true (ZXDZZB);
+create index I_jinan_dz_mlph_true_ZXDHZB on jinan_dz_mlph_true (ZXDHZB);
+create index I_jinan_dz_mlph_true_JWQBH on jinan_dz_mlph_true (JWQBH);
+create index I_jinan_dz_mlph_true_SJGSDWDM on jinan_dz_mlph_true (SJGSDWDM);
+create index I_jinan_dz_mlph_true_2 on jinan_dz_mlph_true (SUBSTR(SJGSDWDM,1,2));
+create index I_jinan_dz_mlph_true_4 on jinan_dz_mlph_true (SUBSTR(SJGSDWDM,1,4));
+create index I_jinan_dz_mlph_true_6 on jinan_dz_mlph_true (SUBSTR(SJGSDWDM,1,6));
+create index I_jinan_dz_mlph_true_9 on jinan_dz_mlph_true (SUBSTR(SJGSDWDM,1,9));
+create index I_jinan_dz_mlph_true_SSSJ on jinan_dz_mlph_true (SSSJ);
+create index I_jinan_dz_mlph_true_SSPCS on jinan_dz_mlph_true (SSPCS);
+create index I_jinan_dz_mlph_true_SSFJ on jinan_dz_mlph_true (SSFJ);
+--
+
+alter table LINYI_DZ_MLPH add constraint PK_LINYI_DZ_MLPH_YWLSH primary key (YWLSH);
+create index I_LINYI_DZ_MLPH_ZXDZZB on LINYI_DZ_MLPH (ZXDZZB);
+create index I_LINYI_DZ_MLPH_ZXDHZB on LINYI_DZ_MLPH (ZXDHZB);
+create index I_LINYI_DZ_MLPH_JWQBH on LINYI_DZ_MLPH (JWQBH);
+create index I_LINYI_DZ_MLPH_SJGSDWDM on LINYI_DZ_MLPH (SJGSDWDM);
+create index I_LINYI_DZ_MLPH_2 on LINYI_DZ_MLPH (SUBSTR(SJGSDWDM,1,2));
+create index I_LINYI_DZ_MLPH_4 on LINYI_DZ_MLPH (SUBSTR(SJGSDWDM,1,4));
+create index I_LINYI_DZ_MLPH_6 on LINYI_DZ_MLPH (SUBSTR(SJGSDWDM,1,6));
+create index I_LINYI_DZ_MLPH_9 on LINYI_DZ_MLPH (SUBSTR(SJGSDWDM,1,9));
+create index I_LINYI_DZ_MLPH_SSSJ on LINYI_DZ_MLPH (SSSJ);
+create index I_LINYI_DZ_MLPH_SSPCS on LINYI_DZ_MLPH (SSPCS);
+create index I_LINYI_DZ_MLPH_SSFJ on LINYI_DZ_MLPH (SSFJ);
+--
+
+alter table LIAOCH_DZ_MLPH add constraint PK_LIAOCH_DZ_MLPH_YWLSH primary key (YWLSH);
+create index I_LIAOCH_DZ_MLPH_ZXDZZB on LIAOCH_DZ_MLPH (ZXDZZB);
+create index I_LIAOCH_DZ_MLPH_ZXDHZB on LIAOCH_DZ_MLPH (ZXDHZB);
+create index I_LIAOCH_DZ_MLPH_JWQBH on LIAOCH_DZ_MLPH (JWQBH);
+create index I_LIAOCH_DZ_MLPH_SJGSDWDM on LIAOCH_DZ_MLPH (SJGSDWDM);
+create index I_LIAOCH_DZ_MLPH_2 on LIAOCH_DZ_MLPH (SUBSTR(SJGSDWDM,1,2));
+create index I_LIAOCH_DZ_MLPH_4 on LIAOCH_DZ_MLPH (SUBSTR(SJGSDWDM,1,4));
+create index I_LIAOCH_DZ_MLPH_6 on LIAOCH_DZ_MLPH (SUBSTR(SJGSDWDM,1,6));
+create index I_LIAOCH_DZ_MLPH_9 on LIAOCH_DZ_MLPH (SUBSTR(SJGSDWDM,1,9));
+create index I_LIAOCH_DZ_MLPH_SSSJ on LIAOCH_DZ_MLPH (SSSJ);
+create index I_LIAOCH_DZ_MLPH_SSPCS on LIAOCH_DZ_MLPH (SSPCS);
+create index I_LIAOCH_DZ_MLPH_SSFJ on LIAOCH_DZ_MLPH (SSFJ);
+--
+
+alter table LAIWU_DZ_MLPH add constraint PK_LAIWU_DZ_MLPH_YWLSH primary key (YWLSH);
+create index I_LAIWU_DZ_MLPH_ZXDZZB on LAIWU_DZ_MLPH (ZXDZZB);
+create index I_LAIWU_DZ_MLPH_ZXDHZB on LAIWU_DZ_MLPH (ZXDHZB);
+create index I_LAIWU_DZ_MLPH_JWQBH on LAIWU_DZ_MLPH (JWQBH);
+create index I_LAIWU_DZ_MLPH_SJGSDWDM on LAIWU_DZ_MLPH (SJGSDWDM);
+create index I_LAIWU_DZ_MLPH_2 on LAIWU_DZ_MLPH (SUBSTR(SJGSDWDM,1,2));
+create index I_LAIWU_DZ_MLPH_4 on LAIWU_DZ_MLPH (SUBSTR(SJGSDWDM,1,4));
+create index I_LAIWU_DZ_MLPH_6 on LAIWU_DZ_MLPH (SUBSTR(SJGSDWDM,1,6));
+create index I_LAIWU_DZ_MLPH_9 on LAIWU_DZ_MLPH (SUBSTR(SJGSDWDM,1,9));
+create index I_LAIWU_DZ_MLPH_SSSJ on LAIWU_DZ_MLPH (SSSJ);
+create index I_LAIWU_DZ_MLPH_SSPCS on LAIWU_DZ_MLPH (SSPCS);
+create index I_LAIWU_DZ_MLPH_SSFJ on LAIWU_DZ_MLPH (SSFJ);
+--
+
+alter table JINING_DZ_MLPH add constraint PK_JINING_DZ_MLPH_YWLSH primary key (YWLSH);
+create index I_JINING_DZ_MLPH_ZXDZZB on JINING_DZ_MLPH (ZXDZZB);
+create index I_JINING_DZ_MLPH_ZXDHZB on JINING_DZ_MLPH (ZXDHZB);
+create index I_JINING_DZ_MLPH_JWQBH on JINING_DZ_MLPH (JWQBH);
+create index I_JINING_DZ_MLPH_SJGSDWDM on JINING_DZ_MLPH (SJGSDWDM);
+create index I_JINING_DZ_MLPH_2 on JINING_DZ_MLPH (SUBSTR(SJGSDWDM,1,2));
+create index I_JINING_DZ_MLPH_4 on JINING_DZ_MLPH (SUBSTR(SJGSDWDM,1,4));
+create index I_JINING_DZ_MLPH_6 on JINING_DZ_MLPH (SUBSTR(SJGSDWDM,1,6));
+create index I_JINING_DZ_MLPH_9 on JINING_DZ_MLPH (SUBSTR(SJGSDWDM,1,9));
+create index I_JINING_DZ_MLPH_SSSJ on JINING_DZ_MLPH (SSSJ);
+create index I_JINING_DZ_MLPH_SSPCS on JINING_DZ_MLPH (SSPCS);
+create index I_JINING_DZ_MLPH_SSFJ on JINING_DZ_MLPH (SSFJ);
+--
+
+alter table TAIAN_DZ_MLPH add constraint PK_TAIAN_DZ_MLPH_YWLSH primary key (YWLSH);
+create index I_TAIAN_DZ_MLPH_ZXDZZB on TAIAN_DZ_MLPH (ZXDZZB);
+create index I_TAIAN_DZ_MLPH_ZXDHZB on TAIAN_DZ_MLPH (ZXDHZB);
+create index I_TAIAN_DZ_MLPH_JWQBH on TAIAN_DZ_MLPH (JWQBH);
+create index I_TAIAN_DZ_MLPH_SJGSDWDM on TAIAN_DZ_MLPH (SJGSDWDM);
+create index I_TAIAN_DZ_MLPH_2 on TAIAN_DZ_MLPH (SUBSTR(SJGSDWDM,1,2));
+create index I_TAIAN_DZ_MLPH_4 on TAIAN_DZ_MLPH (SUBSTR(SJGSDWDM,1,4));
+create index I_TAIAN_DZ_MLPH_6 on TAIAN_DZ_MLPH (SUBSTR(SJGSDWDM,1,6));
+create index I_TAIAN_DZ_MLPH_9 on TAIAN_DZ_MLPH (SUBSTR(SJGSDWDM,1,9));
+create index I_TAIAN_DZ_MLPH_SSSJ on TAIAN_DZ_MLPH (SSSJ);
+create index I_TAIAN_DZ_MLPH_SSPCS on TAIAN_DZ_MLPH (SSPCS);
+create index I_TAIAN_DZ_MLPH_SSFJ on TAIAN_DZ_MLPH (SSFJ);
+--
+
+alter table DONGYING_DZ_MLPH add constraint PK_DONGYING_DZ_MLPH_YWLSH primary key (YWLSH);
+create index I_DONGYING_DZ_MLPH_ZXDZZB on DONGYING_DZ_MLPH (ZXDZZB);
+create index I_DONGYING_DZ_MLPH_ZXDHZB on DONGYING_DZ_MLPH (ZXDHZB);
+create index I_DONGYING_DZ_MLPH_JWQBH on DONGYING_DZ_MLPH (JWQBH);
+create index I_DONGYING_DZ_MLPH_SJGSDWDM on DONGYING_DZ_MLPH (SJGSDWDM);
+create index I_DONGYING_DZ_MLPH_2 on DONGYING_DZ_MLPH (SUBSTR(SJGSDWDM,1,2));
+create index I_DONGYING_DZ_MLPH_4 on DONGYING_DZ_MLPH (SUBSTR(SJGSDWDM,1,4));
+create index I_DONGYING_DZ_MLPH_6 on DONGYING_DZ_MLPH (SUBSTR(SJGSDWDM,1,6));
+create index I_DONGYING_DZ_MLPH_9 on DONGYING_DZ_MLPH (SUBSTR(SJGSDWDM,1,9));
+create index I_DONGYING_DZ_MLPH_SSSJ on DONGYING_DZ_MLPH (SSSJ);
+create index I_DONGYING_DZ_MLPH_SSPCS on DONGYING_DZ_MLPH (SSPCS);
+create index I_DONGYING_DZ_MLPH_SSFJ on DONGYING_DZ_MLPH (SSFJ);
+--
+
+alter table YANTAI_DZ_MLPH add constraint PK_YANTAI_DZ_MLPH_YWLSH primary key (YWLSH);
+create index I_YANTAI_DZ_MLPH_ZXDZZB on YANTAI_DZ_MLPH (ZXDZZB);
+create index I_YANTAI_DZ_MLPH_ZXDHZB on YANTAI_DZ_MLPH (ZXDHZB);
+create index I_YANTAI_DZ_MLPH_JWQBH on YANTAI_DZ_MLPH (JWQBH);
+create index I_YANTAI_DZ_MLPH_SJGSDWDM on YANTAI_DZ_MLPH (SJGSDWDM);
+create index I_YANTAI_DZ_MLPH_2 on YANTAI_DZ_MLPH (SUBSTR(SJGSDWDM,1,2));
+create index I_YANTAI_DZ_MLPH_4 on YANTAI_DZ_MLPH (SUBSTR(SJGSDWDM,1,4));
+create index I_YANTAI_DZ_MLPH_6 on YANTAI_DZ_MLPH (SUBSTR(SJGSDWDM,1,6));
+create index I_YANTAI_DZ_MLPH_9 on YANTAI_DZ_MLPH (SUBSTR(SJGSDWDM,1,9));
+create index I_YANTAI_DZ_MLPH_SSSJ on YANTAI_DZ_MLPH (SSSJ);
+create index I_YANTAI_DZ_MLPH_SSPCS on YANTAI_DZ_MLPH (SSPCS);
+create index I_YANTAI_DZ_MLPH_SSFJ on YANTAI_DZ_MLPH (SSFJ);
+--
+
+alter table HEZE_DZ_MLPH add constraint PK_HEZE_DZ_MLPH_YWLSH primary key (YWLSH);
+create index I_HEZE_DZ_MLPH_ZXDZZB on HEZE_DZ_MLPH (ZXDZZB);
+create index I_HEZE_DZ_MLPH_ZXDHZB on HEZE_DZ_MLPH (ZXDHZB);
+create index I_HEZE_DZ_MLPH_JWQBH on HEZE_DZ_MLPH (JWQBH);
+create index I_HEZE_DZ_MLPH_SJGSDWDM on HEZE_DZ_MLPH (SJGSDWDM);
+create index I_HEZE_DZ_MLPH_2 on HEZE_DZ_MLPH (SUBSTR(SJGSDWDM,1,2));
+create index I_HEZE_DZ_MLPH_4 on HEZE_DZ_MLPH (SUBSTR(SJGSDWDM,1,4));
+create index I_HEZE_DZ_MLPH_6 on HEZE_DZ_MLPH (SUBSTR(SJGSDWDM,1,6));
+create index I_HEZE_DZ_MLPH_9 on HEZE_DZ_MLPH (SUBSTR(SJGSDWDM,1,9));
+create index I_HEZE_DZ_MLPH_SSSJ on HEZE_DZ_MLPH (SSSJ);
+create index I_HEZE_DZ_MLPH_SSPCS on HEZE_DZ_MLPH (SSPCS);
+create index I_HEZE_DZ_MLPH_SSFJ on HEZE_DZ_MLPH (SSFJ);
+--
+
+alter table RIZHAO_DZ_MLPH add constraint PK_RIZHAO_DZ_MLPH_YWLSH primary key (YWLSH);
+create index I_RIZHAO_DZ_MLPH_ZXDZZB on RIZHAO_DZ_MLPH (ZXDZZB);
+create index I_RIZHAO_DZ_MLPH_ZXDHZB on RIZHAO_DZ_MLPH (ZXDHZB);
+create index I_RIZHAO_DZ_MLPH_JWQBH on RIZHAO_DZ_MLPH (JWQBH);
+create index I_RIZHAO_DZ_MLPH_SJGSDWDM on RIZHAO_DZ_MLPH (SJGSDWDM);
+create index I_RIZHAO_DZ_MLPH_2 on RIZHAO_DZ_MLPH (SUBSTR(SJGSDWDM,1,2));
+create index I_RIZHAO_DZ_MLPH_4 on RIZHAO_DZ_MLPH (SUBSTR(SJGSDWDM,1,4));
+create index I_RIZHAO_DZ_MLPH_6 on RIZHAO_DZ_MLPH (SUBSTR(SJGSDWDM,1,6));
+create index I_RIZHAO_DZ_MLPH_9 on RIZHAO_DZ_MLPH (SUBSTR(SJGSDWDM,1,9));
+create index I_RIZHAO_DZ_MLPH_SSSJ on RIZHAO_DZ_MLPH (SSSJ);
+create index I_RIZHAO_DZ_MLPH_SSPCS on RIZHAO_DZ_MLPH (SSPCS);
+create index I_RIZHAO_DZ_MLPH_SSFJ on RIZHAO_DZ_MLPH (SSFJ);
+--
+
+alter table DEZHOU_DZ_MLPH add constraint PK_DEZHOU_DZ_MLPH_YWLSH primary key (YWLSH);
+create index I_DEZHOU_DZ_MLPH_ZXDZZB on DEZHOU_DZ_MLPH (ZXDZZB);
+create index I_DEZHOU_DZ_MLPH_ZXDHZB on DEZHOU_DZ_MLPH (ZXDHZB);
+create index I_DEZHOU_DZ_MLPH_JWQBH on DEZHOU_DZ_MLPH (JWQBH);
+create index I_DEZHOU_DZ_MLPH_SJGSDWDM on DEZHOU_DZ_MLPH (SJGSDWDM);
+create index I_DEZHOU_DZ_MLPH_2 on DEZHOU_DZ_MLPH (SUBSTR(SJGSDWDM,1,2));
+create index I_DEZHOU_DZ_MLPH_4 on DEZHOU_DZ_MLPH (SUBSTR(SJGSDWDM,1,4));
+create index I_DEZHOU_DZ_MLPH_6 on DEZHOU_DZ_MLPH (SUBSTR(SJGSDWDM,1,6));
+create index I_DEZHOU_DZ_MLPH_9 on DEZHOU_DZ_MLPH (SUBSTR(SJGSDWDM,1,9));
+create index I_DEZHOU_DZ_MLPH_SSSJ on DEZHOU_DZ_MLPH (SSSJ);
+create index I_DEZHOU_DZ_MLPH_SSPCS on DEZHOU_DZ_MLPH (SSPCS);
+create index I_DEZHOU_DZ_MLPH_SSFJ on DEZHOU_DZ_MLPH (SSFJ);
+--
+
+--alter table DZ_MLPH add constraint PK_DZ_MLPH_YWLSH primary key (YWLSH);
+create index I_DZ_MLPH_ZXDZZB on DZ_MLPH (ZXDZZB);
+create index I_DZ_MLPH_ZXDHZB on DZ_MLPH (ZXDHZB);
+create index I_DZ_MLPH_JWQBH on DZ_MLPH (JWQBH);
+create index I_DZ_MLPH_2 on DZ_MLPH (SUBSTR(SJGSDWDM,1,2));
+create index I_DZ_MLPH_4 on DZ_MLPH (SUBSTR(SJGSDWDM,1,4));
+create index I_DZ_MLPH_6 on DZ_MLPH (SUBSTR(SJGSDWDM,1,6));
+create index I_DZ_MLPH_9 on DZ_MLPH (SUBSTR(SJGSDWDM,1,9));
+create index I_DZ_MLPH_SSSJ on DZ_MLPH (SSSJ);
+create index I_DZ_MLPH_SSPCS on DZ_MLPH (SSPCS);
+create index I_DZ_MLPH_SSFJ on DZ_MLPH (SSFJ);

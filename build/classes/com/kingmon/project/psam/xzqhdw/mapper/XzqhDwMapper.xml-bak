@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.mapper.XzqhDwMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.model.XzqhDw" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="XZQHDM" property="xzqhdm" jdbcType="VARCHAR" />
+    <result column="DWID" property="dwid" jdbcType="VARCHAR" />
+    <result column="XGDW" property="xgdw" jdbcType="VARCHAR" />
+    <result column="XGR" property="xgr" jdbcType="VARCHAR" />
+    <result column="DJR" property="djr" jdbcType="VARCHAR" />
+    <result column="DJSJ" property="djsj" jdbcType="TIMESTAMP" />
+    <result column="DJDW" property="djdw" jdbcType="VARCHAR" />
+    <result column="SFYX" property="sfyx" jdbcType="VARCHAR" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+    <result column="XGSJ" property="xgsj" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.kingmon.project.psam.model.XzqhDw" >
+    insert into DZ_XZQH_DW (ID, XZQHDM, DWID, 
+      XGDW, XGR, DJR, DJSJ, 
+      DJDW, SFYX, MOVESIGN, 
+      XGSJ)
+    values (#{id,jdbcType=VARCHAR},
+     #{xzqhdm,jdbcType=VARCHAR}, 
+    #{dwid,jdbcType=VARCHAR}, 
+      #{xgdw,jdbcType=VARCHAR}, 
+      #{xgr,jdbcType=VARCHAR},
+       #{djr,jdbcType=VARCHAR},
+       #{djsj,jdbcType=TIMESTAMP}, 
+      #{djdw,jdbcType=VARCHAR}, 
+      #{sfyx,jdbcType=VARCHAR}, 
+      #{movesign,jdbcType=CHAR}, 
+      #{xgsj,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.model.XzqhDw" >
+    insert into DZ_XZQH_DW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="xzqhdm != null" >
+        XZQHDM,
+      </if>
+      <if test="dwid != null" >
+        DWID,
+      </if>
+      <if test="xgdw != null" >
+        XGDW,
+      </if>
+      <if test="xgr != null" >
+        XGR,
+      </if>
+      <if test="djr != null" >
+        DJR,
+      </if>
+      <if test="djsj != null" >
+        DJSJ,
+      </if>
+      <if test="djdw != null" >
+        DJDW,
+      </if>
+      <if test="sfyx != null" >
+        SFYX,
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN,
+      </if>
+      <if test="xgsj != null" >
+        XGSJ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="xzqhdm != null" >
+        #{xzqhdm,jdbcType=VARCHAR},
+      </if>
+      <if test="dwid != null" >
+        #{dwid,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdw != null" >
+        #{xgdw,jdbcType=VARCHAR},
+      </if>
+      <if test="xgr != null" >
+        #{xgr,jdbcType=VARCHAR},
+      </if>
+      <if test="djr != null" >
+        #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="djdw != null" >
+        #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="sfyx != null" >
+        #{sfyx,jdbcType=VARCHAR},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="xgsj != null" >
+        #{xgsj,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+    <select id="selectXzqhdmByDwid" resultType="java.lang.String" parameterType="java.lang.String" >
+    select 
+ 	  XZQHDM
+    from DZ_XZQH
+    where DWID = #{dwid,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

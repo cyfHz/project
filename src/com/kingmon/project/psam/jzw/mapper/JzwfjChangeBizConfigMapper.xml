@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.jzw.mapper.JzwfjChangeBizConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.jzw.model.JzwfjChangeBizConfig" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="BIZ_NAME" property="bizName" jdbcType="VARCHAR" />
+    <result column="BIZ_CODE" property="bizCode" jdbcType="VARCHAR" />
+    
+    <result column="TABLE_NAME" property="tableName" jdbcType="VARCHAR" />
+    
+    <result column="FIELD_NAME" property="fieldName" jdbcType="VARCHAR" />
+  <!--   <result column="REF_JZWFJ_FIELD_NAME" property="refJzwFjFieldName" jdbcType="VARCHAR" /> -->
+    
+    <result column="UPDATE_QUERY_FIELD_NAME" property="updateQueryFieldName" jdbcType="VARCHAR" />
+   
+    <result column="FIELD2_NAME" property="field2Name" jdbcType="VARCHAR" />
+    <result column="REF_JZWFJ_FIELD2_NAME" property="refJzwFjField2Name" jdbcType="VARCHAR" />
+    <result column="REF2_REPLCE_MODE" property="ref2replceMode" jdbcType="VARCHAR" />
+    
+    <result column="FIELD3_NAME" property="field3Name" jdbcType="VARCHAR" />
+    <result column="REF_JZWFJ_FIELD3_NAME" property="refJzwFjField3Name" jdbcType="VARCHAR" />
+    <result column="REF3_REPLCE_MODE" property="ref3replceMode" jdbcType="VARCHAR" />
+    
+    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, BIZ_NAME, BIZ_CODE, TABLE_NAME, FIELD_NAME, UPDATE_QUERY_FIELD_NAME, 
+    FIELD2_NAME, REF_JZWFJ_FIELD2_NAME,REF2_REPLCE_MODE,
+    FIELD3_NAME,REF_JZWFJ_FIELD3_NAME,REF3_REPLCE_MODE
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DZ_JZWFJ_CHANGE_BIZ_CONFIG where ID = #{id,jdbcType=VARCHAR}
+  </select>
+     
+   <select id="selectAll" resultMap="BaseResultMap"  >
+    select  <include refid="Base_Column_List" /> from DZ_JZWFJ_CHANGE_BIZ_CONFIG where 1=1
+  </select>
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.jzw.model.JzwfjChangeBizConfig" >
+    insert into DZ_JZWFJ_CHANGE_BIZ_CONFIG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" > ID,  </if>
+      <if test="bizName != null" > BIZ_NAME, </if>
+      <if test="bizCode != null" > BIZ_CODE, </if>
+      <if test="tableName != null" > TABLE_NAME, </if>
+      <if test="fieldName != null" > FIELD_NAME, </if>
+    <!--   <if test="refJzwFjFieldName != null" > REF_JZWFJ_FIELD_NAME,  </if> -->
+      
+      <if test="updateQueryFieldName != null" > UPDATE_QUERY_FIELD_NAME,  </if>
+      
+      <if test="field2Name != null" > FIELD2_NAME, </if>
+      <if test="refJzwFjField2Name != null" > REF_JZWFJ_FIELD2_NAME,  </if>
+      <if test="ref2replceMode != null" > REF2_REPLCE_MODE,  </if>
+      
+      <if test="field3Name != null" > FIELD3_NAME, </if>
+      <if test="refJzwFjField3Name != null" > REF_JZWFJ_FIELD3_NAME,  </if>
+      <if test="ref3replceMode != null" > REF3_REPLCE_MODE,  </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="id != null" > #{id,jdbcType=VARCHAR},  </if>
+      <if test="bizName != null" > #{bizName,jdbcType=VARCHAR}, </if>
+      <if test="bizCode != null" > #{bizCode,jdbcType=VARCHAR},</if>
+      <if test="tableName != null" > #{tableName,jdbcType=VARCHAR}, </if>
+      <if test="fieldName != null" > #{fieldName,jdbcType=VARCHAR},</if>
+ <!--      <if test="refJzwFjFieldName != null" > #{refJzwFjFieldName,jdbcType=VARCHAR},</if> -->
+      <if test="updateQueryFieldName != null" > #{updateQueryFieldName,jdbcType=VARCHAR},</if>
+       
+      
+      <if test="field2Name != null" >#{field2Name,jdbcType=VARCHAR},</if>
+      <if test="refJzwFjField2Name != null" > #{refJzwFjField2Name,jdbcType=VARCHAR},</if>
+      <if test="ref2replceMode != null" > #{REF2_REPLCE_MODE,jdbcType=VARCHAR}, </if>
+      
+      <if test="field3Name != null" > #{field3Name,jdbcType=VARCHAR},</if>
+      <if test="refJzwFjField3Name != null" > #{refJzwFjField3Name,jdbcType=VARCHAR},</if>
+      <if test="ref3replceMode != null" > #{REF3_REPLCE_MODE,jdbcType=VARCHAR}, </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.jzw.model.JzwfjChangeBizConfig" >
+    update DZ_JZWFJ_CHANGE_BIZ_CONFIG
+    <set >
+       <if test="id != null" > ID=#{id,jdbcType=VARCHAR},  </if>
+      <if test="bizName != null" >BIZ_NAME= #{bizName,jdbcType=VARCHAR}, </if>
+      <if test="bizCode != null" >BIZ_CODE= #{bizCode,jdbcType=VARCHAR},</if>
+      <if test="tableName != null" >TABLE_NAME= #{tableName,jdbcType=VARCHAR}, </if>
+      <if test="fieldName != null" >FIELD_NAME= #{fieldName,jdbcType=VARCHAR},</if>
+      <!-- <if test="refJzwFjFieldName != null" >REF_JZWFJ_FIELD_NAME =#{refJzwFjFieldName,jdbcType=VARCHAR},</if> -->
+      <if test="updateQueryFieldName != null" > UPDATE_QUERY_FIELD_NAME=#{updateQueryFieldName,jdbcType=VARCHAR},</if>
+      
+      <if test="field2Name != null" >FIELD2_NAME=#{field2Name,jdbcType=VARCHAR},</if>
+      <if test="refJzwFjField2Name != null" >REF_JZWFJ_FIELD2_NAME =#{refJzwFjField2Name,jdbcType=VARCHAR},</if>
+      <if test="ref2replceMode != null" > REF2_REPLCE_MODE=#{ref2replceMode,jdbcType=VARCHAR}, </if>
+      
+      <if test="field3Name != null" > FIELD3_NAME=#{field3Name,jdbcType=VARCHAR},</if>
+      <if test="refJzwFjField3Name != null" >REF_JZWFJ_FIELD3_NAME =#{refJzwFjField3Name,jdbcType=VARCHAR},</if>
+      <if test="ref3replceMode != null" > REF3_REPLCE_MODE=#{ref3replceMode,jdbcType=VARCHAR}, </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

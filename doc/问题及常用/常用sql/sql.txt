@@ -1,0 +1,27 @@
+-----------------数据字典查询----------------------------
+select t.type_code,t.type_mc,d.*  from  app_dictionary d left join app_dictionary_type t on d.type_id =t.type_id  
+where  d.type_code like '%xb%';
+---------------------------------------------
+select * from app_resource rr where rr.res_id in 
+(select res_id from app_resource  r  group by r.res_id  having count(r.res_id) > 1) for update;
+------------------------------------------------------------
+select *
+  from dz_jzwjbxx j
+ where j.dzbm in (select m.ssjzw_dzbm
+                    from dz_mlph m
+                   group by m.ssjzw_dzbm
+                  having count(m.ssjzw_dzbm) > 1)
+
+select m.ssjzw_dzbm from dz_mlph m  group by m.ssjzw_dzbm  having count(m.ssjzw_dzbm) > 1;
+
+select count(1) from (select m.ssjzw_dzbm from dz_mlph m  group by m.ssjzw_dzbm  having count(m.ssjzw_dzbm) > 1);
+---------------------------------------------
+select * from dz_shpz t order by pzlx ,organ_code
+-----------------------------------------------------------
+ select w.rule_code from 
+   app_widgetrule w where w.enabled = '1'  and
+    w.rule_id in (
+                select rrw.rule_id from app_role_res_wrule rrw where  rrw.enabled='1' and
+                 rrw.role_id in ( select ru.role_id from app_role_user ru where  ru.enabled='1'and ru.appuser_id='723d6ced-02d9-47cd-88aa-9f17f0b5ca65')
+                                    ) ;
+-----------------------------------------------------------                                    

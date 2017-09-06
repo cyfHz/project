@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.dwxx.mapper.DwxxFwMapper">
+	<resultMap id="BaseResultMap" type="com.kingmon.project.psam.dwxx.model.DwxxFw">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="DWID" property="dwid" jdbcType="VARCHAR" />
+		<result column="FJID" property="fjid" jdbcType="VARCHAR" />
+		<result column="DJR" property="djr" jdbcType="VARCHAR" />
+		<result column="DJDW" property="djdw" jdbcType="VARCHAR" />
+		<result column="DJRMC" property="djrmc" jdbcType="VARCHAR" />
+		<result column="DJDWMC" property="djdwmc" jdbcType="VARCHAR" />
+		<result column="DJSJ" property="djsj" jdbcType="TIMESTAMP" />
+		<result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+		<result column="SBID" property="sbid" jdbcType="VARCHAR" />
+		<result column="DELTAG" property="deltag" jdbcType="CHAR" />
+		<result column="DELTIME" property="deltime" jdbcType="TIMESTAMP" />
+		<result column="DELUSER" property="deluser" jdbcType="VARCHAR" />
+		<result column="JZWID" property="jzwid" jdbcType="VARCHAR" />
+		<result column="TF" property="tf" jdbcType="VARCHAR" />
+		<result column="IMEI" property="imei" jdbcType="VARCHAR" />
+		<result column="SIM" property="sim" jdbcType="VARCHAR" />
+		<result column="GXSJ" property="gxsj" jdbcType="TIMESTAMP" />
+		<result column="MAC_ADDRESS" property="macAddress" jdbcType="VARCHAR" />
+		
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, DWID, FJID, DJR, DJDW, DJRMC, DJDWMC, DJSJ, MOVESIGN, SBID, 
+		DELTAG, DELTIME, DELUSER, JZWID,TF,IMEI,SIM,MAC_ADDRESS,GXSJ
+	</sql>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DWXX_BASE_FW
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+
+ <select id="selectDwxxFwForDwId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DWXX_BASE_FW
+    where DWID = #{id,jdbcType=VARCHAR} and DELTAG!=1
+  </select>
+
+<select id="selectDwxxFjByJzwId" resultType="java.lang.String" parameterType="java.lang.String" >
+    select  FJID from DWXX_BASE_FW  where JZWID = #{jzwId,jdbcType=VARCHAR} and deltag!=1<!-- 2016-0811 过滤删除的 -->
+</select>
+
+
+<select id="selectDwxxFjByJzwIds" resultType="java.lang.String" parameterType="java.util.Map" >
+    select FJID from  DWXX_BASE where TABLE_VALUE like #{table_value} and FJID in
+    (select  FJID from DWXX_BASE_FW  where JZWID = #{jzwId,jdbcType=VARCHAR} and deltag!=1)<!-- 2016-0811 过滤删除的 -->
+</select>
+
+<update id="revokeFwDwxx" parameterType="java.util.Map">
+      update DWXX_BASE_FW 
+      <set>
+        <if test="deltag != null">deltag=#{deltag},</if>
+        <if test="deluser != null">deluser=#{deluser},</if>
+        <if test="deltime != null">deltime=#{deltime},</if>
+        <if test="gxsj != null">gxsj=#{gxsj},</if>
+      </set> 
+       where dwid=#{dwid} and fjid=#{fjbm} and deltag!=1
+  </update>
+
+<!-- ################################################################### -->
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.sy.model.SyFwCzrk" >
+    insert into DWXX_BASE_FW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="dwid != null" >
+        DWID,
+      </if>
+      <if test="fjid != null" >
+        FJID,
+      </if>
+      <if test="djr != null" >
+        DJR,
+      </if>
+      <if test="djdw != null" >
+        DJDW,
+      </if>
+      <if test="djrmc != null" >
+        DJRMC,
+      </if>
+      <if test="djdwmc != null" >
+        DJDWMC,
+      </if>
+      <if test="djsj != null" >
+        DJSJ,
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN,
+      </if>
+      <if test="sbid != null" >
+        SBID,
+      </if>
+      <if test="deltag != null" >
+        DELTAG,
+      </if>
+      <if test="deltime != null" >
+        DELTIME,
+      </if>
+      <if test="deluser != null" >
+        DELUSER,
+      </if>
+       <if test="jzwid != null" >
+        JZWID,
+      </if>
+       <if test="tf != null" >
+        TF,
+      </if>
+      <if test="imei != null" >
+        IMEI,
+      </if>
+      <if test="sim != null" >
+        SIM,
+      </if>
+      
+      <if test="macAddress != null" >
+        MAC_ADDRESS,
+      </if>
+      
+      <if test="gxsj != null" >
+       GXSJ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dwid != null" >
+        #{dwid,jdbcType=VARCHAR},
+      </if>
+      <if test="fjid != null" >
+        #{fjid,jdbcType=VARCHAR},
+      </if>
+      <if test="djr != null" >
+        #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw != null" >
+        #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="djrmc != null" >
+        #{djrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djdwmc != null" >
+        #{djdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="sbid != null" >
+        #{sbid,jdbcType=VARCHAR},
+      </if>
+      <if test="deltag != null" >
+        #{deltag,jdbcType=CHAR},
+      </if>
+      <if test="deltime != null" >
+        #{deltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deluser != null" >
+        #{deluser,jdbcType=VARCHAR},
+      </if>
+       <if test="jzwid != null" >
+       	#{jzwid,jdbcType=VARCHAR},
+      </if>
+        <if test="tf != null" >
+        #{tf,jdbcType=VARCHAR},
+      </if>
+      <if test="imei != null" >
+        #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="sim != null" >
+       #{sim,jdbcType=VARCHAR},
+      </if>  
+      
+       <if test="macAddress != null" >
+       #{macAddress,jdbcType=VARCHAR},
+      </if> 
+      <if test="gxsj != null" >
+       #{gxsj,jdbcType=TIMESTAMP},
+      </if> 
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.sy.model.SyFwCzrk" >
+    update DWXX_BASE_FW
+    <set >
+      <if test="dwid != null" >
+        DWID = #{dwid,jdbcType=VARCHAR},
+      </if>
+      <if test="fjid != null" >
+        FJID = #{fjid,jdbcType=VARCHAR},
+      </if>
+      <if test="djr != null" >
+        DJR = #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw != null" >
+        DJDW = #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="djrmc != null" >
+        DJRMC = #{djrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djdwmc != null" >
+        DJDWMC = #{djdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        DJSJ = #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="sbid != null" >
+        SBID = #{sbid,jdbcType=VARCHAR},
+      </if>
+      <if test="deltag != null" >
+        DELTAG = #{deltag,jdbcType=CHAR},
+      </if>
+      <if test="deltime != null" >
+        DELTIME = #{deltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deluser != null" >
+        DELUSER = #{deluser,jdbcType=VARCHAR},
+      </if>
+       <if test="jzwid != null" >
+       JZWID=#{jzwid,jdbcType=VARCHAR},
+      </if>
+         <if test="tf != null" >
+        TF=#{tf,jdbcType=VARCHAR},
+      </if>
+      <if test="imei != null" >
+        IMEI=#{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="sim != null" >
+       SIM=#{sim,jdbcType=VARCHAR},
+      </if>
+      <if test="gxsj != null" >
+       GXSJ=#{gxsj,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

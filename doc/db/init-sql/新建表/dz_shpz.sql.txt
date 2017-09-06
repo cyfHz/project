@@ -1,0 +1,54 @@
+create table DZ_SHPZ
+(
+  PZID       VARCHAR2(36) not null,
+  PZLX       CHAR(1),
+  PZDM       CHAR(1),
+  ORGAN_CODE VARCHAR2(40)
+);
+-- Add comments to the columns 
+comment on column DZ_SHPZ.PZLX
+  is '配置类型 1 街路巷审核,2 门楼牌号审核';
+comment on column DZ_SHPZ.PZDM
+  is '数据字典SHPZDM';
+comment on column DZ_SHPZ.ORGAN_CODE
+  is '组织机构代码（市）';
+  alter table DZ_SHPZ
+  add constraint PK_DZ_SHPZ_PZID primary key (PZID);
+  
+  
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('1', '1', '0', '370100');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('3', '1', '0', '370200');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('5', '1', '0', '370300');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('7', '1', '0', '370400');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('9', '1', '0', '370500');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('11', '1', '0', '370600');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('13', '1', '0', '370700');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('15', '1', '0', '370800');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('17', '1', '0', '370900');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('19', '1', '0', '371000');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('33', '1', '0', '371100');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('21', '1', '0', '371200');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('23', '1', '0', '371300');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('31', '1', '0', '371400');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('25', '1', '0', '371500');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('27', '1', '0', '371600');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('29', '1', '0', '371700');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('2', '2', '0', '370100');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('4', '2', '0', '370200');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('6', '2', '0', '370300');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('8', '2', '0', '370400');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('10', '2', '0', '370500');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('12', '2', '0', '370600');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('14', '2', '0', '370700');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('16', '2', '0', '370800');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('18', '2', '0', '370900');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('20', '2', '0', '371000');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('34', '2', '0', '371100');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('22', '2', '0', '371200');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('24', '2', '0', '371300');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('32', '2', '0', '371400');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('26', '2', '0', '371500');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('28', '2', '0', '371600');
+insert into dz_shpz (PZID, PZLX, PZDM, ORGAN_CODE) values ('30', '2', '0', '371700');
+
+  

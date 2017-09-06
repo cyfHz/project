@@ -1,0 +1,12 @@
+#leftSideMenuAccordion{background-color:#4182B8;}
+#leftSideMenuAccordion .accordion-body{background-color:#4182B8;}
+#leftSideMenuAccordion .accordion-header{background-color:#F8F8F8;}
+
+#leftSideMenuAccordion ul{list-style-type:none;margin:0px; padding:0px;}
+#leftSideMenuAccordion ul li{ padding:0px;}
+#leftSideMenuAccordion ul li div{margin:0px 0px;padding-left:0px;padding-top:0px;}
+/* #leftSideMenuAccordion ul li div.selected{border:1px solid #99BBE8;cursor:default;} */
+
+#leftSideMenuAccordion .enterout:hover{color:#416AA3;border:1px dashed #99BBE8; background: url("image/active.jpg");cursor:pointer;}
+#leftSideMenuAccordion .enterout a{text-decoration:none;display:block;font-weight:bold;color:#FFFFFF;line-height:30px; height:30px;font-size:12px;}/**/
+#leftSideMenuAccordion .enterout a:hover{padding-left:5px;text-decoration:none;color:#416AA3;background: url("image/active.jpg");}/**/

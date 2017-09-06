@@ -1,0 +1,29 @@
+create table DZ_JZWFJ_PIC
+(
+  picid        VARCHAR2(36) not null,
+  jzwfjid      VARCHAR2(36),
+  movesign     CHAR(1),
+  creat_time   DATE,
+  updated_time DATE,
+  pic          BLOB
+);
+-- Add comments to the table 
+comment on table DZ_JZWFJ_PIC
+  is '建筑物房间图片';
+-- Add comments to the columns 
+comment on column DZ_JZWFJ_PIC.picid
+  is '主键';
+comment on column DZ_JZWFJ_PIC.jzwfjid
+  is '所属房间';
+comment on column DZ_JZWFJ_PIC.movesign
+  is 'MOVESIGN';
+comment on column DZ_JZWFJ_PIC.creat_time
+  is '创建时间';
+comment on column DZ_JZWFJ_PIC.updated_time
+  is '更新时间';
+comment on column DZ_JZWFJ_PIC.pic
+  is '图片';
+-- Create/Recreate primary, unique and foreign key constraints 
+
+  alter table DZ_JZWFJ_PIC  add constraint JZWFJPIC_PK primary key (PICID);
+  create index dz_jzwfj_pic_index_jzwfjid on DZ_JZWFJ_PIC (jzwfjid);

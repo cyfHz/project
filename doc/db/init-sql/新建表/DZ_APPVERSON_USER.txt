@@ -1,0 +1,18 @@
+//2016-07-12提交正式库
+create table DZ_APPVERSON_USER
+(
+  ID         varchar2(36) not null,
+  USERID     varchar2(36) not null,
+  VERSONINFO varchar2(200),
+  ISVALID    char(1)
+)
+;
+-- Add comments to the columns 
+comment on column DZ_APPVERSON_USER.ID
+  is '����';
+comment on column DZ_APPVERSON_USER.USERID
+  is '�û�ID';
+comment on column DZ_APPVERSON_USER.VERSONINFO
+  is '�汾��Ϣ';
+comment on column DZ_APPVERSON_USER.ISVALID
+  is '�Ƿ���Ч';

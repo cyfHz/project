@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-lazy-init="true">
+       
+	    <!-- 类型转换及数据格式化 -->
+	    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	     <property name="registerDefaultFormatters" value="false" />
+	        <property name="formatters">
+	            <set>
+	                <bean class="org.springframework.format.number.NumberFormatAnnotationFormatterFactory" />
+	            </set>
+	        </property>
+	        <property name="formatterRegistrars">
+	            <set>
+	                <bean class="org.springframework.format.datetime.joda.JodaTimeFormatterRegistrar">
+	                    <property name="dateFormatter">
+	                        <bean class="org.springframework.format.datetime.joda.DateTimeFormatterFactoryBean">
+	                            <property name="pattern" value="yyyy-MM-dd"/>
+	                        </bean>
+	                    </property>
+	                    <property name="dateTimeFormatter">
+	                        <bean class="org.springframework.format.datetime.joda.DateTimeFormatterFactoryBean">
+	                            <property name="pattern" value="yyyy-MM-dd HH:mm:ss"/>
+	                        </bean>
+	                    </property>
+	                    <property name="timeFormatter">
+	                        <bean class="org.springframework.format.datetime.joda.DateTimeFormatterFactoryBean">
+	                            <property name="pattern" value="HH:mm:ss"/>
+	                        </bean>
+	                    </property>
+	                </bean>
+	            </set>
+	        </property>
+	    </bean>
+    </beans>

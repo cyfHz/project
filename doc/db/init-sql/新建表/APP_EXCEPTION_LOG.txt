@@ -1,0 +1,27 @@
+--移动端捕获异常存储  --2016-0705添加正式库
+create table APP_EXCEPTION_LOG
+(
+  ID         VARCHAR2(36) not null,
+  APPUSER_ID VARCHAR2(36),
+  SBID       VARCHAR2(36),
+  CREATETIME DATE,
+  CLASSES    VARCHAR2(100),
+  MOTHOD     VARCHAR2(100),
+  MESSAGE    VARCHAR2(500)
+)
+;
+-- Add comments to the columns 
+comment on column APP_EXCEPTION_LOG.ID
+  is '编号主键';
+comment on column APP_EXCEPTION_LOG.APPUSER_ID
+  is '用户编号';
+comment on column APP_EXCEPTION_LOG.SBID
+  is '设备id';
+comment on column APP_EXCEPTION_LOG.CREATETIME
+  is '创建时间';
+comment on column APP_EXCEPTION_LOG.CLASSES
+  is '类名';
+comment on column APP_EXCEPTION_LOG.MOTHOD
+  is '方法名';
+comment on column APP_EXCEPTION_LOG.MESSAGE
+  is '异常内容';

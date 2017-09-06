@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.common.dictionary.mapper.DictionaryMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.common.dictionary.model.Dictionary" >
+    <id column="DICT_ID" property="dict_id" jdbcType="VARCHAR" />
+    <result column="TYPE_ID" property="type_id" jdbcType="VARCHAR" />
+    <result column="TYPE_CODE" property="type_code" jdbcType="VARCHAR" />
+    <result column="DICT_CODE" property="dict_code" jdbcType="VARCHAR" />
+    <result column="DICT_MC" property="dict_mc" jdbcType="VARCHAR" />
+    <result column="DICT_JC" property="dict_jc" jdbcType="VARCHAR" />
+    <result column="DICT_SM" property="dict_sm" jdbcType="VARCHAR" />
+    <result column="ENABLED" property="enabled" jdbcType="CHAR" />
+    <result column="OPRATETIME" property="opratetime" jdbcType="VARCHAR" />
+    <result column="DICT_ORDER" property="dict_order" jdbcType="VARCHAR" />
+    <result column="AREA_ID" property="area_id" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, 
+    DICT_ORDER, AREA_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from APP_DICTIONARY
+    where DICT_ID = #{dict_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from APP_DICTIONARY
+    where DICT_ID = #{dict_id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kingmon.project.common.dictionary.model.Dictionary" >
+    insert into APP_DICTIONARY (DICT_ID, TYPE_ID, TYPE_CODE, 
+      DICT_CODE, DICT_MC, DICT_JC, 
+      DICT_SM, ENABLED, OPRATETIME, 
+      DICT_ORDER, AREA_ID)
+    values (#{dict_id,jdbcType=VARCHAR}, #{type_id,jdbcType=VARCHAR}, #{type_code,jdbcType=VARCHAR}, 
+      #{dict_code,jdbcType=VARCHAR}, #{dict_mc,jdbcType=VARCHAR}, #{dict_jc,jdbcType=VARCHAR}, 
+      #{dict_sm,jdbcType=VARCHAR}, #{enabled,jdbcType=CHAR}, #{opratetime,jdbcType=VARCHAR}, 
+      #{dict_order,jdbcType=VARCHAR}, #{area_id,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kingmon.project.common.dictionary.model.Dictionary" >
+    insert into APP_DICTIONARY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dict_id != null" >
+        DICT_ID,
+      </if>
+      <if test="type_id != null" >
+        TYPE_ID,
+      </if>
+      <if test="type_code != null" >
+        TYPE_CODE,
+      </if>
+      <if test="dict_code != null" >
+        DICT_CODE,
+      </if>
+      <if test="dict_mc != null" >
+        DICT_MC,
+      </if>
+      <if test="dict_jc != null" >
+        DICT_JC,
+      </if>
+      <if test="dict_sm != null" >
+        DICT_SM,
+      </if>
+      <if test="enabled != null" >
+        ENABLED,
+      </if>
+      <if test="opratetime != null" >
+        OPRATETIME,
+      </if>
+      <if test="dict_order != null" >
+        DICT_ORDER,
+      </if>
+      <if test="AREA_ID != null" >
+        AREA_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dict_id != null" >
+        #{dict_id,jdbcType=VARCHAR},
+      </if>
+      <if test="type_id != null" >
+        #{type_id,jdbcType=VARCHAR},
+      </if>
+      <if test="type_code != null" >
+        #{type_code,jdbcType=VARCHAR},
+      </if>
+      <if test="dict_code != null" >
+        #{dict_code,jdbcType=VARCHAR},
+      </if>
+      <if test="dict_mc != null" >
+        #{dict_mc,jdbcType=VARCHAR},
+      </if>
+      <if test="dict_jc != null" >
+        #{dict_jc,jdbcType=VARCHAR},
+      </if>
+      <if test="dict_sm != null" >
+        #{dict_sm,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="opratetime != null" >
+        #{opratetime,jdbcType=VARCHAR},
+      </if>
+      <if test="dict_order != null" >
+        #{dict_order,jdbcType=VARCHAR},
+      </if>
+      <if test="area_id != null" >
+        #{area_id,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.common.dictionary.model.Dictionary" >
+    update APP_DICTIONARY
+    <set >
+      <if test="type_id != null" >
+        TYPE_ID = #{type_id,jdbcType=VARCHAR},
+      </if>
+      <if test="type_code != null" >
+        TYPE_CODE = #{type_code,jdbcType=VARCHAR},
+      </if>
+      <if test="dict_code != null" >
+        DICT_CODE = #{dict_code,jdbcType=VARCHAR},
+      </if>
+      <if test="dict_mc != null" >
+        DICT_MC = #{dict_mc,jdbcType=VARCHAR},
+      </if>
+      <if test="dict_jc != null" >
+        DICT_JC = #{dict_jc,jdbcType=VARCHAR},
+      </if>
+      <if test="dict_sm != null" >
+        DICT_SM = #{dict_sm,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        ENABLED = #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="opratetime != null" >
+        OPRATETIME = #{opratetime,jdbcType=VARCHAR},
+      </if>
+      <if test="dict_order != null" >
+        DICT_ORDER = #{dict_order,jdbcType=VARCHAR},
+      </if>
+      <if test="area_id != null" >
+        AREA_ID = #{area_id,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DICT_ID = #{dict_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.common.dictionary.model.Dictionary" >
+    update APP_DICTIONARY
+    set TYPE_ID = #{type_id,jdbcType=VARCHAR},
+      TYPE_CODE = #{type_code,jdbcType=VARCHAR},
+      DICT_CODE = #{dict_code,jdbcType=VARCHAR},
+      DICT_MC = #{dict_mc,jdbcType=VARCHAR},
+      DICT_JC = #{dict_jc,jdbcType=VARCHAR},
+      DICT_SM = #{dict_sm,jdbcType=VARCHAR},
+      ENABLED = #{enabled,jdbcType=CHAR},
+      OPRATETIME = #{opratetime,jdbcType=VARCHAR},
+      DICT_ORDER = #{dict_order,jdbcType=VARCHAR},
+      AREA_ID = #{area_id,jdbcType=VARCHAR}
+    where DICT_ID = #{dict_id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  	<select id="getDictByCode" parameterType="String" resultType="map">
+		SELECT app_dictionary.* FROM app_dictionary ,app_dictionary_type  WHERE app_dictionary.type_id=app_dictionary_type.type_id and app_dictionary_type.type_code=#{code} order by app_dictionary.dict_order
+	</select>
+	
+	<select id="loadByTypeCodeBy" parameterType="String" resultType="map">
+	    select t.* from app_dictionary t ,app_dictionary_type e WHERE t.type_id=e.type_id and  e.type_code=#{code} and t.type_code like #{subCode} and t.type_code >#{sub}
+	</select>
+	
+	<select id="selectDictByTypeAndCode" parameterType="String" resultMap="BaseResultMap">
+	select d.* from APP_DICTIONARY d ,app_dictionary_type t 
+		where d.type_id=t.type_id 
+		and t.type_code=#{typeCode,jdbcType=VARCHAR} 
+		and d.dict_code=#{dicCode,jdbcType=VARCHAR} 
+	</select>
+</mapper>

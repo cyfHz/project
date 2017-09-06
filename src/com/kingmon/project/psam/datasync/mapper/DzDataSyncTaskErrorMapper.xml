@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.datasync.mapper.DzDataSyncTaskErrorMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.datasync.model.DzDataSyncTaskError" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="TASK_ID" property="taskId" jdbcType="VARCHAR" />
+    <result column="ERRORTIME" property="errortime" jdbcType="TIMESTAMP" />
+     <result column="DESCRIBE" property="describe" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TASK_ID, ERRORTIME,DESCRIBE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DZ_DATA_SYNC_TASK_ERROR
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DZ_DATA_SYNC_TASK_ERROR
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.datasync.model.DzDataSyncTaskError" >
+    insert into DZ_DATA_SYNC_TASK_ERROR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="taskId != null" >
+        TASK_ID,
+      </if>
+      <if test="errortime != null" >
+        ERRORTIME,
+      </if>
+       <if test="describe != null" >
+        DESCRIBE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null" >
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="errortime != null" >
+        #{errortime,jdbcType=TIMESTAMP},
+      </if>
+        <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.datasync.model.DzDataSyncTaskError" >
+    update DZ_DATA_SYNC_TASK_ERROR
+    <set >
+      <if test="taskId != null" >
+        TASK_ID = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="errortime != null" >
+        ERRORTIME = #{errortime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="describe != null" >
+        #{DESCRIBE,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

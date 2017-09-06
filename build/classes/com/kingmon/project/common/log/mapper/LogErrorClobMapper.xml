@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.common.log.mapper.LogErrorClobMapper" >
+  
+  <resultMap id="BaseResultMap" type="com.kingmon.project.common.log.model.LogErrorClob" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="MESSAGE" property="message" jdbcType="CLOB" />
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+    ID, CREATETIME,MESSAGE
+  </sql>
+  
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from APP_LOG  where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <insert id="addLogErrorClob" parameterType="com.kingmon.project.common.log.model.LogErrorClob" >
+    insert into APP_LOG_ERROR_CLOB
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >ID,</if>
+      <if test="createtime != null" >CREATETIME,</if>
+      <if test="message != null" >MESSAGE,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >#{id,jdbcType=VARCHAR},</if>
+      <if test="createtime != null" >#{createtime,jdbcType=TIMESTAMP},</if>
+      <if test="message != null" >#{message,jdbcType=CLOB},</if>
+    </trim>
+  </insert>
+  
+  <!-- #######################page add end ########################################### -->
+
+	<!--通用分页 -->
+	<sql id="Paging_Start">
+		SELECT * FROM (
+		SELECT T_.*, rownum rn_ FROM (
+	</sql>
+
+	<sql id="Paging_end">
+		) T_ WHERE rownum &lt;= ${pageend}
+		) WHERE rn_ &gt; ${pagestart}
+	</sql>
+
+	<!-- #######################page query start ########################################### -->
+	<sql id="Alias_Base_Column_List">
+		${alias}.ID, 
+		${alias}.CREATETIME,
+		${alias}.MESSAGE
+	</sql>
+
+	<select id="selectLogErrorClobList" resultType="java.util.Map"
+		parameterType="java.util.Map">
+		<include refid="Paging_Start" />
+		SELECT
+		<include refid="Alias_Base_Column_List">
+			<property name="alias" value="T1" />
+		</include>
+		FROM APP_LOG_ERROR_CLOB T1 WHERE 1=1
+		<include refid="LogErrorClobList_where">
+			<property name="alias" value="T1" />
+		</include>
+		<if test="sort != null">
+			ORDER BY T1.${sort} ${order}
+		</if>
+		<include refid="Paging_end" />
+	</select>
+
+	<select id="selectLogErrorClobCount" resultType="java.lang.Long"
+		parameterType="java.util.Map">
+		select count(1) from APP_LOG_ERROR_CLOB T1 WHERE 1=1
+		<include refid="LogErrorClobList_where">
+			<property name="alias" value="T1" />
+		</include>
+	</select>
+
+	<sql id="LogErrorClobList_where">
+		<if test="start_time != null">
+			AND  to_char(${alias}.CREATETIME ,'yyyy-mm-dd hh24:mm:ss')  &gt;=#{start_time,jdbcType=VARCHAR}
+		</if>
+		<if test="end_time != null">
+			AND to_char(${alias}.CREATETIME ,'yyyy-mm-dd hh24:mm:ss')  &lt;=#{end_time,jdbcType=VARCHAR}
+		</if>
+	</sql>
+
+	<!-- #######################page query end ########################################### -->
+  
+</mapper>

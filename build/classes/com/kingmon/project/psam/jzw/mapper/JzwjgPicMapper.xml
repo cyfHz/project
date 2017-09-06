@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.jzw.mapper.JzwjgPicMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.jzw.model.JzwjgPic" >
+    <id column="PICID" property="picid" jdbcType="VARCHAR" />
+    <result column="JZWJGID" property="jzwjgid" jdbcType="VARCHAR" />
+    <result column="CREAT_TIME" property="creatTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATED_TIME" property="updatedTime" jdbcType="TIMESTAMP" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.kingmon.project.psam.jzw.model.JzwjgPic" extends="BaseResultMap" >
+    <result column="PIC" property="PIC" jdbcType="BLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PICID, JZWJGID, CREAT_TIME, UPDATED_TIME, MOVESIGN
+  </sql>
+  <sql id="Blob_Column_List" >
+    PIC
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from DZ_JZWJG_PIC  where PICID = #{PICID,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DZ_JZWJG_PIC  where PICID = #{PICID,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.jzw.model.JzwjgPic" >
+    insert into DZ_JZWJG_PIC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="picid != null" > PICID, </if>
+      <if test="jzwjgid != null" > JZWJGID, </if>
+      <if test="creatTime != null" >  CREAT_TIME, </if>
+      <if test="updatedTime != null" >  UPDATED_TIME, </if>
+      <if test="movesign != null" >  MOVESIGN, </if>
+      <if test="pic != null" > PIC, </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="picid != null" > #{picid,jdbcType=VARCHAR}, </if>
+      <if test="jzwjgid != null" >  #{jzwjgid,jdbcType=VARCHAR}, </if>
+      <if test="creatTime != null" > #{creatTime,jdbcType=TIMESTAMP},  </if>
+      <if test="updatedTime != null" > #{updatedTime,jdbcType=TIMESTAMP}, </if>
+      <if test="movesign != null" > #{movesign,jdbcType=CHAR}, </if>
+      <if test="pic != null" > #{pic,jdbcType=BLOB},  </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.jzw.model.JzwjgPic" >
+    update DZ_JZWJG_PIC
+    <set >
+      <if test="jzwjgid != null" > JZWJGID = #{jzwjgid,jdbcType=VARCHAR},  </if>
+      <if test="creatTime != null" >  CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP}, </if>
+      <if test="updatedTime != null" > UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}, </if>
+      <if test="movesign != null" >  MOVESIGN = #{movesign,jdbcType=CHAR}, </if>
+      <if test="pic != null" > PIC = #{pic,jdbcType=BLOB}, </if>
+    </set>
+    where PICID = #{PICID,jdbcType=VARCHAR}
+  </update>
+ 
+ <select id="selectJgpicIdsByPicId" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT PICID FROM DZ_JZWJG_PIC WHERE JZWJGID =#{jzwjgid,jdbcType=VARCHAR}
+	</select>
+	<select id="selectJgpicByPicId" resultType="java.util.Map" parameterType="java.lang.String">
+		SELECT PIC FROM DZ_JZWJG_PIC WHERE PICID =#{picid,jdbcType=VARCHAR}
+	</select>
+		<select id="selectJgpicIdsByjgId" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT PICID FROM DZ_JZWJG_PIC WHERE JZWJGID =#{jzwjgid,jdbcType=VARCHAR}
+	</select>
+</mapper>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.webservice.common.mapper.ServiceBzdzLogMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.webservice.common.model.ServiceBzdzLog" >
+    <id column="LOGINID" property="loginid" jdbcType="VARCHAR" />
+    <result column="LOGINUSER" property="loginuser" jdbcType="VARCHAR" />
+    <result column="LOGINIP" property="loginip" jdbcType="VARCHAR" />
+    <result column="LOGINTIME" property="logintime" jdbcType="TIMESTAMP" />
+    <result column="LOGINUSERID" property="loginuserid" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    LOGINID, LOGINUSER, LOGINIP, LOGINTIME, LOGINUSERID
+  </sql>
+  
+   <!--通用分页 -->
+	<sql id="Paging_Start">
+		SELECT * FROM (
+		SELECT T_.*, rownum rn_ FROM (
+	</sql>
+	<sql id="Paging_end">
+		) T_ WHERE rownum &lt;= ${pageend}
+		) WHERE rn_ &gt; ${pagestart}
+	</sql>
+  
+  <!--logList  -->
+  <select id="logList" resultType="map" parameterType="map">
+      <include refid="Paging_Start" />
+      SELECT 
+      <include refid="Base_Column_List" />
+      FROM SERVICE_BZDZ_LOG T1
+      WHERE 1=1
+      <include refid="logList_where" />
+      <include refid="Paging_end" />
+  </select>
+  
+  <select id="logListCount" resultType="java.lang.Long" parameterType="map">
+    SELECT COUNT(1) FROM SERVICE_BZDZ_LOG
+    WHERE 1=1
+    <include refid="logList_where" />
+  </select>
+  
+  <sql id="logList_where"> 
+    <if test="loginuser != null" >
+       AND LOGINUSER like #{loginuser}
+      </if>
+  </sql>
+  <!-- END -->
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SERVICE_BZDZ_LOG
+    where LOGINID = #{loginid,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SERVICE_BZDZ_LOG
+    where LOGINID = #{loginid,jdbcType=VARCHAR}
+  </delete>
+  
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.webservice.common.model.ServiceBzdzLog" >
+    insert into SERVICE_BZDZ_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="loginid != null" >LOGINID,</if>
+      <if test="loginuser != null" >LOGINUSER,</if>
+      <if test="loginip != null" >LOGINIP,</if>
+      <if test="logintime != null" >LOGINTIME,</if>
+      <if test="loginuserid != null" >LOGINUSERID,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="loginid != null" >#{loginid,jdbcType=VARCHAR},</if>
+      <if test="loginuser != null" >#{loginuser,jdbcType=VARCHAR},</if>
+      <if test="loginip != null" >#{loginip,jdbcType=VARCHAR},</if>
+      <if test="logintime != null" >#{logintime,jdbcType=TIMESTAMP},</if>
+      <if test="loginuserid != null" >#{loginuserid,jdbcType=VARCHAR},</if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.webservice.common.model.ServiceBzdzLog" >
+    update SERVICE_BZDZ_LOG
+    <set >
+      <if test="loginuser != null" >LOGINUSER = #{loginuser,jdbcType=VARCHAR},</if>
+      <if test="loginip != null" >LOGINIP = #{loginip,jdbcType=VARCHAR},</if>
+      <if test="logintime != null" > LOGINTIME = #{logintime,jdbcType=TIMESTAMP},</if>
+      <if test="loginuserid != null" >LOGINUSERID = #{loginuserid,jdbcType=VARCHAR},</if>
+    </set>
+    where LOGINID = #{loginid,jdbcType=VARCHAR}
+  </update>
+</mapper>

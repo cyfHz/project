@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.auth.organization.mapper.OrganizaionChangeMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.auth.organization.model.OrganizaionChange" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="FROMID" property="fromid" jdbcType="VARCHAR" />
+    <result column="TOID" property="toid" jdbcType="VARCHAR" />
+    <result column="CHANGESIGN" property="changesign" jdbcType="CHAR" />
+    <result column="CREATEDBY" property="createdby" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, FROMID, TOID, CHANGESIGN, CREATEDBY, CREATE_TIME
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from APP_ORGANIZAION_CHANGE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.auth.organization.model.OrganizaionChange" >
+    insert into APP_ORGANIZAION_CHANGE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >ID,</if>
+      <if test="fromid != null" >FROMID,</if>
+      <if test="toid != null" >TOID,</if>
+      <if test="changesign != null" >CHANGESIGN,</if>
+      <if test="createdby != null" >CREATEDBY,</if>
+      <if test="createTime != null" >CREATE_TIME, </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="fromid != null" >
+        #{fromid,jdbcType=VARCHAR},
+      </if>
+      <if test="toid != null" >
+        #{toid,jdbcType=VARCHAR},
+      </if>
+      <if test="changesign != null" >
+        #{changesign,jdbcType=CHAR},
+      </if>
+      <if test="createdby != null" >
+        #{createdby,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.auth.organization.model.OrganizaionChange" >
+    update APP_ORGANIZAION_CHANGE
+    <set >
+      <if test="fromid != null" >
+        FROMID = #{fromid,jdbcType=VARCHAR},
+      </if>
+      <if test="toid != null" >
+        TOID = #{toid,jdbcType=VARCHAR},
+      </if>
+      <if test="changesign != null" >
+        CHANGESIGN = #{changesign,jdbcType=CHAR},
+      </if>
+      <if test="createdby != null" >
+        CREATEDBY = #{createdby,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

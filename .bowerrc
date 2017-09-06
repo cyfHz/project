@@ -1,0 +1,11 @@
+{
+  "directory": "WebContent/static/libs/",
+  "registry": "https://bower.herokuapp.com",
+  "analytics": false,
+  "timeout": 120000,
+  "registry": {
+    "search": [
+      "https://bower.herokuapp.com"
+    ]
+  }
+}

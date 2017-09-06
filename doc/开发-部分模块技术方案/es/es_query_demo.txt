@@ -1,0 +1,172 @@
+GET /psam/mlph/e04db6d2-7e52-413e-a456-64338c9c02a7
+GET /psam/mlph/_count
+GET /psam/jzwjbxx/_count
+-------------------------------------------------
+GET /psam/mlph/_search
+{
+ "query": {
+   "term": {
+     "YWLSH": {
+       "value": "e04db6d2-7e52-413e-a456-64338c9c02a7"
+     }
+   }
+ },
+ "sort": [
+   {
+     "YWLSH": {
+       "order": "desc"
+     }
+   }
+ ]
+} 
+-------------------------------------------------
+GET /psam/mlph/_search
+{
+ "query": {
+   "term": {
+     "SSZDYJXZQY_DZBM": {
+       "value": "370826"
+     }
+   }
+ },
+ "sort": [
+   {
+     "YWLSH": {
+       "order": "desc"
+     }
+   }
+ ]
+} 
+-------------------------------------------------
+GET /psam/mlph/_search
+{
+  "query": {
+    "match_phrase": {
+      "DZMC": "相公庄镇"
+    }
+  }  
+}
+
+
+GET /psam/mlph/_search
+{
+ "query": {
+   "match_all": {}
+ } 
+}
+---------------------------------------------
+
+GET /psam/mlph,jzwjbxx/_search
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "match_all": {}
+        },
+        {
+          "match": {
+            "DZMC": "大学"
+          }
+        },
+        {
+          "match": {
+            "DZMC.py": ""
+          }
+        },
+        {
+          "match": {
+            "DZMC.szm": ""
+          }
+        }
+      ]
+    }
+  }
+}
+------------geo_shape--------------------------------------
+GET /psam/jwq/_search
+{
+    "query": {
+        "geo_shape": {
+            "BJZB": {
+                "shape": {
+                    "type": "point",
+                    "coordinates": [116.99386,36.66077]
+                }
+            }
+        }
+    }
+}
+----------filtered-exists----------------------------
+GET /psam/jwq/_search
+{
+ "query": {
+   "filtered": {
+     "query": {
+       "match_all": {}
+     },
+     "filter": {
+       "exists": {
+         "field": "BJZB"
+       }
+     }
+   }
+ } 
+} 
+-----------wildcard---------------------------------------
+GET /psam/mlph/_search
+{
+  "query": {
+    "wildcard": {
+      "DZMC.szm": {
+        "value": "sdsjns*"
+      }
+    }
+    
+  }
+}
+----------prefix----------------------------------------
+GET /psam/mlph/_search
+{
+  "query": {
+    "prefix": {
+      "JWQBH": {
+        "value": "37"
+      }
+    }
+  }
+}
+-------------------------------------------
+GET /psam/mlph/_search
+{
+  "query": {
+    "match": {
+      "DZMC": "123123"
+    }
+  }
+}
+
+GET /psam/mlph/_search
+{
+ "query": {
+   "filtered": {
+     "query": {
+       "match_all": {}
+     },
+     "filter": {
+       "missing": {
+         "field": "LOCATION"
+       }
+     }
+   }
+ } 
+} 
+--------------------------------
+GET /psam/psam/_search
+{
+ "query": {
+   "match": {
+     "dzmc.py":"jining"
+   }
+ } 
+} 

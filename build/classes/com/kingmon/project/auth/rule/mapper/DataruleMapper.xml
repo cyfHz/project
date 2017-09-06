@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingmon.project.auth.rule.mapper.DataruleMapper">
+    
+  <resultMap id="BaseResultMap" type="com.kingmon.project.auth.rule.model.Datarule">
+    <id column="RULE_ID" jdbcType="VARCHAR" property="rule_id" />
+    <result column="AREA_ID" jdbcType="VARCHAR" property="area_id" />
+    <result column="RULE_NAME" jdbcType="VARCHAR" property="rule_name" />
+    <result column="RULE_DATATYPE" jdbcType="VARCHAR" property="rule_datatype" />
+    <result column="RULE_DATAVALUE" jdbcType="VARCHAR" property="rule_datavalue" />
+    <result column="RULE_DESC" jdbcType="VARCHAR" property="rule_desc" />
+    <result column="RULE_CODE" jdbcType="VARCHAR" property="rule_code" />
+    <result column="ENABLED" jdbcType="CHAR" property="enabled" />
+    <result column="OPRATETIME" jdbcType="VARCHAR" property="opratetime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    RULE_ID, AREA_ID, RULE_NAME, RULE_DATATYPE, RULE_DATAVALUE, RULE_DESC, RULE_CODE, ENABLED, OPRATETIME
+  </sql>
+  
+<!-- <select id="selectVlausByRuleCodeAndRoleId" resultType="java.lang.String">
+    select 
+      rrd.rule_value
+    from 
+     APP_DATARULE dr, 
+     APP_ROLE_RES_DRULE rrd
+  	where 
+	  dr.rule_id=rrd.rule_id 
+	  and dr.enabled='1' 
+	  and rrd.role_id=#{role_id,jdbcType=VARCHAR}
+	  and dr.rule_code=#{rule_code,jdbcType=VARCHAR}
+  </select>  -->
+  
+<select id="selectVlausByRuleCodeAndUserId" resultType="java.lang.String">
+<!--       select 
+        rrd.rule_value 
+      from 
+	    APP_DATARULE dr, 
+	    APP_ROLE_RES_DRULE rrd,
+	    app_role_user ru,
+	    app_organization_user u
+  	where 
+	  dr.rule_id=rrd.rule_id
+	  and ru.appuser_id=u.appuser_id
+	  and ru.role_id=rrd.role_id
+	  and dr.enabled='1'
+ 	  and ru.enabled='1'
+	  and dr.rule_code=#{rule_code,jdbcType=VARCHAR}
+	  and u.appuser_id=#{appuser_id,jdbcType=VARCHAR} -->
+	  
+	select 
+        rrd.rule_value 
+    from 
+      APP_ROLE_RES_DRULE rrd,
+      APP_DATARULE dr 
+    where  1=1
+    and rrd.rule_id=dr.rule_id
+     and dr.enabled='1'
+    and dr.rule_code=#{rule_code,jdbcType=VARCHAR}
+    and rrd.role_id in
+     (select ru.role_id from app_role_user ru where ru.enabled='1' and ru.appuser_id =#{appuser_id,jdbcType=VARCHAR} )
+     
+  </select> 
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from APP_DATARULE  where RULE_ID = #{rule_id,jdbcType=VARCHAR}
+  </delete>
+  
+<insert id="insertSelective" parameterType="com.kingmon.project.auth.rule.model.Datarule">
+    insert into APP_DATARULE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rule_id != null"> RULE_ID, </if>
+      <if test="area_id != null">AREA_ID,</if>
+      <if test="rule_name != null">RULE_NAME,</if>
+      <if test="rule_datatype != null">RULE_DATATYPE,</if>
+      <if test="rule_datavalue != null">RULE_DATAVALUE,</if>
+      <if test="rule_desc != null">RULE_DESC,</if>
+      <if test="rule_code != null">RULE_CODE,</if>
+      <if test="enabled != null">ENABLED,</if>
+      <if test="opratetime != null">OPRATETIME,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rule_id != null">#{rule_id,jdbcType=VARCHAR},</if>
+      <if test="area_id != null">#{area_id,jdbcType=VARCHAR},</if>
+      <if test="rule_name != null"> #{rule_name,jdbcType=VARCHAR},</if>
+      <if test="rule_datatype != null">#{rule_datatype,jdbcType=VARCHAR},</if>
+      <if test="rule_datavalue != null">#{rule_datavalue,jdbcType=VARCHAR},</if>
+      <if test="rule_desc != null">#{rule_desc,jdbcType=VARCHAR},</if>
+      <if test="rule_code != null">#{rule_code,jdbcType=VARCHAR},</if>
+      <if test="enabled != null">#{enabled,jdbcType=CHAR},</if>
+      <if test="opratetime != null">#{opratetime,jdbcType=VARCHAR}, </if>
+    </trim>
+  </insert> 
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.auth.rule.model.Datarule">
+    update APP_DATARULE
+    <set>
+      <if test="area_id != null"> AREA_ID = #{area_id,jdbcType=VARCHAR}, </if>
+      <if test="rule_name != null"> RULE_NAME = #{rule_name,jdbcType=VARCHAR}, </if>
+      <if test="rule_datatype != null"> RULE_DATATYPE = #{rule_datatype,jdbcType=VARCHAR}, </if>
+      <if test="rule_datavalue != null"> RULE_DATAVALUE = #{rule_datavalue,jdbcType=VARCHAR}, </if>
+      <if test="rule_desc != null"> RULE_DESC = #{rule_desc,jdbcType=VARCHAR}, </if>
+      <if test="rule_code != null"> RULE_CODE = #{rule_code,jdbcType=VARCHAR}, </if>
+      <if test="enabled != null"> ENABLED = #{enabled,jdbcType=CHAR}, </if>
+      <if test="opratetime != null"> OPRATETIME = #{opratetime,jdbcType=VARCHAR}, </if>
+    </set>
+    where RULE_ID = #{rule_id,jdbcType=VARCHAR}
+  </update>    
+</mapper>

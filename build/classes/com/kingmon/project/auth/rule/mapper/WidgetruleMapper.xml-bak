@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.auth.rule.mapper.WidgetruleMapper" >
+    
+  <resultMap id="BaseResultMap" type="com.kingmon.project.auth.rule.model.Widgetrule" >
+    <id column="RULE_ID" property="rule_id" jdbcType="VARCHAR" />
+    <result column="RES_ID" property="res_id" jdbcType="VARCHAR" />
+    <result column="AREA_ID" property="area_id" jdbcType="VARCHAR" />
+    <result column="RULE_NAME" property="rule_name" jdbcType="VARCHAR" />
+    <result column="RULE_DEFVALUE" property="rule_defvalue" jdbcType="VARCHAR" />
+    <result column="RULE_VALUES" property="rule_values" jdbcType="VARCHAR" />
+    <result column="RULE_DESC" property="rule_desc" jdbcType="VARCHAR" />
+    <result column="RULE_CODE" property="rule_code" jdbcType="VARCHAR" />
+    <result column="ENABLED" property="enabled" jdbcType="CHAR" />
+    <result column="OPRATETIME" property="opratetime" jdbcType="VARCHAR" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    RULE_ID, RES_ID, AREA_ID, RULE_NAME, RULE_DEFVALUE, RULE_VALUES, RULE_DESC, RULE_CODE, 
+    ENABLED, OPRATETIME, MOVESIGN
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from APP_WIDGETRULE
+    where RULE_ID = #{rule_id,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from APP_WIDGETRULE
+    where RULE_ID = #{rule_id,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.kingmon.project.auth.rule.model.Widgetrule" >
+    insert into APP_WIDGETRULE (RULE_ID, RES_ID, AREA_ID, 
+      RULE_NAME, RULE_DEFVALUE, RULE_VALUES, 
+      RULE_DESC, RULE_CODE, ENABLED, 
+      OPRATETIME, MOVESIGN)
+    values (#{rule_id,jdbcType=VARCHAR}, #{res_id,jdbcType=VARCHAR}, #{area_id,jdbcType=VARCHAR}, 
+      #{rule_name,jdbcType=VARCHAR}, #{rule_defvalue,jdbcType=VARCHAR}, #{rule_values,jdbcType=VARCHAR}, 
+      #{rule_desc,jdbcType=VARCHAR}, #{rule_code,jdbcType=VARCHAR}, #{enabled,jdbcType=CHAR}, 
+      #{opratetime,jdbcType=VARCHAR}, #{movesign,jdbcType=CHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.auth.rule.model.Widgetrule" >
+    insert into APP_WIDGETRULE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rule_id != null" >
+        rule_id,
+      </if>
+      <if test="res_id != null" >
+        res_id,
+      </if>
+      <if test="area_id != null" >
+        area_id,
+      </if>
+      <if test="rule_name != null" >
+        rule_name,
+      </if>
+      <if test="rule_defvalue != null" >
+        rule_defvalue,
+      </if>
+      <if test="rule_values != null" >
+        rule_values,
+      </if>
+      <if test="rule_desc != null" >
+        rule_desc,
+      </if>
+      <if test="rule_code != null" >
+        rule_code,
+      </if>
+      <if test="enabled != null" >
+        enabled,
+      </if>
+      <if test="opratetime != null" >
+        opratetime,
+      </if>
+      <if test="movesign != null" >
+        movesign,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rule_id != null" >
+        #{rule_id,jdbcType=VARCHAR},
+      </if>
+      <if test="res_id != null" >
+        #{res_id,jdbcType=VARCHAR},
+      </if>
+      <if test="area_id != null" >
+        #{area_id,jdbcType=VARCHAR},
+      </if>
+      <if test="rule_name != null" >
+        #{rule_name,jdbcType=VARCHAR},
+      </if>
+      <if test="rule_defvalue != null" >
+        #{rule_defvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="rule_values != null" >
+        #{rule_values,jdbcType=VARCHAR},
+      </if>
+      <if test="rule_desc != null" >
+        #{rule_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="rule_code != null" >
+        #{rule_code,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="opratetime != null" >
+        #{opratetime,jdbcType=VARCHAR},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.auth.rule.model.Widgetrule" >
+    update APP_WIDGETRULE
+    <set >
+      <if test="res_id != null" >
+        RES_ID = #{res_id,jdbcType=VARCHAR},
+      </if>
+      <if test="area_id != null" >
+        AREA_ID = #{area_id,jdbcType=VARCHAR},
+      </if>
+      <if test="rule_name != null" >
+        RULE_NAME = #{rule_name,jdbcType=VARCHAR},
+      </if>
+      <if test="rule_defvalue != null" >
+        RULE_DEFVALUE = #{rule_defvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="rule_values != null" >
+        RULE_VALUES = #{rule_values,jdbcType=VARCHAR},
+      </if>
+      <if test="rule_desc != null" >
+        RULE_DESC = #{rule_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="rule_code != null" >
+        RULE_CODE = #{rule_code,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        ENABLED = #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="opratetime != null" >
+        OPRATETIME = #{opratetime,jdbcType=VARCHAR},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=CHAR},
+      </if>
+    </set>
+    where RULE_ID = #{rule_id,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.auth.rule.model.Widgetrule" >
+    update APP_WIDGETRULE
+    set RES_ID = #{res_id,jdbcType=VARCHAR},
+      AREA_ID = #{area_id,jdbcType=VARCHAR},
+      RULE_NAME = #{rule_name,jdbcType=VARCHAR},
+      RULE_DEFVALUE = #{rule_defvalue,jdbcType=VARCHAR},
+      RULE_VALUES = #{rule_values,jdbcType=VARCHAR},
+      RULE_DESC = #{rule_desc,jdbcType=VARCHAR},
+      RULE_CODE = #{rule_code,jdbcType=VARCHAR},
+      ENABLED = #{enabled,jdbcType=CHAR},
+      OPRATETIME = #{opratetime,jdbcType=VARCHAR},
+      MOVESIGN = #{movesign,jdbcType=CHAR}
+    where RULE_ID = #{rule_id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectWidgetruleListByByUserId" resultMap="BaseResultMap"  parameterType="java.lang.String" >
+	select
+      w.RULE_ID,
+      w.RULE_VALUES,
+      w.RULE_CODE,
+      w.RULE_DESC
+  from 
+    app_widgetrule w,
+    app_organization_user u ,
+    app_role r , 
+    APP_ROLE_USER ru , 
+    app_role_res_wrule rrw,
+    app_resource res,
+    app_role_resource rres
+     
+  where 1=1
+  
+   and ru.role_id=r.role_id 
+   and ru.appuser_id=u.appuser_id
+   and rrw.rule_id=w.rule_id
+   and rrw.role_id=r.role_id 
+   and rres.res_id= res.res_id
+   and rres.role_id=r.role_id
+   and r.enabled='1' 
+   and ru.enabled='1'
+   and w.enabled='1'
+   and rres.enabled='1'
+	 and u.appuser_id=#{appuser_id,jdbcType=VARCHAR}
+  </select>
+  
+<select id="selectWidgetruleCodeListByByUserId" resultType="String"  parameterType="java.lang.String" >
+	select
+      w.RULE_CODE
+  from 
+    app_widgetrule w,
+    app_organization_user u ,
+    app_role r , 
+    APP_ROLE_USER ru , 
+    app_role_res_wrule rrw,
+    app_resource res,
+    app_role_resource rres
+  where 1=1
+   and ru.role_id=r.role_id 
+   and ru.appuser_id=u.appuser_id
+   and rrw.rule_id=w.rule_id
+   and rrw.role_id=r.role_id 
+   and rres.res_id= res.res_id
+   and rres.role_id=r.role_id
+   and r.enabled='1' 
+   and ru.enabled='1'
+   and w.enabled='1'
+   and rres.enabled='1'
+	 and u.appuser_id=#{appuser_id,jdbcType=VARCHAR}
+  </select>
+  
+  
+<select id="selectWidgetRuleValueListByByUserId" resultType="String"  parameterType="java.lang.String" >
+	select
+      w.rule_values
+  from 
+    app_widgetrule w,
+    app_organization_user u ,
+    app_role r , 
+    APP_ROLE_USER ru , 
+    app_role_res_wrule rrw,
+    app_resource res,
+    app_role_resource rres
+  where 1=1
+   and ru.role_id=r.role_id 
+   and ru.appuser_id=u.appuser_id
+   and rrw.rule_id=w.rule_id
+   and rrw.role_id=r.role_id 
+   and rres.res_id= res.res_id
+   and rres.role_id=r.role_id
+   and r.enabled='1' 
+   and ru.enabled='1'
+   and w.enabled='1'
+   and rres.enabled='1'
+	 and u.appuser_id=#{appuser_id,jdbcType=VARCHAR}
+  </select>
+</mapper>

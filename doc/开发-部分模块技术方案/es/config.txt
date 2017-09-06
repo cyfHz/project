@@ -1,0 +1,354 @@
+﻿elasticsearch.bat   -Xmx10g -Xms10g
+
+JDK
+-------------------------------------------------------------------
+[root@admin ~]# rpm -qa | grep java
+tzdata-java-2012c-1.el6.noarch
+java-1.6.0-openjdk-1.6.0.0-1.45.1.11.1.el6.x86_64
+[root@admin ~]# rpm -e --nodeps tzdata-java-2012c-1.el6.noarch
+[root@admin ~]# rpm -e --nodeps java-1.6.0-openjdk-1.6.0.0-1.45.1.11.1.el6.x86_64
+-- 安装jdk
+[root@admin local]# rpm -ivh jdk-7-linux-x64.rpm
+--修改环境变量
+vi + /etc/profile
+向文件里面追加以下内容：
+JAVA_HOME=/usr/java/jdk1.7.0
+JRE_HOME=/usr/java/jdk1.7.0/jre
+PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
+export JAVA_HOME JRE_HOME PATH CLASSPATH
+
+[root@admin local]# source /etc/profile   //使修改立即生效
+[root@admin local]#        echo $PATH   //查看PATH值
+
+-------------------------------------------------------------------
+
+elasticsearch.yml
+
+ip
+master
+node
+-------------------------------------------------------------------
+sysctl -w vm.swappiness=0
+swapoff -a
+sysctl -w vm.max_map_count=262144
+
+chmod +x elasticsearch
+chmod +x plugin
+service iptables stop
+
+nohup ./elasticsearch -Xmx12g -Xms12g &
+
+curl -XPOST 'http://192.168.201.192:9200/_cluster/nodes/_shutdown'
+
+
+--------------------------------------------------------------------
+
+PUT /psam
+{
+  "settings": {
+    "refresh_interval": "5s",
+    "number_of_shards": 10,
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "psam": {
+      "properties": {
+     
+        "location": {
+          "type": "geo_point",
+          "lat_lon": true,
+          "geohash_prefix": true,
+          "fielddata": {
+            "format":    "compressed",
+            "precision": "1m"
+          }
+        },
+        "address": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik",
+          "fields": {
+            "py": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_ik",
+              "boost": 5
+            }
+          }
+        },
+        "fullname": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik",
+          "fields": {
+            "py": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_ik",
+              "boost": 5
+            }
+          }
+        },
+       
+        "shortname": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik",
+          "fields": {
+            "py": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_ik",
+              "boost": 10
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "zoneCode": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "fid": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "status": {
+          "type": "string",
+          "index": "not_analyzed"
+        }
+      }
+    }
+  }
+}
+
+PUT /psam/psam/1
+{
+  "location":"36.96121674,115.35322187",
+  "address":"山东省济南市市中区七贤街道办事处南辛庄西路336号",
+  "fullname":"南辛庄西路336号",
+  "shortname":"南辛庄西路336号",
+  "type":"1",
+  "zoneCode":"370001",
+  "status":"1"
+}
+
+
+
+PUT /psam/psam/2
+{
+  "location":"36.96121674,115.35322187",
+  "address":"山东省济南市市中区七贤街道办事处南辛庄西路336号",
+  "fullname":"11号教学楼",
+  "shortname":"11教",
+  "type":"2",
+  "zoneCode":"370001",
+  "fid":"1",
+  "status":"1"
+}
+
+
+GET  /psam/t1,t2/_search
+
+
+GET /psam/bzdzz/_search
+{
+    "query" : {
+        "match" : {
+            "name" : "济南"
+        }
+    }
+}
+
+GET /tg/address/_search
+{
+    "query" : {
+        "match" : {
+            "fullname.py" : "hualian"
+        }
+    }
+}
+
+GET /psam/psam/_search?size=200
+{
+  "query": {
+    "term": {
+      "fid": {
+        "value": "a407706b-4fd3-4366-a293-87863aea6e88"
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+矩形
+GET /db/address/_search
+{
+  "query": {
+    "filtered": {
+      "query": {
+        "match_phrase": { "name": "济南" }
+      },
+      "filter": {
+        "geo_bounding_box": {
+          "location": {
+            "top_left": {
+              "lat": 38.15667,
+              "lon": 107.038799
+            },
+            "bottom_right": {
+              "lat": 34.472801,
+              "lon": 124.700204
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+GET /psam/bzdzz/_search
+{
+  "query": {
+    "filtered": {
+    "filter": {
+      "geo_polygon": {
+        "location": {
+          "points": [
+            {
+              "lat": 36.728163,
+              "lon": 116.941948
+            },
+            {
+              "lat": 36.727238,
+              "lon": 117.050032
+            },
+            {
+              "lat": 36.696686,
+              "lon": 117.077628
+            },
+            {
+              "lat": 36.6374,
+              "lon": 117.077628
+            },
+            {
+              "lat": 36.60774,
+              "lon": 117.059231
+            },
+            {
+              "lat": 36.600323,
+              "lon": 117.014387
+            },
+            {
+              "lat": 36.604959,
+              "lon": 117.001739
+            },
+            {
+              "lat": 36.61701,
+              "lon": 116.947697
+            },
+            {
+              "lat": 36.626279,
+              "lon": 116.939648
+            },
+            {
+              "lat": 36.672607,
+              "lon": 116.940798
+            },
+            {
+              "lat": 36.684648,
+              "lon": 116.948847
+            },
+            {
+              "lat": 36.707797,
+              "lon": 116.937349
+            },
+            {
+              "lat": 36.707797,
+              "lon": 116.937349
+            },
+            {
+              "lat": 36.723535,
+              "lon": 116.938498
+            },
+            {
+              "lat": 36.728163,
+              "lon": 116.941948
+            }
+          ]
+        }
+      }
+    }
+    }
+  }
+}
+
+
+
+圆形区域
+
+GET /psam/bzdzz/_search 
+{
+  "query": {
+    "filtered": {
+      "filter": {
+        "geo_distance": {
+          "distance": "1km",
+          "location": {
+            "lat":  36.20646038,
+            "lon":  116.640255
+          }
+        }
+      }
+    }
+  }
+}
+圆形区域
+
+
+GET /psam/bzdzz/_search
+{
+  "query": {
+    "filtered": {
+      "filter": {
+        "geohash_cell": {
+          "location": {
+            "lat":  36.19792549,
+            "lon": 116.64190098
+          },
+          "precision": "105km"
+        }
+      }
+    }
+  }
+}
+
+
+
+根据ID取
+GET /db/address/20001 
+获取document结构
+GET /db/address/_mapping
+
+
+
+删除
+DELETE /db/address/20001
+修改 
+POST /db/address/20001/_update
+{
+   "doc" : {
+      "name": "山东省济南泉城广场",
+  "location": "36.58834973,116.80896734"
+   }
+}

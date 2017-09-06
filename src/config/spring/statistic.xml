@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-lazy-init="true">
+	
+	<bean id="sql_statistic_totle" class="java.lang.String">
+		<constructor-arg type="java.lang.String" 
+			value=" select count(1) from $table t where 1=1"/>
+	</bean>
+	
+	<bean id="sql_statistic_good" class="java.lang.String">
+		<constructor-arg type="java.lang.String" 
+			value=" select count(1) from $table t where 1=1 and ((ZXDHZB is not null and  ZXDZZB is not null ) and (JWQBH is not null )) "/>
+	</bean>
+	
+	<bean id="sql_statistic_not_good" class="java.lang.String">
+		<constructor-arg type="java.lang.String" 
+			value=" select count(1) from $table t where 1=1 and ((ZXDHZB is null or ZXDZZB is null ) or (JWQBH is null )) "/>
+	</bean>
+	
+	<bean id="sql_statistic_haveNoZB" class="java.lang.String">
+		<constructor-arg type="java.lang.String" 
+			value=" select count(1) from $table t where 1=1 and ((ZXDHZB is null or ZXDZZB is null ) and (JWQBH is not null )) "/>
+	</bean>
+	
+	<bean id="sql_statistic_haveNoJWQ" class="java.lang.String">
+		<constructor-arg type="java.lang.String" 
+			value=" select count(1) from $table t where 1=1 and ((JWQBH is null ) and (ZXDHZB is not null and  ZXDZZB is not null )) "/>
+	</bean>
+	<bean id="sql_statistic_haveNoBoth" class="java.lang.String">
+		<constructor-arg type="java.lang.String" 
+			value=" select count(1) from $table t where 1=1 and ((ZXDHZB is null or ZXDZZB is null )  and (JWQBH is null )) "/>
+	</bean>
+	
+	<!-- ##################################################### -->
+		<bean id="sql_statistic_totle_new" class="java.lang.String">
+		<constructor-arg type="java.lang.String" 
+			value=" select count(1) from DZ_MLPH t where 1=1 and SJGSDWDM like $orgId  "/>
+	</bean>
+	
+	<bean id="sql_statistic_good_new" class="java.lang.String">
+		<constructor-arg type="java.lang.String" 
+			value=" select count(1) from DZ_MLPH t where 1=1 and ((ZXDHZB is not null and  ZXDZZB is not null ) and (JWQBH is not null )) and SJGSDWDM like $orgId  "/>
+	</bean>
+	
+	<bean id="sql_statistic_not_good_new" class="java.lang.String">
+		<constructor-arg type="java.lang.String" 
+			value=" select count(1) from DZ_MLPH t where 1=1 and ((ZXDHZB is null or ZXDZZB is null ) or (JWQBH is null )) and SJGSDWDM like $orgId "/>
+	</bean>
+	
+	<bean id="sql_statistic_haveNoZB_new" class="java.lang.String">
+		<constructor-arg type="java.lang.String" 
+			value=" select count(1) from DZ_MLPH t where 1=1 and ((ZXDHZB is null or ZXDZZB is null ) and (JWQBH is not null )) and SJGSDWDM like $orgId  "/>
+	</bean>
+	
+	<bean id="sql_statistic_haveNoJWQ_new" class="java.lang.String">
+		<constructor-arg type="java.lang.String" 
+			value=" select count(1) from DZ_MLPH t where 1=1 and ((JWQBH is null ) and (ZXDHZB is not null and  ZXDZZB is not null )) and SJGSDWDM like $orgId "/>
+	</bean>
+	<bean id="sql_statistic_haveNoBoth_new" class="java.lang.String">
+		<constructor-arg type="java.lang.String" 
+			value=" select count(1) from DZ_MLPH t where 1=1 and ((ZXDHZB is null or ZXDZZB is null )  and (JWQBH is null )) and SJGSDWDM like $orgId "/>
+	</bean>
+	
+	
+	<bean id="statisticTableConfig" class="java.util.LinkedHashMap">
+		<constructor-arg>
+			<map>
+				<entry key="370100">
+					<map>
+						<entry key="tableName" value="jinan_dz_mlph_true" />
+						<entry key="orgCode" value="3701000000" />
+						<entry key="orgName" value="济南" />
+					</map>
+				</entry>
+			<entry key="370200">
+					<map>
+						<entry key="tableName" value="" />
+						<entry key="orgCode" value="370200000000" />
+						<entry key="orgName" value="青岛" />
+					</map>
+			</entry>
+			<entry key="370300">
+					<map>
+						<entry key="tableName" value="" />
+						<entry key="orgCode" value="370300000000" />
+						<entry key="orgName" value="淄博" />
+					</map>
+			</entry>
+			<entry key="370400">
+					<map>
+						<entry key="tableName" value="" />
+						<entry key="orgCode" value="370400000000" />
+						<entry key="orgName" value="枣庄" />
+					</map>
+			</entry>
+			<entry key="370500">
+					<map>
+						<entry key="tableName" value="DONGYING_DZ_MLPH" />
+						<entry key="orgCode" value="370500000000" />
+						<entry key="orgName" value="东营" />
+					</map>
+				</entry>
+			 <entry key="370600">
+					<map>
+						<entry key="tableName" value="YANTAI_DZ_MLPH" />
+						<entry key="orgCode" value="370600000000" />
+						<entry key="orgName" value="烟台" />
+					</map>
+				</entry>
+				<entry key="370700">
+					<map>
+						<entry key="tableName" value="WEIFANG_DZ_MLPH" />
+						<entry key="orgCode" value="370700000000" />
+						<entry key="orgName" value="潍坊" />
+					</map>
+				</entry>				
+			 <entry key="370800">
+					<map>
+						<entry key="tableName" value="JINING_DZ_MLPH" />
+						<entry key="orgCode" value="370800000000" />
+						<entry key="orgName" value="济宁" />
+					</map>
+				</entry>
+			 <entry key="370900">
+					<map>
+						<entry key="tableName" value="TAIAN_DZ_MLPH" />
+						<entry key="orgCode" value="370900000000" />
+						<entry key="orgName" value="泰安" />
+					</map>
+				</entry>
+			<entry key="371000">
+					<map>
+						<entry key="tableName" value="DZ_MLPH" />
+						<entry key="orgCode" value="371000000000" />
+						<entry key="orgName" value="威海" />
+						<entry key="sql_statistic_special" value=" and t.sssj='371000000000' "/> 
+					</map>
+				</entry>
+			 <entry key="371100">
+					<map>
+						<entry key="tableName" value="RIZHAO_DZ_MLPH" />
+						<entry key="orgCode" value="371100000000" />
+						<entry key="orgName" value="日照" />
+					</map>
+				</entry>
+			<entry key="371200">
+					<map>
+						<entry key="tableName" value="LAIWU_DZ_MLPH" />
+						<entry key="orgCode" value="371200000000" />
+						<entry key="orgName" value="莱芜" />
+					</map>
+			</entry>
+			<entry key="371300">
+					<map>
+						<entry key="tableName" value="LINYI_DZ_MLPH" />
+						<entry key="orgCode" value="371300000000" />
+						<entry key="orgName" value="临沂" />
+					</map>
+				</entry>
+			 <entry key="371400">
+					<map>
+						<entry key="tableName" value="DEZHOU_DZ_MLPH" />
+						<entry key="orgCode" value="371400000000" />
+						<entry key="orgName" value="德州" />
+					</map>
+				</entry>
+			<entry key="371500">
+					<map>
+						<entry key="tableName" value="LIAOCH_DZ_MLPH" />
+						<entry key="orgCode" value="371500000000" />
+						<entry key="orgName" value="聊城" />
+					</map>
+				</entry>
+			<entry key="371600">
+					<map>
+						<entry key="tableName" value="" />
+						<entry key="orgCode" value="371600000000" />
+						<entry key="orgName" value="滨州" />
+					</map>
+				</entry>
+				
+			 <entry key="371700">
+					<map>
+						<entry key="tableName" value="HEZE_DZ_MLPH" />
+						<entry key="orgCode" value="371700000000" />
+						<entry key="orgName" value="菏泽" />
+					</map>
+				</entry>																																				
+			</map>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="statisticTableConfigX" class="java.util.LinkedHashMap">
+		<constructor-arg>
+			<map>
+				<entry key="JINAN_DZ_MLPH_TRUE" value="济南"/>
+				<entry key="DZ_MLPH" value="威海" />
+				<entry key="WEIFANG_DZ_MLPH" value="潍坊" />
+				<entry key="LINYI_DZ_MLPH" value="临沂" />
+				<entry key="LIAOCH_DZ_MLPH" value="聊城" />
+				<entry key="LAIWU_DZ_MLPH" value="莱芜" />
+				<entry key="JINING_DZ_MLPH" value="济宁" />
+				<entry key="TAIAN_DZ_MLPH" value="泰安" />
+				<entry key="DONGYING_DZ_MLPH" value="东营" />
+				<entry key="YANTAI_DZ_MLPH" value="烟台" />
+				<entry key="HEZE_DZ_MLPH" value="菏泽" />
+				<entry key="RIZHAO_DZ_MLPH" value="日照" />
+				<entry key="DEZHOU_DZ_MLPH" value="德州" />
+			</map>
+		</constructor-arg>
+	</bean>
+</beans>
+
+<!-- 地市	表名	规则
+济南	jinan_dz_mlph_true	
+威海	dz_mlph	select t.* from DZ_MLPH t where t.sssj='371000000000'
+潍坊	WEIFANG_DZ_MLPH	
+临沂	LINYI_DZ_MLPH	
+聊城	LIAOCH_DZ_MLPH	
+莱芜	LAIWU_DZ_MLPH	
+济宁	JINING_DZ_MLPH	
+泰安	TAIAN_DZ_MLPH	
+东营	DONGYING_DZ_MLPH	
+烟台	yantai_dz_mlph	
+菏泽	HEZE_DZ_MLPH	
+日照	RIZHAO_DZ_MLPH	
+德州	DEZHOU_DZ_MLPH	 -->

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         name="CM1" 
+         updateCheck="false" 
+         monitoring="on">
+
+    <diskStore path="java.io.tmpdir"/>
+
+    <defaultCache
+            eternal="false"
+            overflowToDisk="true"
+            maxElementsInMemory="1500"
+            timeToIdleSeconds="3000"
+            timeToLiveSeconds="12000"
+             />
+             
+     <cache name="defaultQueryResultCache"  
+            maxElementsInMemory="150" 
+            eternal="false" 
+            timeToLiveSeconds="36000" 
+            timeToIdleSeconds="3600" 
+            overflowToDisk="true"/>
+ <cache name="authTmpResultCache"  
+            maxElementsInMemory="150" 
+            eternal="false" 
+            timeToLiveSeconds="36000" 
+            timeToIdleSeconds="60" 
+            overflowToDisk="true"/>
+            
+<cache name="dataStatistic"  
+            maxElementsInMemory="150" 
+            eternal="false" 
+            timeToLiveSeconds="86400" 
+            timeToIdleSeconds="86400" 
+            overflowToDisk="true"/>
+            
+<cache name="workLoadCashe"  
+            maxElementsInMemory="150" 
+            eternal="false" 
+            timeToLiveSeconds="10800" 
+            timeToIdleSeconds="10800" 
+            overflowToDisk="true"/>
+</ehcache>

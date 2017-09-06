@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.shpz.mapper.ShpzMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.shpz.model.Shpz" >
+    <id column="PZID" property="pzid" jdbcType="VARCHAR" />
+    <result column="PZLX" property="pzlx" jdbcType="CHAR" />
+    <result column="PZDM" property="pzdm" jdbcType="CHAR" />
+    <result column="ORGAN_CODE" property="organCode" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+    PZID, PZLX, PZDM, ORGAN_CODE
+  </sql>
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DZ_SHPZ
+    where PZID = #{pzid,jdbcType=VARCHAR}
+  </select>
+<!--     <select id="selectJlxShpzByOrgCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT  <include refid="Base_Column_List" /> FROM DZ_SHPZ WHERE PZLX='1' and ORGAN_CODE = #{orgCode,jdbcType=VARCHAR}
+   </select> -->
+    <select id="selectShpz" resultMap="BaseResultMap" parameterType="java.lang.String">
+		SELECT  <include refid="Base_Column_List" /> FROM DZ_SHPZ WHERE PZLX=#{pzlx,jdbcType=VARCHAR} and ORGAN_CODE = #{orgCode,jdbcType=VARCHAR}
+   </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DZ_SHPZ where PZID = #{pzid,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.shpz.model.Shpz" >
+    insert into DZ_SHPZ
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pzid != null" >PZID,</if>
+      <if test="pzlx != null" >PZLX, </if>
+      <if test="pzdm != null" >PZDM, </if>
+      <if test="organCode != null" >ORGAN_CODE,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pzid != null" >#{pzid,jdbcType=VARCHAR},</if>
+      <if test="pzlx != null" >#{pzlx,jdbcType=CHAR},</if>
+      <if test="pzdm != null" >#{pzdm,jdbcType=CHAR},</if>
+      <if test="organCode != null" >#{organCode,jdbcType=VARCHAR},</if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.shpz.model.Shpz" >
+    update DZ_SHPZ
+    <set >
+      <if test="pzlx != null" >PZLX = #{pzlx,jdbcType=CHAR},</if>
+      <if test="pzdm != null" >PZDM = #{pzdm,jdbcType=CHAR},</if>
+      <if test="organCode != null" >ORGAN_CODE = #{organCode,jdbcType=VARCHAR},</if>
+    </set>
+    where PZID = #{pzid,jdbcType=VARCHAR}
+  </update>
+
+   
+</mapper>

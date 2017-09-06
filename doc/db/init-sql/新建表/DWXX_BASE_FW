@@ -1,0 +1,85 @@
+-- Create table  ----房屋单位 中间表16-0817 新增--
+create table DWXX_BASE_FW
+(
+  ID          VARCHAR2(36) not null,
+  DWID        VARCHAR2(36),
+  FJID        VARCHAR2(36),
+  DJR         VARCHAR2(36),
+  DJDW        VARCHAR2(36),
+  DJRMC       VARCHAR2(100),
+  DJDWMC      VARCHAR2(200),
+  DJSJ        DATE,
+  MOVESIGN    CHAR(1),
+  SBID        VARCHAR2(50),
+  DELTAG      CHAR(1) default 0,
+  DELTIME     DATE,
+  DELUSER     VARCHAR2(36),
+  JZWID       VARCHAR2(36),
+  TF          VARCHAR2(40),
+  IMEI        VARCHAR2(40),
+  SIM         VARCHAR2(40),
+  GXSJ        DATE,
+  MAC_ADDRESS VARCHAR2(20)
+)
+tablespace POLICECLOUD
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 16
+    next 8
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table DWXX_BASE_FW
+  is '单位房屋关系表';
+-- Add comments to the columns 
+comment on column DWXX_BASE_FW.ID
+  is '主键';
+comment on column DWXX_BASE_FW.DWID
+  is '单位编号';
+comment on column DWXX_BASE_FW.FJID
+  is '房间编号';
+comment on column DWXX_BASE_FW.DJR
+  is '登记人';
+comment on column DWXX_BASE_FW.DJDW
+  is '登记单位';
+comment on column DWXX_BASE_FW.DJRMC
+  is '登记人名称';
+comment on column DWXX_BASE_FW.DJDWMC
+  is '登记单位名称';
+comment on column DWXX_BASE_FW.DJSJ
+  is '登记时间';
+comment on column DWXX_BASE_FW.MOVESIGN
+  is 'MOVESIGN';
+comment on column DWXX_BASE_FW.SBID
+  is '设备ID';
+comment on column DWXX_BASE_FW.DELTAG
+  is '删除标记（0-未删除，1-已删除）';
+comment on column DWXX_BASE_FW.DELTIME
+  is '删除时间';
+comment on column DWXX_BASE_FW.DELUSER
+  is '删除人';
+comment on column DWXX_BASE_FW.JZWID
+  is '建筑物ID';
+comment on column DWXX_BASE_FW.GXSJ
+  is '更新时间';
+comment on column DWXX_BASE_FW.MAC_ADDRESS
+  is 'Mac地址';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table DWXX_BASE_FW
+  add constraint DWXX_BASE_FW_PK primary key (ID)
+  using index 
+  tablespace POLICECLOUD
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );

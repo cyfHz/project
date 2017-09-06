@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.orgarea.mapper.OrgPgisAreaMapper" >
+ 
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.orgarea.model.OrgPgisArea" >
+    <id column="ORGNA_ID" property="orgnaId" jdbcType="VARCHAR" />
+    <result column="ENABLED" property="enabled" jdbcType="CHAR" />
+    <result column="CREATED" property="created" jdbcType="VARCHAR" />
+    <result column="CREATEDBY" property="createdby" jdbcType="VARCHAR" />
+    <result column="AREA" property="area" jdbcType="VARCHAR" />
+    <result column="MOVESIGN" property="movesign" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="ResultMapWithBLOBs" type="com.kingmon.project.psam.orgarea.model.OrgPgisArea" extends="BaseResultMap" >
+    <result column="MAP_AREA" property="mapArea" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ORGNA_ID, ENABLED, CREATED, CREATEDBY, AREA, MOVESIGN
+  </sql>
+  
+  <sql id="Blob_Column_List" >  MAP_AREA </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+     ,
+    <include refid="Blob_Column_List" />
+    from ENT_ORGANIZATION_PGIS_AREA where ORGNA_ID = #{orgnaId,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ENT_ORGANIZATION_PGIS_AREA where ORGNA_ID = #{orgnaId,jdbcType=VARCHAR}
+  </delete>
+  
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.orgarea.model.OrgPgisArea" >
+    insert into ENT_ORGANIZATION_PGIS_AREA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgnaId != null" >ORGNA_ID,</if>
+      <if test="enabled != null" > ENABLED, </if>
+      <if test="created != null" >CREATED, </if>
+      <if test="createdby != null" >CREATEDBY, </if>
+      <if test="area != null" > AREA,</if>
+      <if test="movesign != null" > MOVESIGN,</if>
+      <if test="mapArea != null" > MAP_AREA,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgnaId != null" >#{orgnaId,jdbcType=VARCHAR},</if>
+      <if test="enabled != null" > #{enabled,jdbcType=CHAR},</if>
+      <if test="created != null" >#{created,jdbcType=VARCHAR},</if>
+      <if test="createdby != null" >#{createdby,jdbcType=VARCHAR},</if>
+      <if test="area != null" > #{area,jdbcType=VARCHAR},</if>
+      <if test="movesign != null" >#{movesign,jdbcType=VARCHAR},</if>
+      <if test="mapArea != null" >#{mapArea,jdbcType=CLOB},</if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.orgarea.model.OrgPgisArea" >
+    update ENT_ORGANIZATION_PGIS_AREA
+    <set >
+      <if test="enabled != null" >ENABLED = #{enabled,jdbcType=CHAR},</if>
+      <if test="created != null" >CREATED = #{created,jdbcType=VARCHAR},</if>
+      <if test="createdby != null" >CREATEDBY = #{createdby,jdbcType=VARCHAR}, </if>
+      <if test="area != null" >AREA = #{area,jdbcType=VARCHAR},</if>
+      <if test="movesign != null" >MOVESIGN = #{movesign,jdbcType=VARCHAR}, </if>
+      <if test="mapArea != null" >MAP_AREA = #{mapArea,jdbcType=CLOB}, </if>
+    </set>
+    where ORGNA_ID = #{orgnaId,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

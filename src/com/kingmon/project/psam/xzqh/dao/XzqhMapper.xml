@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingmon.project.psam.xzqh.dao.XzqhMapper">
+	<resultMap id="XzqhBaseResultMap" type="com.kingmon.project.psam.xzqh.model.Xzqh">
+		<id column="DZBM" property="dzbm" jdbcType="VARCHAR" />
+		<result column="DZYSLXDM" property="dzyslxdm" jdbcType="VARCHAR" />
+		<result column="XZQHDM" property="xzqhdm" jdbcType="VARCHAR" />
+		<result column="XZQHMC" property="xzqhmc" jdbcType="VARCHAR" />
+		<result column="BMJC" property="bmjc" jdbcType="VARCHAR" />
+		<result column="SJXZQY_DZBM" property="sjxzqy_dzbm" jdbcType="VARCHAR" />
+		<result column="SLRQ" property="slrq" jdbcType="TIMESTAMP" />
+		<result column="CXSJ" property="cxsj" jdbcType="TIMESTAMP" />
+		<result column="GXSJ" property="gxsj" jdbcType="TIMESTAMP" />
+		<result column="QYRQ" property="qyrq" jdbcType="TIMESTAMP" />
+		<result column="TYRQ" property="tyrq" jdbcType="TIMESTAMP" />
+		<result column="SYZTDM" property="syztdm" jdbcType="VARCHAR" />
+		<result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+		<result column="CXYY" property="cxyy" jdbcType="VARCHAR" />
+		<result column="ZJF" property="zjf" jdbcType="VARCHAR" />
+		<result column="DJR" property="djr" jdbcType="VARCHAR" />
+		<result column="DJDW" property="djdw" jdbcType="VARCHAR" />
+		<result column="DJSJ" property="djsj" jdbcType="TIMESTAMP" />
+		<result column="XGR" property="xgr" jdbcType="VARCHAR" />
+		<result column="XGDW" property="xgdw" jdbcType="VARCHAR" />
+		<result column="CXBJ" property="cxbj" jdbcType="VARCHAR" />
+		<result column="CXR" property="cxr" jdbcType="VARCHAR" />
+		<result column="XZQHGSDM" property="xzqhgsdm" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Xzqh_Base_Column_List">
+		${alias}.DZBM, ${alias}.DZYSLXDM, ${alias}.XZQHDM, ${alias}.XZQHMC, ${alias}.BMJC, ${alias}.SJXZQY_DZBM, ${alias}.SLRQ, ${alias}.CXSJ,
+		${alias}.GXSJ, ${alias}.QYRQ, ${alias}.TYRQ,
+		${alias}.SYZTDM, ${alias}.MOVESIGN, ${alias}.CXYY, ${alias}.ZJF, ${alias}.DJR, ${alias}.DJDW,
+		${alias}.DJSJ, ${alias}.XGR, ${alias}.XGDW, ${alias}.CXBJ, ${alias}.CXR
+	</sql>
+
+	<!--通用分页 -->
+	<sql id="Paging_Start">
+		SELECT * FROM (
+		SELECT T_.*, rownum rn_ FROM (
+	</sql>
+	<sql id="Paging_end">
+		) T_ WHERE rownum &lt;= ${pageend}
+		) WHERE rn_ &gt; ${pagestart}
+	</sql>
+	<select id="selectDetailByPrimaryKey" resultType="java.util.Map"
+		parameterType="java.lang.String">
+		select
+		x.DZBM, x.DZYSLXDM, x.XZQHDM, x.XZQHMC, x.BMJC,
+		x.SJXZQY_DZBM, x.SLRQ, x.CXSJ, x.GXSJ, x.QYRQ,
+		x.TYRQ,
+		x.SYZTDM,
+		x.MOVESIGN, x.CXYY, x.ZJF, x.DJSJ, x.CXBJ,
+		ouser.USER_NAME as XGR,
+		userDjr.USER_NAME as DJR,
+		orgDjdw.ORGNA_NAME as DJDW,
+		orgXgdw.ORGNA_NAME as XGDW,
+		orgCxdw.ORGNA_NAME as CXDW,
+		userCxr.USER_NAME as CXR
+		from DZ_XZQH x
+		left join APP_ORGANIZATION_USER ouser on
+		ouser.APPUSER_ID=x.XGR
+		left join APP_ORGANIZATION_USER userDjr on
+		userDjr.APPUSER_ID=x.DJR
+		left join APP_ORGANIZATION orgDjdw on
+		orgDjdw.ORGNA_ID=x.DJDW
+		left join APP_ORGANIZATION orgXgdw on
+		orgXgdw.ORGNA_ID=x.XGDW
+		left join APP_ORGANIZATION_USER userCxr on
+		userCxr.APPUSER_ID=x.CXR
+		left join APP_ORGANIZATION orgCxdw on
+		orgCxdw.ORGNA_ID=x.CXDW
+		where x.DZBM = #{dzbm,jdbcType=VARCHAR}
+	</select>
+
+	<select id="xzqhList" resultType="map" parameterType="map">
+		<include refid="Paging_Start" />
+		SELECT
+		<include refid="Xzqh_Base_Column_List">
+			<property name="alias" value="T1" />
+		</include>
+		,T2.XZQHMC as SJXZQYMC
+		FROM DZ_XZQH T1,DZ_XZQH t2
+		WHERE T1.SJXZQY_DZBM=T2.DZBM(+)
+		<include refid="xzqhList_where">
+			<property name="alias" value="T1" />
+		</include>
+		<if test="sort != null">
+			ORDER BY T1.${sort} ${order}
+		</if>
+		<include refid="Paging_end" />
+	</select>
+
+
+<!--NODETYPE 为 树状叶子结点最低一级关闭判断字段   TYPE为该数据的原 行政区划 类型-->
+<select id="getXzqhXzjd" resultType="map" parameterType="String">
+		SELECT DZBM as NODEID,XZQHMC as NODETEXT,'XZJD' as NODETYPE,'XZQH' as TYPES
+		FROM DZ_XZQH
+		<include refid="getChild_where" />
+		ORDER BY DZ_XZQH.XZQHDM
+	</select>
+	<select id="getXzqh" resultType="map" parameterType="String">
+	    select DZBM as NODEID,XZQHMC as NODETEXT,'XZQH' as NODETYPE,'XZQH' as TYPES from dz_xzqh x where x.dzbm=#{id} and x.syztdm=10
+	</select>
+	<select id="getXzqhJd" resultType="map" parameterType="String">
+	    select DZBM as NODEID,XZQHMC as NODETEXT,'XZJD' as NODETYPE,'XZQH' as TYPES from dz_xzqh x where x.dzbm=#{id} and x.syztdm=10
+	</select>
+	<select id="getXzqhXzsqj" resultType="map" parameterType="String">
+	    select DZBM as NODEID,XZQHMC as NODETEXT,'SQJCWH' as NODETYPE,'XZQH' as TYPES  from dz_xzqh x where x.dzbm=#{id} and x.syztdm=10
+	</select>
+	<select id="getXzqhJdSqj" resultType="map" parameterType="String">
+<!-- 	    select DZBM as NODEID,XZJDMC as NODETEXT,'SQJCWH' as NODETYPE from dz_xzjd x where x.dzbm=#{id} and x.syztdm=10 -->
+        select DZBM as NODEID,XZJDMC as NODETEXT,'SQJCWH' as NODETYPE,'XZJD' as TYPES from dz_xzjd x where x.dzbm=#{id} and x.syztdm=10
+	</select>
+	<select id="getXzjdMap" resultType="map" parameterType="String">
+<!-- 	    select DZBM as NODEID,XZJDMC as NODETEXT,'XZJD' as NODETYPE from dz_xzjd x where x.dzbm=#{id} and x.syztdm=10 -->
+        select DZBM as NODEID,XZJDMC as NODETEXT,'XZJD' as NODETYPE,'XZJD' as TYPES  from dz_xzjd x where x.dzbm=#{id} and x.syztdm=10
+	</select>
+	<select id="getCount" resultType="java.lang.Long" parameterType="String">
+		select count(1) from DZ_XZQH where SJXZQY_DZBM=#{id} and syztdm=10
+	</select>
+	<select id="getXzqhSqj" resultType="map" parameterType="String">
+	    select DZBM as NODEID,XZJDMC as NODETEXT,'SQJCWH','XZJD' as TYPES as NODETYPE from dz_xzjd x where x.dzbm=#{id} and x.syztdm=10
+	</select>
+
+
+
+
+	<select id="xzqhListCount" resultType="java.lang.Long" parameterType="map">
+		select count(1) from DZ_XZQH WHERE 1=1
+		<include refid="xzqhList_where">
+			<property name="alias" value="DZ_XZQH" />
+		</include>
+	</select>
+
+	<sql id="xzqhList_where">
+		<if test="DZBM != null">
+			AND ${alias}.DZBM = #{DZBM}
+		</if>
+		<if test="XZQHMC != null">
+			AND (${alias}.XZQHMC like #{XZQHMC} or lower(${alias}.ZJF) like lower(#{XZQHMC}))
+		</if>
+		<if test="XZQHDM != null">
+			<!-- AND ${alias}.XZQHDM = #{XZQHDM} -->
+			AND ${alias}.XZQHDM like #{XZQHDM}
+		</if>
+		<if test="DZYSLXDM != null">
+			AND ${alias}.DZYSLXDM = #{DZYSLXDM}
+		</if>
+		<if test="SYZTDM != null">
+			AND ${alias}.SYZTDM = #{SYZTDM}
+		</if>
+		<if test="SJXZQY_DZBM != null">
+			AND ${alias}.SJXZQY_DZBM = #{SJXZQY_DZBM}
+		</if>
+		<if test="xzqhdm_data_auth != null">
+			AND ${alias}.XZQHDM  like  #{xzqhdm_data_auth}
+		</if>
+		<if test="qydm != null">
+			AND ${alias}.XZQHDM  like  #{qydm}
+		</if>
+		
+	</sql>
+		
+	<select id="getChild" resultType="map" parameterType="String">
+		SELECT DZBM as NODEID,XZQHMC as NODETEXT,'XZQH' as NODETYPE
+		FROM DZ_XZQH
+		<include refid="getChild_where" />
+		ORDER BY DZ_XZQH.XZQHDM
+	</select>
+
+	<select id="getChildCount" resultType="java.lang.Long" parameterType="String">
+		select count(1) from DZ_XZQH
+		<include refid="getChild_where" />
+	</select>
+	
+	<sql id="getChild_where">
+		WHERE 1=1 and SYZTDM=10
+		<choose>
+			<when test="_parameter == null">
+				AND SJXZQY_DZBM is null
+			</when>
+			<otherwise>
+				AND SJXZQY_DZBM = #{id}
+			</otherwise>
+		</choose>
+	</sql>
+	
+	
+	
+	
+	
+	<select id="getXzjd" resultType="map" parameterType="String">
+		SELECT DZBM as NODEID, XZJDMC as NODETEXT,'XZJD' as NODETYPE,'XZJD' as TYPES FROM DZ_XZJD WHERE  SJXZQY_DZBM = #{id} AND syztdm=10 ORDER BY DZ_XZJD.XZJDDM 
+	</select>
+
+	<select id="getXzjdCount" resultType="java.lang.Long" parameterType="String">
+		SELECT count(1) from DZ_XZJD WHERE  SJXZQY_DZBM = #{id} AND syztdm=10
+	</select>
+	
+	
+	<select id="getSqcjwh" resultType="map" parameterType="String">
+		SELECT DZBM as NODEID ,SQJCWHMC as NODETEXT ,'SQJCWH' as NODETYPE,'SQJCWH' as TYPES FROM DZ_SQJCWH WHERE SJXZQY_DZBM = #{id} AND syztdm=10 ORDER BY DZ_SQJCWH.SQJCWHDM
+	</select>
+
+	<select id="getSqcjwhCount" resultType="java.lang.Long" parameterType="String">
+		SELECT COUNT(1) FROM DZ_SQJCWH WHERE SJXZQY_DZBM = #{id} AND syztdm=10
+	</select>
+	
+	
+	
+	
+	<select id="getDictByCode" parameterType="String" resultType="map">
+		SELECT app_dictionary.* FROM app_dictionary ,app_dictionary_type  WHERE app_dictionary.type_id=app_dictionary_type.type_id and app_dictionary_type.type_code=#{code}
+	</select>
+	
+	
+	<insert id="addXzqh" parameterType="map" >
+    insert into DZ_XZQH (
+     	DZBM, 
+     	DZYSLXDM, 
+      	XZQHDM, 
+      	XZQHMC,
+       	BMJC, 
+       	SJXZQY_DZBM,
+       	SYZTDM,
+       	
+       	GXSJ,
+       	DJR,DJDW,DJSJ,
+       	CXBJ,ZJF,
+       	QYRQ,SLRQ
+     )
+    values (
+      #{DZBM,jdbcType=VARCHAR}, 
+      #{DZYSLXDM,jdbcType=VARCHAR}, 
+      #{XZQHDM,jdbcType=VARCHAR}, 
+      #{XZQHMC,jdbcType=VARCHAR}, 
+      #{BMJC,jdbcType=VARCHAR}, 
+      #{SJXZQY_DZBM,jdbcType=VARCHAR}, 
+      #{SYZTDM,jdbcType=VARCHAR},
+      
+      #{GXSJ,jdbcType=TIMESTAMP},
+      #{DJR,jdbcType=VARCHAR},
+      #{DJDW,jdbcType=VARCHAR},
+      #{DJSJ,jdbcType=VARCHAR},
+      
+      #{CXBJ,jdbcType=VARCHAR},
+      #{ZJF,jdbcType=VARCHAR},
+      
+      #{QYRQ,jdbcType=TIMESTAMP},
+      #{SLRQ,jdbcType=TIMESTAMP}
+      
+     )
+  </insert>
+  
+  <update id="saveXzqh" parameterType="map" >
+    update DZ_XZQH
+    <set >
+      <if test="DZYSLXDM != null" >
+        DZYSLXDM = #{DZYSLXDM,jdbcType=VARCHAR},
+      </if>
+      <if test="XZQHDM != null" >
+        XZQHDM = #{XZQHDM,jdbcType=VARCHAR},
+      </if>
+      <if test="XZQHMC != null" >
+        XZQHMC = #{XZQHMC,jdbcType=VARCHAR},
+      </if>
+      <if test="BMJC != null" >
+        BMJC = #{BMJC,jdbcType=VARCHAR},
+      </if>
+      <if test="SJXZQY_DZBM != null" >
+        SJXZQY_DZBM = #{SJXZQY_DZBM,jdbcType=VARCHAR},
+      </if>
+      <if test="SYZTDM != null" >
+        SYZTDM = #{SYZTDM,jdbcType=VARCHAR},
+      </if>
+       <if test="SLRQ != null" >
+        SLRQ = #{SLRQ,jdbcType=TIMESTAMP},
+      </if>
+      <if test="TYRQ != null" >
+        TYRQ = #{TYRQ,jdbcType=TIMESTAMP},
+      </if>
+       <if test="GXSJ != null" >
+        GXSJ = #{GXSJ,jdbcType=TIMESTAMP},
+      </if>
+       <if test="XGR != null" >
+        XGR = #{XGR,jdbcType=VARCHAR},
+      </if>
+       <if test="XGDW != null" >
+        XGDW = #{XGDW,jdbcType=VARCHAR},
+      </if>
+        <if test="ZJF != null" >
+        ZJF = #{ZJF,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where DZBM = #{DZBM,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="cancelXzqh" parameterType="map" >
+    update DZ_XZQH
+    <set >
+       <if test="CXSJ != null" >
+        CXSJ = #{CXSJ,jdbcType=TIMESTAMP},
+      </if>
+        <if test="CXR != null" >
+        CXR = #{CXR,jdbcType=VARCHAR},
+      </if>
+        <if test="CXYY != null" >
+        CXYY = #{CXYY,jdbcType=VARCHAR},
+      </if>
+        <if test="CXDW != null" >
+        CXDW = #{CXDW,jdbcType=VARCHAR},
+      </if>
+      <if test="GXSJ != null" >
+        GXSJ = #{GXSJ,jdbcType=TIMESTAMP},
+      </if>
+       <if test="TYRQ != null" >
+        TYRQ = #{TYRQ,jdbcType=TIMESTAMP},
+      </if>
+       <if test="SYZTDM != null" >
+        SYZTDM = #{SYZTDM,jdbcType=VARCHAR},
+      </if>
+      CXBJ = 1
+    </set>
+    where DZBM = #{DZBM,jdbcType=VARCHAR}
+  </update>
+   <update id="activateXzqh" parameterType="map" >
+    update DZ_XZQH
+    <set >
+        CXBJ = 0,
+        SYZTDM = 10,
+        GXSJ = #{GXSJ,jdbcType=TIMESTAMP},
+        XGR = #{XGR,jdbcType=VARCHAR},
+        XGDW = #{XGDW,jdbcType=VARCHAR}
+        <if test="QYRQ != null" >
+         ,QYRQ = #{QYRQ,jdbcType=TIMESTAMP}
+      </if>
+    </set>
+    where DZBM = #{DZBM,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectXzqhdmById" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT XZQHDM FROM DZ_XZQH WHERE DZBM = #{id}
+	</select>
+	
+	 <select id="selectXzqhBydm" resultMap="XzqhBaseResultMap" parameterType="java.lang.String">
+		SELECT 	
+		<include refid="Xzqh_Base_Column_List">
+			<property name="alias" value="T1" />
+		</include>
+		 FROM DZ_XZQH T1 WHERE XZQHDM = #{xzqhdm}
+	</select>
+	
+	<select id="selectXzqhBydmList" resultMap="XzqhBaseResultMap" parameterType="java.lang.String">
+		SELECT 	
+		<include refid="Xzqh_Base_Column_List">
+			<property name="alias" value="T1" />
+		</include>
+		 FROM DZ_XZQH T1 WHERE XZQHDM = #{xzqhdm}
+		 order by T1.XZQHDM 
+	</select>
+	
+	
+	<select id="selectSjxzqyDzbmByKey" resultType="java.lang.String" parameterType="java.lang.String">
+		select SJXZQY_DZBM from DZ_XZQH where  DZBM = #{dzbm,jdbcType=VARCHAR} 
+	</select>
+	
+	<select id="selectDzbmByDm" resultType="java.lang.String" parameterType="java.lang.String">
+		select DZBM from DZ_XZQH where  XZQHDM = #{xzqhdm,jdbcType=VARCHAR} and syztdm=10
+	</select>
+	
+	<select id="selectXzqhByXzqhdm" resultType="java.util.Map" parameterType="String">
+		SELECT DZBM as NODEID,XZQHMC as NODETEXT,'XZQH' as NODETYPE,'XZQH' as TYPES
+		FROM DZ_XZQH where XZQHDM = #{xzqhdm,jdbcType=VARCHAR} and syztdm=10 ORDER BY XZQHDM
+	</select>
+	<select id="selectXzqhBydzbm" resultType="java.util.Map" parameterType="String">
+		SELECT DZBM as NODEID,XZQHMC as NODETEXT,'XZJD' as NODETYPE,'XZQH' as TYPES
+		FROM DZ_XZQH where dzbm = #{id,jdbcType=VARCHAR} 
+	</select>
+	<select id="selectXzqhBydzbmSQJ" resultType="java.util.Map" parameterType="String">
+		SELECT DZBM as NODEID,XZQHMC as NODETEXT,'SQJCWH' as NODETYPE,'XZQH' as TYPES
+		FROM DZ_XZQH where dzbm = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	
+	
+	<select id="selectXzqhByDzbm" resultMap="XzqhBaseResultMap" parameterType="java.lang.String">
+		SELECT 	
+		<include refid="Xzqh_Base_Column_List">
+			<property name="alias" value="T1" />
+		</include>
+		 FROM DZ_XZQH T1 WHERE DZBM = #{dzbm}
+	</select>
+	
+	<select id="xzqhListForWebService" resultType="java.util.Map" parameterType="java.util.Map">
+		<include refid="Paging_Start" />
+		SELECT T1.DZBM as "dzbm", T1.XZQHDM as "xzqhdm",T1.XZQHMC as "xzqhmc",T1.BMJC as "bmjc",T1.SJXZQY_DZBM as "sjxzqy_dzbm"
+		FROM DZ_XZQH T1
+		WHERE 1=1
+		<include refid="xzqhListForWebService_where">
+			<property name="alias" value="T1"/>	
+		</include>
+		<include refid="Paging_end" />
+	</select>
+	<sql id="xzqhListForWebService_where">
+		<if test="DZBM != null">
+			AND ${alias}.DZBM = #{DZBM}
+		</if>
+		<if test="XZQHMC != null">
+			AND ${alias}.XZQHMC like #{XZQHMC}
+		</if>
+		<if test="XZQHDM != null">
+			AND ${alias}.XZQHDM = #{XZQHDM}
+		</if>
+		<if test="SJXZQY_DZBM != null">
+			AND ${alias}.SJXZQY_DZBM = #{SJXZQY_DZBM}
+		</if>
+	</sql>
+	<select id="countForWebService" resultType="java.lang.Long" parameterType="map">
+		SELECT count(1)
+		FROM DZ_XZQH T1
+		WHERE 1=1
+		<include refid="xzqhListForWebService_where">
+			<property name="alias" value="T1"/>	
+		</include>
+	</select>
+	
+	<!-- ####################################################### -->
+		<select id="selectXzqyMapByDzbm" resultType="java.util.Map" parameterType="java.lang.String">
+		SELECT TMP.* from 
+	      (
+	        select s.dzbm as dm ,s.sqjcwhdm as qudm,s.sqjcwhmc as mc,'SQJCWH' as xtype from dz_sqjcwh s where s.dzbm=#{dzbm,jdbcType=VARCHAR}
+	        UNION
+	        SELECT x.dzbm as dm ,x.xzjddm as qudm,  x.xzjdmc as mc,  'XZJD' as xtype   from dz_xzjd x where x.dzbm=#{dzbm,jdbcType=VARCHAR}
+	        UNION
+	        SELECT z.dzbm as dm ,z.xzqhdm as qudm,  z.xzqhmc as mc , 'XZQH' as xtype  from dz_xzqh z where z.dzbm = #{dzbm,jdbcType=VARCHAR}
+	      )TMP where TMP.DM=#{dzbm,jdbcType=VARCHAR}
+	</select>
+		 
+
+</mapper>

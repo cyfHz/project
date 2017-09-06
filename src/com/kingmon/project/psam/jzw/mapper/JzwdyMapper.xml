@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.jzw.mapper.JzwdyMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.jzw.model.Jzwdy" >
+    <id column="JZWDYID" property="jzwdyid" jdbcType="VARCHAR" />
+    <result column="JZWJGID" property="jzwjgid" jdbcType="VARCHAR" />
+    <result column="DYXH" property="dyxh" jdbcType="VARCHAR" />
+    <result column="DYMC" property="dymc" jdbcType="VARCHAR" />
+    <result column="LCS" property="lcs" jdbcType="DECIMAL" />
+    <result column="DYMS" property="dyms" jdbcType="DECIMAL" />
+    <result column="ZHGXRQ" property="zhgxrq" jdbcType="TIMESTAMP" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    JZWDYID, JZWJGID, DYXH, DYMC, LCS, DYMS, ZHGXRQ, MOVESIGN
+  </sql>
+  <sql id="Alias_Base_Column_List" >
+    ${alias}.JZWDYID,${alias}.JZWJGID,${alias}.DYXH,${alias}.DYMC,${alias}.LCS,${alias}.DYMS,${alias}.ZHGXRQ,  ${alias}.MOVESIGN
+  </sql>
+  
+<!--通用分页 -->
+	<sql id="Paging_Start">
+		SELECT * FROM ( SELECT T_.*, rownum rn_ FROM (
+	</sql>
+	
+	<sql id="Paging_end">
+		) T_ WHERE rownum &lt;= ${pageend} ) WHERE rn_ &gt; ${pagestart}
+	</sql>
+	
+  
+  <!-- #######################page query end ########################################### --> 
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DZ_JZWDY  where JZWDYID = #{jzwdyid,jdbcType=VARCHAR}
+  </select>
+  <!-- #######################insertSelective########################################### --> 
+    <insert id="insertSelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwdy" >
+    insert into DZ_JZWDY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jzwdyid != null" >JZWDYID,</if>
+      <if test="jzwjgid != null" >JZWJGID,</if>
+      <if test="dyxh != null" >DYXH,</if>
+      <if test="dymc != null" > DYMC,</if>
+      <if test="lcs != null" >LCS,</if>
+      <if test="dyms != null" >DYMS,</if>
+      <if test="zhgxrq != null" >ZHGXRQ,</if>
+      <if test="movesign != null" > MOVESIGN,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jzwdyid != null" > #{jzwdyid,jdbcType=VARCHAR},</if>
+      <if test="jzwjgid != null" >#{jzwjgid,jdbcType=VARCHAR},</if>
+      <if test="dyxh != null" >#{dyxh,jdbcType=VARCHAR},</if>
+      <if test="dymc != null" >#{dymc,jdbcType=VARCHAR}, </if>
+      <if test="lcs != null" >#{lcs,jdbcType=DECIMAL},</if>
+      <if test="dyms != null" >#{dyms,jdbcType=DECIMAL},</if>
+      <if test="zhgxrq != null" >#{zhgxrq,jdbcType=TIMESTAMP},</if>
+      <if test="movesign != null" > #{movesign,jdbcType=CHAR},</if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwdy" >
+    update DZ_JZWDY
+    <set >
+      <if test="jzwjgid != null" >
+        JZWJGID = #{jzwjgid,jdbcType=VARCHAR},
+      </if>
+      <if test="dyxh != null" >
+        DYXH = #{dyxh,jdbcType=VARCHAR},
+      </if>
+      <if test="dymc != null" >
+        DYMC = #{dymc,jdbcType=VARCHAR},
+      </if>
+      <if test="lcs != null" >
+        LCS = #{lcs,jdbcType=DECIMAL},
+      </if>
+      <if test="dyms != null" >
+        DYMS = #{dyms,jdbcType=DECIMAL},
+      </if>
+      <if test="zhgxrq != null" >
+        ZHGXRQ = #{zhgxrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=CHAR},
+      </if>
+    </set>
+    where JZWDYID = #{jzwdyid,jdbcType=VARCHAR}
+  </update>
+ 
+   <!-- #######################Select########################################## --> 
+   
+<!--   <select id="selectDyxhByJzwJgid" resultType="com.kingmon.project.psam.jzw.model.Jzwdy" parameterType="java.lang.String" >
+  	  select DISTINCT(DYXH) from DZ_JZWDY  where JZWJGID = #{jzwjgId,jdbcType=VARCHAR} order by to_number(DYXH) DESC
+  </select> -->
+<!--     <select id="selectSortedDyxhByJzwJgid" resultType="com.kingmon.project.psam.jzw.model.Jzwdy" parameterType="java.lang.String" >
+  	  select DISTINCT(DYXH) from DZ_JZWDY  where JZWJGID = #{jzwjgId,jdbcType=VARCHAR} order by to_number(DYXH) DESC
+  </select> -->
+  
+  <select id="selectSortedJzwdyByJzwJgid" resultType="com.kingmon.project.psam.jzw.model.Jzwdy" parameterType="java.lang.String" >
+    select <include refid="Base_Column_List" />   from DZ_JZWDY  where JZWJGID = #{jzwjgId,jdbcType=VARCHAR} order by to_number(DYXH) 
+  </select>
+   <select id="selectJzwDyCountByJzwjgId" resultType="java.lang.Long" parameterType="java.lang.String" >
+    select count(1) from DZ_JZWDY  where JZWJGID = #{jzwjgId,jdbcType=VARCHAR}
+  </select>
+  
+
+  <select id="jzwdyListForWebService" resultType="java.util.Map" parameterType="java.util.Map">
+		<include refid="Paging_Start"/>
+		select d.JZWDYID as "jzwdyid",d.JZWJGID as "jzwid",d.DYXH as "dyxh",d.DYMC as "dymc",d.LCS as "lcs",d.DYMS as "dyms"
+		from DZ_JZWDY d 
+		WHERE 1=1
+		<if test="JZWDYID != null">
+			AND d.JZWDYID = #{JZWDYID}
+		</if>
+		<if test="JZWJGID != null">
+			AND d.JZWJGID = #{JZWJGID}
+		</if>
+		<include refid="Paging_end"/>
+  </select>
+	<select id="countForWebService" resultType="java.lang.Long" parameterType="map">
+		select count(1) from DZ_JZWDY d  WHERE 1=1
+		<if test="JZWDYID != null">
+			AND d.JZWDYID = #{JZWDYID}
+		</if>
+		<if test="JZWJGID != null">
+			AND d.JZWJGID = #{JZWJGID}
+		</if>
+	</select>
+  
+  <update id="updateDyMcForDyId" parameterType="com.kingmon.project.psam.jzw.model.Jzwdy">
+        update DZ_JZWDY dy set dy.DYMS = #{dyms,jdbcType=DECIMAL} 
+        where JZWDYID = #{jzwdyid,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

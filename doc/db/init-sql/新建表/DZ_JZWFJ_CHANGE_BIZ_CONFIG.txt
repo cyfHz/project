@@ -1,0 +1,45 @@
+-- Create table 房间拆分合并配置表  --20160705添加正式库
+create table DZ_JZWFJ_CHANGE_BIZ_CONFIG
+(
+  ID                      VARCHAR2(36) not null,
+  BIZ_NAME                VARCHAR2(100) not null,
+  BIZ_CODE                VARCHAR2(100) not null,
+  TABLE_NAME              VARCHAR2(100) not null,
+  FIELD_NAME              VARCHAR2(100) not null,
+  UPDATE_QUERY_FIELD_NAME VARCHAR2(100) not null,
+  FIELD2_NAME             VARCHAR2(100),
+  REF_JZWFJ_FIELD2_NAME   VARCHAR2(100),
+  FIELD3_NAME             VARCHAR2(100),
+  REF_JZWFJ_FIELD3_NAME   VARCHAR2(100),
+  REF2_REPLCE_MODE        VARCHAR2(100),
+  REF3_REPLCE_MODE        VARCHAR2(100)
+)
+tablespace POLICECLOUD
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 16
+    next 8
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the columns 
+comment on column DZ_JZWFJ_CHANGE_BIZ_CONFIG.REF2_REPLCE_MODE
+  is '替换模式 1：直接替换，2： 字符替换';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table DZ_JZWFJ_CHANGE_BIZ_CONFIG
+  add constraint PK_JZWFJ_CHNAGE_BIZ_CONFIG primary key (ID)
+  using index 
+  tablespace POLICECLOUD
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );

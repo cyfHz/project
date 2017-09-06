@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.common.log.mapper.LogLoginMapper" >
+    
+  <resultMap id="BaseResultMap" type="com.kingmon.project.common.log.model.LogLogin" >
+    <id column="ID" property="ID" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="USER_ID" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="USER_NAME" jdbcType="VARCHAR" />
+    <result column="ORGNA_ID" property="ORGNA_ID" jdbcType="VARCHAR" />
+    <result column="LOGINTIME1" property="LOGINTIME1" jdbcType="VARCHAR" />
+    <result column="LOGOUTTIME" property="LOGOUTTIME" jdbcType="TIMESTAMP" />
+    <result column="LOGINTYPE" property="LOGINTYPE" jdbcType="VARCHAR" />
+    <result column="IP" property="IP" jdbcType="VARCHAR" />
+    <result column="LOGINCLIENT" property="LOGINCLIENT" jdbcType="VARCHAR" />
+    <result column="MEMO" property="MEMO" jdbcType="VARCHAR" />
+    <result column="USER_TYPE" property="USER_TYPE" jdbcType="DECIMAL" />
+    <result column="GPS_X" property="GPS_X" jdbcType="VARCHAR" />
+    <result column="GPS_Y" property="GPS_Y" jdbcType="VARCHAR" />
+    <result column="SBID" property="SBID" jdbcType="VARCHAR" />
+    <result column="MOVESIGN" property="MOVESIGN" jdbcType="CHAR" />
+    <result column="LOGINTIME" property="LOGINTIME" jdbcType="TIMESTAMP" />
+    <result column="LOGOUTTIME1" property="LOGOUTTIME1" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, USER_ID, USER_NAME, ORGNA_ID, LOGINTIME1, LOGOUTTIME, LOGINTYPE, IP, LOGINCLIENT, 
+    MEMO, USER_TYPE, GPS_X, GPS_Y, SBID, MOVESIGN, LOGINTIME, LOGOUTTIME1
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from APP_LOG_LOGIN where ID = #{ID,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from APP_LOG_LOGIN where ID = #{ID,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.kingmon.project.common.log.model.LogLogin" >
+    insert into APP_LOG_LOGIN (ID, USER_ID, USER_NAME, 
+      ORGNA_ID, LOGINTIME1, LOGOUTTIME, 
+      LOGINTYPE, IP, LOGINCLIENT, 
+      MEMO, USER_TYPE, GPS_X, 
+      GPS_Y, SBID, MOVESIGN, 
+      LOGINTIME, LOGOUTTIME1)
+    values (#{ID,jdbcType=VARCHAR}, #{USER_ID,jdbcType=VARCHAR}, #{USER_NAME,jdbcType=VARCHAR}, 
+      #{ORGNA_ID,jdbcType=VARCHAR}, #{LOGINTIME1,jdbcType=VARCHAR}, #{LOGOUTTIME,jdbcType=TIMESTAMP}, 
+      #{LOGINTYPE,jdbcType=VARCHAR}, #{IP,jdbcType=VARCHAR}, #{LOGINCLIENT,jdbcType=VARCHAR}, 
+      #{MEMO,jdbcType=VARCHAR}, #{USER_TYPE,jdbcType=DECIMAL}, #{GPS_X,jdbcType=VARCHAR}, 
+      #{GPS_Y,jdbcType=VARCHAR}, #{SBID,jdbcType=VARCHAR}, #{MOVESIGN,jdbcType=CHAR}, 
+      #{LOGINTIME,jdbcType=TIMESTAMP}, #{LOGOUTTIME1,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.common.log.model.LogLogin" >
+    insert into APP_LOG_LOGIN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="USER_ID != null" >
+        USER_ID,
+      </if>
+      <if test="USER_NAME != null" >
+        USER_NAME,
+      </if>
+      <if test="ORGNA_ID != null" >
+        ORGNA_ID,
+      </if>
+      <if test="LOGINTIME1 != null" >
+        LOGINTIME1,
+      </if>
+      <if test="LOGOUTTIME != null" >
+        LOGOUTTIME,
+      </if>
+      <if test="LOGINTYPE != null" >
+        LOGINTYPE,
+      </if>
+      <if test="IP != null" >
+        IP,
+      </if>
+      <if test="LOGINCLIENT != null" >
+        LOGINCLIENT,
+      </if>
+      <if test="MEMO != null" >
+        MEMO,
+      </if>
+      <if test="USER_TYPE != null" >
+        USER_TYPE,
+      </if>
+      <if test="GPS_X != null" >
+        GPS_X,
+      </if>
+      <if test="GPS_Y != null" >
+        GPS_Y,
+      </if>
+      <if test="SBID != null" >
+        SBID,
+      </if>
+      <if test="MOVESIGN != null" >
+        MOVESIGN,
+      </if>
+      <if test="LOGINTIME != null" >
+        LOGINTIME,
+      </if>
+      <if test="LOGOUTTIME1 != null" >
+        LOGOUTTIME1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_ID != null" >
+        #{USER_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_NAME != null" >
+        #{USER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="ORGNA_ID != null" >
+        #{ORGNA_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="LOGINTIME1 != null" >
+        #{LOGINTIME1,jdbcType=VARCHAR},
+      </if>
+      <if test="LOGOUTTIME != null" >
+        #{LOGOUTTIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="LOGINTYPE != null" >
+        #{LOGINTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="IP != null" >
+        #{IP,jdbcType=VARCHAR},
+      </if>
+      <if test="LOGINCLIENT != null" >
+        #{LOGINCLIENT,jdbcType=VARCHAR},
+      </if>
+      <if test="MEMO != null" >
+        #{MEMO,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_TYPE != null" >
+        #{USER_TYPE,jdbcType=DECIMAL},
+      </if>
+      <if test="GPS_X != null" >
+        #{GPS_X,jdbcType=VARCHAR},
+      </if>
+      <if test="GPS_Y != null" >
+        #{GPS_Y,jdbcType=VARCHAR},
+      </if>
+      <if test="SBID != null" >
+        #{SBID,jdbcType=VARCHAR},
+      </if>
+      <if test="MOVESIGN != null" >
+        #{MOVESIGN,jdbcType=CHAR},
+      </if>
+      <if test="LOGINTIME != null" >
+        #{LOGINTIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="LOGOUTTIME1 != null" >
+        #{LOGOUTTIME1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.common.log.model.LogLogin" >
+    update APP_LOG_LOGIN
+    <set >
+      <if test="USER_ID != null" >
+        USER_ID = #{USER_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_NAME != null" >
+        USER_NAME = #{USER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="ORGNA_ID != null" >
+        ORGNA_ID = #{ORGNA_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="LOGINTIME1 != null" >
+        LOGINTIME1 = #{LOGINTIME1,jdbcType=VARCHAR},
+      </if>
+      <if test="LOGOUTTIME != null" >
+        LOGOUTTIME = #{LOGOUTTIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="LOGINTYPE != null" >
+        LOGINTYPE = #{LOGINTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="IP != null" >
+        IP = #{IP,jdbcType=VARCHAR},
+      </if>
+      <if test="LOGINCLIENT != null" >
+        LOGINCLIENT = #{LOGINCLIENT,jdbcType=VARCHAR},
+      </if>
+      <if test="MEMO != null" >
+        MEMO = #{MEMO,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_TYPE != null" >
+        USER_TYPE = #{USER_TYPE,jdbcType=DECIMAL},
+      </if>
+      <if test="GPS_X != null" >
+        GPS_X = #{GPS_X,jdbcType=VARCHAR},
+      </if>
+      <if test="GPS_Y != null" >
+        GPS_Y = #{GPS_Y,jdbcType=VARCHAR},
+      </if>
+      <if test="SBID != null" >
+        SBID = #{SBID,jdbcType=VARCHAR},
+      </if>
+      <if test="MOVESIGN != null" >
+        MOVESIGN = #{MOVESIGN,jdbcType=CHAR},
+      </if>
+      <if test="LOGINTIME != null" >
+        LOGINTIME = #{LOGINTIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="LOGOUTTIME1 != null" >
+        LOGOUTTIME1 = #{LOGOUTTIME1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.common.log.model.LogLogin" >
+    update APP_LOG_LOGIN
+    set 
+      USER_ID = #{USER_ID,jdbcType=VARCHAR},
+      USER_NAME = #{USER_NAME,jdbcType=VARCHAR},
+      ORGNA_ID = #{ORGNA_ID,jdbcType=VARCHAR},
+      LOGINTIME1 = #{LOGINTIME1,jdbcType=VARCHAR},
+      LOGOUTTIME = #{LOGOUTTIME,jdbcType=TIMESTAMP},
+      LOGINTYPE = #{LOGINTYPE,jdbcType=VARCHAR},
+      IP = #{IP,jdbcType=VARCHAR},
+      LOGINCLIENT = #{LOGINCLIENT,jdbcType=VARCHAR},
+      MEMO = #{MEMO,jdbcType=VARCHAR},
+      USER_TYPE = #{USER_TYPE,jdbcType=DECIMAL},
+      GPS_X = #{GPS_X,jdbcType=VARCHAR},
+      GPS_Y = #{GPS_Y,jdbcType=VARCHAR},
+      SBID = #{SBID,jdbcType=VARCHAR},
+      MOVESIGN = #{MOVESIGN,jdbcType=CHAR},
+      LOGINTIME = #{LOGINTIME,jdbcType=TIMESTAMP},
+      LOGOUTTIME1 = #{LOGOUTTIME1,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,40 @@
+select t.zxdhzb, t.zxdzzb, t.jwqbh from JINING_DZ_MLPH t;
+
+--sql_totle
+select count(1)
+  from JINING_DZ_MLPH t
+ where 1 = 1
+   and t.sjgsdwdm like '370801%';
+--sql_good
+select count(1)
+  from JINING_DZ_MLPH t
+ where 1 = 1
+   and ((ZXDHZB is not null and ZXDZZB is not null) and (JWQBH is not null))
+   and t.sjgsdwdm like '370801%';
+--sql_not_good
+select count(1)
+  from JINING_DZ_MLPH t
+ where 1 = 1
+   and ((ZXDHZB is null or ZXDZZB is null) or (JWQBH is null))
+   and t.sjgsdwdm like '370801%';
+-------------------------------------------------------------------
+
+--sql_haveNoZB
+select count(1)
+  from JINING_DZ_MLPH t
+ where 1 = 1
+   and ((ZXDHZB is null or ZXDZZB is null) and (JWQBH is not null))
+   and t.sjgsdwdm like '370801%';
+
+--sql_haveNoJWQ            
+select count(1)
+  from JINING_DZ_MLPH t
+ where 1 = 1
+   and ((JWQBH is null) and (ZXDHZB is not null and ZXDZZB is not null))
+   and t.sjgsdwdm like '370801%';
+  --sql_haveNoBoth
+select count(1)
+  from JINING_DZ_MLPH t
+ where 1 = 1
+   and ((ZXDHZB is null or ZXDZZB is null) and (JWQBH is null))
+   and t.sjgsdwdm like '370801%';

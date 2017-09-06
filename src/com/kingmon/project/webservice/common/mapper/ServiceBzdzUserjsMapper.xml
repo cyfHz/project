@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.webservice.common.mapper.ServiceBzdzUserjsMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.webservice.common.model.ServiceBzdzUserjs" >
+    <id column="JSID" property="jsid" jdbcType="VARCHAR" />
+    <result column="JSR" property="jsr" jdbcType="VARCHAR" />
+    <result column="JSSJ" property="jssj" jdbcType="TIMESTAMP" />
+    <result column="JSSM" property="jssm" jdbcType="VARCHAR" />
+    <result column="JSUSERID" property="jsuserid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    JSID, JSR, JSSJ, JSSM, JSUSERID
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SERVICE_BZDZ_USERJS
+    where JSID = #{jsid,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SERVICE_BZDZ_USERJS
+    where JSID = #{jsid,jdbcType=VARCHAR}
+  </delete>
+  
+ 
+  <insert id="insertSelective" parameterType="com.kingmon.project.webservice.common.model.ServiceBzdzUserjs" >
+    insert into SERVICE_BZDZ_USERJS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jsid != null" >JSID,</if>
+      <if test="jsr != null" >JSR,</if>
+      <if test="jssj != null" >JSSJ,</if>
+      <if test="jssm != null" >JSSM,</if>
+      <if test="jsuserid != null" >JSUSERID,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jsid != null" >#{jsid,jdbcType=VARCHAR},</if>
+      <if test="jsr != null" >#{jsr,jdbcType=VARCHAR},</if>
+      <if test="jssj != null" >#{jssj,jdbcType=TIMESTAMP},</if>
+      <if test="jssm != null" >#{jssm,jdbcType=VARCHAR},</if>
+      <if test="jsuserid != null" >#{jsuserid,jdbcType=VARCHAR},</if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.webservice.common.model.ServiceBzdzUserjs" >
+    update SERVICE_BZDZ_USERJS
+    <set >
+      <if test="jsr != null" >JSR = #{jsr,jdbcType=VARCHAR},</if>
+      <if test="jssj != null" >JSSJ = #{jssj,jdbcType=TIMESTAMP},</if>
+      <if test="jssm != null" >JSSM = #{jssm,jdbcType=VARCHAR},</if>
+      <if test="jsuserid != null" >JSUSERID = #{jsuserid,jdbcType=VARCHAR},</if>
+    </set>
+    where JSID = #{jsid,jdbcType=VARCHAR}
+  </update>
+  
+  <insert id="addUserjs" parameterType="map" >
+    insert into SERVICE_BZDZ_USERJS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jsid != null" >JSID,</if>
+      <if test="jsr != null" >JSR,</if>
+      <if test="jssj != null" >JSSJ,</if>
+      <if test="jssm != null" >JSSM,</if>
+      <if test="jsuserid != null" >JSUSERID,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jsid != null" >#{jsid,jdbcType=VARCHAR},</if>
+      <if test="jsr != null" >#{jsr,jdbcType=VARCHAR},</if>
+      <if test="jssj != null" >#{jssj,jdbcType=TIMESTAMP},</if>
+      <if test="jssm != null" >#{jssm,jdbcType=VARCHAR},</if>
+      <if test="jsuserid != null" >#{jsuserid,jdbcType=VARCHAR},</if>
+    </trim>
+  </insert>
+</mapper>

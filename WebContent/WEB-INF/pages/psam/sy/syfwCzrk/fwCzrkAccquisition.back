@@ -1,0 +1,367 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ include file="/static/meta/taglib.jsp" %>
+<script type="text/javascript">
+	$(function() {
+	});
+	function doSubmit(){
+		if(!KMAJAX.validateFromCallback($("#formss"),KMCORE.ajaxDoneAndCloseDialog)){
+			alertMsg.info("请确认校验不通过数据");
+		}
+	}
+	function cancel(){
+		editDialog.close(100);
+	}
+
+
+</script>
+<t:DataDict code="ZZMM" var="zzmmDict"></t:DataDict>
+<t:DataDict code="HYZK" var="hyzkDict"></t:DataDict>
+<t:DataDict code="XL" var="xlDict"></t:DataDict>
+<t:DataDict code="MZ" var="mzDict"></t:DataDict>
+
+<div class="easyui-layout" data-options="fit:true,border:false">
+	<div data-options="region:'center',border:false" title="" style="overflow:scroll;padding: 10px;">
+		<form id="formss" class="form-horizontal" method="post" action="${ctx}/psam/sy/syfwCzrk/savefwCzrkAccInfo">
+			<input type="hidden" name="jzwfjid" value="${czrk.jzwfjid}"/>
+			<input type="hidden" name="rkid" value="${czrk.rkid}"/>
+			<fieldset>
+	<%-- 			 <table id="formTbale" cellpadding="4">
+				 <tr><th>个人信息</th><th colspan="5"><hr></th></tr>
+					 <tr>
+					 	<th>姓名:</th>
+						<td><input type="text" name="xm" value="${czrk.xm }" class="easyui-textbox easyui-validatebox form-control" data-options="required:true,validType:'length[1,50]'" /></td>
+					 	<th>曾用名:</th>
+						<td><input type="text" name="zym" value="${czrk.xm }" class="easyui-textbox easyui-validatebox form-control" data-options="required:true,validType:'length[1,50]'" /></td>
+						<th>身份证号:</th>
+						<td><input type="text" name="gmsfhm"  value="${czrk.gmsfhm }"  class="easyui-textbox easyui-validatebox  form-control" data-options="required:true,validType:'length[15,18]'" /></td>
+					 </tr>
+					 
+				 	 <tr>
+					 	 <th>民族</th>
+						  <td><input dict="mzDict" name="mz" value="${czrk.mz}" class="form-control"  required="required" style="width: 170px;"/></td>
+						 <th>性别</th>
+						 <td >
+								 <select name="xb"  class="easyui-combobox form-control" data-options="required:true"  style="width: 170px;" >
+									 <option value="1" <c:if test="${'1' eq czrk.xb  }">selected = "selected"</c:if>>男</option>
+									 <option value="0" <c:if test="${'0' eq czrk.xb  }">selected = "selected"</c:if>>女</option>
+								 </select>
+						</td>
+						<th>出生日期</th>
+						<td><input type="text" name="csrq"  value="${czrk.csrq }" class="easyui-datebox easyui-validatebox form-control"  data-options=" " /></td>
+					</tr>
+					
+					  <tr>
+                      	<th>政治面貌</th>
+						<td><input dict="zzmmDict" name="zzmm" value="${czrk.zzmm}" class="form-control"  required="required" style="width: 170px;"/></td>
+						<th>婚姻状况</th>
+						<td><input dict="hyzkDict" name="hyzk" value="${czrk.hyzk}" class="form-control"  required="required" style="width: 170px;"/></td>
+					  	<th>学历</th>
+						<td><input dict="xlDict" name="xl" value="${czrk.xl}" class="form-control"  required="required" style="width: 170px;"/></td>
+					  </tr>
+					  
+				  <tr>
+				   <th>手机</th>
+					<td><input type="text" id="lxfssj" name="lxfssj"  value="${czrk.lxfssj}" class="easyui-numberbox easyui-validatebox form-control"  data-options="validType:'length[0,50]'" ></td> 
+				    <th>固话</th>
+					<td><input type="text" id="lxfsgh" name="lxfsgh"  value="${czrk.lxfsgh}" class="easyui-numberbox easyui-validatebox form-control"  data-options="validType:'length[0,50]'" ></td> 
+				 	<th>其他联系方式</th>
+					<td><input type="text" id="lxfsqt" name="lxfsqt"  value="${czrk.lxfsqt}" class="easyui-numberbox easyui-validatebox form-control"  data-options="validType:'length[0,50]'" ></td> 
+				  </tr>
+                   
+                   <tr>
+                    <th>身高</th>
+					<td><input type="text" id="sg" name="sg" value="${czrk.sg}" class="easyui-numberbox easyui-validatebox form-control"  data-options="validType:'length[0,6]'" ></td> 
+					<th>血型</th> 
+					<td>
+	                   	 <select name="xx"  class="easyui-combobox form-control" data-options="required:true"  style="width: 170px;" >
+								<option value="A" <c:if test="${'A' eq czrk.xx  }">selected = "selected"</c:if>>A型</option>
+								<option value="B" <c:if test="${'B' eq czrk.xx  }">selected = "selected"</c:if>>B型</option>
+								<option value="AB" <c:if test="${'AB' eq czrk.xx  }">selected = "selected"</c:if>>AB型</option>
+								<option value="O" <c:if test="${'O' eq czrk.xx  }">selected = "selected"</c:if>>O型</option>
+						</select>
+					 </td>
+					 <th>宗教信仰</th>
+					<td><input type="text" id="zjxy" name="zjxy"  value="${czrk.zjxy}" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,36]'" ></td> 
+                   </tr>
+                   
+				 <tr>
+                    <th>职业</th>
+					<td><input type="text" id="zy" name="zy" value="${czrk.zy}" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,36]'" ></td> 
+					<th>文化程度</th> 
+					<td><input type="text" id="whcd" name="whcd" value="${czrk.whcd}" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,36]'" ></td>
+					 <th>兵役状况</th>
+					<td><input type="text" id="byzk" name="byzk"  value="${czrk.byzk}" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,36]'" ></td> 
+                  </tr>
+                   
+					 <tr>
+					 	<th>出生时间</th>
+						<td><input type="text" name="cssj"  value="${czrk.cssj }" class="easyui-datebox easyui-validatebox form-control"  data-options=" " /></td>
+						<th>出生地国籍</th>
+					   <td><input type="text" id="csdgj" name="csdgj" value="${czrk.csdgj }" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,200]'" ></td> 
+					     <th>出生地省市县</th>
+					   <td><input type="text" id="csdssx" name="csdssx" value="${czrk.csdssx }" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,200]'" ></td> 
+					 </tr>
+					 
+					 <tr>
+					   <th>籍贯国籍</th>
+					   <td><input type="text" id="jggj" name="jggj" value="${czrk.jggj }" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,200]'" ></td> 
+					   <th>籍贯省市县</th>
+					   <td><input type="text" id="jgssx" name="jgssx" value="${czrk.jgssx }" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,200]'" ></td> 
+					   <th>与户主关系</th>
+						<td><input type="text" id="yhzgx" name="yhzgx" value="${fwjbxx.yhzgx}" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,36]'" /></td>
+					   </tr>
+					 <tr><th>地址信息</th><th colspan="5"><hr></th></tr>
+					 
+					 <tr>
+					 <th>所属县区</th>
+					 <td>
+					 <input type="hidden" name="ssxq" value="${czrk.ssxq }" />
+					 <input type="text" id="ssxq_mc" name="ssxq_mc" value="${czrk.ssxq_mc}" class="easyui-textbox easyui-validatebox form-control"  readonly="readonly" >
+					 </td> 
+					 <th>乡镇街道</th>
+					 <input type="hidden" name="xzjd" value="${czrk.xzjd }" />
+					 <td><input type="text" id="xzjd_mc" name="xzjd_mc" value="${czrk.xzjd_mc }"  class="easyui-textbox easyui-validatebox form-control"   readonly="readonly"  data-options="validType:'length[0,36]'" ></td> 
+					 <th>居委会</th>
+					  <td><input type="text" id="jwh" name="jwh" value="${czrk.jwh }"  class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,200]'" ></td> 
+					 
+					 </tr>
+					 <tr>
+					   <th>街路巷(村)</th>
+					    <input type="hidden" name="jlxc" value="${czrk.jlxc }" />
+					   <td><input type="text" id="jlxc_mc" name="jlxc_mc" value="${czrk.jlxc_mc }"   class="easyui-textbox easyui-validatebox form-control"  readonly="readonly"></td> 
+					   <th>门楼牌号</th>
+					   <td><input type="text" id="mlph" name="mlph" value="${czrk.mlph }"  class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,200]'" ></td> 
+					   <th>门(楼)详址</th>
+					   <td><input type="text" id="mlxz" name="mlxz" value="${czrk.mlxz }"  class="easyui-textbox easyui-validatebox form-control"   readonly="readonly"  data-options="validType:'length[0,200]'" ></td> 
+					 </tr>
+					<tr><th>常住户口信息</th><th colspan="5"><hr></th></tr> 
+					
+				    <tr>
+				    	<th>常住户口所在地</th>
+				   	 	<td><input type="text" id="czhkszd" name="czhkszd" value="${czrk.czhkszd }" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,500]'" /></td>		
+				     	<th>常住户口所在地住址</th>
+				    	<td><input type="text" id="czhkszdzz" name="czhkszdzz" value="${czrk.czhkszdzz }" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,500]'" /></td>		
+				     	<th>常住户口所在地住址房间号</th>
+				      	<td><input type="text" id="czhkszdzzfjh" name="czhkszdzzfjh" value="${czrk.czhkszdzzfjh }" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,200]'" /></td>		
+				    </tr>
+				    
+				    <tr><th>现居住地信息</th><th colspan="5"><hr></th></tr> 
+				    <tr>
+				    	<th>现居住地</th>
+				     	<td><input type="text" id="xjzd" name="xjzd"  value="${czrk.xjzd}" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,500]'" /></td>		
+				      	<th>现居住地址</th>
+						<td><input type="text" id="xjzdzz" name="xjzdzz" value="${czrk.xjzdzz}" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,500]'" /></td> 
+				       	<th>现居住地住址房间号</th>
+						<td><input type="text" id="xjzdzzfjh" name="xjzdzzfjh" value="${czrk.xjzdzzfjh}"   class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,50]'" /></td> 
+				    </tr>
+				    <tr><th>监控人信息</th><th colspan="5"><hr></th></tr> 
+				    <tr>
+				    <th>监控人身份号码</th>
+						<td><input type="text" name="jkrgmsfhm" value="${czrk.jkrgmsfhm}" class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[18,18]'" /></td>
+				    <th>监护人姓名</th>
+						<td><input type="text" name="jhrxm" value="${czrk.jhrxm}"  class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[0,50]'" /></td>
+				    <th>监护人员关系</th>
+						<td><input type="text" name="jhrygx"  value="${czrk.jhrygx}"  class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[0,36]'" /></td>
+				    </tr>
+				    <tr>
+				    <th>监控人二身份号码</th>
+						<td><input type="text" name="jhregmsfhm" value="${czrk.jhregmsfhm}"  class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[18,18]'" /></td>
+				    <th>监护人二姓名</th>
+						<td><input type="text" name="jhrexm"  value="${czrk.jhrexm}" class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[0,50]'" /></td>
+				    <th>监护人员二关系</th>
+						<td><input type="text" name="jhregx" value="${czrk.jhregx}"  class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[0,36]'" /></td>
+				    </tr>
+				    <tr><th>亲属信息</th><th colspan="5"><hr></th></tr> 
+				    <tr>
+				   		<th>父亲身份号码</th>
+						<td><input type="text" name="fqgmsfhm" value="${czrk.fqgmsfhm}" class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[18,18]'" /></td>
+				    	<th>父亲姓名</th>
+						<td><input type="text" name="fqxm" value="${czrk.fqxm}"  class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[0,50]'" /></td>
+				    </tr>
+				    <tr>
+				   		<th>母亲身份号码</th>
+						<td><input type="text" name="mqgmsfhm" value="${czrk.mqgmsfhm}" class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[18,18]'" /></td>
+				    	<th>母亲姓名</th>
+						<td><input type="text" name="mqxm" value="${czrk.mqxm}"  class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[0,50]'" /></td>
+				    </tr>
+				    <tr>
+				   		<th>配偶身份号码</th>
+						<td><input type="text" name="pogmsfhm" value="${czrk.pogmsfhm}" class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[18,18]'" /></td>
+				    	<th>配偶姓名</th>
+						<td><input type="text" name="poxm" value="${czrk.poxm}"  class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[0,50]'" /></td>
+				    </tr>
+				    <tr><th>登记信息</th><th colspan="5"><hr></th></tr>
+				 	 <tr>
+					    <th>责任人</th>
+						<td><input type="text" name="zrr" value="${czrk.zrr}" class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[0,50]'" /></td>
+						<th>户籍地详址</th>
+						<td colspan="3"><input type="text" name="hjdxz" value="${czrk.hjdxz}"  class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[0,200]'" style="width: 400px"/></td>
+					</tr> 
+					 <tr>
+					 
+					  	<th>PGIS经度</th>
+					  	<td><input type="text" name="zbx" value="${czrk.zbx}" class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[0,36]'" /></td>
+					  	<th>PGIS纬度</th>
+					  	<td><input type="text" name="zby" value="${czrk.zby}" class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[0,36]'" /></td>
+						<th>地址名称</th>
+						<td >
+							<input type="hidden" name="dzbm" value="${czrk.dzbm}" />
+							<input type="hidden" name="jzwfjid" value="${czrk.jzwfjid}" />
+							<input type="text" name="dzmc" value="${czrk.dzmc}"  class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[0,200]'"/>
+						</td>
+					</tr> 
+					
+					 <tr>
+					    <th>所属派出所</th>
+						<td>
+						<input type="hidden" name="sspcs" value="${czrk.sspcs}" />
+						<input type="text" name="pcs_mc" value="${czrk.pcs_mc}" readonly="readonly" class="easyui-textbox  form-control" />
+						
+						</td>
+						<th>警务责任区</th>
+						<td>
+							<input type="hidden" name="jwzrqdm" value="${czrk.jwzrqdm}" />
+							<input type="text" name="jwzrq_mc"  value="${czrk.jwzrq_mc}" class="easyui-textbox form-control" />
+						</td>
+					</tr> 
+					 <tr>
+					    <th>登记人</th>
+					    <td><input type="text" id="djr" name="djr" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,36]'" /></td>
+					    <th>登记单位</th>
+					    <td><input type="text" id="djdw" name="djdw" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,36]'" /></td>
+					 </tr>  
+					 
+				 </table> --%>
+				  <table id="formTbale" cellpadding="4">
+				     <tr><th>个人信息</th><th colspan="5"><hr></th></tr>
+					 <tr>
+					 	<th>姓名:</th>
+						<td><input type="text" name="xm" value="${czrk.xm }" class="easyui-textbox easyui-validatebox form-control" data-options="required:true,validType:'length[1,50]'" /></td>
+					 	<th>曾用名:</th>
+						<td><input type="text" name="zym" value="${czrk.xm }" class="easyui-textbox easyui-validatebox form-control" data-options="required:true,validType:'length[1,50]'" /></td>
+						<th>照片</th>
+					 	   <td rowspan="4">
+					 		<div style="width: 120px;height: 150px;border: 1px solid red; margin-left: 30px;">
+					 			<font color="red">此处放图片</font>
+					 		</div>
+					 	 </td>
+					
+					 </tr>
+					 <tr>
+					   <th>身份证号:</th>
+						<td><input type="text" name="gmsfhm"  value="${czrk.gmsfhm }"  class="easyui-textbox easyui-validatebox  form-control" data-options="required:true,validType:'length[15,18]'" /></td>
+					   <th>性别</th>
+						 <td >
+								 <select name="xb"  class="easyui-combobox form-control" data-options="required:true"  style="width: 170px;" >
+									 <option value="1" <c:if test="${'1' eq czrk.xb  }">selected = "selected"</c:if>>男</option>
+									 <option value="0" <c:if test="${'0' eq czrk.xb  }">selected = "selected"</c:if>>女</option>
+								 </select>
+						</td>
+					 </tr>
+					  <tr>
+					   	<th>出生日期</th>
+						<td><input type="text" name="csrq"  value="${czrk.csrq }" class="easyui-datebox easyui-validatebox form-control"  data-options=" " /></td>
+					     <th>民族</th>
+						  <td><input dict="mzDict" name="mz" value="${czrk.mz}" class="form-control"  required="required" style="width: 170px;"/></td>
+					 </tr>
+					  <tr>
+				   <th>手机</th>
+					<td><input type="text" id="lxfssj" name="lxfssj"  value="${czrk.lxfssj}" class="easyui-numberbox easyui-validatebox form-control"  data-options="validType:'length[0,50]'" ></td> 
+				     <th>兵役状况</th>
+					<td><input type="text" id="byzk" name="byzk"  value="${czrk.byzk}" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,36]'" ></td> 
+				  </tr>
+				  <tr>
+                      	<th>政治面貌</th>
+						<td><input dict="zzmmDict" name="zzmm" value="${czrk.zzmm}" class="form-control"  required="required" style="width: 170px;"/></td>
+						<th>婚姻状况</th>
+						<td><input dict="hyzkDict" name="hyzk" value="${czrk.hyzk}" class="form-control"  required="required" style="width: 170px;"/></td>
+					  	<th>学历</th>
+						<td><input dict="xlDict" name="xl" value="${czrk.xl}" class="form-control"  required="required" style="width: 170px;"/></td>
+					  </tr>
+					 	 <tr>
+					  <th>QQ</th>
+					<td><input type="text" id="xxbcQq" name="xxbcQq" value="${czrk.xxbcQq}" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,36]'" ></td> 
+					 <th>微信</th>
+					 <td><input type="text" id="xxbcWx" name="xxbcWx" value="${czrk.xxbcWx}" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,36]'" /></td> 
+				       	<th>微博</th>
+						<td><input type="text" id="xxbcWb" name="xxbcWb" value="${czrk.xxbcWb}"   class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,50]'" /></td> 
+					 </tr>
+					 <tr>
+					 <th>与户主关系</th>
+						<td><input type="text" id="yhzgx" name="yhzgx" value="${czrk.yhzgx}" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,36]'" /></td>
+					  <th>电子邮箱</th>
+						<td><input type="text" id="xxbcDzyx" name="xxbcDzyx" value="${czrk.xxbcDzyx}" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,36]'" /></td>
+					</tr>
+					 <tr>
+					  <th>职业</th>
+					<td><input type="text" id="zy" name="zy" value="${czrk.zy}" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,36]'" ></td> 
+					 <th>现居住地址</th>
+					 <td><input type="text" id="xjzdzz" name="xjzdzz" value="${czrk.xjzdzz}" class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,500]'" /></td> 
+				       	<th>现居住地住址房间号</th>
+						<td><input type="text" id="xjzdzzfjh" name="xjzdzzfjh" value="${czrk.xjzdzzfjh}"   class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,50]'" /></td> 
+					 </tr>
+					  <tr>
+					 
+					  	<th>PGIS经度</th>
+					  	<td><input type="text" name="zbx" value="${czrk.zbx}" class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[0,36]'" /></td>
+					  	<th>PGIS纬度</th>
+					  	<td><input type="text" name="zby" value="${czrk.zby}" class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[0,36]'" /></td>
+						<th>地址名称</th>
+						<td >
+							<input type="hidden" name="dzbm" value="${czrk.dzbm}" />
+							<input type="hidden" name="jzwfjid" value="${czrk.jzwfjid}" />
+							<input type="text" name="dzmc" value="${czrk.dzmc}"  class="easyui-textbox easyui-validatebox  form-control" data-options="validType:'length[0,200]'"/>
+						</td>
+					</tr>
+					<tr><th>地址信息</th><th colspan="5"><hr></th></tr>
+					 <tr>
+					 <th>所属县区</th>
+					 <td>
+					 <input type="hidden" name="ssxq" value="${czrk.ssxq }" />
+					 <input type="text" id="ssxq_mc" name="ssxq_mc" value="${czrk.ssxq_mc}" class="easyui-textbox easyui-validatebox form-control"  readonly="readonly" >
+					 </td>
+					  <th>街路巷(村)</th>
+					    <input type="hidden" name="jlxc" value="${czrk.jlxc }" />
+					   <td><input type="text" id="jlxc_mc" name="jlxc_mc" value="${czrk.jlxc_mc }"   class="easyui-textbox easyui-validatebox form-control"  readonly="readonly"></td>  
+					
+					 <th>乡镇街道</th>
+					 <input type="hidden" name="xzjd" value="${czrk.xzjd }" />
+					 <td><input type="text" id="xzjd_mc" name="xzjd_mc" value="${czrk.xzjd_mc }"  class="easyui-textbox easyui-validatebox form-control"   readonly="readonly"  data-options="validType:'length[0,36]'" ></td> 
+					 
+					 </tr>
+					 <tr>
+					   <th>门楼牌号</th>
+					   <td><input type="text" id="mlph" name="mlph" value="${czrk.mlph }"  class="easyui-textbox easyui-validatebox form-control"  data-options="validType:'length[0,200]'" ></td> 
+					   <th>门(楼)详址</th>
+					   <td><input type="text" id="mlxz" name="mlxz" value="${czrk.mlxz }"  class="easyui-textbox easyui-validatebox form-control"   readonly="readonly"  data-options="validType:'length[0,200]'" ></td> 
+					 </tr>
+					
+					<tr>
+					    <th>所属派出所</th>
+						<td>
+						<input type="hidden" name="sspcs" value="${czrk.sspcs}" />
+						<input type="text" name="pcs_mc" value="${czrk.pcs_mc}" readonly="readonly" class="easyui-textbox  form-control" />
+						
+						</td>
+						<th>警务责任区</th>
+						<td>
+							<input type="hidden" name="jwzrqdm" value="${czrk.jwzrqdm}" />
+							<input type="text" name="jwzrq_mc"  value="${czrk.jwzrq_mc}" class="easyui-textbox form-control" />
+						</td>
+					</tr>  
+				  </table>
+			</fieldset>
+			<div style="position: absolute;bottom: 5px;right: 10px;">
+				<km:widgetTag widgetRulevalue=""></km:widgetTag>
+					<a href="#" class="easyui-linkbutton" iconCls="icon-ok" plain="false" onclick="doSubmit()">保 存</a>
+				
+				<km:widgetTag widgetRulevalue=""></km:widgetTag>
+					<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" plain="false" onclick="cancel()">取 消</a>
+				
+			</div>
+			
+		</form>
+	</div>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/dict.util.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/common.util.js"></script>
+</div>

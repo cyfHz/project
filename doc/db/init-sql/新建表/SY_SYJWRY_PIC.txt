@@ -1,0 +1,35 @@
+-- Create table
+create table SY_SYJWRY_PIC
+(
+  id          varchar2(36),
+  rklx        char(2),
+  pic         blob,
+  create_time date,
+  create_user varchar2(36),
+  rkid        varchar2(36),
+  rkzjbh      varchar2(40)
+);
+-- Add comments to the table 
+comment on table SY_SYJWRY_PIC
+  is '人口管理照片表';
+-- Add comments to the columns 
+comment on column SY_SYJWRY_PIC.rklx
+  is '人口类型：1czrk ，2 ldrk，3 jwry';
+comment on column SY_SYJWRY_PIC.pic
+  is '照片字段';
+comment on column SY_SYJWRY_PIC.create_time
+  is '创建时间';
+comment on column SY_SYJWRY_PIC.create_user
+  is '创建人';
+comment on column SY_SYJWRY_PIC.rkid
+  is '人口id';
+comment on column SY_SYJWRY_PIC.rkzjbh
+  is '人口证件编号';
+  
+  -- Create/Recreate primary, unique and foreign key constraints 
+alter table SY_SYJWRY_PIC
+  add constraint SY_SYJWRY_PIC_PK primary key (ID);
+  
+-- Create/Recreate indexes 
+create index I_SY_SYJWRY_PIC_RKID on SY_SYJWRY_PIC (rkid);
+create index I_SY_SYJWRY_PIC_RkZHBH on SY_SYJWRY_PIC (rkzjbh);

@@ -1,0 +1,6 @@
+APP_ORGANIZATION
+ORGNA_TYPE :
+0 省厅
+1：市局
+2：分局
+3：派出所

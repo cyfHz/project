@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.jwq.mapper.JwqMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.jwq.model.Jwq" >
+    <id column="JWQID" property="jwqid" jdbcType="VARCHAR" />
+    <result column="PCSID" property="pcsid" jdbcType="VARCHAR" />
+    <result column="SJXZQYID" property="sjxzqyid" jdbcType="VARCHAR" />
+    <result column="JWQBH" property="jwqbh" jdbcType="VARCHAR" />
+    <result column="JWQMC" property="jwqmc" jdbcType="VARCHAR" />
+    <result column="JWQJJ" property="jwqjj" jdbcType="VARCHAR" />
+    <result column="JWQMJ" property="jwqmj" jdbcType="DECIMAL" />
+    <result column="JWHSL" property="jwhsl" jdbcType="DECIMAL" />
+    <result column="NCGQSL" property="ncgqsl" jdbcType="DECIMAL" />
+    <result column="JWQXZ" property="jwqxz" jdbcType="VARCHAR" />
+    <result column="SFYX" property="sfyx" jdbcType="CHAR" />
+    <result column="QYRQ" property="qyrq" jdbcType="VARCHAR" />
+    <result column="SXRQ" property="sxrq" jdbcType="VARCHAR" />
+    <result column="XGSJ" property="xgsj" jdbcType="VARCHAR" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+    
+     <result column="pcsmc" property="pcsmc" jdbcType="VARCHAR" /><!--  不是数据库字段 -->
+     <result column="sjxzqy_mc" property="sjxzqy_mc" jdbcType="CHAR" /><!--  不是数据库字段 -->
+  </resultMap>
+  
+  <resultMap id="ResultMapWithBLOBs" type="com.kingmon.project.psam.jwq.model.Jwq" extends="BaseResultMap" >
+    <result column="BJZBZ" property="bjzbz" jdbcType="CLOB" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    JWQID, PCSID, SJXZQYID, JWQBH, JWQMC, JWQJJ, JWQMJ, JWHSL, NCGQSL, JWQXZ, SFYX, QYRQ, 
+    SXRQ, XGSJ, BZ, MOVESIGN
+  </sql>
+  
+  <sql id="Blob_Column_List" >
+    BJZBZ
+  </sql>
+  
+   <sql id="Blob_Column_List" >
+    
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />  ,  <include refid="Blob_Column_List" />
+    from ENT_JWQ  where JWQID = #{jwqid,jdbcType=VARCHAR}
+  </select>
+  <sql id="Alias_Base_Column_List" >
+${alias}.JWQID,${alias}.PCSID,${alias}.SJXZQYID,${alias}.JWQBH,${alias}.JWQMC,${alias}.JWQJJ,
+${alias}.JWQMJ,${alias}.JWHSL,${alias}.NCGQSL,${alias}.JWQXZ,${alias}.SFYX,${alias}.QYRQ,
+${alias}.SXRQ,${alias}.XGSJ,${alias}.BZ,${alias}.MOVESIGN,${alias}BJZBZ
+</sql>
+   <select id="selectByPrimaryKeyForUpdate" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Alias_Base_Column_List" >
+    	<property name="alias" value="J" />
+    </include>,
+    org.ORGNA_NAME as pcsmc,
+    tmp.mc as sjxzqy_mc
+    from ENT_JWQ J
+    left join APP_ORGANIZATION org on org.ORGNA_ID=j.PCSID
+    <!-- left join dz_xzqh x  on j.SJXZQYID=x.dzbm  -->
+    left join ( select s.dzbm as dm ,s.sqjcwhmc as mc from dz_sqjcwh s 
+     			UNION 
+     			SELECT x.dzbm as dm ,x.xzjdmc as mc FROM dz_xzjd x  
+     			UNION 
+     			SELECT z.dzbm as dm ,z.xzqhmc as mc FROM dz_xzqh z 
+     		 )tmp
+    on J.SJXZQYID=tmp.dm
+     where J.JWQID = #{jwqid,jdbcType=VARCHAR}
+  </select>
+
+
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ENT_JWQ  where JWQID = #{jwqid,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.jwq.model.Jwq" >
+    insert into ENT_JWQ
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jwqid != null" > JWQID,  </if>
+      <if test="pcsid != null" >   PCSID,  </if>
+      <if test="sjxzqyid != null" >  SJXZQYID,  </if>
+      <if test="jwqbh != null" > JWQBH, </if>
+      <if test="jwqmc != null" >  JWQMC,  </if>
+      <if test="jwqjj != null" >   JWQJJ, </if>
+      <if test="jwqmj != null" >  JWQMJ, </if>
+      <if test="jwhsl != null" >  JWHSL,  </if>
+      <if test="ncgqsl != null" > NCGQSL,  </if>
+      <if test="jwqxz != null" >  JWQXZ,  </if>
+      <if test="sfyx != null" >  SFYX,  </if>
+      <if test="qyrq != null" >   QYRQ,  </if>
+      <if test="sxrq != null" >  SXRQ,  </if>
+      <if test="xgsj != null" > XGSJ, </if>
+      <if test="bz != null" > BZ, </if>
+      <if test="movesign != null" >   MOVESIGN,   </if>
+      <if test="bjzbz != null" >  BJZBZ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jwqid != null" >  #{jwqid,jdbcType=VARCHAR}, </if>
+      <if test="pcsid != null" >  #{pcsid,jdbcType=VARCHAR},   </if>
+      <if test="sjxzqyid != null" > #{sjxzqyid,jdbcType=VARCHAR}, </if>
+      <if test="jwqbh != null" >  #{jwqbh,jdbcType=VARCHAR}, </if>
+      <if test="jwqmc != null" >  #{jwqmc,jdbcType=VARCHAR},  </if>
+      <if test="jwqjj != null" >  #{jwqjj,jdbcType=VARCHAR},  </if>
+      <if test="jwqmj != null" >  #{jwqmj,jdbcType=DECIMAL},  </if>
+      <if test="jwhsl != null" >   #{jwhsl,jdbcType=DECIMAL},   </if>
+      <if test="ncgqsl != null" > #{ncgqsl,jdbcType=DECIMAL}, </if>
+      <if test="jwqxz != null" >  #{jwqxz,jdbcType=VARCHAR}, </if>
+      <if test="sfyx != null" >   #{sfyx,jdbcType=CHAR}, </if>
+      <if test="qyrq != null" > #{qyrq,jdbcType=VARCHAR}, </if>
+      <if test="sxrq != null" >   #{sxrq,jdbcType=VARCHAR}, </if>
+      <if test="xgsj != null" >  #{xgsj,jdbcType=VARCHAR}, </if>
+      <if test="bz != null" >  #{bz,jdbcType=VARCHAR},   </if>
+      <if test="movesign != null" >  #{movesign,jdbcType=CHAR}, </if>
+      <if test="bjzbz != null" >  #{bjzbz,jdbcType=CLOB},  </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.jwq.model.Jwq" >
+    update ENT_JWQ
+    <set >
+      <if test="pcsid != null" >  PCSID = #{pcsid,jdbcType=VARCHAR}, </if>
+      <if test="sjxzqyid != null" >  SJXZQYID = #{sjxzqyid,jdbcType=VARCHAR}, </if>
+      <if test="jwqbh != null" >  JWQBH = #{jwqbh,jdbcType=VARCHAR},  </if>
+      <if test="jwqmc != null" > JWQMC = #{jwqmc,jdbcType=VARCHAR},  </if>
+      <if test="jwqjj != null" >  JWQJJ = #{jwqjj,jdbcType=VARCHAR}, </if>
+      <if test="jwqmj != null" >   JWQMJ = #{jwqmj,jdbcType=DECIMAL},  </if>
+      <if test="jwhsl != null" >  JWHSL = #{jwhsl,jdbcType=DECIMAL}, </if>
+      <if test="ncgqsl != null" > NCGQSL = #{ncgqsl,jdbcType=DECIMAL}, </if>
+      <if test="jwqxz != null" > JWQXZ = #{jwqxz,jdbcType=VARCHAR},   </if>
+      <if test="sfyx != null" >  SFYX = #{sfyx,jdbcType=CHAR},  </if>
+      <if test="qyrq != null" >  QYRQ = #{qyrq,jdbcType=VARCHAR}, </if>
+      <if test="sxrq != null" >  SXRQ = #{sxrq,jdbcType=VARCHAR},  </if>
+      <if test="xgsj != null" >  XGSJ = #{xgsj,jdbcType=VARCHAR}, </if>
+      <if test="bz != null" >  BZ = #{bz,jdbcType=VARCHAR},  </if>
+      <if test="movesign != null" >  MOVESIGN = #{movesign,jdbcType=CHAR}, </if>
+      <if test="bjzbz != null" > BJZBZ = #{bjzbz,jdbcType=CLOB}, </if>
+    </set>
+    where JWQID = #{jwqid,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="cancelJwq" parameterType="java.util.Map" >
+   update ENT_JWQ
+   set  SFYX = #{sfyx,jdbcType=CHAR},
+        SXRQ = #{sxrq,jdbcType=VARCHAR},
+        XGSJ= #{xgsj,jdbcType=DATE}
+         where JWQID = #{jwqid,jdbcType=VARCHAR}     
+  </update>
+  
+   <update id="activateJwq" parameterType="java.util.Map" >
+   update ENT_JWQ
+   set  SFYX = #{sfyx,jdbcType=CHAR},
+        QYRQ = #{qyrq,jdbcType=VARCHAR},
+        XGSJ= #{xgsj,jdbcType=DATE}
+        where JWQID = #{jwqid,jdbcType=VARCHAR}     
+  </update>
+  
+  <select id="jwqCountByJwqbh" parameterType="java.lang.String" resultType="java.lang.Long" >
+       SELECT COUNT(1) FROM ENT_JWQ WHERE JWQBH = #{jwqbh,jdbcType=VARCHAR}
+  </select>
+  
+   <update id="updateBjzbz" parameterType="java.lang.String" >
+   update ENT_JWQ
+   set   
+   	BJZBZ = #{bjzbz,jdbcType=CLOB}
+         where JWQID = #{jwqid,jdbcType=VARCHAR}     
+  </update>
+  
+  
+   <select id="selectUserJwqBianjie" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+     j.JWQID, j.PCSID, j.SJXZQYID, 
+     j.JWQBH, j.JWQMC, j.JWQJJ, 
+     j.JWQMJ, j.JWHSL, j.NCGQSL, 
+     j.JWQXZ, j.SFYX, j.QYRQ, 
+    j.SXRQ, j.XGSJ, j.BZ, j.BJZBZ
+    from ENT_JWQYJYGX jy,ENT_JWQ j where jy.jwqid=j.jwqid
+    	 and jy.user_id=#{app_userid,jdbcType=VARCHAR}
+  </select>
+  
+     <select id="selectjwqCount" resultType="java.lang.Long" >
+    	select count(*) from ENT_JWQ
+    </select>
+    	<!--通用分页 -->
+	<sql id="Paging_Start">
+		SELECT * FROM (
+		SELECT T_.*, rownum rn_ FROM (
+	</sql>
+	<sql id="Paging_end">
+		) T_ WHERE rownum &lt;= ${pageend}
+		) WHERE rn_ &gt;= ${pagestart}
+	</sql>
+	
+     <select id="selectJwqzbbjList" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map">
+		<include refid="Paging_Start" />
+			SELECT JWQID ,BJZBZ  FROM ENT_JWQ WHERE 1=1 and bjzbz is not null ORDER BY  JWQID
+		<include refid="Paging_end" />
+	</select>
+  
+</mapper>

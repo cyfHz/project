@@ -1,0 +1,106 @@
+﻿select count(*) from dz_mlph m where m.jwqbh is null;--21320711
+
+select count(*) from dz_mlph m where m.sspcs is null;--111883
+
+select count(*) from dz_mlph m where m.ssjlxxq_dzbm is null;--39881
+
+select count(*) from dz_mlph m where m.sszdyjxzqy_dzbm is null;--896134
+
+
+select count(*) from dz_jzwjbxx j where j.zaglssjwzrqdm is null;--240784
+
+select count(*) from dz_jzwjbxx j where j.sszdyjxzqy_dzbm is null;--3542
+
+select count(*) from dz_jzwjbxx j where j.ssjlxxq_dzbm is null;--237744
+
+select count(1) from dz_jzwjbxx j where j.jzwmc is null;--6631520
+select count(1) from dz_jzwjbxx j where j.dzmc is null;--843843
+
+数据检索，导致数据查询不到、
+
+建筑物 -门楼牌号-mlph  类型 --决定是否建筑物
+
+
+门楼牌号 标注 --- 没有所属警务区，谁来标注？ 检索不到该数据
+
+所属派出所
+
+session添加数据权限中level 以及str（37） 注意 dz_xzqh_dw
+
+采集界面，数据不限定，修改时 单条限定（根据警务区）
+
+建筑物基本信息 db模式查询， 去掉left join 慢字段
+
+定时任务导入数据 改成功能按钮
+
+警务区规划 放大到级别之后显示视野内已规划的警务区
+
+采集页面，放大到一定级别之后，显示 检索结果
+
+采集界面 信息提示样式修改
+
+
+
+baseuser 内容修改
+
+resource 
+
+wrule 加载
+
+/* 
+	警务区编码为12位
+		——第一层（1、2位）表示省、自治区、直辖市公安厅、局和新疆生产建设兵团公安局；
+		——第二层（3、4位）表示省辖市、地区和省直辖行政单位，省直管县公安局（处）；
+		——第三层（5、6位）表示设区市的区，地区和省辖市下辖的县、市公安局（分局）；
+		——第四层（7、8、9位）表示公安派出所；
+		——第五层（10、11、12位）表示警务责任区。
+
+*/
+
+
+1	1	省厅	2	1
+2	2	市局	4	2
+3	3	分局	6	3
+4	4	派出所	10	4
+5	5	警务区	12	5
+6	6	特巡警	8	6
+select substr(t.orgna_code,0,10 ),t.* from APP_ORGANIZATION t where t.orgna_name like '%派出所';
+
+select count(*) from ent_jwq--12045
+
+select j.jwqbh,j.* from ent_jwq j where  concat(substr(j.jwqbh,0,9 ),'000' ) !=j.pcsid;
+
+select count(*) from ent_jwq j where  concat(substr(j.jwqbh,0,9 ),'000' ) =j.pcsid;--12022
+
+select j.jwqbh,j.* from ent_jwq j where  concat(substr(j.jwqbh,0,10 ),'00' ) <>j.pcsid;
+
+ select count(*) from ent_jwq j where  concat(substr(j.jwqbh,0,10 ),'00' ) =j.pcsid;--10993
+-=-------------------------------------------------
+文档中 字段大小写 是否统一，还是完全按照文档
+
+根据所选点所在警务区未找到警务区所属派出所数据，请检查
+------------auth
+http://10.49.7.151:8055/login.aspx
+------------------------------------------------------------------
+采集页面，放大到一定级别之后，显示建筑物信息
+目前实现第一页，第二页 分页事件 没有实现监听
+
+生成代码
+----------------------------------------------------------------------------------------
+需要保证建筑物中所属警务区不能为空，不然会导致 ： 搜索引擎检索不到数据，、
+、
+采集权限不能限制到用户的所属管辖范围
+-------------------------------------------------------------
+
+
+
+select * from dz_shpz order by pzlx,organ_code;
+
+------------------------------------------------------------
+
+警务区添加 index createtime字段
+
+------------------------------------
+用户级别加载-1 登录时，提示
+--------------------------
+加载用户信息注意 sspsc sssj ssfj

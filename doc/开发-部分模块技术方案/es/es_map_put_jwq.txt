@@ -1,0 +1,74 @@
+PUT /psam/_mapping/jwq
+{
+  "jwq": {
+    "properties": {
+      "JWQID": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+	  "PCSID": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "SJXZQYID": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "JWQBH": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "JWQMC": {
+         "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik"
+      },
+      "JWQJJ": {
+         "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik"
+      },
+      "JWQMJ": {
+        "type": "double"
+      },
+      "JWHSL": {
+        "type": "double"
+      },
+      "NCGQSL": {
+        "type": "double"
+      },
+      "JWQXZ": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "SFYX": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "QYRQ": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "SXRQ": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "XGSJ": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "BZ": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "MOVESIGN": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "BJZB":{
+         "type": "geo_shape",
+         "precision": "1cm"
+      }
+    }
+  }
+}

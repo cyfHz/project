@@ -1,0 +1,116 @@
+.icon-blank{
+	background:url('icons/blank.gif') no-repeat center center;
+}
+.icon-add{
+	background:url('icons/edit_add.png') no-repeat center center;
+}
+.icon-edit{
+	background:url('icons/pencil.png') no-repeat center center;
+}
+.icon-remove{
+	background:url('icons/edit_remove.png') no-repeat center center;
+}
+.icon-save{
+	background:url('icons/filesave.png') no-repeat center center;
+}
+.icon-cut{
+	background:url('icons/cut.png') no-repeat center center;
+}
+.icon-ok{
+	background:url('icons/ok.png') no-repeat center center;
+}
+.icon-no{
+	background:url('icons/no.png') no-repeat center center;
+}
+.icon-cancel{
+	background:url('icons/cancel.png') no-repeat center center;
+}
+.icon-reload{
+	background:url('icons/reload.png') no-repeat center center;
+}
+.icon-search{
+	background:url('icons/search.png') no-repeat center center;
+}
+.icon-print{
+	background:url('icons/print.png') no-repeat center center;
+}
+.icon-help{
+	background:url('icons/help.png') no-repeat center center;
+}
+.icon-undo{
+	background:url('icons/undo.png') no-repeat center center;
+}
+.icon-redo{
+	background:url('icons/redo.png') no-repeat center center;
+}
+.icon-back{
+	background:url('icons/back.png') no-repeat center center;
+}
+.icon-sum{
+	background:url('icons/sum.png') no-repeat center center;
+}
+.icon-tip{
+	background:url('icons/tip.png') no-repeat center center;
+}
+
+.icon-mini-add{
+	background:url('icons/mini_add.png') no-repeat center center;
+}
+.icon-mini-edit{
+	background:url('icons/mini_edit.png') no-repeat center center;
+}
+.icon-mini-refresh{
+	background:url('icons/mini_refresh.png') no-repeat center center;
+}
+.icon-alertok{
+	background:url('icons/alertok.png') no-repeat center center;
+}
+.icon-alertinfo{
+	background:url('icons/alertinfo.png') no-repeat center center;
+}
+
+.icon-alertwarn{
+	background:url('icons/alertwarn.png') no-repeat center center;
+}
+.icon-alertconfirm{
+	background:url('icons/alertconfirm.png') no-repeat center center;
+}
+.icon-kmhome{
+	background:url('icons/km-home.png') no-repeat center center;
+}
+.icon-kmadd{
+	background:url('icons/km_add.png') no-repeat center center;
+}
+.icon-kmedit{
+	background:url('icons/km-edit.png') no-repeat center center;
+}
+.icon-kmdelete{
+	background:url('icons/km_delete.png') no-repeat center center;
+}
+.icon-kmhouse{
+	background:url('icons/km-house.png') no-repeat center center;
+}
+.icon-kmhouse24{
+	background:url('icons/km-house24.png') no-repeat center center;
+}
+.icon-kmhousemlph{
+	background:url('icons/km-house-mlph.png') no-repeat center center;
+}
+.icon-kmxsearchreact{
+	background:url('icons/km-search-react.png') no-repeat center center;
+}
+.icon-kmxsearchcircle{
+	background:url('icons/km-search-circle.png') no-repeat center center;
+}
+.icon-kmxsearchpan{
+	background:url('icons/km-search-pan.png') no-repeat center center;
+}
+.icon-km-mapmove{
+	background:url('icons/km-map-move.png') no-repeat center center;
+}
+.icon-km-mapdelete{
+	background:url('icons/km-map-delete.png') no-repeat center center;
+}
+.icon-km-mapzooncenter{
+	background:url('icons/km-map-zooncenter.png') no-repeat center center;
+}

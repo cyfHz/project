@@ -1,0 +1,222 @@
+package com.kingmon.project.elastic.controller;
+
+import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
+import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
+import static org.elasticsearch.index.query.QueryBuilders.termQuery;
+import static org.elasticsearch.index.query.QueryBuilders.wildcardQuery;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang.math.NumberUtils;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.search.SearchType;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.FilterBuilders;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.kingmon.base.common.KConstants;
+import com.kingmon.base.data.DataSet;
+import com.kingmon.base.data.FastJsonDataSet;
+import com.kingmon.base.data.KJSONMSG;
+import com.kingmon.base.data.ParamObject;
+import com.kingmon.base.util.PaginationUtil;
+import com.kingmon.base.util.UUIDUtil;
+import com.kingmon.base.web.KBaseController;
+import com.kingmon.common.annon.AuthWidgetRule;
+import com.kingmon.project.elastic.model.GeoPoint;
+import com.kingmon.project.elastic.model.Polygon;
+import com.kingmon.project.elastic.model.SearchPoint;
+import com.kingmon.project.elastic.model.SearchCircle;
+import com.kingmon.project.elastic.model.SearchReactangle;
+import com.kingmon.project.elastic.service.ElasticService;
+import com.kingmon.project.elastic.service.ElasticServiceRest;
+import com.kingmon.project.elastic.util.DataCovertUtil;
+import com.kingmon.project.elastic.util.ElasticUtil;
+import com.kingmon.project.psam.jlx.model.Jlx;
+import com.kingmon.project.psam.jlx.service.IJlxService;
+import com.kingmon.project.psam.jzw.model.Jzwjbxx;
+import com.kingmon.project.psam.jzw.serivice.IJzwjbxxService;
+import com.kingmon.project.psam.jzw.serivice.IJzwjgPicService;
+import com.kingmon.project.psam.mlph.model.Mlph;
+import com.kingmon.project.psam.mlph.service.MlphService;
+import com.kingmon.project.psam.sqrxx.model.Sqrxx;
+@Controller
+@RequestMapping("/psam/elastic")
+public class ElasticController_bak201511191605 extends KBaseController{
+	private static final String prefix="psam/elastic/";
+	@Autowired
+	private IJzwjbxxService jzwjbxxService;
+	@Autowired
+	private MlphService mlphService;
+	@Autowired
+	private IJlxService jlxService;
+	
+	@Autowired
+	private IJzwjgPicService jzwjgPicService;
+	
+	@Autowired
+	private ElasticServiceRest elasticServiceRest;
+	@Autowired
+	private ElasticService elasticService;
+//----------------------信息采集-----------------------------------------------	
+	@AuthWidgetRule(value="elastic.search",desc="检索",operateType="W",refTable="")
+	@RequestMapping(value = {"/search" }, method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
+	@ResponseBody
+//	public  Object search(@RequestBody Map<String,Object> param) {
+		public  Object search(@RequestParam Map<String,Object> param) {
+		
+		String type=(String) param.get("type");
+		String val=(String) param.get("val");
+		String field= "jzwmc";
+		int page=Integer.valueOf((String)param.get("page"));
+		int size=Integer.valueOf((String)param.get("rows"));
+		int from =(page-1)*size;
+		
+		
+		
+		if("circle".equals(type)){
+			//{val=山东, lon=116.99282, page=1, radius=1000, type=circle, rows=10, lat=36.66387}
+			Double radius=Double.valueOf((String)param.get("radius"));
+			Double lat=Double.valueOf((String)param.get("lat"));
+			Double lon=Double.valueOf((String)param.get("lon"));
+			GeoPoint point= new GeoPoint(lat, lon);
+//			JSONObject jsonObj=elasticServiceRest.searchByCircle(from, size, field, val, radius, point,"","");
+//			FastJsonDataSet ds=DataCovertUtil.convertJson(jsonObj);
+			//.setQuery(QueryBuilders.boolQuery().should(matchAllQuery()).should(matchQuery("DZMC", text)).should(matchQuery("DZMC.py", text)).should(wildcardQuery("DZMC.szm", text+"*")))
+			SearchResponse response = elasticService.getClient()
+					.prepareSearch("psam")
+					.setTypes(type)
+					.setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
+					.setQuery(matchQuery("DZMC", val))
+					.setPostFilter(FilterBuilders.geoDistanceFilter("location").point(lat,lon).distance(""+radius)).setFrom(from).setSize(size).execute()
+					.actionGet();
+			DataSet ds=ElasticUtil.searchResponse2Dataset(response);
+			
+		
+			return ds;
+		}else if("react".equals(type)){
+			
+			Double ltlat=Double.valueOf((String)param.get("ltlat"));
+			Double ltlon=Double.valueOf((String)param.get("ltlon"));
+			
+			Double rblat=Double.valueOf((String)param.get("rblat"));
+			Double rblon=Double.valueOf((String)param.get("rblon"));
+			GeoPoint topleft=new GeoPoint(ltlat, ltlon);
+			GeoPoint bottomright=new GeoPoint(rblat, rblon);
+			
+			JSONObject jsonObj=elasticServiceRest.searchByRect(from, size, field, val, topleft, bottomright,"","");
+			FastJsonDataSet ds=DataCovertUtil.convertJson(jsonObj);
+			return ds;
+		}else if("polygon".equals(type)){
+			
+			List<GeoPoint> points=Lists.newArrayList();
+			Polygon polygon=new Polygon(points);
+			JSONObject jsonObj=elasticServiceRest.searchByPolygon(from, size, field, val, polygon, "levelName","levelVal");
+			return new KJSONMSG(200,"数据加载成功", jsonObj);
+		}else{
+			return  FastJsonDataSet.newDs(); 
+		}
+	}
+	
+	@AuthWidgetRule(value="elastic.mapSearch",desc="检索",operateType="W",refTable="")
+	@RequestMapping(value = {"/mapSearch" }, method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
+	@ResponseBody
+		public  Object mapSearch(@RequestParam Map<String,Object> param) {
+		String type=(String) param.get("type");
+		String val=(String) param.get("val");
+		String searchFrom=(String) param.get("searchFrom");
+		String fieldjzw= "jzwmc";
+		String fieldmlph= "mlphmc";
+		int page=Integer.valueOf((String)param.get("page"));
+		int size=Integer.valueOf((String)param.get("rows"));
+		int from =(page-1)*size;
+		//do searche
+		
+		BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery().must(matchAllQuery());
+		SearchResponse searchResponse = elasticService.getClient().prepareSearch("psam").setTypes("mlph")
+			.setSearchType(SearchType.DFS_QUERY_THEN_FETCH).setQuery(boolQueryBuilder)
+			.setFrom(from).setSize(size).execute()
+		.actionGet();
+		return ElasticUtil.searchResponse2Dataset(searchResponse);
+	}
+	
+	
+	@AuthWidgetRule(value="elastic.circleSearch",desc="圆形检索",operateType="W",refTable="DZ_JZWJBXX")
+	@RequestMapping(value = {"/circleSearch" }, method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
+	@ResponseBody
+	public  Object circleSearch(@ModelAttribute("paramObject") ParamObject pb) {
+		// @ModelAttribute("circle") SearchCircle circle
+		GeoPoint center = new GeoPoint(33, 115);
+		//long from, long size, String field, String val, double radius, GeoPoint point
+		//(elasticServiceRest.searchByCircle(0, 10, "jzwmc", "济南",  10000, center));
+//		circle.getPoint();
+//		circle.getRadius();
+		
+		JSONObject obj=elasticServiceRest.searchByCircle(0, 10, "jzwmc", "济南",  10000, center, "levelName","levelVal");
+		
+		List<Map> list=Lists.newArrayList();
+		Map<String,Object> map=Maps.newHashMap();
+		map.put("zxdhzb", "116.99282");
+		map.put("zxdzzb", "36.66387");
+		map.put("res", "信息点"+1);
+		Map<String,Object> map1=Maps.newHashMap();
+		map1.put("zxdhzb", "116.99001");
+		map1.put("zxdzzb", "36.66699");
+		map1.put("res", "信息点"+2);
+		Map<String,Object> map2=Maps.newHashMap();
+		map2.put("zxdhzb", "117.00173");
+		map2.put("zxdzzb", "36.656");
+		map2.put("res", "信息点"+3);
+		list.add(map);
+		list.add(map1);
+		list.add(map2);
+		return new KJSONMSG(200,"数据加载成功", list);
+	}
+	@AuthWidgetRule(value="jzwjbxx.reactSearch",desc="矩形检索",operateType="W",refTable="DZ_JZWJBXX")
+	@RequestMapping(value = {"/reactSearch" }, method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
+	@ResponseBody
+	public  Object reactSearch(@ModelAttribute("reactangle") SearchReactangle reactangle) {
+		System.out.println(reactangle);
+		return ajaxDoneSuccess("成功");
+	}
+	@AuthWidgetRule(value="jzwjbxx.loadSearch",desc="信息检索",operateType="W",refTable="DZ_JZWJBXX")
+	@RequestMapping(value = {"/loadSearch" }, method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
+	@ResponseBody
+	public  Object loadSearch(@ModelAttribute("reactangle") SearchReactangle reactangle) {
+		List<Map> list=Lists.newArrayList();
+		Map<String,Object> map=Maps.newHashMap();
+		map.put("zxdhzb", "116.99282");
+		map.put("zxdzzb", "36.66387");
+		map.put("res", "信息点"+1);
+		Map<String,Object> map1=Maps.newHashMap();
+		map1.put("zxdhzb", "116.99001");
+		map1.put("zxdzzb", "36.66699");
+		map1.put("res", "信息点"+2);
+		Map<String,Object> map2=Maps.newHashMap();
+		map2.put("zxdhzb", "117.00173");
+		map2.put("zxdzzb", "36.656");
+		map2.put("res", "信息点"+3);
+		list.add(map);
+		list.add(map1);
+		list.add(map2);
+		return new KJSONMSG(200,"数据加载成功", list);
+	}
+}

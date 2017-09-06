@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.jzw.mapper.JzwfjChangeMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.jzw.model.JzwfjChange" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="FROMFJID" property="fromfjid" jdbcType="VARCHAR" />
+    <result column="TOFJID" property="tofjid" jdbcType="VARCHAR" />
+    <result column="CHANGESIGN" property="changesign" jdbcType="CHAR" />
+    <result column="CREATED" property="created" jdbcType="TIMESTAMP" />
+    <result column="CREATEDBY" property="createdby" jdbcType="VARCHAR" />
+    <result column="CREATEDDW" property="createddw" jdbcType="VARCHAR" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, FROMFJID, TOFJID, CHANGESIGN, CREATED, CREATEDBY, CREATEDDW, MOVESIGN
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DZ_JZWFJ_CHANGE where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.jzw.model.JzwfjChange" >
+    insert into DZ_JZWFJ_CHANGE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" > ID,  </if>
+      <if test="fromfjid != null" > FROMFJID, </if>
+      <if test="tofjid != null" > TOFJID, </if>
+      <if test="changesign != null" > CHANGESIGN, </if>
+      <if test="created != null" > CREATED, </if>
+      <if test="createdby != null" > CREATEDBY,  </if>
+      <if test="createddw != null" >  CREATEDDW,  </if>
+      <if test="movesign != null" > MOVESIGN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" > #{id,jdbcType=VARCHAR}, </if>
+      <if test="fromfjid != null" > #{fromfjid,jdbcType=VARCHAR}, </if>
+      <if test="tofjid != null" >  #{tofjid,jdbcType=VARCHAR}, </if>
+      <if test="changesign != null" > #{changesign,jdbcType=CHAR}, </if>
+      <if test="created != null" > #{created,jdbcType=TIMESTAMP},  </if>
+      <if test="createdby != null" >  #{createdby,jdbcType=VARCHAR},  </if>
+      <if test="createddw != null" > #{createddw,jdbcType=VARCHAR}, </if>
+      <if test="movesign != null" > #{movesign,jdbcType=CHAR}, </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.jzw.model.JzwfjChange" >
+    update DZ_JZWFJ_CHANGE
+    <set >
+      <if test="fromfjid != null" > FROMFJID = #{fromfjid,jdbcType=VARCHAR}, </if>
+      <if test="tofjid != null" >  TOFJID = #{tofjid,jdbcType=VARCHAR}, </if>
+      <if test="changesign != null" >  CHANGESIGN = #{changesign,jdbcType=CHAR},  </if>
+      <if test="created != null" > CREATED = #{created,jdbcType=TIMESTAMP},  </if>
+      <if test="createdby != null" > CREATEDBY = #{createdby,jdbcType=VARCHAR}, </if>
+      <if test="createddw != null" > CREATEDDW = #{createddw,jdbcType=VARCHAR}, </if>
+      <if test="movesign != null" >  MOVESIGN = #{movesign,jdbcType=CHAR}, </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.webservice.common.mapper.ServiceBzdzRejectIpMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.webservice.common.model.ServiceBzdzRejectIp" >
+    <id column="IPID" property="ipid" jdbcType="VARCHAR" />
+    <result column="SFYY" property="sfyy" jdbcType="VARCHAR" />
+    <result column="IP" property="ip" jdbcType="VARCHAR" />
+    <result column="IPXZJK" property="ipxzjk" jdbcType="VARCHAR" />
+    <result column="TJR" property="tjr" jdbcType="VARCHAR" />
+    <result column="TJSJ" property="tjsj" jdbcType="TIMESTAMP" />
+    <result column="TJDW" property="tjdw" jdbcType="VARCHAR" />
+    <result column="XGR" property="xgr" jdbcType="VARCHAR" />
+    <result column="XGSJ" property="xgsj" jdbcType="TIMESTAMP" />
+    <result column="XGDW" property="xgdw" jdbcType="VARCHAR" />
+    <result column="LONGIP" property="longip" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+   IPID,SFYY,IP,IPXZJK,TJR,TJSJ,TJDW,XGR,XGSJ,XGDW,LONGIP
+  </sql>
+  <!--通用分页 -->
+	<sql id="Paging_Start">
+		SELECT * FROM (
+		SELECT T_.*, rownum rn_ FROM (
+	</sql>
+	<sql id="Paging_end">
+		) T_ WHERE rownum &lt;= ${pageend}
+		) WHERE rn_ &gt; ${pagestart}
+	</sql>
+	
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />
+    from SERVICE_BZDZ_REJECTIP
+    where IPID = #{ipid,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="selectBdIp" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />
+    from SERVICE_BZDZ_REJECTIP
+    where IP = #{ip,jdbcType=VARCHAR}
+  </select>
+  
+  
+<!--   <select id="selectBdLongIp" resultMap="BaseResultMap" parameterType="java.lang.long">
+   select 
+    <include refid="Base_Column_List" />
+    from SERVICE_BZDZ_REJECTIP
+    where LONGIP = #{longip,jdbcType=INTEGER}
+  </select> -->
+  
+  <select id="rejectIpList" resultType="map" parameterType="map">
+     <include refid="Paging_Start" />
+      SELECT 
+      <include refid="Base_Column_List" />
+      FROM SERVICE_BZDZ_REJECTIP T1
+      WHERE 1=1 
+      <if test="sort != null">
+			ORDER BY T1.${sort} ${order}
+		</if>
+      <include refid="Paging_end" />
+  </select>
+  <select id="rejectIpListCount" resultType="java.lang.Long" parameterType="map">
+      SELECT 
+      COUNT(1)
+      FROM SERVICE_BZDZ_REJECTIP T1
+      WHERE 1=1 
+  </select>
+  
+ <!--  <update id="updateTokenId" parameterType="java.lang.String">
+    update SERVICE_BZDZ_USER set TOKENID=#{tokenId}
+    where SYSTEMID in 
+    (
+      select u.bdip  from SERVICE_BZDZ_USER u 
+      where u.systemid=#{systemid}
+    )
+  </update> -->
+  
+  
+  <update id="removeIpState" parameterType="map">
+     UPDATE SERVICE_BZDZ_REJECTIP
+     <set>
+      <if test="sfyy != null" >
+        sfyy = #{sfyy,jdbcType=VARCHAR},
+      </if>
+      <if test="xgr != null" >
+        xgr = #{xgr,jdbcType=VARCHAR},
+      </if>
+      <if test="xgsj != null" >
+        xgsj = #{xgsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xgdw != null" >
+        xgdw = #{xgdw,jdbcType=VARCHAR},
+      </if>
+      </set>
+      where IPID = #{ipid,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="saveXzjkRejectIp" parameterType="map">
+    UPDATE SERVICE_BZDZ_REJECTIP
+     <set>
+      <if test="ipxzjk != null" >
+        ipxzjk = #{ipxzjk,jdbcType=VARCHAR},
+      </if>
+      <if test="xgr != null" >
+        xgr = #{xgr,jdbcType=VARCHAR},
+      </if>
+      <if test="xgsj != null" >
+        xgsj = #{xgsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xgdw != null" >
+        xgdw = #{xgdw,jdbcType=VARCHAR},
+      </if>
+      </set>
+      where IPID = #{ipid,jdbcType=VARCHAR}
+  </update>
+  
+  <insert id="addIp" parameterType="map">
+   insert into SERVICE_BZDZ_REJECTIP
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ipid != null" >
+        IPID,
+      </if>
+      <if test="sfyy != null" >
+        SFYY,
+      </if>
+      <if test="ip != null" >
+        IP,
+      </if>
+      <if test="ipxzjk != null" >
+        IPXZJK,
+      </if>
+      <if test="tjr != null" >
+        TJR,
+      </if>
+      <if test="tjsj != null" >
+        TJSJ,
+      </if>
+      <if test="tjdw != null" >
+        TJDW,
+      </if>
+      <if test="xgr != null" >
+        XGR,
+      </if>
+      <if test="xgsj != null" >
+        XGSJ,
+      </if>
+      <if test="xgdw != null" >
+        XGDW,
+      </if>
+      <if test="longip != null" >
+        LONGIP
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ipid != null" >
+        #{ipid,jdbcType=VARCHAR},
+      </if>
+      <if test="sfyy != null" >
+        #{sfyy,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="ipxzjk != null" >
+        #{ipxzjk,jdbcType=VARCHAR},
+      </if>
+      <if test="tjr != null" >
+        #{tjr,jdbcType=VARCHAR},
+      </if>
+      <if test="tjsj != null" >
+        #{tjsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tjdw != null" >
+        #{tjdw,jdbcType=VARCHAR},
+      </if>
+       <if test="xgr != null" >
+        #{xgr,jdbcType=VARCHAR},
+      </if>
+       <if test="xgsj != null" >
+        #{xgsj,jdbcType=TIMESTAMP},
+      </if>
+       <if test="xgdw != null" >
+        #{xgdw,jdbcType=VARCHAR},
+      </if>
+      <if test="longip != null" >
+        #{longip,jdbcType=INTEGER}
+      </if>
+     </trim>
+  </insert>
+  
+  
+  <update id="saveIp" parameterType="map">
+     update SERVICE_BZDZ_REJECTIP
+    <set>
+      <if test="ipid != null" >
+        ipid = #{ipid,jdbcType=VARCHAR},
+      </if>
+      <if test="sfyy != null" >
+        sfyy = #{sfyy,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="ipxzjk != null" >
+        ipxzjk = #{ipxzjk,jdbcType=VARCHAR},
+      </if>
+      <if test="tjr != null" >
+        tjr = #{tjr,jdbcType=VARCHAR},
+      </if>
+      <if test="tjsj != null" >
+        tjsj = #{tjsj},
+      </if>
+      <if test="tjdw != null" >
+        tjdw = #{tjdw,jdbcType=VARCHAR},
+      </if>
+      <if test="xgr != null" >
+        xgr = #{xgr,jdbcType=VARCHAR},
+      </if>
+      <if test="xgsj != null" >
+        xgsj = #{xgsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xgdw != null" >
+        xgdw = #{xgdw,jdbcType=VARCHAR},
+      </if>
+      <if test="longip != null" >
+       longip= #{longip,jdbcType=INTEGER}
+      </if>
+      </set>
+      where IPID = #{ipid,jdbcType=VARCHAR},
+  </update>
+  
+</mapper>

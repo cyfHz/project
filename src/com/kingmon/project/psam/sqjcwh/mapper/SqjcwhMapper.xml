@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.sqjcwh.mapper.SqjcwhMapper">
+	<resultMap id="BaseResultMap" type="com.kingmon.project.psam.sqjcwh.model.Sqjcwh">
+		<id column="DZBM" property="dzbm" jdbcType="VARCHAR" />
+		<result column="DZYSLXDM" property="dzyslxdm" jdbcType="VARCHAR" />
+		<result column="SQJCWHDM" property="sqjcwhdm" jdbcType="VARCHAR" />
+		<result column="SQJCWHMC" property="sqjcwhmc" jdbcType="VARCHAR" />
+		<result column="BMJC" property="bmjc" jdbcType="VARCHAR" />
+		<result column="DYCXSXDM" property="dycxsxdm" jdbcType="VARCHAR" />
+		<result column="SJXZQY_DZBM" property="sjxzqy_dzbm" jdbcType="VARCHAR" />
+		<result column="SLRQ" property="slrq" jdbcType="TIMESTAMP" />
+		<result column="CXSJ" property="cxsj" jdbcType="TIMESTAMP" />
+		<result column="GXSJ" property="gxsj" jdbcType="TIMESTAMP" />
+		<result column="QYRQ" property="qyrq" jdbcType="TIMESTAMP" />
+		<result column="TYRQ" property="tyrq" jdbcType="TIMESTAMP" />
+		<result column="SYZTDM" property="syztdm" jdbcType="VARCHAR" />
+		<result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+		<result column="CXYY" property="cxyy" jdbcType="VARCHAR" />
+		<result column="ZJF" property="zjf" jdbcType="VARCHAR" />
+		<result column="DJR" property="djr" jdbcType="VARCHAR" />
+		<result column="DJDW" property="djdw" jdbcType="VARCHAR" />
+		<result column="DJSJ" property="djsj" jdbcType="TIMESTAMP" />
+		<result column="XGR" property="xgr" jdbcType="VARCHAR" />
+		<result column="XGDW" property="xgdw" jdbcType="VARCHAR" />
+		<result column="CHILDCOUNT" property="childcount" jdbcType="DECIMAL" />
+		<result column="SQJCWHDM_NEW" property="sqjcwhdm_new" jdbcType="VARCHAR" />
+		<result column="SJSQJCWH_DZBM" property="sjsqjcwh_dzbm" jdbcType="VARCHAR" />
+		<result column="CXR" property="cxr" jdbcType="VARCHAR" />
+		<result column="CXDW" property="cxdw" jdbcType="VARCHAR" />
+		<result column="CXBJ" property="cxbj" jdbcType="CHAR" />
+		<result column="SQJCWHGSDM" property="sqjcwhgsdm" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		DZBM, DZYSLXDM, SQJCWHDM, SQJCWHMC, BMJC, DYCXSXDM,
+		SJXZQY_DZBM, SLRQ,
+		CXSJ, GXSJ,
+		QYRQ, TYRQ, SYZTDM, MOVESIGN, CXYY, ZJF,
+		DJR, DJDW, DJSJ, XGR, XGDW,
+		CHILDCOUNT,
+		SQJCWHDM_NEW, SJSQJCWH_DZBM,
+		CXR, CXDW, CXBJ
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from DZ_SQJCWH
+		where DZBM = #{dzbm,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectSqjcwhdmByDzbm" resultType="java.lang.String" parameterType="java.lang.String">
+		select SQJCWHDM from DZ_SQJCWH where DZBM = #{dzbm,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectDetailByPrimaryKey" resultType="java.util.Map" parameterType="java.lang.String">
+		select
+		x.DZBM, x.DZYSLXDM, x.SQJCWHDM, x.SQJCWHMC, x.BMJC, x.DYCXSXDM,
+		x.SJXZQY_DZBM, x.SLRQ,
+		x.CXSJ, x.GXSJ,
+		x.QYRQ, x.TYRQ, 
+		x.SYZTDM, x.MOVESIGN,
+		 x.CXYY, x.ZJF,
+	    x.DJSJ,x.CHILDCOUNT,
+		x.SQJCWHDM_NEW, x.SJSQJCWH_DZBM,
+		x.CXBJ,
+		TMP.mc as SJXZQYMC,
+		sj_sqjcwh.SQJCWHMC as SJSQJCWHMC,
+		ouser.USER_NAME as DJR,
+		ouserxgr.USER_NAME as XGR,
+		outercxr.USER_NAME as CXR,
+		aorg.ORGNA_NAME as CXDW,
+		axgdw.ORGNA_NAME as XGDW,
+		adjdw.ORGNA_NAME as DJDW,
+		TMP.dm as SJXZQYDZBM
+		from DZ_SQJCWH x
+		<!-- left  join  DZ_XZJD xz  on xz.DZBM=x.SJXZQY_DZBM -->
+		left  join  DZ_SQJCWH sj_sqjcwh on x.SJSQJCWH_DZBM=sj_sqjcwh.DZBM
+		left join APP_ORGANIZATION_USER ouser on ouser.APPUSER_ID=x.DJR
+		left join  APP_ORGANIZATION_USER ouserxgr on ouserxgr.APPUSER_ID=x.XGR
+		left join APP_ORGANIZATION_USER outercxr on outercxr.APPUSER_ID=x.CXR
+		left join APP_ORGANIZATION aorg on aorg.ORGNA_ID=x.CXDW
+		left join APP_ORGANIZATION axgdw on axgdw.ORGNA_ID=x.XGDW
+		left join APP_ORGANIZATION adjdw on adjdw.ORGNA_ID=x.DJDW
+		left join 
+		(  select s.dzbm as dm ,s.sqjcwhdm as qudm,s.sqjcwhmc as mc from dz_sqjcwh s 
+	        UNION
+	        SELECT x.dzbm as dm ,x.xzjddm as qudm,  x.xzjdmc as mc  from dz_xzjd x 
+	        UNION
+	        SELECT z.dzbm as dm ,z.xzqhdm as qudm,  z.xzqhmc as mc  from dz_xzqh z 
+	      )TMP on x.SJXZQY_DZBM=tmp.dm
+		where x.DZBM = #{dzbm,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByPrimaryKeyL" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		TMP.mc as SJXZQY_MC,
+        TMP.dm as SJXZQY_DZBM,
+        sj_sqjcwh.dzbm as sjsqjcwh_dzbm,
+        sj_sqjcwh.sqjcwhmc as sjsqjcwh_mc,
+		x.DZBM, x.DZYSLXDM, x.SQJCWHDM, x.SQJCWHMC, x.BMJC, x.DYCXSXDM,
+		x.SJXZQY_DZBM, x.SLRQ,
+		x.CXSJ, x.GXSJ,
+		x.QYRQ, x.TYRQ, x.SYZTDM, x.MOVESIGN, x.CXYY, x.ZJF,
+		x.DJR, x.DJDW, x.DJSJ, x.XGR, x.XGDW,
+		x.CHILDCOUNT,
+		x.SQJCWHDM_NEW, x.SJSQJCWH_DZBM,
+		x.CXR, x.CXDW, x.CXBJ
+		from DZ_SQJCWH x
+		<!-- left  join  DZ_XZJD xz  on xz.DZBM=x.SJXZQY_DZBM -->
+		left  join  DZ_SQJCWH sj_sqjcwh on x.SJSQJCWH_DZBM=sj_sqjcwh.DZBM 
+		left join 
+		(   select s.dzbm as dm ,s.sqjcwhdm as qudm,s.sqjcwhmc as mc from dz_sqjcwh s 
+	        UNION
+	        SELECT x.dzbm as dm ,x.xzjddm as qudm,  x.xzjdmc as mc   from dz_xzjd x 
+	        UNION
+	        SELECT z.dzbm as dm ,z.xzqhdm as qudm,  z.xzqhmc as mc  from dz_xzqh z 
+	      )TMP on x.SJXZQY_DZBM=tmp.dm
+		where x.DZBM = #{dzbm,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="queryCount" resultType="java.lang.Long">
+		select count(1) from DZ_SQJCWH
+		where 
+		DZBM!= #{dzbm,jdbcType=VARCHAR} 
+		and  SQJCWHDM = #{sqjcwhdm,jdbcType=VARCHAR}
+	</select>
+	
+	<update id="activateSqjcwh" parameterType="com.kingmon.project.psam.sqjcwh.model.Sqjcwh">
+		update DZ_SQJCWH
+		set
+		QYRQ = #{qyrq,jdbcType=TIMESTAMP},
+		GXSJ = #{gxsj,jdbcType=TIMESTAMP},
+		SYZTDM = #{syztdm,jdbcType=VARCHAR},
+		XGR = #{xgr,jdbcType=VARCHAR},
+		XGDW = #{xgdw,jdbcType=VARCHAR},
+		CXBJ = #{cxbj,jdbcType=CHAR}
+		where DZBM = #{dzbm,jdbcType=VARCHAR}
+	</update>
+	<update id="revokeSqjcwh" parameterType="com.kingmon.project.psam.sqjcwh.model.Sqjcwh">
+		update DZ_SQJCWH
+		set 
+		CXSJ = #{cxsj,jdbcType=TIMESTAMP},
+		GXSJ = #{gxsj,jdbcType=TIMESTAMP},
+		SYZTDM = #{syztdm,jdbcType=VARCHAR},
+		CXYY = #{cxyy,jdbcType=VARCHAR},
+		XGR = #{xgr,jdbcType=VARCHAR},
+		XGDW = #{xgdw,jdbcType=VARCHAR},
+		CXR = #{cxr,jdbcType=VARCHAR},
+		CXDW = #{cxdw,jdbcType=VARCHAR},
+		CXBJ = #{cxbj,jdbcType=CHAR},
+		TYRQ=#{tyrq,jdbcType=TIMESTAMP}
+		where DZBM = #{dzbm,jdbcType=VARCHAR}
+	</update>
+	
+	
+	<insert id="insertSelective" parameterType="com.kingmon.project.psam.sqjcwh.model.Sqjcwh">
+		insert into DZ_SQJCWH
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="dzbm != null">
+				DZBM,
+			</if>
+			<if test="dzyslxdm != null">
+				DZYSLXDM,
+			</if>
+			<if test="sqjcwhdm != null">
+				SQJCWHDM,
+			</if>
+			<if test="sqjcwhmc != null">
+				SQJCWHMC,
+			</if>
+			<if test="bmjc != null">
+				BMJC,
+			</if>
+			<if test="dycxsxdm != null">
+				DYCXSXDM,
+			</if>
+			<if test="sjxzqy_dzbm != null">
+				SJXZQY_DZBM,
+			</if>
+			<if test="slrq != null">
+				SLRQ,
+			</if>
+			<if test="cxsj != null">
+				CXSJ,
+			</if>
+			<if test="gxsj != null">
+				GXSJ,
+			</if>
+			<if test="qyrq != null">
+				QYRQ,
+			</if>
+			<if test="tyrq != null">
+				TYRQ,
+			</if>
+			<if test="syztdm != null">
+				SYZTDM,
+			</if>
+			<if test="movesign != null">
+				MOVESIGN,
+			</if>
+			<if test="cxyy != null">
+				CXYY,
+			</if>
+			<if test="zjf != null">
+				ZJF,
+			</if>
+			<if test="djr != null">
+				DJR,
+			</if>
+			<if test="djdw != null">
+				DJDW,
+			</if>
+			<if test="djsj != null">
+				DJSJ,
+			</if>
+			<if test="xgr != null">
+				XGR,
+			</if>
+			<if test="xgdw != null">
+				XGDW,
+			</if>
+			<if test="childcount != null">
+				CHILDCOUNT,
+			</if>
+			<if test="sqjcwhdm_new != null">
+				SQJCWHDM_NEW,
+			</if>
+			<if test="sjsqjcwh_dzbm != null">
+				SJSQJCWH_DZBM,
+			</if>
+			<if test="cxr != null">
+				CXR,
+			</if>
+			<if test="cxdw != null">
+				CXDW,
+			</if>
+			<if test="cxbj != null">
+				CXBJ,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="dzbm != null">
+				#{dzbm,jdbcType=VARCHAR},
+			</if>
+			<if test="dzyslxdm != null">
+				#{dzyslxdm,jdbcType=VARCHAR},
+			</if>
+			<if test="sqjcwhdm != null">
+				#{sqjcwhdm,jdbcType=VARCHAR},
+			</if>
+			<if test="sqjcwhmc != null">
+				#{sqjcwhmc,jdbcType=VARCHAR},
+			</if>
+			<if test="bmjc != null">
+				#{bmjc,jdbcType=VARCHAR},
+			</if>
+			<if test="dycxsxdm != null">
+				#{dycxsxdm,jdbcType=VARCHAR},
+			</if>
+			<if test="sjxzqy_dzbm != null">
+				#{sjxzqy_dzbm,jdbcType=VARCHAR},
+			</if>
+			<if test="slrq != null">
+				#{slrq,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cxsj != null">
+				#{cxsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gxsj != null">
+				#{gxsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="qyrq != null">
+				#{qyrq,jdbcType=TIMESTAMP},
+			</if>
+			<if test="tyrq != null">
+				#{tyrq,jdbcType=TIMESTAMP},
+			</if>
+			<if test="syztdm != null">
+				#{syztdm,jdbcType=VARCHAR},
+			</if>
+			<if test="movesign != null">
+				#{movesign,jdbcType=CHAR},
+			</if>
+			<if test="cxyy != null">
+				#{cxyy,jdbcType=VARCHAR},
+			</if>
+			<if test="zjf != null">
+				#{zjf,jdbcType=VARCHAR},
+			</if>
+			<if test="djr != null">
+				#{djr,jdbcType=VARCHAR},
+			</if>
+			<if test="djdw != null">
+				#{djdw,jdbcType=VARCHAR},
+			</if>
+			<if test="djsj != null">
+				#{djsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="xgr != null">
+				#{xgr,jdbcType=VARCHAR},
+			</if>
+			<if test="xgdw != null">
+				#{xgdw,jdbcType=VARCHAR},
+			</if>
+			<if test="childcount != null">
+				#{childcount,jdbcType=DECIMAL},
+			</if>
+			<if test="sqjcwhdm_new != null">
+				#{sqjcwhdm_new,jdbcType=VARCHAR},
+			</if>
+			<if test="sjsqjcwh_dzbm != null">
+				#{sjsqjcwh_dzbm,jdbcType=VARCHAR},
+			</if>
+			<if test="cxr != null">
+				#{cxr,jdbcType=VARCHAR},
+			</if>
+			<if test="cxdw != null">
+				#{cxdw,jdbcType=VARCHAR},
+			</if>
+			<if test="cxbj != null">
+				#{cxbj,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.sqjcwh.model.Sqjcwh">
+		update DZ_SQJCWH
+		<set>
+			<if test="dzyslxdm != null">
+				DZYSLXDM = #{dzyslxdm,jdbcType=VARCHAR},
+			</if>
+			<if test="sqjcwhdm != null">
+				SQJCWHDM = #{sqjcwhdm,jdbcType=VARCHAR},
+			</if>
+			<if test="sqjcwhmc != null">
+				SQJCWHMC = #{sqjcwhmc,jdbcType=VARCHAR},
+			</if>
+			<if test="bmjc != null">
+				BMJC = #{bmjc,jdbcType=VARCHAR},
+			</if>
+			<if test="dycxsxdm != null">
+				DYCXSXDM = #{dycxsxdm,jdbcType=VARCHAR},
+			</if>
+			<if test="sjxzqy_dzbm != null">
+				SJXZQY_DZBM = #{sjxzqy_dzbm,jdbcType=VARCHAR},
+			</if>
+			<if test="slrq != null">
+				SLRQ = #{slrq,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cxsj != null">
+				CXSJ = #{cxsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gxsj != null">
+				GXSJ = #{gxsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="qyrq != null">
+				QYRQ = #{qyrq,jdbcType=TIMESTAMP},
+			</if>
+			<if test="tyrq != null">
+				TYRQ = #{tyrq,jdbcType=TIMESTAMP},
+			</if>
+			<if test="syztdm != null">
+				SYZTDM = #{syztdm,jdbcType=VARCHAR},
+			</if>
+			<if test="movesign != null">
+				MOVESIGN = #{movesign,jdbcType=CHAR},
+			</if>
+			<if test="cxyy != null">
+				CXYY = #{cxyy,jdbcType=VARCHAR},
+			</if>
+			<if test="zjf != null">
+				ZJF = #{zjf,jdbcType=VARCHAR},
+			</if>
+			<if test="djr != null">
+				DJR = #{djr,jdbcType=VARCHAR},
+			</if>
+			<if test="djdw != null">
+				DJDW = #{djdw,jdbcType=VARCHAR},
+			</if>
+			<if test="djsj != null">
+				DJSJ = #{djsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="xgr != null">
+				XGR = #{xgr,jdbcType=VARCHAR},
+			</if>
+			<if test="xgdw != null">
+				XGDW = #{xgdw,jdbcType=VARCHAR},
+			</if>
+			<if test="childcount != null">
+				CHILDCOUNT = #{childcount,jdbcType=DECIMAL},
+			</if>
+			<if test="sqjcwhdm_new != null">
+				SQJCWHDM_NEW = #{sqjcwhdm_new,jdbcType=VARCHAR},
+			</if>
+			<if test="sjsqjcwh_dzbm != null">
+				SJSQJCWH_DZBM = #{sjsqjcwh_dzbm,jdbcType=VARCHAR},
+			</if>
+			<if test="cxr != null">
+				CXR = #{cxr,jdbcType=VARCHAR},
+			</if>
+			<if test="cxdw != null">
+				CXDW = #{cxdw,jdbcType=VARCHAR},
+			</if>
+			<if test="cxbj != null">
+				CXBJ = #{cxbj,jdbcType=CHAR},
+			</if>
+		</set>
+		where DZBM = #{dzbm,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="selectSjxzqyDzbmByKey" resultType="java.lang.String" parameterType="java.lang.String">
+		select SJXZQY_DZBM from DZ_SQJCWH where  DZBM= #{dzbm,jdbcType=VARCHAR} 
+	</select>
+	<select id="selectSqjcwhdmListByXzjdDzbm" resultType="java.lang.String" parameterType="java.lang.String">
+		select SQJCWHDM from DZ_SQJCWH s where  s.sjxzqy_dzbm=#{sjxzqy_dzbm,jdbcType=VARCHAR} 
+	</select>
+	
+	<!--通用分页 -->
+	<sql id="Paging_Start">
+		SELECT * FROM (
+		SELECT T_.*, rownum rn_ FROM (
+	</sql>
+	<sql id="Paging_end">
+		) T_ WHERE rownum &lt;= ${pageend}
+		) WHERE rn_ &gt; ${pagestart}
+	</sql>
+	
+	<select id="sqjcwhListForWebService" resultType="java.util.Map" parameterType="java.util.Map">
+		<include refid="Paging_Start"/>
+		select s.DZBM as "dzbm",s.SQJCWHDM as "sqjcwhdm",s.SQJCWHMC as "sqjcwhmc",s.BMJC as "bmjc",s.SJXZQY_DZBM as "sjxzqy_dzbm" 
+		from DZ_SQJCWH s
+		WHERE 1=1
+		<include refid="sqjcwhList_where">
+			<property name="alias" value="s"/>	
+		</include>
+		<include refid="Paging_end"/>
+	</select>
+	<select id="countForWebService" resultType="java.lang.Long" parameterType="map">
+		select count(1) from DZ_SQJCWH s WHERE 1=1
+		<include refid="sqjcwhList_where">
+			<property name="alias" value="s" />
+		</include>
+	</select>
+	
+	<sql id="sqjcwhList_where">
+		<if test="DZBM != null">
+			AND ${alias}.DZBM = #{DZBM}
+		</if>
+		<if test="SQJCWHDM != null">
+			AND ${alias}.SQJCWHDM = #{SQJCWHDM}
+		</if>
+		<if test="SQJCWHMC != null">
+			AND ${alias}.SQJCWHMC like #{SQJCWHMC}
+		</if>
+	</sql>
+</mapper>

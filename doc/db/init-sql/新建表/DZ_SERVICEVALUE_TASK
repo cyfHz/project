@@ -1,0 +1,36 @@
+-- Create table
+create table DZ_SERVICEVALUE_TASK
+(
+  id             VARCHAR2(36),
+  servicetableid VARCHAR2(36),
+  fromid         VARCHAR2(36),
+  toid           VARCHAR2(36),
+  status         CHAR(1),
+  createtime     DATE,
+  createuser     VARCHAR2(36),
+  begintime      VARCHAR2(40),
+  endtime        VARCHAR2(40)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the columns 
+comment on column DZ_SERVICEVALUE_TASK.id
+  is '主键ID';
+comment on column DZ_SERVICEVALUE_TASK.servicetableid
+  is '外键 操作表ID';
+comment on column DZ_SERVICEVALUE_TASK.fromid
+  is '要操作的数据';
+comment on column DZ_SERVICEVALUE_TASK.toid
+  is '操作后的数据';
+comment on column DZ_SERVICEVALUE_TASK.status
+  is '状态';
+comment on column DZ_SERVICEVALUE_TASK.createtime
+  is '创建时间';
+comment on column DZ_SERVICEVALUE_TASK.createuser
+  is '创建人';
+comment on column DZ_SERVICEVALUE_TASK.begintime
+  is '开始时间';
+comment on column DZ_SERVICEVALUE_TASK.endtime
+  is '结束时间';

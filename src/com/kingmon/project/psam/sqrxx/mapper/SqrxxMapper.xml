@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.sqrxx.mapper.SqrxxMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.sqrxx.model.Sqrxx" >
+    <id column="SQRID" property="sqrid" jdbcType="VARCHAR" />
+    <result column="SQRXM" property="sqrxm" jdbcType="VARCHAR" />
+    <result column="SQRGMSFZHM" property="sqrgmsfzhm" jdbcType="VARCHAR" />
+    <result column="SQRLXDH" property="sqrlxdh" jdbcType="VARCHAR" />
+    <result column="SQDWMC" property="sqdwmc" jdbcType="VARCHAR" />
+    <result column="SQDWLXDH" property="sqdwlxdh" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SQRID, SQRXM, SQRGMSFZHM, SQRLXDH, SQDWMC, SQDWLXDH
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DZ_SQRXX
+    where SQRID = #{sqrid,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="selectBySfzh" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DZ_SQRXX
+    where SQRGMSFZHM = #{sfzh,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DZ_SQRXX
+    where SQRID = #{sqrid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kingmon.project.psam.sqrxx.model.Sqrxx" >
+    insert into DZ_SQRXX (SQRID, SQRXM, SQRGMSFZHM, 
+      SQRLXDH, SQDWMC, SQDWLXDH
+      )
+    values (#{sqrid,jdbcType=VARCHAR}, #{sqrxm,jdbcType=VARCHAR}, #{sqrgmsfzhm,jdbcType=VARCHAR}, 
+      #{sqrlxdh,jdbcType=VARCHAR}, #{sqdwmc,jdbcType=VARCHAR}, #{sqdwlxdh,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.sqrxx.model.Sqrxx" >
+    insert into DZ_SQRXX
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sqrid != null" >
+        sqrid,
+      </if>
+      <if test="sqrxm != null" >
+        sqrxm,
+      </if>
+      <if test="sqrgmsfzhm != null" >
+        sqrgmsfzhm,
+      </if>
+      <if test="sqrlxdh != null" >
+        sqrlxdh,
+      </if>
+      <if test="sqdwmc != null" >
+        sqdwmc,
+      </if>
+      <if test="sqdwlxdh != null" >
+        sqdwlxdh,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sqrid != null" >
+        #{sqrid,jdbcType=VARCHAR},
+      </if>
+      <if test="sqrxm != null" >
+        #{sqrxm,jdbcType=VARCHAR},
+      </if>
+      <if test="sqrgmsfzhm != null" >
+        #{sqrgmsfzhm,jdbcType=VARCHAR},
+      </if>
+      <if test="sqrlxdh != null" >
+        #{sqrlxdh,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdwmc != null" >
+        #{sqdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdwlxdh != null" >
+        #{sqdwlxdh,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.sqrxx.model.Sqrxx" >
+    update DZ_SQRXX
+    <set >
+      <if test="sqrxm != null" >
+        SQRXM = #{sqrxm,jdbcType=VARCHAR},
+      </if>
+      <if test="sqrgmsfzhm != null" >
+        SQRGMSFZHM = #{sqrgmsfzhm,jdbcType=VARCHAR},
+      </if>
+      <if test="sqrlxdh != null" >
+        SQRLXDH = #{sqrlxdh,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdwmc != null" >
+        SQDWMC = #{sqdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdwlxdh != null" >
+        SQDWLXDH = #{sqdwlxdh,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SQRID = #{sqrid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.psam.sqrxx.model.Sqrxx" >
+    update DZ_SQRXX
+    set SQRXM = #{sqrxm,jdbcType=VARCHAR},
+      SQRGMSFZHM = #{sqrgmsfzhm,jdbcType=VARCHAR},
+      SQRLXDH = #{sqrlxdh,jdbcType=VARCHAR},
+      SQDWMC = #{sqdwmc,jdbcType=VARCHAR},
+      SQDWLXDH = #{sqdwlxdh,jdbcType=VARCHAR}
+    where SQRID = #{sqrid,jdbcType=VARCHAR}
+  </update>
+</mapper>

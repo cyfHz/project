@@ -1,0 +1,657 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v = "urn:schemas-microsoft-com:vml"> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>    
+<%@ include file="/static/meta/includeall.jsp" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+  <SCRIPT src="http://<spring:message code="pgis.url"/>/PGIS_S_TileMap/js_UTF-8/EzMapAPI.js" type="text/javascript"></SCRIPT>
+<!-- <SCRIPT src="http://10.48.1.227:9081/PGIS_S_TileMap/js_UTF-8/EzMapAPI.js" type="text/javascript"></SCRIPT> -->
+<SCRIPT src="${pageContext.request.contextPath}/static/js/pgis/km.pgis.points.js" type="text/javascript"></SCRIPT>
+<style type="text/css">
+  v\:* {
+        BEHAVIOR: url(#default#VML)
+      }
+    <!--[if gte IE 8]> 
+    <script type="text/javascript">
+        document.namespaces.add('vml', 'urn:schemas-microsoft-com:vml');
+        document.createStyleSheet().cssText =
+            'vml\\:fill, vml\\:path, vml\\:shape, vml\\:stroke' +
+                '{ behavior:url(#default#VML); } ';
+    </script>
+    <![endif]-->
+</style>
+<title>警务区管理</title>
+</head>
+<body class="easyui-layout">
+  <t:DataDict code="JWQXZ" var="jwqxzDict"></t:DataDict>
+    <div data-options="region:'west',title:'组织机构',split:true" style="width: 200px;">
+        <ul id="zzjgTree" class="easyui-tree"></ul> <!-- -->
+    </div>
+    
+    <div data-options="region:'center',border:false">
+        <div class="easyui-layout" data-options="fit:true">
+            <div data-options="region:'north',border:false" style="height: 50px; background-color: #F4F4F4;overflow: hidden;">
+                <form class="form-inline query-form form-horizontal" id="jwqSearchform">
+                
+                 <input type="hidden" id="xzqhdzbm" name="webParams[xzqhdzbm]"></input>
+                  <input type="hidden" id="orgid" name="webParams[orgid]" ></input>
+                    <div class="form-group">
+                        <th>警务区名称:</th>
+                        <input name="webParams['jwqmc']" type="text" class="easyui-textbox form-control"></input>
+                    </div>
+                    
+                    <div class="form-group">
+                        <th>警务区编号:</th>
+                        <input name="webParams['jwqbh']" type="text"  value="" class="easyui-textbox form-control"></input>
+                    </div>
+                    <div class="form-group">
+                       <km:widgetTag widgetRulevalue="jwq.jwqList">
+						<a href="#" class="easyui-linkbutton" iconCls="icon-search" plain="false" onclick="loaddata('load');;">查 询</a>
+						</km:widgetTag>
+                    </div>
+                </form>
+            </div>
+            <div data-options="region:'center',border:false">
+            <table id="jwqDataGrid" data-options="fit:true" ></table>
+		    <div id="toolbarDiv" class="easyui-toolbar" style="padding:4px;height:auto">
+		        <km:widgetTag widgetRulevalue="jwq.addJwq">
+		         	<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="enterAddJwq()">添加</a>
+ 				</km:widgetTag>
+ 				 <km:widgetTag widgetRulevalue="jwq.updateJwq">
+		         	<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openeditJwq()">修改</a>
+ 				</km:widgetTag>
+ 				 <km:widgetTag widgetRulevalue="jwq.cancelJwq">
+		         	<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="cancelJwq()">注销</a>
+ 				</km:widgetTag>
+ 				<km:widgetTag widgetRulevalue="jwq.activateJwq">
+		         	<a href="#" class="easyui-linkbutton" iconCls="icon-ok" plain="true" onclick="activateJwq()">启用</a>
+ 				</km:widgetTag>
+ 				<km:widgetTag widgetRulevalue="jwq.enterDetailJwq">
+					<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openDetailDialog()">详细信息</a>
+				</km:widgetTag>
+ 				 <km:widgetTag widgetRulevalue="jwq.guihua">
+		         	<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="openGuihuaDialog()">规划</a>
+ 				</km:widgetTag>
+ 				  <km:widgetTag widgetRulevalue="jwq.enterJyAssign"> 
+		         	<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="assignedJy()">警员分配</a>
+ 			 	</km:widgetTag> 
+ 			 		 <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="startJwqChaiFen()">拆分</a>
+ 			 		 <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="startJwqHeBing()">合并</a>
+			</div>	
+            </div>
+        </div>
+    </div>
+    <div id="dlg_jwq_pgis"  class="easyui-dialog" style="width: 1000px; height: 500px; padding: 0px 0px" maximizable="true"  modal="true" closed="true" closable="false"  buttons="#dlg-buttons">
+	    	<div id="dlg-buttons">
+				<a href="javascript:;" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="startGuihua();">添加区域</a>&nbsp;
+		    	<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="savePolygonRes()">提交</a>&nbsp;
+		    	<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" plain="true" onclick="closeGuihuaDialog()">关闭 </a>&nbsp;
+	    	<input type="hidden" id="drawPolygonRes" value=""></input>
+			<input type="hidden"  id="drawPolygonRes_jwqid" value=""></input>
+			</div>
+    		 <div id="mymap" class="map" style="width:100%; height:100%;" ></div> <!---->
+     </div>
+<!-- ################################################################################################################################## -->   
+<div id="dlg_chaiFenJwqDataGrid" class="easyui-dialog" closable="true" style="width: 450px; height: 550px; padding: 1px 1px" modal="true" closed="true" buttons="#dlg_chaiFenOrgDataGrid_buttons">
+	<table id="chaiFenJwqDataGrid" data-options="fit:true" ></table>
+</div>
+<!-- ################################################################################################################################## --> 
+<div id="dlg_heBingJwqDataGrid"  class="easyui-dialog"  closed="true" style="width: 750px; height: 450px; padding: 1px 1px" modal="true"  buttons="#dlg_heBingOrgDataGrid_buttons">
+	<div style="width: 100%;height: 100%">
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'west',split:true" title="要合并的警务区" style="width:300px;">
+				<table id="fromHebingJwqDataGrid"  data-options="fit:true" ></table>
+			</div>
+			<div data-options="region:'center',title:'请选择要合并到的目标警务区'" style="width:450px;">
+				<table id="toHebingJwqDataGrid"  data-options="fit:true" ></table>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="dlg_heBingJwqDataGrid_buttons">
+	<a href="javascript:;" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_heBingJwqDataGrid').dialog('close')" style="width: 90px">关闭</a>
+</div>
+<!-- ################################################################################################################################## -->  
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/dict.util.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/common.util.js"></script>
+ <script type="text/javascript">
+ function startJwqChaiFen(){
+		var rows = $("#jwqDataGrid").datagrid("getSelections");
+		if(rows.length !=1 ){
+			alertMsg.warn("请选择一条要拆分的数据");return;
+		}
+		var fromJwqId=rows[0].JWQID;
+		 $("#dlg_chaiFenJwqDataGrid").dialog("open").dialog("center").dialog("setTitle","选择要拆分到的目标警务区");
+		 $("#chaiFenJwqDataGrid").datagrid({
+				rownumbers: true,//j.JWQID, j.PCSID,j.JWQBH,j.JWQMC,j.SFYX
+				url:"${ctx}/psam/jwq/loadJwqChaiFenDataGrid?fromJwqId="+fromJwqId,
+				idField:'JWQID',
+				columns:[[
+				    {field:'JWQBH',title:'警务区编号',width:100},
+				    {field:'JWQMC',title:'警务区名称',width:240}
+				]],
+		        onBeforeLoad:function(){ 
+		        	$(this).datagrid("clearSelections");
+		        },loadFilter:function(data,parentId){
+					return KMCORE.ajaxDoneForServerError(data);
+				},toolbar:[{text:"确认",iconCls:'icon-ok',handler:function(){processChaifen();}}
+				           ,'-',
+				           {text:"取消",iconCls:'icon-cancel',handler:function(){$('#dlg_chaiFenJwqDataGrid').dialog('close');}
+				}]
+			});
+		 $("#chaiFenOrgDataGrid").datagrid("clearSelections");
+	}
+ 
+ function processChaifen(){
+		var toRows = $("#chaiFenJwqDataGrid").datagrid("getSelections");
+		if(toRows.length <= 1){
+			alertMsg.warn("请选择多余一条要拆分到的目标警务区");return;
+		}
+		var fromRow = $("#jwqDataGrid").datagrid("getSelections");
+		var fromId=fromRow[0].JWQID;
+		var toIds = KMEASYUtil.rowsIdToArray(toRows, "JWQID");
+		
+		var url="${ctx}/psam/jwq/processJwqChaiFen";
+		var param={"fromId":fromId,"toIds":toIds};
+		
+		KMAJAX.ajaxTodo(url, param, function(data) {
+			if(data.statusCode!=200){
+				 alertMsg.error(data.message);return;
+			}
+			alertMsg.info(data.message);
+			loaddata('reload');
+		});
+	}
+ //-------------------JwqHeBing------------------------------------------
+function startJwqHeBing() {
+		var rows = $("#jwqDataGrid").datagrid("getSelections");
+		if (rows.length < 2) {
+			alertMsg.warn("请选择多于一条要合并的数据");
+			return;
+		}
+		var idArray = KMEASYUtil.rowsIdToArray(rows, "JWQID");
+		var ajaxUrl = "${ctx}/psam/jwq/checkJwqHebing";
+		var param = {"jwqIds" : idArray};
+		KMAJAX.ajaxTodo(ajaxUrl, param, function(data) {
+			if (data.statusCode != 200) {
+				alertMsg.error(data.message);
+				return;
+			}
+			if (data.statusCode == 200) {
+				$("#dlg_heBingJwqDataGrid").dialog("open").dialog("center").dialog("setTitle", "警务区合并");
+				$("#fromHebingJwqDataGrid").datagrid({
+					//j.JWQID, j.PCSID,j.JWQBH,j.JWQMC,j.SFYX 
+					rownumbers : true,
+					idField : 'JWQID',
+					columns : [ [ {field : 'JWQBH',title : '警务区编码',width : 100}, {field : 'JWQMC',title : '警务区名称',width : 160} ] ],
+					onClickRow : function(rowIndex, rowData) {$("#fromHebingJwqDataGrid").datagrid('unselectAll');}
+				});
+				$("#fromHebingJwqDataGrid").datagrid('loadData', rows);
+				//------------------------------------------------------------------
+				$("#toHebingJwqDataGrid").datagrid({
+					singleSelect : true,rownumbers : true,fitColumns : true,
+					idField : 'JWQID',
+					columns : [ [ {field : 'JWQBH',title : '警务区编号',width : 120},
+								// {field:'PCSID',title:'派出所ID',hidden:true},
+								{field : 'JWQMC',title : '警务区名称',width : 260}
+								//{field:'SFYX',title:'是否有效',width:200},
+					] ],
+					onBeforeLoad : function() {$(this).datagrid("clearSelections");},
+					loadFilter : function(data) {return KMCORE.ajaxDoneForServerError(data);},
+					toolbar : [  {text : "确认",iconCls : 'icon-ok',handler : function() {processHebing();}}
+					             ,'-',
+					             {text:"取消",iconCls:'icon-cancel',handler:function(){$('#dlg_heBingJwqDataGrid').dialog('close');}}
+					]
+				});/* */
+				$("#toHebingJwqDataGrid").datagrid('loadData', data.data);
+			}
+		});
+	}
+function processHebing() {
+	var fromRows = $("#fromHebingJwqDataGrid").datagrid("getRows");
+	var toRows = $("#toHebingJwqDataGrid").datagrid("getSelections");
+	var fromIdArray = KMEASYUtil.rowsIdToArray(fromRows, "JWQID");
+	if (toRows.length != 1) {
+		alertMsg.warn("请选择一条要合并到的警务区数据");
+		return;
+	}
+	var toId = toRows[0].JWQID;
+	var param = { "fromIds" : fromIdArray,"toId" : toId};
+	var ajaxUrl = "${ctx}/psam/jwq/processJwqHebing";
+	KMAJAX.ajaxTodo(ajaxUrl, param, function(data) {
+		if (data.statusCode != 200) {
+			alertMsg.info(data.message);
+			return;
+		}
+		alertMsg.info(data.message);
+		$("#dlg_heBingJwqDataGrid").dialog("close");
+		$("#jwqDataGrid").datagrid('reload');
+	});
+
+}
+//-----------------------------------------------------------------------------
+	var pPolygons= new Array();//多个边界区域
+	var jwqinfo;
+	var removedIndexes=new Array();//存放已经被删除的
+	 var _MapApp;
+    //打开规划窗口，清除标记
+	function openGuihuaDialog(){
+		pPolygons.splice(0,pPolygons.length);//清空已边界数组
+		removedIndexes.splice(0,removedIndexes.length);//清空已删除的id 数组
+		pPolygons= new Array();
+		removedIndexes=new Array();
+		
+		 var rows = $("#jwqDataGrid").datagrid("getSelections");
+		   if(rows.length!=1){
+			   alertMsg.warn("请选择一条要规划的警务区");
+			   return;
+		   }
+		   if(rows[0].SFYX=='0'){
+				 alertMsg.warn("该警务区信息已注销！");
+				 return;
+		}
+		 clearMap();//清除标记
+		$("#drawPolygonRes").val("");
+	    $("#drawPolygonRes_jwqid").val();
+	    var jwqid=rows[0].JWQID;
+	    $("#drawPolygonRes_jwqid").val(jwqid);
+		$("#dlg_jwq_pgis").dialog('open').dialog('center').dialog('setTitle','警务区规划------<font color="red">请注意顺时针取点 </font>');
+		if(!_MapApp){
+			onLoad();
+   		}
+		loadBianjieByjwqId();//加载选中警务区的 边界
+	}
+
+	//加载选中警务区的 边界   
+    function loadBianjieByjwqId(){
+    	var ajaxUrl="${pageContext.request.contextPath}/psam/jwq/loadJwqBianjie";
+    	var jwqid=$("#drawPolygonRes_jwqid").val();
+    	var param={"jwqid":jwqid};
+    	KMAJAX.ajaxTodo(ajaxUrl, param, function(data) {
+    		if(data.statusCode!=200){
+    			 alertMsg.error(data.message);
+    			 return;
+    		}
+    		jwqinfo=data.data;
+    		var bjzbz=jwqinfo.bjzbz;
+    		if(!bjzbz||bjzbz==""||bjzbz==undefined){
+    			alertMsg.warn("该警务区没有划分边界");return ;
+    		}
+    		var zuobiao = new Array();
+    		zuobiao=bjzbz.split(";");
+    		if(zuobiao&&zuobiao.length>0){
+    			 //alert(zuobiao.length);
+    			 for(var i = 0; i < zuobiao.length; i++){
+    				 if(PUBUtil.isStrHavaValue(zuobiao[i])){
+    					 var  points= constructOneBianjie(zuobiao[i]);
+            			 var strPoints=points.join(",");
+            			 pPolygons.push(new Polygon(strPoints,"black", 3,0.2,"red"));
+            			 showOneBianjie(pPolygons[i],jwqinfo,i);
+    				 }
+        		 }
+    		}
+		}); 
+    }
+ 
+    //显示一个边界区域 
+    function showOneBianjie(pPolygon,jwqinfo,index){
+    	_MapApp.addOverlay(pPolygon);
+    	var jwqmc=jwqinfo.jwqmc;
+		var jwqbh=jwqinfo.jwqbh;//警务区编号 
+		var jwhsl=jwqinfo.jwhsl;//居委会数量
+		var jwqmj=jwqinfo.jwqmj;//警务区面积 
+		var ncgqsl=jwqinfo.ncgqsl;//农村管区数量
+		var jwqxz=jwqinfo.jwqxz;
+		var strMsg=" 警务区编号 :"+jwqbh+"<br/>"
+				   +"警务区名称:"+jwqmc+"<br/>"
+				   +"警务区面积："+jwqmj+"<br/>"
+				   +"居委会数量："+jwhsl+"<br/>"
+				   +"农村管区数量："+ncgqsl+"<br/>"
+				   +"警务区性质："+jwqxz+"<br/>"
+				   +"<br/>"
+				   +"<a href=\"#\" onclick=\"doDelete("+index+");\" >删除</a>&nbsp;&nbsp;&nbsp;"
+				   +"<a href=\"#\" onclick=\"doEdit("+index+");\" >编辑</a>";
+    	pPolygon.addListener("click",function(){
+    		pPolygon.openInfoWindowHtml(strMsg);
+    	 });
+    	  pPolygon.setExtendStatus(1,100,1,2);
+     	  pPolygon.setInterval(500);
+     	 // pPolygon.enableEdit();
+     	 pPolygon.disableEdit();
+     	 var mbr=pPolygon.getMBR();
+    	 var pointxx=mbr.centerPoint();
+    	 if(pointxx){
+    		 _MapApp.centerAndZoom(pointxx, 11);
+    	 }
+     	 /* if(pPolygon&&pPolygon!=null&&pPolygon!=undefined){
+     		var pArray= pPolygon.getPoints();
+     		if(pArray[0]!="NaN,undefined"){
+     			_MapApp.centerAtLatLng(pArray[1]);
+     		}
+     	 } */
+    }
+    function doEdit(index){
+    	(pPolygons[index]).closeInfoWindowHtml();
+    	(pPolygons[index]).enableEdit();
+    }
+    //删除一个边界区域,
+    function doDelete(index){
+    	(pPolygons[index]).closeInfoWindowHtml();
+    	 _MapApp.removeOverlay(pPolygons[index],true);
+    	 removedIndexes.push(index);//已经删除的在数组removedIndexes中记录
+    }
+    function closeGuihuaDialog(){
+    	clearMap();
+    	_MapApp.changeDragMode('pan',null,null,null);
+        $("#drawPolygonRes").val("");
+     	$("#drawPolygonRes_jwqid").val();
+    	$("#dlg_jwq_pgis").dialog('close');
+    	
+    }
+    function clearMap() {
+    	if(_MapApp){
+    		_MapApp.clear();
+    	}
+  	}
+
+   //
+	function startGuihua(){
+		_MapApp.changeDragMode('drawPolygon',drawPolygonRes,drawPolygonRes_jwqid,guihuaCallback);
+	}
+   //规划回调函数:
+	//思路提示：  
+	//1.把新规划的区域push到数组pPolygons中，
+	//2. clearMap()把地图中标注全部删除，
+	//3. 重绘数组pPolygons 中的所有边界区域
+	//4.已经删除的在removedIndexes记录中的，在步骤3.中不再重绘。
+    function guihuaCallback(res){
+    	var zuobiao=res.split(",");
+    	if(!zuobiao||zuobiao.length==6){
+    		alertMsg.warn("未选择规划区域");
+    		return;
+    	}
+		if(zuobiao&&zuobiao.length>0){
+			var  points= constructOneBianjie(res);
+			 var strPoints=points.join(",");
+			 var polyon=new Polygon(strPoints,"black", 3,0.2,"red");
+			 pPolygons.push(polyon);
+			 clearMap();
+			 for(var i = 0; i < pPolygons.length; i++){
+				  var iscontinue=0;
+				 for(var j=0;j<removedIndexes.length;j++){
+	    			 if(removedIndexes[j]==i){
+	    				 iscontinue++; 
+	    			 }
+	    		 }
+				 if(iscontinue>0){
+					 continue;
+				 }
+    			 pPolygons[i].setFillColor("red");
+    			 pPolygons[i].setFillOpacity(0.2);
+    			 showOneBianjie(pPolygons[i],jwqinfo,i);
+    			 pPolygons[i].disableEdit();
+    		 }
+		}
+    }
+	//---------------------save----------------
+	    function savePolygonRes(){
+    	var res=$("#drawPolygonRes").val();
+    	var jwqid=$("#drawPolygonRes_jwqid").val();
+    	/*var jwqid=$("#drawPolygonRes_jwqid").val();
+    	 if(!res){
+    		alertMsg.warn("未选择规划区域");
+    		return;
+    	}
+    	var arrayPoints=res.split(",");
+    	if(!arrayPoints||arrayPoints.length==6){
+    		alertMsg.warn("未选择规划区域");
+    		return;
+    	} */
+    	
+    	var resStr="";
+    	//保存时，已经被删除的 多边形，不会被拼接在提交的数据中
+    	 for(var i = 0; i < pPolygons.length; i++){
+    		 var iscontinue=0;
+    		 for(var j=0;j<removedIndexes.length;j++){
+    			 if(removedIndexes[j]==i){
+    				 iscontinue++; 
+    			 }
+    		 }
+    		 if(iscontinue>0){
+				 continue;
+			 }
+    		 var pp=pPolygons[i].getPoints();
+    		 if(pp=="NaN"||pp==undefined){
+    			 continue;
+    		 }
+    		 resStr=resStr+pp+";";
+		 }
+    	
+    	if(resStr==""||resStr=="NAN,undefined"){
+    		var iscomfirm=alertMsg.confirm("该警务区没有边界数据，确认提交？", {
+     			cancelCall : function() {alertMsg.close(); return false;},
+     			okCall : function() { 
+		     			var ajaxUrl="${ctx}/psam/jwq/updateBjzbz";
+		     	    	 var param={"jwqid":jwqid,"bjzbz":resStr};
+		     	    	 KMAJAX.ajaxTodo(ajaxUrl, param, function(data) {
+		     				KMCORE.ajaxDone(data);
+		     				//closeGuihuaDialog();
+		     				//loaddata('reload');
+		     			});
+     	    	 }
+     		});
+     }else{
+    	 var ajaxUrl="${ctx}/psam/jwq/updateBjzbz";
+	    	 var param={"jwqid":jwqid,"bjzbz":resStr};
+	    	 KMAJAX.ajaxTodo(ajaxUrl, param, function(data) {
+				KMCORE.ajaxDone(data);
+				//_MapApp.changeDragMode('pan',null,null,null);
+				//closeGuihuaDialog();
+				//loaddata('reload');
+			});
+     }
+    	
+    }
+	//地图初始化
+    function onLoad(){
+    	if(_compatIE()){
+    		//setTimeout(function(){
+				//$('#dlg_jwq_pgis').append('<div id="mymap" style="height: 100%;width: 100%;"></div>');
+				 // 构造地图类
+	            _MapApp = new EzMap(document.getElementById("mymap"));
+	            // 显示地图左侧比例尺控制控件
+	            _MapApp.showMapControl();
+	            // 设置地图对中中心
+	            _MapApp.centerAndZoom(new Point(116.99655, 36.66345), 11);
+	            // 添加鹰眼
+	            var uOverview=new OverView();// 构造一个鹰眼对象
+	            uOverview.width=200;// 设置鹰眼视窗的宽度
+	            uOverview.height=200;// 设置鹰眼视窗的高度
+	            uOverview.minLevel=5;// 设置鹰眼视窗中最小显示地图级别
+	            uOverview.maxLevel=12;// 设置鹰眼视窗中最大显示地图级别
+	            _MapApp.addOverView(uOverview);// 添加鹰眼对象
+    		//});
+           
+    	}else if(_MapApp==null){
+    		var pEle=document.getElementById("mymap");
+    		pEle.innerHTML="<p>目前EzMap地图引擎不支持你使用的浏览器，我们当前支持如下浏览器类型:</p><ul><li><a href='http://www.microsoft.com/windows/ie/downloads/default.asp'>IE</a> 5.5+ (Windows)</li>";
+    	}
+      }
+//--------------------------基本逻辑---------------------------------------------------
+   $(function() {
+    	loadZzjgTree();
+    	initDataGrid();
+    	
+   });
+   
+    function initDataGrid(){
+    	var loadurl="${ctx}/psam/jwq/jwqList";
+    	  treeDrid = $("#jwqDataGrid").datagrid({
+				title:"警务区管理",
+				nowrap: true,//设置为true，当数据长度超出列宽时将会自动截取
+				rownumbers: true, fitColumns: true,//滚动条
+				animate:true, collapsible:false,//显示可折叠按钮
+				striped:true, singleSelect: false,//为true时只能选择单行
+				pagination : true, rownumbers : true,//行数
+				pageSize: 10,
+				url:loadurl,
+				checkbox:false,
+				idField:'JWQID',//分页保留选中
+				toolbar:"#toolbarDiv",
+				columns:[[
+					//{field:'JWQID',width:20,checkbox:true},
+					{field:'JWQBH',title:'警务区编号',width:130,sortable:true},
+					{field:'JWQMC',title:'警务区名称',width:200,sortable:true},
+					{field:'ORGNA_NAME',title:'所属派出所',width:150,sortable:true},
+					//{field:'XZQHMCQ',title:'上级行政区划',width:135,sortable:true},
+					{field:'SFYX',title:'是否有效 ',width:100,formatter:function(value,row){
+						if(0==value){ return "<font color=red>无效<font>";
+						} else if(1==value){ return "<font color=green>有效<font>"; }
+					}},
+					{field:'JWQJJ',title:'警务区简介',width:100},
+					{field:'JWQMJ',title:'警务区面积',width:100},
+					{field:'NCGQSL',title:'农村管区数量',width:100},
+					{field:'JWQXZ',title:'警务区性质 ',width:100,formatter:dictFormat('jwqxzDict')},
+				
+					{field:'QYRQ',title:'启用日期 ',width:100},
+					{field:'SXRQ',title:'失效日期 ',width:100}
+				]],
+		        onBeforeLoad:function(){ 
+		        	$(this).datagrid("clearSelections");
+		        },loadFilter:function(data,parentId){
+					return KMCORE.ajaxDoneForServerError(data);
+				}
+			});
+    }
+    function loadZzjgTree(){
+    	$('#zzjgTree').tree({
+			url: '${ctx}/auth/organization/loadOrganTree',
+			cascadeCheck:false,
+			loadFilter: function(data) {
+				if (!data || !data.rows || data.rows.length < 1) {
+					return [];
+				}
+				var nodes = [];
+				$(data.rows).each(function(i, row) {
+					var node = {};
+					node.id = row.NODEID;
+					node.text = row.NODETEXT;
+					//node.state = row.NODETYPE == 'SQJCWH' ? "open":"closed";
+					node.state = "closed";
+					nodes.push(node);
+				});
+				return nodes;
+			} , onClick: function(node) {
+               $('#orgid').val(node.id);
+               loaddata('reload');
+            },onLoadSuccess: function() {
+               $('#zzjgTree').tree('expand',$('#zzjgTree').tree('getRoot').target);
+            }
+		});
+    }
+	function loaddata(reload) { 
+	  	var queryParams =$("#jwqDataGrid").datagrid("options").queryParams;
+	  	KMEASYUtil.genQueryParams(queryParams, $("#jwqSearchform").form().serializeArray());
+		$("#jwqDataGrid").datagrid(reload);
+		$("#jwqDataGrid").datagrid("clearSelections");
+	}
+	function enterAddJwq(){
+		var url="${ctx}/psam/jwq/enterAddJwq";
+		var options={title:"警务区信息添加页面",width:1000,height:400, url:url,params:{},onClosed:function(){loaddata('reload');}};
+		editDialog.open(options);
+	}
+
+	function openeditJwq(){
+		 var rows = $("#jwqDataGrid").datagrid("getSelections");
+		 if(rows.length != 1){
+			alertMsg.warn("请选择一条要编辑的警务区");return;
+		 }
+		 if(rows[0].SFYX=='0'){
+			 alertMsg.warn("该警务区信息已注销，不允许修改！");return;
+		 }
+	    var url="${ctx}/psam/jwq/enterUpdateJwq";
+	    var param={jwqid:rows[0].JWQID};
+		var options={title:"警务区信息编辑",width:1000,height:400, url:url,params:param,onClosed:function(){loaddata('reload');}};
+		editDialog.open(options);
+   }
+	function openDetailDialog(){
+		var rows = $("#jwqDataGrid").datagrid("getSelections");
+		if(rows.length != 1){
+			alertMsg.warn("请选择一个要查看的警务区");return;
+		}
+		var url="${ctx}/psam/jwq/enterDetailJwq";
+		var param={jwqid:rows[0].JWQID};
+		var options={title:"警务区详细信息",width:900,height:400, url:url,params:param,onClosed:function(){loaddata('reload');}};
+		editDialog.open(options);
+	}
+   function cancelJwq(){
+	   var rows = $("#jwqDataGrid").datagrid("getSelections");
+	   if(rows.length!=1){
+		   alertMsg.warn("请选择一条要注销的警务区");
+		   return;
+	   }
+	   if(rows[0].SFYX=='0'){
+			 alertMsg.warn("该警务区信息已注销！");
+			 return;
+		 }
+	   var idArray =KMEASYUtil.rowsIdToArray(rows,"JWQID");
+	   alertMsg.confirm("确定要注销该警务区？", {
+			cancelCall : function() {alertMsg.close();},
+			okCall : function() {
+					alertMsg.close();
+					var ajaxUrl = "${ctx}/psam/jwq/cancelJwq";
+					var param = { "id" : rows[0].JWQID};
+					KMAJAX.ajaxTodo(ajaxUrl, param, function(data) {
+						KMCORE.ajaxDone(data);
+						loaddata('reload');
+					});
+				}
+		});
+   }
+	  function activateJwq(flag){
+	  var rows = $("#jwqDataGrid").datagrid("getSelections");
+	   if(rows.length!=1){
+		   alertMsg.warn("请选择一条要启用的警务区");
+		   return;
+	   }
+	   if(rows[0].SFYX=='1'){
+			 alertMsg.warn("该警务区正在使用！");
+			 return;
+		 }
+	   var idArray =KMEASYUtil.rowsIdToArray(rows,"JWQID");
+	   alertMsg.confirm("确定要启用该警务区？", {
+			cancelCall : function() {alertMsg.close();},
+			okCall : function() {
+					alertMsg.close();
+					var ajaxUrl = "${ctx}/psam/jwq/activateJwq";
+					var param = { "id" : rows[0].JWQID};
+					KMAJAX.ajaxTodo(ajaxUrl, param, function(data) {
+						KMCORE.ajaxDone(data);
+						loaddata('reload');
+					});
+				}
+		});
+   }
+    function assignedJy(){
+    	var rows=$("#jwqDataGrid").datagrid("getSelections");
+    	if(rows.length==0){
+    		alertMsg.warn("请选择要分配警员的警务区");
+    		return;
+    	}
+    	if(rows.length>1){
+    		alertMsg.warn("请选择一条数据");
+    		return;
+    	}
+    	 if(rows[0].SFYX=='0'){
+			 alertMsg.warn("该警务区信息已注销，不允许分配人员！");return;
+		 }
+    	var url="${ctx}/psam/jwqyJygx/enterJyAssign";
+  	    var param={jwqid:rows[0].JWQID};
+  		var options={title:"警务区人员分配",width:1200,height:630, url:url,params:param,onClosed:function(){loaddata('reload');}};
+  		editDialog.open(options);	
+    }
+    </script>
+  
+</body>
+
+</html>

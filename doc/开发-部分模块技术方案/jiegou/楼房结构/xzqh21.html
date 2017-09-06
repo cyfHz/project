@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script src="static/libs/easyui/jquery-1.8.0.min.js" type="text/javascript"></script>
+<style type="text/css">
+/*分类栏目通用样式*/
+.one{ float:left; width:100px; height:100px; border:3px solid #000;border-color: blue; } 
+.two{ clear:both; } 
+</style>
+<script>
+  $(function (){
+	  init();
+  });
+
+  function init(){
+	  $("#container div.one").click(function(){
+		  if($(this).hasClass("tdx")){
+			  removeSelectedCss($(this))
+		  }else{
+			  addSelectedCss($(this));
+		  }
+	  });
+  }
+  function addSelectedCss(domId){
+	  $("#container div.one").each(function(index,element){
+		  if($(this).attr("id")==domId.attr("id")){
+			  $(this).addClass("tdx");
+		  }
+	  });
+  }
+ function removeSelectedCss(domId){
+	// alert(domId.attr("id"));
+	// domId.removeClass("tdx");
+	 $("#container div.one").each(function(index,element){
+		  if($(this).attr("id")==domId.attr("id")){
+			  $(this).removeClass("tdx");
+		  }
+	  });
+  }
+  function hebing(){
+	  $("#container div.one").each(function(index,element){
+		  if($(this).hasClass("tdx")){
+			  $(this).attr({id:"lili"});
+			  alert($(this).text());
+		  }
+	  })
+  }
+  function checkHebing(){
+	  
+  }
+  function show(){
+	 var ids= $("#lili").attr("id");
+	 alert(ids);
+		alert($("#container").html());
+	}
+  function chaifen(){
+	  
+  }
+
+</script>
+<style type="text/css">
+.tdx{
+background-color: #CD0000;
+}
+
+</style>
+</head>
+
+<body><br/>
+<input type="button" value="显示" onclick="show();" />
+<input type="button" value="合并" onclick="hebing();" />
+<input type="button" value="拆分" onclick="show();" />
+<br/><br/>
+<div id="container">
+<div class="two">
+   <div id="2-1" class="one">2-1</div>
+   <div id="2-2" class="one">2-2</div>
+   <div id="2-3" class="one" >2-3</div>
+   <div id="2-4" class="one" >2-4</div>
+   <div id="2-5" class="one">2-5</div>
+   <div id="2-6" class="one">2-6</div>
+</div>
+<div class="two">
+   <div id="1-1" class="one" >1-1</div>
+   <div id="1-2" class="one" >1-2</div>
+</div>
+</div>
+
+
+</body>
+</html>

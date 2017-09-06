@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.auth.role.mapper.RoleResDruleMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.auth.role.model.RoleResDrule" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="RULE_ID" property="rule_id" jdbcType="VARCHAR" />
+    <result column="RULE_VALUE" property="rule_value" jdbcType="VARCHAR" />
+    <result column="ROLE_ID" property="role_id" jdbcType="VARCHAR" />
+    <result column="AREA_ID" property="area_id" jdbcType="VARCHAR" />
+    <result column="RES_ID" property="res_id" jdbcType="VARCHAR" />
+    <result column="LOCALROLE_ID" property="localrole_id" jdbcType="VARCHAR" />
+    <result column="OPRATETIME" property="opratetime" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, RULE_ID, RULE_VALUE, ROLE_ID, AREA_ID, RES_ID, LOCALROLE_ID, OPRATETIME
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from APP_ROLE_RES_DRULE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from APP_ROLE_RES_DRULE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.kingmon.project.auth.role.model.RoleResDrule" >
+    insert into APP_ROLE_RES_DRULE (ID, RULE_ID, RULE_VALUE, 
+      ROLE_ID, AREA_ID, RES_ID, 
+      LOCALROLE_ID, OPRATETIME)
+    values (
+    #{id,jdbcType=VARCHAR}, 
+    #{rule_id,jdbcType=VARCHAR}, 
+    #{rule_value,jdbcType=VARCHAR}, 
+      #{role_id,jdbcType=VARCHAR}, 
+      #{area_id,jdbcType=VARCHAR},
+       #{res_id,jdbcType=VARCHAR}, 
+      #{localrole_id,jdbcType=VARCHAR},
+       #{opratetime,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.auth.role.model.RoleResDrule" >
+    insert into APP_ROLE_RES_DRULE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="rule_id != null" >
+        RULE_ID,
+      </if>
+      <if test="rule_value != null" >
+        RULE_VALUE,
+      </if>
+      <if test="role_id != null" >
+        ROLE_ID,
+      </if>
+      <if test="area_id != null" >
+        AREA_ID,
+      </if>
+      <if test="res_id != null" >
+        RES_ID,
+      </if>
+      <if test="localrole_id != null" >
+        LOCALROLE_ID,
+      </if>
+      <if test="opratetime != null" >
+        OPRATETIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="rule_id != null" >
+        #{rule_id,jdbcType=VARCHAR},
+      </if>
+      <if test="rule_value != null" >
+        #{rule_value,jdbcType=VARCHAR},
+      </if>
+      <if test="role_id != null" >
+        #{role_id,jdbcType=VARCHAR},
+      </if>
+      <if test="area_id != null" >
+        #{area_id,jdbcType=VARCHAR},
+      </if>
+      <if test="res_id != null" >
+        #{res_id,jdbcType=VARCHAR},
+      </if>
+      <if test="localrole_id != null" >
+        #{localrole_id,jdbcType=VARCHAR},
+      </if>
+      <if test="opratetime != null" >
+        #{opratetime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.auth.role.model.RoleResDrule" >
+    update APP_ROLE_RES_DRULE
+    <set >
+      <if test="rule_id != null" >
+        RULE_ID = #{rule_id,jdbcType=VARCHAR},
+      </if>
+      <if test="rule_value != null" >
+        RULE_VALUE = #{rule_value,jdbcType=VARCHAR},
+      </if>
+      <if test="role_id != null" >
+        ROLE_ID = #{role_id,jdbcType=VARCHAR},
+      </if>
+      <if test="area_id != null" >
+        AREA_ID = #{area_id,jdbcType=VARCHAR},
+      </if>
+      <if test="res_id != null" >
+        RES_ID = #{res_id,jdbcType=VARCHAR},
+      </if>
+      <if test="localrole_id != null" >
+        LOCALROLE_ID = #{localrole_id,jdbcType=VARCHAR},
+      </if>
+      <if test="opratetime != null" >
+        OPRATETIME = #{opratetime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.auth.role.model.RoleResDrule" >
+    update APP_ROLE_RES_DRULE
+    set RULE_ID = #{rule_id,jdbcType=VARCHAR},
+      RULE_VALUE = #{rule_value,jdbcType=VARCHAR},
+      ROLE_ID = #{role_id,jdbcType=VARCHAR},
+      AREA_ID = #{area_id,jdbcType=VARCHAR},
+      RES_ID = #{res_id,jdbcType=VARCHAR},
+      LOCALROLE_ID = #{localrole_id,jdbcType=VARCHAR},
+      OPRATETIME = #{opratetime,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

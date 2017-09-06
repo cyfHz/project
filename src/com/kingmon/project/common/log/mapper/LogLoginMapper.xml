@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.common.log.mapper.LogLoginMapper">
+
+	<resultMap id="BaseResultMap" type="com.kingmon.project.common.log.model.LogLogin">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="USER_ID" property="user_id" jdbcType="VARCHAR" />
+		<result column="USER_NAME" property="user_name" jdbcType="VARCHAR" />
+		<result column="ORGNA_ID" property="orgna_id" jdbcType="VARCHAR" />
+		<result column="LOGINTIME1" property="logintime1" jdbcType="VARCHAR" />
+		<result column="LOGOUTTIME" property="logouttime" jdbcType="TIMESTAMP" />
+		<result column="LOGINTYPE" property="logintype" jdbcType="VARCHAR" />
+		<result column="IP" property="ip" jdbcType="VARCHAR" />
+		<result column="LOGINCLIENT" property="loginclient" jdbcType="VARCHAR" />
+		<result column="MEMO" property="memo" jdbcType="VARCHAR" />
+		<result column="USER_TYPE" property="user_type" jdbcType="DECIMAL" />
+		<result column="GPS_X" property="gps_x" jdbcType="VARCHAR" />
+		<result column="GPS_Y" property="gps_y" jdbcType="VARCHAR" />
+		<result column="SBID" property="sbid" jdbcType="VARCHAR" />
+		<result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+		<result column="LOGINTIME" property="logintime" jdbcType="TIMESTAMP" />
+		<result column="LOGOUTTIME1" property="logouttime1" jdbcType="VARCHAR" />
+		<result column="IMEI" property="imei" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, USER_ID, USER_NAME, ORGNA_ID, LOGINTIME1, LOGOUTTIME, LOGINTYPE, IP,
+		LOGINCLIENT,
+		MEMO, USER_TYPE, GPS_X, GPS_Y, SBID, MOVESIGN, LOGINTIME, LOGOUTTIME1,IMEI
+	</sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from APP_LOG  where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  
+	<insert id="addLogLogin" parameterType="com.kingmon.project.common.log.model.LogLogin">
+		insert into APP_LOG_LOGIN
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">ID,</if>
+			<if test="user_id != null">USER_ID,</if>
+			<if test="user_name != null">USER_NAME,</if>
+			<if test="orgna_id != null">ORGNA_ID,</if>
+			<if test="logintime1 != null">LOGINTIME1,</if>
+			<if test="logouttime != null">LOGOUTTIME,</if>
+			<if test="logintype != null">LOGINTYPE,</if>
+			<if test="ip != null">IP,</if>
+			<if test="loginclient != null">LOGINCLIENT,</if>
+			<if test="memo != null">MEMO,</if>
+			<if test="user_type != null">USER_TYPE,</if>
+			<if test="gps_x != null">GPS_X,</if>
+			<if test="gps_y != null">GPS_Y,</if>
+			<if test="sbid != null">SBID,</if>
+			<if test="movesign != null">MOVESIGN,</if>
+			<if test="logintime != null">LOGINTIME,</if>
+			<if test="logouttime1 != null">LOGOUTTIME1,</if>
+			<if test="imei != null">IMEI,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id,jdbcType=VARCHAR},</if>
+			<if test="user_id != null">#{user_id,jdbcType=VARCHAR},</if>
+			<if test="user_name != null">#{user_name,jdbcType=VARCHAR},</if>
+			<if test="orgna_id != null">#{orgna_id,jdbcType=VARCHAR},</if>
+			<if test="logintime1 != null">#{logintime1,jdbcType=VARCHAR},</if>
+			<if test="logouttime != null">#{logouttime,jdbcType=TIMESTAMP},</if>
+			<if test="logintype != null">#{logintype,jdbcType=VARCHAR},</if>
+			<if test="ip != null">#{ip,jdbcType=VARCHAR},</if>
+			<if test="loginclient != null">#{loginclient,jdbcType=VARCHAR},</if>
+			<if test="memo != null">#{memo,jdbcType=VARCHAR},</if>
+			<if test="user_type != null">#{user_type,jdbcType=DECIMAL},</if>
+			<if test="gps_x != null">#{gps_x,jdbcType=VARCHAR},</if>
+			<if test="gps_y != null">#{gps_y,jdbcType=VARCHAR},</if>
+			<if test="sbid != null">#{sbid,jdbcType=VARCHAR},</if>
+			<if test="movesign != null">#{movesign,jdbcType=CHAR},</if>
+			<if test="logintime != null">#{logintime,jdbcType=TIMESTAMP},</if>
+			<if test="logouttime1 != null">#{logouttime1,jdbcType=VARCHAR},</if>
+			<if test="imei != null">#{IMEI},</if>
+		</trim>
+	</insert>
+	
+	<update id="updateLogoutTime" parameterType="com.kingmon.project.common.log.model.LogLogin" >
+    update APP_LOG_LOGIN
+    set 
+      LOGOUTTIME = #{logouttime,jdbcType=VARCHAR},
+      LOGOUTTIME1 = #{logouttime1,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+	<!-- #######################page add end ########################################### -->
+
+	<!--通用分页 -->
+	<sql id="Paging_Start">
+		SELECT * FROM (
+		SELECT T_.*, rownum rn_ FROM (
+	</sql>
+
+	<sql id="Paging_end">
+		) T_ WHERE rownum &lt;= ${pageend}
+		) WHERE rn_ &gt;
+		${pagestart}
+	</sql>
+
+	<!-- #######################page query start ########################################### -->
+	<sql id="Alias_Base_Column_List">
+		${alias}.ID,
+		${alias}.USER_ID, 
+		${alias}.USER_NAME, 
+		${alias}.ORGNA_ID, 
+		${alias}.LOGINTIME1, 
+		${alias}.LOGOUTTIME, 
+		${alias}.LOGINTYPE, 
+		${alias}.IP,
+		${alias}.LOGINCLIENT,
+		${alias}.MEMO, 
+		${alias}.USER_TYPE, 
+		${alias}.GPS_X, 
+		${alias}.GPS_Y, 
+		${alias}.SBID, 
+		${alias}.MOVESIGN, 
+		${alias}.LOGINTIME, 
+		${alias}.LOGOUTTIME1,
+		${alias}.IMEI
+	</sql>
+
+	<select id="selectLogLoginList" resultType="java.util.Map"
+		parameterType="java.util.Map">
+		<include refid="Paging_Start" />
+		SELECT
+		<include refid="Alias_Base_Column_List">
+			<property name="alias" value="T1" />
+		</include>
+		FROM APP_LOG_LOGIN T1 WHERE 1=1
+		<include refid="LogLoginList_where">
+			<property name="alias" value="T1" />
+		</include>
+		<if test="sort != null">
+			ORDER BY T1.LOGOUTTIME desc
+		</if>
+		<include refid="Paging_end" />
+	</select>
+
+	<select id="selectLogLoginCount" resultType="java.lang.Long"
+		parameterType="java.util.Map">
+		select count(1) from APP_LOG_LOGIN T1 WHERE 1=1
+		<include refid="LogLoginList_where">
+			<property name="alias" value="T1" />
+		</include>
+	</select>
+
+	<sql id="LogLoginList_where">
+		<if test="user_loginname != null">
+			AND ${alias}.USER_NAME  like #{user_loginname,jdbcType=VARCHAR}
+		</if>
+		
+		<if test="start_time != null">
+			AND  to_char(${alias}.LOGINTIME ,'yyyy-mm-dd hh24:mm:ss')  &gt;=#{start_time,jdbcType=VARCHAR}
+		</if>
+		<if test="end_time != null">
+			AND to_char(${alias}.LOGINTIME ,'yyyy-mm-dd hh24:mm:ss')  &lt;=#{end_time,jdbcType=VARCHAR}
+		</if>
+	</sql>
+
+	<!-- #######################page query end ########################################### -->
+
+</mapper>

@@ -1,0 +1,24 @@
+-- Create table
+create table APP_ORGANIZAION_CHANGE
+(
+  id          VARCHAR2(36) not null,
+  fromid      VARCHAR2(36),
+  toid        VARCHAR2(36),
+  changesign  CHAR(1),
+  createdby   VARCHAR2(36),
+  create_time DATE
+);
+-- Add comments to the columns 
+comment on column APP_ORGANIZAION_CHANGE.id  is '主键';
+comment on column APP_ORGANIZAION_CHANGE.fromid is '被拆分/合并组织机构ID';
+comment on column APP_ORGANIZAION_CHANGE.toid  is '拆分/合并后组织机构ID';
+comment on column APP_ORGANIZAION_CHANGE.changesign  is '记录拆分还是合并';
+comment on column APP_ORGANIZAION_CHANGE.createdby is '创建人';
+comment on column APP_ORGANIZAION_CHANGE.create_time  is '时间';
+-- Create/Recreate indexes 
+create index I_ORGANIZAION_CHANGE_FROMID on APP_ORGANIZAION_CHANGE (FROMID)
+ 
+create index I_ORGANIZAION_CHANGE_TOID on APP_ORGANIZAION_CHANGE (TOID)
+ 
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table APP_ORGANIZAION_CHANGE  add constraint PK_APP_ORGANIZAION_CHANGE primary key (ID)

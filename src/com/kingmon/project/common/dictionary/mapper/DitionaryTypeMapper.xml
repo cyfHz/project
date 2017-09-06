@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.common.dictionary.mapper.DitionaryTypeMapper" >
+  
+  <resultMap id="BaseResultMap" type="com.kingmon.project.common.dictionary.model.DitionaryType" >
+    <id column="TYPE_ID" property="type_id" jdbcType="VARCHAR" />
+    <result column="TYPE_CODE" property="type_code" jdbcType="VARCHAR" />
+    <result column="TYPE_MC" property="type_mc" jdbcType="VARCHAR" />
+    <result column="TYPE_SM" property="type_sm" jdbcType="VARCHAR" />
+    <result column="ENABLED" property="enabled" jdbcType="CHAR" />
+    <result column="OPRATETIME" property="opratetime" jdbcType="VARCHAR" />
+    <result column="TYPE_ORDER" property="type_order" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from APP_DICTIONARY_TYPE where TYPE_ID = #{TYPE_ID,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from APP_DICTIONARY_TYPE where TYPE_ID = #{TYPE_ID,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.kingmon.project.common.dictionary.model.DitionaryType" >
+    insert into APP_DICTIONARY_TYPE 
+    	(
+    	TYPE_ID, 
+    	TYPE_CODE, 
+    	TYPE_MC, 
+      	TYPE_SM, 
+      	ENABLED, 
+      	OPRATETIME, 
+      	TYPE_ORDER
+      	)
+    values (
+   	 	#{type_id,jdbcType=VARCHAR}, 
+   	 	#{type_code,jdbcType=VARCHAR}, 
+    	#{type_mc,jdbcType=VARCHAR}, 
+        #{type_sm,jdbcType=VARCHAR}, 
+        #{enabled,jdbcType=CHAR}, 
+        #{opratetime,jdbcType=VARCHAR}, 
+        #{type_order,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kingmon.project.common.dictionary.model.DitionaryType" >
+    insert into APP_DICTIONARY_TYPE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="type_id != null" >
+        TYPE_ID,
+      </if>
+      <if test="type_code != null" >
+        TYPE_CODE,
+      </if>
+      <if test="type_mc != null" >
+        TYPE_MC,
+      </if>
+      <if test="type_sm != null" >
+        TYPE_SM,
+      </if>
+      <if test="enabled != null" >
+        ENABLED,
+      </if>
+      <if test="opratetime != null" >
+        OPRATETIME,
+      </if>
+      <if test="type_order != null" >
+        TYPE_ORDER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="type_id != null" >
+        #{type_id,jdbcType=VARCHAR},
+      </if>
+      <if test="type_code != null" >
+        #{type_code,jdbcType=VARCHAR},
+      </if>
+      <if test="type_mc != null" >
+        #{type_mc,jdbcType=VARCHAR},
+      </if>
+      <if test="type_sm != null" >
+        #{type_sm,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="opratetime != null" >
+        #{opratetime,jdbcType=VARCHAR},
+      </if>
+      <if test="type_order != null" >
+        #{type_order,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.common.dictionary.model.DitionaryType" >
+    update APP_DICTIONARY_TYPE
+    <set >
+      <if test="type_code != null" >
+        TYPE_CODE = #{type_code,jdbcType=VARCHAR},
+      </if>
+      <if test="type_mc != null" >
+        TYPE_MC = #{type_mc,jdbcType=VARCHAR},
+      </if>
+      <if test="type_sm != null" >
+        TYPE_SM = #{type_sm,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        ENABLED = #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="opratetime != null" >
+        OPRATETIME = #{opratetime,jdbcType=VARCHAR},
+      </if>
+      <if test="type_order != null" >
+        TYPE_ORDER = #{type_order,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TYPE_ID = #{type_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.common.dictionary.model.DitionaryType" >
+    update APP_DICTIONARY_TYPE
+   	 set
+     TYPE_CODE = #{type_code,jdbcType=VARCHAR},
+      TYPE_MC = #{type_mc,jdbcType=VARCHAR},
+      TYPE_SM = #{type_sm,jdbcType=VARCHAR},
+      ENABLED = #{enabled,jdbcType=CHAR},
+      OPRATETIME = #{opratetime,jdbcType=VARCHAR},
+      TYPE_ORDER = #{type_order,jdbcType=VARCHAR}
+    where TYPE_ID = #{type_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

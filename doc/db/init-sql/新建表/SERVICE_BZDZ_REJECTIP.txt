@@ -1,0 +1,36 @@
+
+------------2016-05-13---- 新增-----------------(0617 已添正式库
+-- Create table
+create table SERVICE_BZDZ_REJECTIP
+(
+  IPID    VARCHAR2(200) not null,
+  SFYY    VARCHAR2(200),
+  IP      VARCHAR2(200),
+  IPXZJK  VARCHAR2(200),
+  TJR     VARCHAR2(200),
+  TJSJ    DATE,
+  TJDW    VARCHAR2(200),
+  XGR     VARCHAR2(200),
+  XGSJ    DATE,
+  XGDW    VARCHAR2(200),
+  LONGIP  VARCHAR2(200)
+);
+
+-- Add comments to the columns 
+comment on column SERVICE_BZDZ_REJECTIP.IPID is '主键';
+comment on column SERVICE_BZDZ_REJECTIP.SFYY  is '是否有用';
+comment on column SERVICE_BZDZ_REJECTIP.IP  is 'ip地址';
+comment on column SERVICE_BZDZ_REJECTIP.IPXZJK  is 'ip限制接口';
+comment on column SERVICE_BZDZ_REJECTIP.TJR  is '添加人';
+comment on column SERVICE_BZDZ_REJECTIP.TJSJ  is '添加时间';
+comment on column SERVICE_BZDZ_REJECTIP.TJDW  is '添加单位';
+comment on column SERVICE_BZDZ_REJECTIP.XGR  is '修改人';
+comment on column SERVICE_BZDZ_REJECTIP.XGSJ  is '修改时间';
+comment on column SERVICE_BZDZ_REJECTIP.XGDW  is '修改单位';
+comment on column SERVICE_BZDZ_REJECTIP.LONGIP  is 'IP地址 转化为Long型存储';
+  
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SERVICE_BZDZ_REJECTIP
+  add constraint PK_SERVICE_BZDZ_REJECTIP primary key (IPID);
+  
+  

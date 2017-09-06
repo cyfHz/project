@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.jzw.mapper.JzwlcMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.jzw.model.Jzwlc" >
+    <id column="JZWLCID" property="jzwlcid" jdbcType="VARCHAR" />
+    <result column="JZWJGID" property="jzwjgid" jdbcType="VARCHAR" />
+    <result column="JZWDYID" property="jzwdyid" jdbcType="VARCHAR" />
+    <result column="LCXH" property="lcxh" jdbcType="VARCHAR" />
+    <result column="LCMC" property="lcmc" jdbcType="VARCHAR" />
+    <result column="ZHGXRQ" property="zhgxrq" jdbcType="TIMESTAMP" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    JZWLCID, JZWJGID, JZWDYID, LCXH, LCMC, ZHGXRQ, MOVESIGN
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DZ_JZWLC
+    where JZWLCID = #{jzwlcid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DZ_JZWLC
+    where JZWLCID = #{jzwlcid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kingmon.project.psam.jzw.model.Jzwlc" >
+    insert into DZ_JZWLC (JZWLCID, JZWJGID, JZWDYID, 
+      LCXH, LCMC, ZHGXRQ, 
+      MOVESIGN)
+    values (#{jzwlcid,jdbcType=VARCHAR}, #{jzwjgid,jdbcType=VARCHAR}, #{jzwdyid,jdbcType=VARCHAR}, 
+      #{lcxh,jdbcType=VARCHAR}, #{lcmc,jdbcType=VARCHAR}, #{zhgxrq,jdbcType=TIMESTAMP}, 
+      #{movesign,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwlc" >
+    insert into DZ_JZWLC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jzwlcid != null" >
+        jzwlcid,
+      </if>
+      <if test="jzwjgid != null" >
+        jzwjgid,
+      </if>
+      <if test="jzwdyid != null" >
+        jzwdyid,
+      </if>
+      <if test="lcxh != null" >
+        lcxh,
+      </if>
+      <if test="lcmc != null" >
+        lcmc,
+      </if>
+      <if test="zhgxrq != null" >
+        zhgxrq,
+      </if>
+      <if test="movesign != null" >
+        movesign,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jzwlcid != null" >
+        #{jzwlcid,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwjgid != null" >
+        #{jzwjgid,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwdyid != null" >
+        #{jzwdyid,jdbcType=VARCHAR},
+      </if>
+      <if test="lcxh != null" >
+        #{lcxh,jdbcType=VARCHAR},
+      </if>
+      <if test="lcmc != null" >
+        #{lcmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zhgxrq != null" >
+        #{zhgxrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwlc" >
+    update DZ_JZWLC
+    <set >
+      <if test="jzwjgid != null" >
+        JZWJGID = #{jzwjgid,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwdyid != null" >
+        JZWDYID = #{jzwdyid,jdbcType=VARCHAR},
+      </if>
+      <if test="lcxh != null" >
+        LCXH = #{lcxh,jdbcType=VARCHAR},
+      </if>
+      <if test="lcmc != null" >
+        LCMC = #{lcmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zhgxrq != null" >
+        ZHGXRQ = #{zhgxrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=CHAR},
+      </if>
+    </set>
+    where JZWLCID = #{jzwlcid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.psam.jzw.model.Jzwlc" >
+    update DZ_JZWLC
+    set JZWJGID = #{jzwjgid,jdbcType=VARCHAR},
+      JZWDYID = #{jzwdyid,jdbcType=VARCHAR},
+      LCXH = #{lcxh,jdbcType=VARCHAR},
+      LCMC = #{lcmc,jdbcType=VARCHAR},
+      ZHGXRQ = #{zhgxrq,jdbcType=TIMESTAMP},
+      MOVESIGN = #{movesign,jdbcType=CHAR}
+    where JZWLCID = #{jzwlcid,jdbcType=VARCHAR}
+  </update>
+</mapper>

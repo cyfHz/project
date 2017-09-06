@@ -1,0 +1,16 @@
+nbproject/
+*.pydevproject
+.project
+.metadata
+*.tmp
+node_modules/
+*.bak
+.classpath
+.settings/
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+

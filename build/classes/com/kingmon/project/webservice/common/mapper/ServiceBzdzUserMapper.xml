@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.webservice.common.mapper.ServiceBzdzUserMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.webservice.common.model.ServiceBzdzUser" >
+    <id column="SYSTEMID" property="systemid" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="USERPASSWORD" property="userpassword" jdbcType="VARCHAR" />
+    <result column="FZRNAME" property="fzrname" jdbcType="VARCHAR" />
+    <result column="FZRSFZH" property="fzrsfzh" jdbcType="VARCHAR" />
+    <result column="JSRNAME" property="jsrname" jdbcType="VARCHAR" />
+    <result column="JSRSFZH" property="jsrsfzh" jdbcType="VARCHAR" />
+    <result column="JSRPOLICEID" property="jsrpoliceid" jdbcType="VARCHAR" />
+    <result column="COMPANYNAME" property="companyname" jdbcType="VARCHAR" />
+    <result column="REGISTERTIME" property="registertime" jdbcType="TIMESTAMP" />
+    <result column="SHR" property="shr" jdbcType="VARCHAR" />
+    <result column="SHTIME" property="shtime" jdbcType="TIMESTAMP" />
+    <result column="SFSH" property="sfsh" jdbcType="VARCHAR" />
+    <result column="BDIP" property="bdip" jdbcType="VARCHAR" />
+    <result column="SFSD" property="sfsd" jdbcType="VARCHAR" />
+    <result column="SDTIME" property="sdtime" jdbcType="TIMESTAMP" />
+    <result column="SDR" property="sdr" jdbcType="VARCHAR" />
+    <result column="DELTAG" property="deltag" jdbcType="VARCHAR" />
+    <result column="DELUSER" property="deluser" jdbcType="VARCHAR" />
+    <result column="DELTIME" property="deltime" jdbcType="TIMESTAMP" />
+    <result column="DJR" property="djr" jdbcType="VARCHAR" />
+    <result column="DJDW" property="djdw" jdbcType="VARCHAR" />
+    <result column="DJSJ" property="djsj" jdbcType="TIMESTAMP" />
+    <result column="DJRMC" property="djrmc" jdbcType="VARCHAR" />
+    <result column="DJDWMC" property="djdwmc" jdbcType="VARCHAR" />
+    <result column="XGRMC" property="xgrmc" jdbcType="VARCHAR" />
+    <result column="XGDWMC" property="xgdwmc" jdbcType="VARCHAR" />
+    <result column="XGR" property="xgr" jdbcType="VARCHAR" />
+    <result column="XGDW" property="xgdw" jdbcType="VARCHAR" />
+    <result column="GXSJ" property="gxsj" jdbcType="VARCHAR" />
+    <result column="MOVESIGN" property="movesign" jdbcType="VARCHAR" />
+    <result column="REJECT_COUNT" property="rejectCount" jdbcType="INTEGER" />
+    <result column="TOKENID" property="tokenId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SYSTEMID, USERNAME, USERPASSWORD, FZRNAME, FZRSFZH, JSRNAME, JSRSFZH, JSRPOLICEID, 
+    COMPANYNAME, REGISTERTIME, SHR, SHTIME, SFSH, BDIP, SFSD, SDTIME, SDR, DELTAG, DELUSER, 
+    DELTIME, DJR, DJDW, DJSJ, DJRMC, DJDWMC, XGRMC, XGDWMC, XGR, XGDW, GXSJ, MOVESIGN,REJECT_COUNT,TOKENID
+  </sql>
+
+  
+    <!--通用分页 -->
+	<sql id="Paging_Start">
+		SELECT * FROM (
+		SELECT T_.*, rownum rn_ FROM (
+	</sql>
+	<sql id="Paging_end">
+		) T_ WHERE rownum &lt;= ${pageend}
+		) WHERE rn_ &gt; ${pagestart}
+	</sql>
+	
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SERVICE_BZDZ_USER
+    where SYSTEMID = #{systemid,jdbcType=VARCHAR}
+  </select>  
+	
+	 <select id="selectByUserNameAndIp" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SERVICE_BZDZ_USER
+    where   BDIP = #{0,jdbcType=VARCHAR}
+    and  USERNAME = #{1,jdbcType=VARCHAR} 
+            
+  </select>
+	
+   <select id="selectByNameAndPwd" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SERVICE_BZDZ_USER where
+     USERNAME = #{username,jdbcType=VARCHAR}
+      and 
+     USERPASSWORD = #{userpassword,jdbcType=VARCHAR} 
+  </select>
+  
+	
+  <!--userList  -->
+  <select id="userList" resultType="map" parameterType="map">
+      <include refid="Paging_Start" />
+      SELECT 
+      <include refid="Base_Column_List" />
+      FROM SERVICE_BZDZ_USER T1
+      WHERE 1=1 AND (DELTAG is null or DELTAG !=1)
+      <include refid="userList_where" />
+      <if test="sort != null">
+			ORDER BY T1.${sort} ${order}
+		</if>
+      <include refid="Paging_end" />
+  </select>
+  
+  <select id="userListCount" resultType="java.lang.Long" parameterType="map">
+    SELECT COUNT(1) FROM SERVICE_BZDZ_USER
+    WHERE 1=1 AND (DELTAG is null or DELTAG !=1)
+    <include refid="userList_where" />
+  </select>
+  
+  <sql id="userList_where"> 
+    <if test="username != null" >
+       AND USERNAME like #{username}
+      </if>
+  </sql>
+  <!-- END -->
+  
+  
+  <update id="reviewUser" parameterType="map">
+     UPDATE SERVICE_BZDZ_USER SET
+     SFSH=#{sfsh},SHR=#{shr},SHTIME=#{shtime}
+     WHERE SYSTEMID=#{systemid}
+  </update>
+  
+  <update id="unlockedUser" parameterType="map">
+     UPDATE SERVICE_BZDZ_USER SET
+     SFSD=#{sfsd}
+     WHERE SYSTEMID=#{systemid}
+  </update>
+  
+  <update id="lockedUser" parameterType="map">
+     UPDATE SERVICE_BZDZ_USER SET
+     SFSD=#{sfsd},SDR=#{sdr},SDTIME=#{sdtime}
+     WHERE SYSTEMID=#{systemid}
+  </update>
+  
+  <update id="delBzdzUser" parameterType="com.kingmon.project.webservice.common.model.ServiceBzdzUser">
+     UPDATE SERVICE_BZDZ_USER SET
+     DELTAG=#{deltag},DELUSER=#{deluser},DELTIME=#{deltime}
+     WHERE SYSTEMID=#{systemid}
+  </update>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SERVICE_BZDZ_USER
+    where SYSTEMID = #{systemid,jdbcType=VARCHAR}
+  </delete>
+  
+  <update id="updateTokenId" parameterType="java.lang.String">
+    update SERVICE_BZDZ_USER set TOKENID=#{tokenId}
+    where SYSTEMID = #{systemid}
+  </update>
+  
+  
+   <insert id="insertSelective" parameterType="com.kingmon.project.webservice.common.model.ServiceBzdzUser" >
+    insert into SERVICE_BZDZ_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="systemid != null" >
+        SYSTEMID,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="userpassword != null" >
+        USERPASSWORD,
+      </if>
+      <if test="fzrname != null" >
+        FZRNAME,
+      </if>
+      <if test="fzrsfzh != null" >
+        FZRSFZH,
+      </if>
+      <if test="jsrname != null" >
+        JSRNAME,
+      </if>
+      <if test="jsrsfzh != null" >
+        JSRSFZH,
+      </if>
+      <if test="jsrpoliceid != null" >
+        JSRPOLICEID,
+      </if>
+      <if test="companyname != null" >
+        COMPANYNAME,
+      </if>
+      <if test="registertime != null" >
+        REGISTERTIME,
+      </if>
+      <!-- <if test="shr != null" >
+        SHR,
+      </if> -->
+      <if test="shtime != null" >
+        SHTIME,
+      </if>
+      <if test="sfsh != null" >
+        SFSH,
+      </if>
+      <if test="bdip != null" >
+        BDIP,
+      </if>
+      <if test="sfsd != null" >
+        SFSD,
+      </if>
+      <if test="sdtime != null" >
+        SDTIME,
+      </if>
+      <if test="sdr != null" >
+        SDR,
+      </if>
+      <if test="deltag != null" >
+        DELTAG,
+      </if>
+      <if test="deluser != null" >
+        DELUSER,
+      </if>
+      <if test="deltime != null" >
+        DELTIME,
+      </if>
+      <if test="djr != null" >
+        DJR,
+      </if>
+      <if test="djdw != null" >
+        DJDW,
+      </if>
+      <if test="djsj != null" >
+        DJSJ,
+      </if>
+      <if test="djrmc != null" >
+        DJRMC,
+      </if>
+      <if test="djdwmc != null" >
+        DJDWMC,
+      </if>
+      <if test="xgrmc != null" >
+        XGRMC,
+      </if>
+      <if test="xgdwmc != null" >
+        XGDWMC,
+      </if>
+      <if test="xgr != null" >
+        XGR,
+      </if>
+      <if test="xgdw != null" >
+        XGDW,
+      </if>
+      <if test="gxsj != null" >
+        GXSJ,
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN,
+      </if>
+      <if test="rejectCount != null" >
+       REJECT_COUNT
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="systemid != null" >
+        #{systemid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fzrname != null" >
+        #{fzrname,jdbcType=VARCHAR},
+      </if>
+      <if test="fzrsfzh != null" >
+        #{fzrsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="jsrname != null" >
+        #{jsrname,jdbcType=VARCHAR},
+      </if>
+      <if test="jsrsfzh != null" >
+        #{jsrsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="jsrpoliceid != null" >
+        #{jsrpoliceid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="registertime != null" >
+        #{registertime,jdbcType=TIMESTAMP},
+      </if>
+     <!--  <if test="shr != null" >
+        #{shr,jdbcType=VARCHAR},
+      </if> -->
+      <if test="shtime != null" >
+        #{shtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sfsh != null" >
+        #{sfsh,jdbcType=VARCHAR},
+      </if>
+      <if test="bdip != null" >
+        #{bdip,jdbcType=VARCHAR},
+      </if>
+      <if test="sfsd != null" >
+        #{sfsd,jdbcType=VARCHAR},
+      </if>
+      <if test="sdtime != null" >
+        #{sdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sdr != null" >
+        #{sdr,jdbcType=VARCHAR},
+      </if>
+      <if test="deltag != null" >
+        #{deltag,jdbcType=VARCHAR},
+      </if>
+      <if test="deluser != null" >
+        #{deluser,jdbcType=VARCHAR},
+      </if>
+      <if test="deltime != null" >
+        #{deltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="djr != null" >
+        #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw != null" >
+        #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="djrmc != null" >
+        #{djrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djdwmc != null" >
+        #{djdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgrmc != null" >
+        #{xgrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdwmc != null" >
+        #{xgdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgr != null" >
+        #{xgr,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdw != null" >
+        #{xgdw,jdbcType=VARCHAR},
+      </if>
+      <if test="gxsj != null" >
+        #{gxsj,jdbcType=VARCHAR},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=VARCHAR},
+      </if>
+      <if test="rejectCount != null" >
+       #{rejectCount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.webservice.common.model.ServiceBzdzUser" >
+    update SERVICE_BZDZ_USER
+    <set >
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        USERPASSWORD = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fzrname != null" >
+        FZRNAME = #{fzrname,jdbcType=VARCHAR},
+      </if>
+      <if test="fzrsfzh != null" >
+        FZRSFZH = #{fzrsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="jsrname != null" >
+        JSRNAME = #{jsrname,jdbcType=VARCHAR},
+      </if>
+      <if test="jsrsfzh != null" >
+        JSRSFZH = #{jsrsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="jsrpoliceid != null" >
+        JSRPOLICEID = #{jsrpoliceid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null" >
+        COMPANYNAME = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="registertime != null" >
+        REGISTERTIME = #{registertime,jdbcType=TIMESTAMP},
+      </if>
+      <!-- <if test="shr != null" >
+        SHR = #{shr,jdbcType=VARCHAR},
+      </if> -->
+      <if test="shtime != null" >
+        SHTIME = #{shtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sfsh != null" >
+        SFSH = #{sfsh,jdbcType=VARCHAR},
+      </if>
+      <if test="bdip != null" >
+        BDIP = #{bdip,jdbcType=VARCHAR},
+      </if>
+      <if test="sfsd != null" >
+        SFSD = #{sfsd,jdbcType=VARCHAR},
+      </if>
+      <if test="sdtime != null" >
+        SDTIME = #{sdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sdr != null" >
+        SDR = #{sdr,jdbcType=VARCHAR},
+      </if>
+      <if test="deltag != null" >
+        DELTAG = #{deltag,jdbcType=VARCHAR},
+      </if>
+      <if test="deluser != null" >
+        DELUSER = #{deluser,jdbcType=VARCHAR},
+      </if>
+      <if test="deltime != null" >
+        DELTIME = #{deltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="djr != null" >
+        DJR = #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw != null" >
+        DJDW = #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        DJSJ = #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="djrmc != null" >
+        DJRMC = #{djrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djdwmc != null" >
+        DJDWMC = #{djdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgrmc != null" >
+        XGRMC = #{xgrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdwmc != null" >
+        XGDWMC = #{xgdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgr != null" >
+        XGR = #{xgr,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdw != null" >
+        XGDW = #{xgdw,jdbcType=VARCHAR},
+      </if>
+      <if test="gxsj != null" >
+        GXSJ = #{gxsj,jdbcType=VARCHAR},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=VARCHAR},
+      </if>
+      <if test="rejectCount != null" >
+       REJECT_COUNT= #{rejectCount,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where SYSTEMID = #{systemid,jdbcType=VARCHAR}
+  </update>
+
+<!-- <insert id="addBzdzUser" parameterType="com.kingmon.project.webservice.common.model.ServiceBzdzUser" >
+    insert into SERVICE_BZDZ_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="systemid != null" >
+        SYSTEMID,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="userpassword != null" >
+        USERPASSWORD,
+      </if>
+      <if test="fzrname != null" >
+        FZRNAME,
+      </if>
+      <if test="fzrsfzh != null" >
+        FZRSFZH,
+      </if>
+      <if test="jsrname != null" >
+        JSRNAME,
+      </if>
+      <if test="jsrsfzh != null" >
+        JSRSFZH,
+      </if>
+      <if test="jsrpoliceid != null" >
+        JSRPOLICEID,
+      </if>
+      <if test="companyname != null" >
+        COMPANYNAME,
+      </if>
+      <if test="registertime != null" >
+        REGISTERTIME,
+      </if>
+      <if test="shtime != null" >
+        SHTIME,
+      </if>
+      <if test="sfsh != null" >
+        SFSH,
+      </if>
+      <if test="bdip != null" >
+        BDIP,
+      </if>
+      <if test="sfsd != null" >
+        SFSD,
+      </if>
+      <if test="sdtime != null" >
+        SDTIME,
+      </if>
+      <if test="sdr != null" >
+        SDR,
+      </if>
+      <if test="deltag != null" >
+        DELTAG,
+      </if>
+      <if test="deluser != null" >
+        DELUSER,
+      </if>
+      <if test="deltime != null" >
+        DELTIME,
+      </if>
+      <if test="djr != null" >
+        DJR,
+      </if>
+      <if test="djdw != null" >
+        DJDW,
+      </if>
+      <if test="djsj != null" >
+        DJSJ,
+      </if>
+      <if test="djrmc != null" >
+        DJRMC,
+      </if>
+      <if test="djdwmc != null" >
+        DJDWMC,
+      </if>
+      <if test="xgrmc != null" >
+        XGRMC,
+      </if>
+      <if test="xgdwmc != null" >
+        XGDWMC,
+      </if>
+      <if test="xgr != null" >
+        XGR,
+      </if>
+      <if test="xgdw != null" >
+        XGDW,
+      </if>
+      <if test="gxsj != null" >
+        GXSJ,
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN,
+      </if>
+      <if test="xzdlcs != null" >
+        XZDLCS
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="systemid != null" >
+        #{systemid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fzrname != null" >
+        #{fzrname,jdbcType=VARCHAR},
+      </if>
+      <if test="fzrsfzh != null" >
+        #{fzrsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="jsrname != null" >
+        #{jsrname,jdbcType=VARCHAR},
+      </if>
+      <if test="jsrsfzh != null" >
+        #{jsrsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="jsrpoliceid != null" >
+        #{jsrpoliceid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="registertime != null" >
+        #{registertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shtime != null" >
+        #{shtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sfsh != null" >
+        #{sfsh,jdbcType=VARCHAR},
+      </if>
+      <if test="bdip != null" >
+        #{bdip,jdbcType=VARCHAR},
+      </if>
+      <if test="sfsd != null" >
+        #{sfsd,jdbcType=VARCHAR},
+      </if>
+      <if test="sdtime != null" >
+        #{sdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sdr != null" >
+        #{sdr,jdbcType=VARCHAR},
+      </if>
+      <if test="deltag != null" >
+        #{deltag,jdbcType=VARCHAR},
+      </if>
+      <if test="deluser != null" >
+        #{deluser,jdbcType=VARCHAR},
+      </if>
+      <if test="deltime != null" >
+        #{deltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="djr != null" >
+        #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw != null" >
+        #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="djrmc != null" >
+        #{djrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djdwmc != null" >
+        #{djdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgrmc != null" >
+        #{xgrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdwmc != null" >
+        #{xgdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgr != null" >
+        #{xgr,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdw != null" >
+        #{xgdw,jdbcType=VARCHAR},
+      </if>
+      <if test="gxsj != null" >
+        #{gxsj,jdbcType=VARCHAR},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=VARCHAR},
+      </if>
+      <if test="xzdlcs != null" >
+        #{xzdlcs,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert> -->
+  
+<!--   <update id="saveBzdzUser" parameterType="com.kingmon.project.webservice.common.model.ServiceBzdzUser" >
+    update SERVICE_BZDZ_USER
+    <set >
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        USERPASSWORD = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fzrname != null" >
+        FZRNAME = #{fzrname,jdbcType=VARCHAR},
+      </if>
+      <if test="fzrsfzh != null" >
+        FZRSFZH = #{fzrsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="jsrname != null" >
+        JSRNAME = #{jsrname,jdbcType=VARCHAR},
+      </if>
+      <if test="jsrsfzh != null" >
+        JSRSFZH = #{jsrsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="jsrpoliceid != null" >
+        JSRPOLICEID = #{jsrpoliceid,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null" >
+        COMPANYNAME = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="registertime != null" >
+        REGISTERTIME = #{registertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shtime != null" >
+        SHTIME = #{shtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sfsh != null" >
+        SFSH = #{sfsh,jdbcType=VARCHAR},
+      </if>
+      <if test="bdip != null" >
+        BDIP = #{bdip,jdbcType=VARCHAR},
+      </if>
+      <if test="sfsd != null" >
+        SFSD = #{sfsd,jdbcType=VARCHAR},
+      </if>
+      <if test="sdtime != null" >
+        SDTIME = #{sdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sdr != null" >
+        SDR = #{sdr,jdbcType=VARCHAR},
+      </if>
+      <if test="deltag != null" >
+        DELTAG = #{deltag,jdbcType=VARCHAR},
+      </if>
+      <if test="deluser != null" >
+        DELUSER = #{deluser,jdbcType=VARCHAR},
+      </if>
+      <if test="deltime != null" >
+        DELTIME = #{deltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="djr != null" >
+        DJR = #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw != null" >
+        DJDW = #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        DJSJ = #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="djrmc != null" >
+        DJRMC = #{djrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djdwmc != null" >
+        DJDWMC = #{djdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgrmc != null" >
+        XGRMC = #{xgrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdwmc != null" >
+        XGDWMC = #{xgdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgr != null" >
+        XGR = #{xgr,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdw != null" >
+        XGDW = #{xgdw,jdbcType=VARCHAR},
+      </if>
+      <if test="gxsj != null" >
+        GXSJ = #{gxsj,jdbcType=VARCHAR},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=VARCHAR},
+      </if>
+      <if test="xzdlcs != null" >
+       XZDLCS= #{xzdlcs,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SYSTEMID = #{systemid,jdbcType=VARCHAR}
+  </update> -->
+  
+  
+</mapper>

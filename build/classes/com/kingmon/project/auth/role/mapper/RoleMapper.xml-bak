@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.auth.role.mapper.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.auth.role.model.Role" >
+    <id column="ROLE_ID" property="role_id" jdbcType="VARCHAR" />
+    <result column="ROLE_NAME" property="role_name" jdbcType="VARCHAR" />
+    <result column="ROLE_DESC" property="role_desc" jdbcType="VARCHAR" />
+    <result column="ROLE_CODE" property="role_code" jdbcType="VARCHAR" />
+    <result column="ENABLED" property="enabled" jdbcType="CHAR" />
+    <result column="OPRATETIME" property="opratetime" jdbcType="VARCHAR" />
+    <result column="AREA_ID" property="area_id" jdbcType="VARCHAR" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+    <result column="ORGANID" property="organid" jdbcType="VARCHAR" />
+    <result column="CREATEUSER" property="createuser" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ROLE_ID, ROLE_NAME, ROLE_DESC, ROLE_CODE, ENABLED, OPRATETIME, AREA_ID, MOVESIGN, 
+    ORGANID, CREATEUSER
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from APP_ROLE
+    where ROLE_ID = #{role_id,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from APP_ROLE
+    where ROLE_ID = #{role_id,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.kingmon.project.auth.role.model.Role" >
+    insert into APP_ROLE (ROLE_ID, ROLE_NAME, ROLE_DESC, 
+      ROLE_CODE, ENABLED, OPRATETIME, 
+      AREA_ID, MOVESIGN, ORGANID, 
+      CREATEUSER)
+    values (#{role_id,jdbcType=VARCHAR}, #{role_name,jdbcType=VARCHAR}, #{role_desc,jdbcType=VARCHAR}, 
+      #{role_code,jdbcType=VARCHAR}, #{enabled,jdbcType=CHAR}, #{opratetime,jdbcType=VARCHAR}, 
+      #{area_id,jdbcType=VARCHAR}, #{movesign,jdbcType=CHAR}, #{organid,jdbcType=VARCHAR}, 
+      #{createuser,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.auth.role.model.Role" >
+    insert into APP_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="role_id != null" >
+        ROLE_ID,
+      </if>
+      <if test="role_name != null" >
+        ROLE_NAME,
+      </if>
+      <if test="role_desc != null" >
+        ROLE_DESC,
+      </if>
+      <if test="role_code != null" >
+        ROLE_CODE,
+      </if>
+      <if test="enabled != null" >
+        ENABLED,
+      </if>
+      <if test="opratetime != null" >
+        OPRATETIME,
+      </if>
+      <if test="area_id != null" >
+        AREA_ID,
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN,
+      </if>
+      <if test="organid != null" >
+        ORGANID,
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="role_id != null" >
+        #{role_id,jdbcType=VARCHAR},
+      </if>
+      <if test="role_name != null" >
+        #{role_name,jdbcType=VARCHAR},
+      </if>
+      <if test="role_desc != null" >
+        #{role_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="role_code != null" >
+        #{role_code,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="opratetime != null" >
+        #{opratetime,jdbcType=VARCHAR},
+      </if>
+      <if test="area_id != null" >
+        #{area_id,jdbcType=VARCHAR},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="organid != null" >
+        #{organid,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.auth.role.model.Role" >
+    update APP_ROLE
+    <set >
+      <if test="role_name != null" >
+        ROLE_NAME = #{role_name,jdbcType=VARCHAR},
+      </if>
+      <if test="role_desc != null" >
+        ROLE_DESC = #{role_desc,jdbcType=VARCHAR},
+      </if>
+      <if test="role_code != null" >
+        ROLE_CODE = #{role_code,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        ENABLED = #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="opratetime != null" >
+        OPRATETIME = #{OPRATETIME,jdbcType=VARCHAR},
+      </if>
+      <if test="area_id != null" >
+        AREA_ID = #{area_id,jdbcType=VARCHAR},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="organid != null" >
+        ORGANID = #{organid,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER = #{createuser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROLE_ID = #{role_id,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.auth.role.model.Role" >
+    update APP_ROLE
+    set ROLE_NAME = #{role_name,jdbcType=VARCHAR},
+      ROLE_DESC = #{role_desc,jdbcType=VARCHAR},
+      ROLE_CODE = #{role_code,jdbcType=VARCHAR},
+      ENABLED = #{enabled,jdbcType=CHAR},
+      OPRATETIME = #{opratetime,jdbcType=VARCHAR},
+      AREA_ID = #{area_id,jdbcType=VARCHAR},
+      MOVESIGN = #{movesign,jdbcType=CHAR},
+      ORGANID = #{organid,jdbcType=VARCHAR},
+      CREATEUSER = #{createuser,jdbcType=VARCHAR}
+    where ROLE_ID = #{role_id,jdbcType=VARCHAR}
+  </update>
+  <!--  -->
+    <select id="selectRoleListByByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select R.ROLE_ID, R.ROLE_NAME,R.ROLE_CODE, R.ORGANID 
+    from APP_ROLE R, APP_ROLE_USER RU 
+    where RU.ROLE_ID = R.ROLE_ID AND R.ENABLED='1' AND  RU.APPUSER_ID = #{APPUSER_ID,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

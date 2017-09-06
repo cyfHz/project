@@ -1,0 +1,49 @@
+{
+"message":"",
+"statusCode":"200",
+"data":[ 
+{
+	"menuid" : "100",
+	"icon" : "icon-kmhome",
+	"menuname" : "基础数据",
+	"menus" : [
+	{
+		"menuid" : "120",
+		"menuname" : "行政区划管理",
+		"icon" : "icon-kmedit",
+		"url" : "psam/xzqh"
+	}, {
+		"menuid" : "121",
+		"menuname" : "乡镇街道管理",
+		"icon" : "icon-kmedit",
+		"url" : "psam/xzjd"
+	},{
+		"menuid" : "122",
+		"menuname" : "社区居村委会管理",
+		"icon" : "icon-kmedit",
+		"url" : "psam/sqjcwh"
+	},{
+		"menuid" : "123",
+		"menuname" : "街路巷（小区）管理",
+		"icon" : "icon-kmedit",
+		"url" : "psam/jlx"
+	} ,{
+		"menuid" : "124",
+		"menuname" : "门（楼）牌号管理",
+		"icon" : "icon-kmedit",
+		"url" : "psam/mlph"
+	},{
+		"menuid" : "125",
+		"menuname" : "建筑物基本信息",
+		"icon" : "icon-kmedit",
+		"url" : "psam/jzwjbxx"
+	},{
+		"menuid" : "126",
+		"menuname" : "房屋基本信息",
+		"icon" : "icon-kmedit",
+		"url" : "psam/fw/"
+	}]
+}
+
+
+]}

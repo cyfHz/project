@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.common.log.mapper.LogOperateMapper">
+	<resultMap id="BaseResultMap" type="com.kingmon.project.common.log.model.LogOperate">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="USER_ID" property="user_id" jdbcType="VARCHAR" />
+		<result column="USER_LOGINNAME" property="user_loginname" jdbcType="VARCHAR" />
+		<result column="USER_NAME" property="user_name" jdbcType="VARCHAR" />
+		<result column="ORGNA_ID" property="orgna_id" jdbcType="VARCHAR" />
+		<result column="OPERATE_TIME" property="operate_time" jdbcType="TIMESTAMP" />
+		<result column="OPERATE_TYPE" property="operate_type" jdbcType="VARCHAR" />
+		<result column="TABLE_NAME" property="table_name" jdbcType="VARCHAR" />
+		<result column="OPERATE_DEF" property="operate_def" jdbcType="VARCHAR" />
+		<result column="LOG_TEXT" property="log_text" jdbcType="CLOB" />
+	</resultMap>
+ 	
+	<sql id="Base_Column_List">
+		ID, USER_ID, USER_LOGINNAME, USER_NAME, ORGNA_ID, OPERATE_TIME,
+		OPERATE_TYPE, TABLE_NAME,
+		OPERATE_DEF
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from APP_LOG  where ID = #{id,jdbcType=VARCHAR}
+  </select>
+	<!-- #######################page add start ########################################### -->
+	<insert id="addLogOperate" parameterType="com.kingmon.project.common.log.model.LogOperate">
+		insert into APP_LOG_OPERATE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">ID,</if>
+			<if test="user_id != null">USER_ID,</if>
+			<if test="user_loginname != null">USER_LOGINNAME,</if>
+			<if test="user_name != null">USER_NAME,</if>
+			<if test="orgna_id != null">ORGNA_ID,</if>
+			<if test="operate_time != null">OPERATE_TIME,</if>
+			<if test="operate_type != null">OPERATE_TYPE,</if>
+			<if test="table_name != null">TABLE_NAME,</if>
+			<if test="operate_def != null">OPERATE_DEF,</if>
+			<if test="log_text != null">LOG_TEXT,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id,jdbcType=VARCHAR},</if>
+			<if test="user_id != null">#{user_id,jdbcType=VARCHAR},</if>
+			<if test="user_loginname != null">#{user_loginname,jdbcType=VARCHAR},</if>
+			<if test="user_name != null">#{user_name,jdbcType=VARCHAR},</if>
+			<if test="orgna_id != null">#{orgna_id,jdbcType=VARCHAR},</if>
+			<if test="operate_time != null">#{operate_time,jdbcType=TIMESTAMP},</if>
+			<if test="operate_type != null">#{operate_type,jdbcType=VARCHAR},</if>
+			<if test="table_name != null">#{table_name,jdbcType=VARCHAR},</if>
+			<if test="operate_def != null">#{operate_def,jdbcType=VARCHAR},</if>
+			<if test="log_text != null">#{log_text,jdbcType=CLOB},</if>
+		</trim>
+	</insert>
+	<!-- #######################page add end ########################################### -->
+
+	<!--通用分页 -->
+	<sql id="Paging_Start">
+		SELECT * FROM (
+		SELECT T_.*, rownum rn_ FROM (
+	</sql>
+
+	<sql id="Paging_end">
+		) T_ WHERE rownum &lt;= ${pageend}
+		) WHERE rn_ &gt;
+		${pagestart}
+	</sql>
+
+	<!-- #######################page query start ########################################### -->
+	<sql id="Alias_Base_Column_List">
+		${alias}.ID, 
+		${alias}.USER_ID, 
+		${alias}.USER_LOGINNAME,
+		${alias}.USER_NAME, 
+		${alias}.ORGNA_ID, 
+		${alias}.OPERATE_TIME,
+		${alias}.OPERATE_TYPE, 
+		${alias}.TABLE_NAME,
+		${alias}.OPERATE_DEF,
+		${alias}.LOG_TEXT
+	</sql>
+
+	<select id="selectLogOperateList" resultType="java.util.Map"
+		parameterType="java.util.Map">
+		<include refid="Paging_Start" />
+		SELECT
+		<include refid="Alias_Base_Column_List">
+			<property name="alias" value="T1" />
+		</include>
+		FROM APP_LOG_OPERATE T1 WHERE 1=1
+		<include refid="LogOperateList_where">
+			<property name="alias" value="T1" />
+		</include>
+		<if test="sort != null">
+			ORDER BY T1.${sort} ${order}
+		</if>
+		<include refid="Paging_end" />
+	</select>
+
+	<select id="selectLogOperateCount" resultType="java.lang.Long"
+		parameterType="java.util.Map">
+		select count(1) from APP_LOG_OPERATE T1 WHERE 1=1
+		<include refid="LogOperateList_where">
+			<property name="alias" value="T1" />
+		</include>
+	</select>
+
+	<sql id="LogOperateList_where">
+		<if test="user_loginname != null">
+			AND ${alias}.USER_LOGINNAME =#{user_loginname,jdbcType=VARCHAR}
+		</if>
+		<if test="start_time != null">
+			AND  to_char(${alias}.OPERATE_TIME ,'yyyy-mm-dd hh24:mm:ss')  &gt;=#{start_time,jdbcType=VARCHAR}
+		</if>
+		<if test="end_time != null">
+			AND to_char(${alias}.OPERATE_TIME ,'yyyy-mm-dd hh24:mm:ss')  &lt;=#{end_time,jdbcType=VARCHAR}
+		</if>
+	</sql>
+
+	<!-- #######################page query end ########################################### -->
+
+</mapper>

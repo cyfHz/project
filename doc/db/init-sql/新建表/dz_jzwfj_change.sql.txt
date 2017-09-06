@@ -1,0 +1,35 @@
+create table DZ_JZWFJ_CHANGE
+(
+  id         VARCHAR2(36) not null,
+  fromfjid   VARCHAR2(36),
+  tofjid     VARCHAR2(36),
+  changesign CHAR(1),
+  created    DATE,
+  createdby  VARCHAR2(36),
+  createddw  VARCHAR2(36),
+  movesign   CHAR(1)
+);
+-- Add comments to the table 
+comment on table DZ_JZWFJ_CHANGE
+  is '建筑物房间拆分合并历史记录';
+-- Add comments to the columns 
+comment on column DZ_JZWFJ_CHANGE.id
+  is '主键';
+comment on column DZ_JZWFJ_CHANGE.fromfjid
+  is '被拆分/合并房间ID';
+comment on column DZ_JZWFJ_CHANGE.tofjid
+  is '拆分/合并后房间ID';
+comment on column DZ_JZWFJ_CHANGE.changesign
+  is '记录拆分还是合并';
+comment on column DZ_JZWFJ_CHANGE.created
+  is '时间';
+comment on column DZ_JZWFJ_CHANGE.createdby
+  is '创建人';
+comment on column DZ_JZWFJ_CHANGE.createddw
+  is '创建单位';
+comment on column DZ_JZWFJ_CHANGE.movesign
+  is 'MOVESIGN';
+  
+alter table DZ_JZWFJ_CHANGE add constraint JDW_FJ_CHANGGE_ID primary key (ID);
+create index DZ_JZWFJ_CHANGE_TOFJID on DZ_JZWFJ_CHANGE (TOFJID);
+create index I_DZ_JZWFJ_CHANGE_FROMFJID on DZ_JZWFJ_CHANGE (FROMFJID);

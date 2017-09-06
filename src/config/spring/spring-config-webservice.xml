@@ -1,0 +1,33 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd 
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	
+	<jaxws:endpoint id="xzqhWebService" implementor="com.kingmon.project.webservice.xzqh.impl.XzqhWebServiceImpl" address="/xzqhWebService" />
+	
+	<jaxws:endpoint id="bzdzWebService" implementor="com.kingmon.project.webservice.bzdz.impl.BzdzWebServiceImpl" address="/bzdzWebService" />
+
+	<jaxws:endpoint id="xzjdWebService" implementor="com.kingmon.project.webservice.xzjd.impl.XzjdWebServiceImpl" address="/xzjdWebService" />
+
+	<jaxws:endpoint id="jlxWebService" implementor="com.kingmon.project.webservice.jlx.impl.JlxWebServiceImpl" address="/jlxWebService" />
+	
+	<jaxws:endpoint id="sqjcwhWebService" implementor="com.kingmon.project.webservice.sqjcwh.impl.SqjcwhWebServiceImpl" address="/sqjcwhWebService" />
+	
+	<jaxws:endpoint id="dyxxWebService" implementor="com.kingmon.project.webservice.dyxx.impl.DyxxWebServiceImpl" address="/dyxxWebService" />
+	
+	<jaxws:endpoint id="lcxxWebService" implementor="com.kingmon.project.webservice.lcxx.impl.LcxxWebServiceImpl" address="/lcxxWebService" />
+	
+	<jaxws:endpoint id="fwxxWebService" implementor="com.kingmon.project.webservice.fwxx.impl.FwxxWebServiceImpl" address="/fwxxWebService" />
+	
+	<!-- <jaxws:endpoint id="helloWorldService" implementor="com.kingmon.project.webservice.demo.impl.HelloWorldImpl" address="/helloWorldService" />
+	 -->
+	<jaxws:endpoint id="authService" implementor="com.kingmon.project.webservice.auth.impl.AuthServiceImpl" address="/authService" />
+	 
+	 <bean id="redisTokenRepositoryImpl" class="com.kingmon.project.webservice.common.token.repository.impl.RedisTokenRepositoryImpl">
+        <property name="jedisManager" ref="jedisManager"/>
+    </bean>
+</beans>

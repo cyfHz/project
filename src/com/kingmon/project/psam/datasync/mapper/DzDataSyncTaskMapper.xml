@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.datasync.mapper.DzDataSyncTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.datasync.model.DzDataSyncTask" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CONFIG_ID" property="configId" jdbcType="VARCHAR" />
+    <result column="ORIGINAL_VALUE" property="originalValue" jdbcType="VARCHAR" />
+    <result column="TARGET_VALUE" property="targetValue" jdbcType="VARCHAR" />
+    <result column="UPDATE_WHERE_VALUE" property="updateWhereValue" jdbcType="VARCHAR" />
+    
+ <!--    <result column="ES_ORIGINAL_VALUE" property="esOriginalValue" jdbcType="VARCHAR" />
+    <result column="ES_TARGET_VALUE" property="esTargetValue" jdbcType="VARCHAR" /> -->
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+     <result column="ENABLED" property="enabled" jdbcType="CHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="CREATEUSER" property="createuser" jdbcType="VARCHAR" />
+    <result column="ENDTIME" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="DESCRIBE" property="describe" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, CONFIG_ID, ORIGINAL_VALUE, TARGET_VALUE, STATUS, CREATETIME, CREATEUSER, ENDTIME,DESCRIBE,ENABLED,UPDATE_WHERE_VALUE
+  </sql>
+   <sql id="Alias_Base_Column_List" >
+    ${alias}.ID, ${alias}.CONFIG_ID, ${alias}.ORIGINAL_VALUE, ${alias}.TARGET_VALUE, ${alias}.STATUS, ${alias}.CREATETIME, ${alias}.CREATEUSER, ${alias}.ENDTIME,${alias}.DESCRIBE,${alias}.ENABLED,${alias}.UPDATE_WHERE_VALUE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   <include refid="Base_Column_List" />
+    from DZ_DATA_SYNC_TASK where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectSyncTaskByBizId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select    
+   		<include refid="Alias_Base_Column_List" >
+	    	<property name="alias" value="t"/>
+	    </include>
+	    from DZ_DATA_SYNC_TASK t,DZ_DATA_SYNC_CONFIG c 
+	     where 1=1 and t.CONFIG_ID=c.ID 
+	  	 <if test="bizId != null">
+				AND c.BIZ_ID =#{bizId,jdbcType=VARCHAR}
+		 </if>
+	     <if test="status != null">
+				AND STATUS =#{status,jdbcType=VARCHAR}
+		 </if>
+		  <if test="enabled != null">
+				AND ENABLED =#{enabled,jdbcType=VARCHAR}
+		 </if>
+  </select>
+  
+    <select id="selectSyncTaskByConfigId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	    select    <include refid="Base_Column_List" />
+	    from DZ_DATA_SYNC_TASK  where 1=1
+	  	  <if test="configId != null">
+				AND CONFIG_ID =#{configId,jdbcType=VARCHAR}
+		 </if>
+	     <if test="status != null">
+				AND STATUS =#{status,jdbcType=VARCHAR}
+		 </if>
+		  <if test="enabled != null">
+				AND ENABLED =#{enabled,jdbcType=VARCHAR}
+		 </if>
+  </select>
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DZ_DATA_SYNC_TASK
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+     <insert id="batchInsertSyncTask" parameterType="java.util.List">
+		insert into DZ_DATA_SYNC_TASK ( ID, CONFIG_ID, ORIGINAL_VALUE, TARGET_VALUE,UPDATE_WHERE_VALUE , STATUS,ENABLED, CREATETIME, CREATEUSER, ENDTIME,DESCRIBE)
+		<foreach collection="list" item="item" index="index" open="(" separator="union" close=")">
+	select
+		 #{id,jdbcType=VARCHAR}, 
+	     #{configId,jdbcType=VARCHAR},
+	     #{originalValue,jdbcType=VARCHAR},
+	     #{targetValue,jdbcType=VARCHAR},
+	     #{updateWhereValue,jdbcType=VARCHAR},
+	     #{status,jdbcType=CHAR},
+	     #{enabled,jdbcType=CHAR},
+	     #{createtime,jdbcType=TIMESTAMP},
+	     #{createuser,jdbcType=VARCHAR}
+	     #{endtime,jdbcType=TIMESTAMP}
+	     #{describe,jdbcType=VARCHAR}
+			from dual
+		</foreach>
+	</insert>
+	
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.datasync.model.DzDataSyncTask" >
+    insert into DZ_DATA_SYNC_TASK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="configId != null" >
+        CONFIG_ID,
+      </if>
+      <if test="originalValue != null" >
+        ORIGINAL_VALUE,
+      </if>
+      <if test="targetValue != null" >
+        TARGET_VALUE,
+      </if>
+      <if test="updateWhereValue != null" >
+        UPDATE_WHERE_VALUE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="enabled != null" >
+        ENABLED,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+       <if test="describe != null" >
+        DESCRIBE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="configId != null" >
+        #{configId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalValue != null" >
+        #{originalValue,jdbcType=VARCHAR},
+      </if>
+      <if test="targetValue != null" >
+        #{targetValue,jdbcType=VARCHAR},
+      </if>
+      <if test="updateWhereValue != null" >
+         #{updateWhereValue,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=VARCHAR},
+      </if>
+       <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.datasync.model.DzDataSyncTask" >
+    update DZ_DATA_SYNC_TASK
+    <set >
+      <if test="configId != null" >
+        CONFIG_ID = #{configId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalValue != null" >
+        ORIGINAL_VALUE = #{originalValue,jdbcType=VARCHAR},
+      </if>
+      <if test="targetValue != null" >
+        TARGET_VALUE = #{targetValue,jdbcType=VARCHAR},
+      </if>
+      <if test="updateWhereValue != null" >
+         #{UPDATE_WHERE_VALUE,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="enabled != null" >
+        ENABLED = #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER = #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        ENDTIME = #{endtime,jdbcType=VARCHAR},
+      </if>
+        <if test="describe != null" >
+        #{DESCRIBE,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

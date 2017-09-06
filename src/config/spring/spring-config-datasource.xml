@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/jee 
+       http://www.springframework.org/schema/jee/spring-jee.xsd	
+       http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd"
+       default-lazy-init="true">
+       
+   
+	<!-- Mybatis 配置 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage"  value="com.kingmon.project" />
+		 <property name="configLocation">
+		    <value>classpath:config/mybtis/mybatis-env-setting.xml</value>
+		  </property>
+  
+		<!-- <property name="configurationProperties" >
+		<props>
+            <prop key="callSettersOnNulls">true</prop>  
+		</props>
+		</property> -->
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
+		<property name="annotationClass"  value="com.kingmon.base.common.KMapper"/>
+		<property name="basePackage"  value="com.kingmon.project" />
+	</bean>
+	<!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+
+	<!-- 事务配置 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- dev-->
+	<beans profile="dev">
+	<!--
+		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+			<property name="url" value="${jdbc.url}" />
+			<property name="username" value="${jdbc.username}" />
+			<property name="password" value="${jdbc.password}" />
+		</bean>
+  -->		
+		<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialSize" value="${druid.initialSize}"/>
+        <property name="minIdle" value="${druid.minIdle}"/>
+        <property name="maxActive" value="${druid.maxActive}"/>
+        <property name="maxWait" value="${druid.maxWait}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${druid.timeBetweenEvictionRunsMillis}" />
+        <property name="minEvictableIdleTimeMillis" value="${druid.minEvictableIdleTimeMillis}" />
+        <property name="validationQuery" value="${druid.validationQuery}" />
+        <property name="testWhileIdle" value="${druid.testWhileIdle}" />
+        <property name="testOnBorrow" value="${druid.testOnBorrow}" />
+        <property name="testOnReturn" value="${druid.testOnReturn}" />
+        <property name="poolPreparedStatements" value="${druid.poolPreparedStatements}" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="${druid.maxPoolPreparedStatementPerConnectionSize}" />
+        <property name="filters" value="${druid.filters}" />
+       <property name="connectionProperties" value="config.decrypt=false" />
+	</bean>
+	
+	</beans>
+	
+	<!-- real production-->
+	<beans profile="prod">
+		<jee:jndi-lookup id="dataSource" jndi-name="jdbc/pcamDB" />
+	</beans>
+	
+	
+</beans>   

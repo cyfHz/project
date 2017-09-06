@@ -1,0 +1,28 @@
+-- Create table 移动端版本更新  --2016-0705添加正式库
+create table APP_VERSION
+(
+  ID       NVARCHAR2(36) not null,
+  APP_NAME VARCHAR2(60) not null,
+  APP_VERS VARCHAR2(60),
+  APP_NR   VARCHAR2(2000)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 8K
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the columns 
+comment on column APP_VERSION.ID
+  is '主键';
+comment on column APP_VERSION.APP_NAME
+  is 'APP名称';
+comment on column APP_VERSION.APP_VERS
+  is 'APP版本';
+comment on column APP_VERSION.APP_NR
+  is 'APP版本更新内容';

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.common.log.mapper.LogMapper" >
+ 
+    <resultMap id="BaseResultMap" type="com.kingmon.project.common.log.model.Log" >
+    <id column="ID" property="ID" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="USER_ID" jdbcType="VARCHAR" />
+    <result column="USER_LOGINNAME" property="USER_LOGINNAME" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="USER_NAME" jdbcType="VARCHAR" />
+    <result column="ORGNA_ID" property="ORGNA_ID" jdbcType="VARCHAR" />
+    <result column="LOG_TYPE" property="LOG_TYPE" jdbcType="VARCHAR" />
+    <result column="OPRATETIME1" property="OPRATETIME1" jdbcType="VARCHAR" />
+    <result column="LOG_OBJECT" property="LOG_OBJECT" jdbcType="VARCHAR" />
+    <result column="LOG_CONTENT" property="LOG_CONTENT" jdbcType="VARCHAR" />
+    <result column="AREA_CODE" property="AREA_CODE" jdbcType="VARCHAR" />
+    <result column="OPRATETIME" property="OPRATETIME" jdbcType="TIMESTAMP" />
+    <result column="OPERATE_URL" property="OPERATE_URL" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, USER_ID, USER_LOGINNAME, USER_NAME, ORGNA_ID, LOG_TYPE, OPRATETIME1, LOG_OBJECT, 
+    LOG_CONTENT, AREA_CODE, OPRATETIME, OPERATE_URL
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from APP_LOG  where ID = #{ID,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from APP_LOG
+    where ID = #{ID,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.kingmon.project.common.log.model.Log" >
+    insert into APP_LOG (
+      ID, USER_ID, 
+      USER_LOGINNAME, 
+      USER_NAME, 
+      ORGNA_ID, 
+      LOG_TYPE, 
+      OPRATETIME1, 
+      LOG_OBJECT, 
+      LOG_CONTENT, 
+      AREA_CODE, 
+      OPRATETIME, OPERATE_URL
+      )
+    values (#{ID,jdbcType=VARCHAR}, #{USER_ID,jdbcType=VARCHAR}, #{USER_LOGINNAME,jdbcType=VARCHAR}, 
+      #{USER_NAME,jdbcType=VARCHAR}, #{ORGNA_ID,jdbcType=VARCHAR}, #{LOG_TYPE,jdbcType=VARCHAR}, 
+      #{OPRATETIME1,jdbcType=VARCHAR}, #{LOG_OBJECT,jdbcType=VARCHAR}, #{LOG_CONTENT,jdbcType=VARCHAR}, 
+      #{AREA_CODE,jdbcType=VARCHAR}, #{OPRATETIME,jdbcType=TIMESTAMP}, #{OPERATE_URL,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.common.log.model.Log" >
+    insert into APP_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="USER_ID != null" >
+        USER_ID,
+      </if>
+      <if test="USER_LOGINNAME != null" >
+        USER_LOGINNAME,
+      </if>
+      <if test="USER_NAME != null" >
+        USER_NAME,
+      </if>
+      <if test="ORGNA_ID != null" >
+        ORGNA_ID,
+      </if>
+      <if test="LOG_TYPE != null" >
+        LOG_TYPE,
+      </if>
+      <if test="OPRATETIME1 != null" >
+        OPRATETIME1,
+      </if>
+      <if test="LOG_OBJECT != null" >
+        LOG_OBJECT,
+      </if>
+      <if test="LOG_CONTENT != null" >
+        LOG_CONTENT,
+      </if>
+      <if test="AREA_CODE != null" >
+        AREA_CODE,
+      </if>
+      <if test="OPRATETIME != null" >
+        OPRATETIME,
+      </if>
+      <if test="OPERATE_URL != null" >
+        OPERATE_URL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_ID != null" >
+        #{USER_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_LOGINNAME != null" >
+        #{USER_LOGINNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_NAME != null" >
+        #{USER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="ORGNA_ID != null" >
+        #{ORGNA_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="LOG_TYPE != null" >
+        #{LOG_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="OPRATETIME1 != null" >
+        #{OPRATETIME1,jdbcType=VARCHAR},
+      </if>
+      <if test="LOG_OBJECT != null" >
+        #{LOG_OBJECT,jdbcType=VARCHAR},
+      </if>
+      <if test="LOG_CONTENT != null" >
+        #{LOG_CONTENT,jdbcType=VARCHAR},
+      </if>
+      <if test="AREA_CODE != null" >
+        #{AREA_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="OPRATETIME != null" >
+        #{OPRATETIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="OPERATE_URL != null" >
+        #{OPERATE_URL,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.common.log.model.Log" >
+    update APP_LOG
+    <set >
+      <if test="USER_ID != null" >
+        USER_ID = #{USER_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_LOGINNAME != null" >
+        USER_LOGINNAME = #{USER_LOGINNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_NAME != null" >
+        USER_NAME = #{USER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="ORGNA_ID != null" >
+        ORGNA_ID = #{ORGNA_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="LOG_TYPE != null" >
+        LOG_TYPE = #{LOG_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="OPRATETIME1 != null" >
+        OPRATETIME1 = #{OPRATETIME1,jdbcType=VARCHAR},
+      </if>
+      <if test="LOG_OBJECT != null" >
+        LOG_OBJECT = #{LOG_OBJECT,jdbcType=VARCHAR},
+      </if>
+      <if test="LOG_CONTENT != null" >
+        LOG_CONTENT = #{LOG_CONTENT,jdbcType=VARCHAR},
+      </if>
+      <if test="AREA_CODE != null" >
+        AREA_CODE = #{AREA_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="OPRATETIME != null" >
+        OPRATETIME = #{OPRATETIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="OPERATE_URL != null" >
+        OPERATE_URL = #{OPERATE_URL,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.common.log.model.Log" >
+    update APP_LOG
+    set 
+      USER_ID = #{USER_ID,jdbcType=VARCHAR},
+      USER_LOGINNAME = #{USER_LOGINNAME,jdbcType=VARCHAR},
+      USER_NAME = #{USER_NAME,jdbcType=VARCHAR},
+      ORGNA_ID = #{ORGNA_ID,jdbcType=VARCHAR},
+      LOG_TYPE = #{LOG_TYPE,jdbcType=VARCHAR},
+      OPRATETIME1 = #{OPRATETIME1,jdbcType=VARCHAR},
+      LOG_OBJECT = #{LOG_OBJECT,jdbcType=VARCHAR},
+      LOG_CONTENT = #{LOG_CONTENT,jdbcType=VARCHAR},
+      AREA_CODE = #{AREA_CODE,jdbcType=VARCHAR},
+      OPRATETIME = #{OPRATETIME,jdbcType=TIMESTAMP},
+      OPERATE_URL = #{OPERATE_URL,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.jzw.mapper.JzwfjMapper" >
+
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.jzw.model.Jzwfj" >
+    <id column="JZWFJID" property="jzwfjid" jdbcType="VARCHAR" />
+    <result column="JZWJGID" property="jzwjgid" jdbcType="VARCHAR" />
+    <result column="JZWDYID" property="jzwdyid" jdbcType="VARCHAR" />
+    <result column="JZWLCID" property="jzwlcid" jdbcType="VARCHAR" />
+    <result column="FJXH" property="fjxh" jdbcType="VARCHAR" />
+    <result column="FJMC" property="fjmc" jdbcType="VARCHAR" />
+    <result column="ZHGXRQ" property="zhgxrq" jdbcType="TIMESTAMP" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+    <result column="CREATEDBY" property="createdby" jdbcType="VARCHAR" />
+    <result column="CREATED" property="created" jdbcType="TIMESTAMP" />
+    <result column="UPDATEDBY" property="updatedby" jdbcType="VARCHAR" />
+    <result column="UPDATED" property="updated" jdbcType="TIMESTAMP" />
+    <result column="DELTAG" property="deltag" jdbcType="CHAR" />
+    <result column="DELUSER" property="deluser" jdbcType="VARCHAR" />
+    <result column="DELTIME" property="deltime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    JZWFJID, JZWJGID, JZWDYID, JZWLCID, FJXH, FJMC, ZHGXRQ, MOVESIGN, CREATEDBY, CREATED, 
+    UPDATEDBY, UPDATED, DELTAG, DELUSER, DELTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DZ_JZWFJ
+    where JZWFJID = #{jzwfjid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DZ_JZWFJ
+    where JZWFJID = #{jzwfjid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kingmon.project.psam.jzw.model.Jzwfj" >
+    insert into DZ_JZWFJ (jzwfjid, JZWJGID, JZWDYID, 
+      JZWLCID, FJXH, FJMC, 
+      ZHGXRQ, MOVESIGN, CREATEDBY, 
+      CREATED, UPDATEDBY, UPDATED, 
+      DELTAG, DELUSER, DELTIME
+      )
+    values (#{jzwfjid,jdbcType=VARCHAR}, #{jzwjgid,jdbcType=VARCHAR}, #{jzwdyid,jdbcType=VARCHAR}, 
+      #{jzwlcid,jdbcType=VARCHAR}, #{fjxh,jdbcType=VARCHAR}, #{fjmc,jdbcType=VARCHAR}, 
+      #{zhgxrq,jdbcType=TIMESTAMP}, #{movesign,jdbcType=CHAR}, #{createdby,jdbcType=VARCHAR}, 
+      #{created,jdbcType=TIMESTAMP}, #{updatedby,jdbcType=VARCHAR}, #{updated,jdbcType=TIMESTAMP}, 
+      #{deltag,jdbcType=CHAR}, #{deluser,jdbcType=VARCHAR}, #{deltime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwfj" >
+    insert into DZ_JZWFJ
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jzwfjid != null" >
+        JZWFJID,
+      </if>
+      <if test="jzwjgid != null" >
+        JZWJGID,
+      </if>
+      <if test="jzwdyid != null" >
+        JZWDYID,
+      </if>
+      <if test="jzwlcid != null" >
+        JZWLCID,
+      </if>
+      <if test="fjxh != null" >
+        FJXH,
+      </if>
+      <if test="fjmc != null" >
+        FJMC,
+      </if>
+      <if test="zhgxrq != null" >
+        ZHGXRQ,
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN,
+      </if>
+      <if test="createdby != null" >
+        CREATEDBY,
+      </if>
+      <if test="created != null" >
+        CREATED,
+      </if>
+      <if test="updatedby != null" >
+        UPDATEDBY,
+      </if>
+      <if test="updated != null" >
+        UPDATED,
+      </if>
+      <if test="deltag != null" >
+        DELTAG,
+      </if>
+      <if test="deluser != null" >
+        DELUSER,
+      </if>
+      <if test="deltime != null" >
+        DELTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jzwfjid != null" >
+        #{jzwfjid,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwjgid != null" >
+        #{jzwjgid,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwdyid != null" >
+        #{jzwdyid,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwlcid != null" >
+        #{jzwlcid,jdbcType=VARCHAR},
+      </if>
+      <if test="fjxh != null" >
+        #{fjxh,jdbcType=VARCHAR},
+      </if>
+      <if test="fjmc != null" >
+        #{fjmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zhgxrq != null" >
+        #{zhgxrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="createdby != null" >
+        #{createdby,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedby != null" >
+        #{updatedby,jdbcType=VARCHAR},
+      </if>
+      <if test="updated != null" >
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deltag != null" >
+        #{deltag,jdbcType=CHAR},
+      </if>
+      <if test="deluser != null" >
+        #{deluser,jdbcType=VARCHAR},
+      </if>
+      <if test="deltime != null" >
+        #{deltime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwfj" >
+    update DZ_JZWFJ
+    <set >
+      <if test="jzwjgid != null" >
+        JZWJGID = #{jzwjgid,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwdyid != null" >
+        JZWDYID = #{jzwdyid,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwlcid != null" >
+        JZWLCID = #{jzwlcid,jdbcType=VARCHAR},
+      </if>
+      <if test="fjxh != null" >
+        FJXH = #{fjxh,jdbcType=VARCHAR},
+      </if>
+      <if test="fjmc != null" >
+        FJMC = #{fjmc,jdbcType=VARCHAR},
+      </if>
+      <if test="zhgxrq != null" >
+        ZHGXRQ = #{zhgxrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="createdby != null" >
+        CREATEDBY = #{createdby,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        CREATED = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedby != null" >
+        UPDATEDBY = #{updatedby,jdbcType=VARCHAR},
+      </if>
+      <if test="updated != null" >
+        UPDATED = #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deltag != null" >
+        DELTAG = #{deltag,jdbcType=CHAR},
+      </if>
+      <if test="deluser != null" >
+        DELUSER = #{deluser,jdbcType=VARCHAR},
+      </if>
+      <if test="deltime != null" >
+        DELTIME = #{deltime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where JZWFJID = #{jzwfjid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.psam.jzw.model.Jzwfj" >
+    update DZ_JZWFJ
+    set JZWJGID = #{jzwjgid,jdbcType=VARCHAR},
+      JZWDYID = #{jzwdyid,jdbcType=VARCHAR},
+      JZWLCID = #{jzwlcid,jdbcType=VARCHAR},
+      FJXH = #{fjxh,jdbcType=VARCHAR},
+      FJMC = #{fjmc,jdbcType=VARCHAR},
+      ZHGXRQ = #{zhgxrq,jdbcType=TIMESTAMP},
+      MOVESIGN = #{movesign,jdbcType=CHAR},
+      CREATEDBY = #{createdby,jdbcType=VARCHAR},
+      CREATED = #{created,jdbcType=TIMESTAMP},
+      UPDATEDBY = #{updatedby,jdbcType=VARCHAR},
+      UPDATED = #{updated,jdbcType=TIMESTAMP},
+      DELTAG = #{deltag,jdbcType=CHAR},
+      DELUSER = #{deluser,jdbcType=VARCHAR},
+      DELTIME = #{deltime,jdbcType=TIMESTAMP}
+    where JZWFJID = #{jzwfjid,jdbcType=VARCHAR}
+  </update>
+</mapper>

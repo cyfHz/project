@@ -1,0 +1,686 @@
+PUT /psam
+{
+  "settings": {
+    "refresh_interval": "5s",
+    "number_of_shards": 10,
+    "number_of_replicas": 0
+  }
+}
+
+
+
+PUT /psam/_mapping/mlph
+{
+    "mlph": {
+      "properties": {
+        "YWLSH": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "DZBM": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "DZYSLXDM": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "DZMC": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik",
+          "fields": {
+            "py": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_ik",
+              "boost": 5
+            },
+            "szm": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_first_letter_analyzer",
+              "boost": 5
+            }
+          }
+        },
+        "SSXQDM": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "QHNXXDZ": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik",
+          "fields": {
+            "py": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_ik",
+              "boost": 5
+            },
+            "szm": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_first_letter_analyzer",
+              "boost": 5
+            }
+          }
+        },
+        "SSJLXXQ_JLXXQMC": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik",
+          "fields": {
+            "py": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_ik",
+              "boost": 5
+            },
+            "szm": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_first_letter_analyzer",
+              "boost": 5
+            }
+          }
+        },
+        "SSJLXXQ_DZBM": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "SSJZW_DZBM": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "MLPH": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik",
+          "fields": {
+            "py": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_ik",
+              "boost": 5
+            },
+            "szm": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_first_letter_analyzer",
+              "boost": 5
+            }
+          }
+        },
+        "LSMLPBS": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "BLDW_GAJGJGDM": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "BLDW_GAJGMC": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "BLR_XM": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "BLSJ": {
+          "type": "date"
+        },
+        "SJGSDWDM": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "SJGSDWMC": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik",
+          "fields": {
+            "py": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_ik",
+              "boost": 5
+            },
+            "szm": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_first_letter_analyzer",
+              "boost": 5
+            }
+          }
+        },
+        "MOVESIGN": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "DJR": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "DJDW": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik",
+          "fields": {
+            "py": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_ik",
+              "boost": 5
+            },
+            "szm": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_first_letter_analyzer",
+              "boost": 5
+            }
+          }
+        },
+        "DJSJ": {
+          "type": "date"
+        },
+        "XGR": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "XGDW": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "GXSJ": {
+          "type": "date"
+        },
+        "SQRID": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "CHILDCOUNT": {
+          "type": "long"
+        },
+         "ZXDHZB": {
+          "type": "double"
+        },
+         "ZXDZZB": {
+          "type": "double"
+        },
+        "DELTAG": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "DELUSER": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "DELTIME": {
+          "type": "date"
+        },
+        "SSZDYJXZQY_DZBM": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "JZWMC": {
+          "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik",
+          "fields": {
+            "py": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_ik",
+              "boost": 5
+            },
+            "szm": {
+              "type": "string",
+              "store": "no",
+              "analyzer": "pinyin_first_letter_analyzer",
+              "boost": 5
+            }
+          }
+        },
+        "JWQBH": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "JWQMC": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "FROMBY": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "SBID": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+         "GPSX": {
+          "type": "double"
+        },
+        "GPSY": {
+          "type": "double"
+        },
+        "MLPHLXID": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "MLPHLXMC": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "DRSJ": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "SSPCS": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "SSFJ": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "SSSJ": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "SPZT": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "SHPZDM": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "IS_INDEXED": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "CREATE_TIME": {
+          "type": "date"
+        },
+        
+        
+        "MAC_ADDRESS": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+           "TF_CARD_NUM": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+           "IMEI_NUM": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+           "SIM_NUM": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        
+        
+        
+        
+        "LOCATION": {
+          "type": "geo_point",
+          "lat_lon": true,
+          "geohash_prefix": true,
+          "fielddata": {
+            "format": "compressed",
+            "precision": "1m"
+          }
+        }
+      }
+    }
+}
+
+
+
+
+PUT /psam/_mapping/jzwjbxx
+{
+  "jzwjbxx": {
+    "properties": {
+      "DZBM": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "DZYSLXDM": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "DZMC": {
+        "type": "string",
+        "index": "analyzed",
+        "analyzer": "ik",
+        "fields": {
+          "py": {
+            "type": "string",
+            "store": "no",
+            "analyzer": "pinyin_ik",
+            "boost": 5
+          },
+          "szm": {
+            "type": "string",
+            "store": "no",
+            "analyzer": "pinyin_first_letter_analyzer",
+            "boost": 5
+          }
+        }
+      },
+      "JZWMC": {
+        "type": "string",
+        "index": "analyzed",
+        "analyzer": "ik",
+        "fields": {
+          "py": {
+            "type": "string",
+            "store": "no",
+            "analyzer": "pinyin_ik",
+            "boost": 5
+          },
+          "szm": {
+            "type": "string",
+            "store": "no",
+            "analyzer": "pinyin_first_letter_analyzer",
+            "boost": 5
+          }
+        }
+      },
+      "BMJC": {
+        "type": "string",
+        "index": "analyzed",
+        "analyzer": "ik",
+        "fields": {
+          "py": {
+            "type": "string",
+            "store": "no",
+            "analyzer": "pinyin_ik",
+            "boost": 5
+          },
+          "szm": {
+            "type": "string",
+            "store": "no",
+            "analyzer": "pinyin_first_letter_analyzer",
+            "boost": 5
+          }
+        }
+      },
+      "ZXDHZB": {
+        "type": "double"
+      },
+      "ZXDZZB": {
+        "type": "double"
+      },
+      "ZAGLSSJWZRQDM": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "SSZDYJXZQY_DZBM": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "SSJLXXQ_DZBM": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "DZZCZBZ": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "DZZZYBS": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "GXSJ": {
+        "type": "date"
+      },
+      "QYRQ": {
+        "type": "date"
+      },
+      "TYRQ": {
+        "type": "date"
+      },
+      "DJDW_GAJGJGDM": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "DJDW_GAJGMC": {
+        "type": "string",
+        "index": "analyzed",
+        "analyzer": "ik",
+        "fields": {
+          "py": {
+            "type": "string",
+            "store": "no",
+            "analyzer": "pinyin_ik",
+            "boost": 5
+          },
+          "szm": {
+            "type": "string",
+            "store": "no",
+            "analyzer": "pinyin_first_letter_analyzer",
+            "boost": 5
+          }
+        }
+      },
+      "DJR_XM": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "MOVESIGN": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "ZJF": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "DJR": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "DJDW": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "DJSJ": {
+        "type": "date"
+      },
+      "XGR": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "XGDW": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "ENABLE": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "CHILDCOUNT": {
+        "type": "long"
+      },
+      "ZAGLSSJWZRQMC": {
+        "type": "string",
+        "index": "analyzed",
+        "analyzer": "ik",
+        "fields": {
+          "py": {
+            "type": "string",
+            "store": "no",
+            "analyzer": "pinyin_ik",
+            "boost": 5
+          },
+          "szm": {
+            "type": "string",
+            "store": "no",
+            "analyzer": "pinyin_first_letter_analyzer",
+            "boost": 5
+          }
+        }
+      },
+      "DELTIME": {
+        "type": "date"
+      },
+      "IS_INDEXED": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "CREATE_TIME": {
+        "type": "date"
+      },
+      "MAC_ADDRESS": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "TF_CARD_NUM": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "IMEI_NUM": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "SIM_NUM": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "LOCATION": {
+        "type": "geo_point",
+        "lat_lon": true,
+        "geohash_prefix": true,
+        "fielddata": {
+          "format": "compressed",
+          "precision": "1m"
+        }
+      }
+    }
+  }
+}
+
+PUT /psam/_mapping/jwq
+{
+  "jwq": {
+    "properties": {
+      "JWQID": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+	  "PCSID": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "SJXZQYID": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "JWQBH": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "JWQMC": {
+         "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik"
+      },
+      "JWQJJ": {
+         "type": "string",
+          "index": "analyzed",
+          "analyzer": "ik"
+      },
+      "JWQMJ": {
+        "type": "double"
+      },
+      "JWHSL": {
+        "type": "double"
+      },
+      "NCGQSL": {
+        "type": "double"
+      },
+      "JWQXZ": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "SFYX": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "QYRQ": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "SXRQ": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "XGSJ": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "BZ": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "MOVESIGN": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "BJZB":{
+         "type": "geo_shape",
+         "precision": "1cm"
+      }
+    }
+  }
+}
+
+
+
+GET /psam/jwq/_search
+{
+  "query": {
+    "geo_shape": {
+      "BJZB": { 
+        "relation": "intersects",
+        "shape": { 
+          "type":   "point",
+          "coordinates": [ 
+           115.982128, 36.411653
+          ]
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+
+get access_token
+http://10.48.147.30/oam/oauth/token?client_id=5300&client_secret=14ed0771b53e4cb0b808dea13d05b7c0&grant_type=client_credentials
+info
+http://10.48.147.30/oam/api/personSearchHbase/1.0?src=czrk&q=3700000000000000000&rows=1&start=&access_token=access_token
+photo
+http://10.48.147.30/oam/api/getpersoninfo/v1.0?access_token=access_token&function_id=persons/infoPhoto&target_card_id=3700000000000000000

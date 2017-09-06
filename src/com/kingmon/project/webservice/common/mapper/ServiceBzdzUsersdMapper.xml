@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.webservice.common.mapper.ServiceBzdzUsersdMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.webservice.common.model.ServiceBzdzUsersd" >
+    <id column="SDID" property="sdid" jdbcType="VARCHAR" />
+    <result column="SDR" property="sdr" jdbcType="VARCHAR" />
+    <result column="SDSJ" property="sdsj" jdbcType="TIMESTAMP" />
+    <result column="SDSM" property="sdsm" jdbcType="VARCHAR" />
+    <result column="SDUSER" property="sduser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SDID, SDR, SDSJ, SDSM, SDUSER
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SERVICE_BZDZ_USERSD
+    where SDID = #{sdid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SERVICE_BZDZ_USERSD
+    where SDID = #{sdid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insertSelective" parameterType="com.kingmon.project.webservice.common.model.ServiceBzdzUsersd" >
+    insert into SERVICE_BZDZ_USERSD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sdid != null" >SDID,</if>
+      <if test="sdr != null" >SDR,</if>
+      <if test="sdsj != null" >SDSJ,</if>
+      <if test="sdsm != null" >SDSM,</if>
+      <if test="sduser != null" >SDUSER,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sdid != null" >#{sdid,jdbcType=VARCHAR},</if>
+      <if test="sdr != null" >#{sdr,jdbcType=VARCHAR},</if>
+      <if test="sdsj != null" >#{sdsj,jdbcType=TIMESTAMP},</if>
+      <if test="sdsm != null" >#{sdsm,jdbcType=VARCHAR},</if>
+      <if test="sduser != null" >#{sduser,jdbcType=VARCHAR},</if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.webservice.common.model.ServiceBzdzUsersd" >
+    update SERVICE_BZDZ_USERSD
+    <set >
+      <if test="sdr != null" >SDR = #{sdr,jdbcType=VARCHAR},</if>
+      <if test="sdsj != null" >SDSJ = #{sdsj,jdbcType=TIMESTAMP},</if>
+      <if test="sdsm != null" >SDSM = #{sdsm,jdbcType=VARCHAR},</if>
+      <if test="sduser != null" >SDUSER = #{sduser,jdbcType=VARCHAR},</if>
+    </set>
+    where SDID = #{sdid,jdbcType=VARCHAR}
+  </update>
+ 
+ <insert id="addUsersd" parameterType="map" >
+    insert into SERVICE_BZDZ_USERSD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sdid != null" >SDID,</if>
+      <if test="sdr != null" >SDR,</if>
+      <if test="sdsj != null" >SDSJ,</if>
+      <if test="sdsm != null" >SDSM,</if>
+      <if test="sduser != null" >SDUSER,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sdid != null" >#{sdid,jdbcType=VARCHAR},</if>
+      <if test="sdr != null" >#{sdr,jdbcType=VARCHAR},</if>
+      <if test="sdsj != null" >#{sdsj,jdbcType=TIMESTAMP},</if>
+      <if test="sdsm != null" >#{sdsm,jdbcType=VARCHAR},</if>
+      <if test="sduser != null" >#{sduser,jdbcType=VARCHAR},</if>
+    </trim>
+  </insert>
+</mapper>

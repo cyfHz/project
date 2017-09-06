@@ -1,0 +1,93 @@
+.form-inline .form-group {
+	display: inline-block;
+	margin-bottom: 0;
+	*display: inline;
+	zoom: 1;
+}
+.form-control{
+		behavior: url(ie-css3.htc);
+}
+.form-inline .form-control {
+	display: inline-block;
+	behavior: url(ie-css3.htc);
+}
+
+.query-form {
+	padding-left: 5px;
+	padding-top: 10px;
+	overflow: hidden;
+}
+
+.form-horizontal .form-group {
+	margin-bottom: 15px;
+}
+
+.form-horizontal label {
+	margin-bottom: 0;
+	text-align: right;
+	box-sizing: border-box;
+	display: block;
+	float: left;
+	width: 120px;
+}
+
+.form-horizontal .form-control {
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	width: 175px;
+	behavior: url(ie-css3.htc);
+}
+
+
+.tag-normal{
+	background-color: #949494;
+	border-radius: .25em;
+	padding: 3px 8px 3px 5px;
+	color: white;
+	font-weight: bold;
+}
+.tag-success{
+	background-color: #82af6f;
+	border-radius: .25em;
+	padding: 3px 8px 3px 5px;
+	color: white;
+	font-weight: bold;
+}
+.tag-fail{
+	background-color: #d9534f;
+	border-radius: .25em;
+	padding: 3px 8px 3px 5px;
+	color: white;
+	font-weight: bold;
+}
+.tag-warn{
+	background-color: #FF9900;
+	border-radius: .25em;
+	padding: 3px 8px 3px 5px;
+	color: white;
+	font-weight: bold;	
+}
+
+.detail-table{
+	border:solid 1px;
+	width: 100%;
+}
+
+.detail-table td,.detail-table th {
+	border: 1px solid #9EB5D0;
+	border-collapse: collapse;
+	padding-left: 2px;
+	background-color: #FDFDFD;
+}
+
+.detail-table th {
+    background-color: #F3F8FF;
+}
+.detail-table td {
+	font-size: 15px;
+}

@@ -1,0 +1,138 @@
+
+
+    /**
+     * 已删除，不用操作<br>
+     * 
+     * 所属建筑物_地址编码-VARCHAR2(36)
+     */
+    private String ssjzw_dzbm;
+
+  
+
+    /**
+     * 临时门（楼）牌标识-CHAR(1)
+     */
+    private String lsmlpbs;
+
+    /**
+     * 办理单位_公安机关机构代码-VARCHAR2(20)
+     */
+    private String bldw_gajgjgdm;
+
+    /**
+     * 办理单位_公安机关名称-VARCHAR2(50)
+     */
+    private String bldw_gajgmc;
+
+    /**
+     * 办理人_姓名-VARCHAR2(20)
+     */
+    private String blr_xm;
+
+    /**
+     * 办理时间-DATE
+     */
+    private Date blsj;
+
+    /**
+     * 数据归属单位代码  -最底到警务责任区-VARCHAR2(20)
+     */
+    private String sjgsdwdm;
+
+    /**
+     * 数据归属单位名称-VARCHAR2(100)
+     */
+    private String sjgsdwmc;
+
+
+    /**
+     * 登记人-VARCHAR2(36) 
+     */
+    private String djr;
+
+    /**
+     * 登记单位-VARCHAR2(36) 
+     */
+    private String djdw;
+
+    /**
+     * 登记时间(yyyy-mm-dd hh:mi:ss)-DATE
+     */
+    private Date djsj;
+
+    /**
+     * 申请人ID-VARCHAR2(36)
+     */
+    private String sqrid;
+
+
+
+
+
+    /**
+     * 建筑物名称-VARCHAR2(300)
+     */
+    private String jzwmc;
+
+
+
+
+
+    /**
+     * 
+     * 门楼牌号类型名称-VARCHAR2(20)
+     */
+    private String mlphlxmc;
+
+    /**
+     * 导入时间-VARCHAR2(14)
+     */
+    private String drsj;
+
+    /**
+     * 所属派出所-VARCHAR2(36)
+     */
+    private String sspcs;
+
+    /**
+     * 所属分局-VARCHAR2(36)
+     */
+    private String ssfj;
+
+    /**
+     * 所属市局-VARCHAR2(36)
+     */
+    private String sssj;
+    /**
+     * #new#
+     * 审核结果char(1) 0:正在申请 1、审核未通过2、审核通过
+     */
+    private String spzt;
+    /**
+     * #new#
+     * 审核配置代码char(1) 0:不需要审核1、派出所申请2、区县审核3、市局审核
+     */
+    private String shpzdm;
+
+    
+    
+    /**
+     * 是否已经加入到elastic
+     */
+    private String isIndexed;
+    
+    /**
+     * 创建时间(导入时间)
+     */
+    private Date createTime;
+    
+    
+    //-------------------------------------------------  
+    /**
+     * 二维码-clob
+     */
+    private String qrCode;
+    
+
+    //-------------------------------------------------   
+    

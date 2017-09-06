@@ -1,0 +1,35 @@
+
+--------------------------------------------------------------------------------------------
+create table jinan_dz_mlph_true as select * from dz_mlph;
+create table WEIFANG_DZ_MLPH as select * from dz_mlph;
+create table LINYI_DZ_MLPH as select * from dz_mlph;
+create table LIAOCH_DZ_MLPH as select * from dz_mlph;
+create table LAIWU_DZ_MLPH as select * from dz_mlph;
+create table JINING_DZ_MLPH as select * from dz_mlph;
+create table TAIAN_DZ_MLPH as select * from dz_mlph;
+create table DONGYING_DZ_MLPH as select * from dz_mlph;
+create table yantai_dz_mlph as select * from dz_mlph;
+create table HEZE_DZ_MLPH as select * from dz_mlph;
+create table RIZHAO_DZ_MLPH as select * from dz_mlph;
+create table DEZHOU_DZ_MLPH as select * from dz_mlph;
+
+drop table jinan_dz_mlph_true ;
+drop table WEIFANG_DZ_MLPH;
+drop table LINYI_DZ_MLPH ;
+drop table LIAOCH_DZ_MLPH ;
+drop table LAIWU_DZ_MLPH ;
+drop table JINING_DZ_MLPH ;
+drop table TAIAN_DZ_MLPH ;
+drop table DONGYING_DZ_MLPH ;
+drop table yantai_dz_mlph ;
+drop table HEZE_DZ_MLPH ;
+drop table RIZHAO_DZ_MLPH ;
+drop table DEZHOU_DZ_MLPH ;
+
+delete from app_resource;
+delete from app_role;
+delete from app_role_resource;
+delete from app_role_res_drule;
+delete from app_role_res_wrule;
+delete from app_role_user;
+delete from app_widgetrule;

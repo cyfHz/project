@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<title>建筑物基本信息</title>
+<%@ include file="/static/meta/includeall.jsp"%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/common.css">
+<style type="text/css">
+.jlx-panel .pagination-info {
+	display: none;
+}
+</style>
+</head>
+<body class="easyui-layout">
+	<t:DataDict code="DZYSFL" var="dzyslxDict"></t:DataDict>
+	<t:DataDict code="DZ_SYZT" var="syztDict"></t:DataDict>
+	
+	<!-- ############west行政区划+街路巷################# -->
+	<div data-options="region:'west',title:'行政区划',split:true" style="width: 250px;">
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'north',border:false,collapsible:false" style="height: 260px;">
+				<jsp:include page="../xzqh/xzqh.tree.jsp">
+					<jsp:param name="showXzjd" value="true"  />
+					<jsp:param name="showSqjcwh" value="true" />
+					<jsp:param name="checkbox" value="false" />
+				</jsp:include>
+				<input id="xzqhTreeValue" type="hidden">
+			</div>
+			
+			<div data-options="region:'center',title:'街路巷（小区）',split:true" class="jlx-panel" style="width: 220px;">
+				<div class="easyui-layout" data-options="fit:true">
+					<div data-options="region:'north',border:false" style="height: 35px; background-color: #F4F4F4;">
+						<div style="padding: 5px 20px;">
+							<input id="jlxxqmc-searchbox" class="easyui-searchbox" name="JLXXQMC" searcher="loadJLXData"  data-options="prompt:'街路巷名称'"></input>
+						</div>
+					</div>
+					<div data-options="region:'center',border:false">
+					<table id="jlxGrid" class="easyui-datagrid" >
+						</table>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+		<div data-options="region:'center',border:false">
+			<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'north',border:false" style="height: 50px; background-color: #F4F4F4;">
+				<form class="form-inline query-form" id="jzwjbxxform">
+				 <input type="hidden" id="jlxdzbm" name="jlxdzbm" />
+					<div class="form-group">
+						<label>建筑物名称:</label> <input name="JZWMC" type="text" class="form-control">
+					</div>
+					<div class="form-group">
+						<label>地址:</label> <input name="DZMC" type="text" class="form-control">
+					</div>
+					<div class="form-group">
+						<a href="javascript:;" onclick="loaddata('load');" class="easyui-linkbutton" data-options="iconCls:'icon-search'" >查询</a>
+					</div>
+				</form>
+			</div>
+				<div data-options="region:'center',border:false">
+				 <table id="jzwjbxxDataGrid" data-options="fit:true" ></table>
+					<div id="toolbarDiv">
+				<%-- 	<km:widgetTag widgetRulevalue="com.kingmon.project.psam.jzw.controller.JzwjbxxController.enterAddJzwJbxx">
+					<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addJzwJbxx()">新增</a>
+					</km:widgetTag> --%>
+					
+					<km:widgetTag widgetRulevalue="com.kingmon.project.psam.jzw.controller.JzwjbxxController.enterEditJzwJbxx">
+					<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editJzwJbxx()">修改</a>
+					</km:widgetTag>			
+						<km:widgetTag widgetRulevalue="com.kingmon.project.psam.jzw.controller.JzwjbxxController.Cancellation">	
+					<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="Cancellation()">注销</a>
+					</km:widgetTag>		
+					<km:widgetTag widgetRulevalue="com.kingmon.project.psam.jzw.controller.JzwjbxxController.loadJzwjgDyLcInfo">	
+						<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="loadJzwjgDyLcInfo()">结构信息</a>
+					</km:widgetTag>	
+					<km:widgetTag widgetRulevalue="">
+						<a href="#" class="easyui-linkbutton" iconCls="icon-print" plain="true" onclick="">导入Excel</a>
+					</km:widgetTag>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/dict.util.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/common.util.js"></script>
+	<script type="text/javascript">
+$(function() {
+	  initDataGrid();
+	});
+	var treeOpts = {//行政区划onClick
+			onClick: function(node) {
+				var qhdm = node.id.substring(node.id.indexOf('_')+1);
+				var xzqhTreeValue=$("#xzqhTreeValue").val(qhdm);
+				var params = {};
+				params.SSZDYJXZQY_DZBM = qhdm;
+				$("#jlxxqmc-searchbox").searchbox("setValue",""); 
+				$('#jlxGrid').datagrid('load', params);
+				var jlxxqmc = $("#jlxxqmc-searchbox").searchbox("getValue");
+				 $("#mlphmc-searchbox").searchbox("setValue",""); 
+				 initJLXGrid();
+				$('#jzwjbxxDataGrid').datagrid('load', params); 
+			}
+		};
+	
+function loadXzqhTree() {
+		$('#xzqhTree').tree({
+			url: '${pageContext.request.contextPath}/psam/xzqh/tree?'+$.param({showXzjd:false,showSqjcwh:false}),
+			loadFilter: function(data) {
+				if (!data || !data.rows || data.rows.length < 1) {
+					return [];
+				}
+				var nodes = [];
+				$(data.rows).each(function(i, row) {
+					var node = {};
+					node.id = row.NODETYPE+'_'+row.NODEID;
+					node.text = row.NODETEXT;
+					node.state = row.NODETYPE == 'XZJD' ? "open":"closed";
+					nodes.push(node);
+				});
+				return nodes;
+			},
+			cascadeCheck:false,
+			checkbox:false,
+			onLoadSuccess: function() {
+				$('#xzqhTree').tree('expand',$('#xzqhTree').tree('getRoot').target);
+			},onClick: function(node) {
+				$('#sjxzqy_dzbm').val(node.id.substring(node.id.indexOf('_')+1));
+				loaddata('load');
+			}
+		});
+	}
+//----------------JLX-----------------------------------------------	
+function initJLXGrid(){
+			var loadurl="${pageContext.request.contextPath}/psam/jlx/loadJlxBMMCDataSet";
+			 $("#jlxGrid").datagrid({
+				 url:loadurl,
+				 fit:true,border:false,pagination:true,fitColumns:true,singleSelect:true,rownumbers: true,
+				 frozenColumns :[[ {field : 'JLXXQMC',title : '街路巷名称',width : 200} ]],
+				 loadFilter:function(data){
+					var pager = $("#jlxGrid").datagrid("getPager")
+					pager.pagination({
+						showPageList : false,
+						showRefresh : false
+					});
+					return data;
+				}, onSelect:function(rowIndex,rowData){
+					$("#jlxdzbm").val(rowData.DZBM);
+					loaddata("reload");
+				 }
+			});
+}
+function loadJLXData(value,name) {
+			var queryParams = $("#jlxGrid").datagrid("options").queryParams;
+			var jlxxqmc = $("#jlxxqmc-searchbox").searchbox("getValue");
+			var xzqhTreeValue=$("#xzqhTreeValue").val();
+			queryParams.SSZDYJXZQY_DZBM = xzqhTreeValue;
+			queryParams.JLXXQMC = value;
+			$("#jlxGrid").datagrid('reload');
+}
+//---------------------------------------------------------------------------------------
+		
+		function initDataGrid() {
+			var loadurl = "${ctx}/psam/jzwjbxx/jzwjbxxList";
+			var treeDrid = $("#jzwjbxxDataGrid").datagrid({
+				title : "建筑物基本信息",
+				nowrap : true,//设置为true，当数据长度超出列宽时将会自动截取
+				rownumbers : true,
+				fitColumns : false,//滚动条
+				animate : true,
+				collapsible : false,//显示可折叠按钮
+				striped : true,//设置为true将交替显示行背景。
+				singleSelect : true,//为true时只能选择单行
+				pagination : true,//分页
+				rownumbers : true,//行数
+				pageSize : 10,
+				url : loadurl,
+				checkbox : true,
+				idField : 'DZBM',//分页保留选中
+				toolbar : "#toolbarDiv",
+				frozenColumns :[[
+               // {field : 'DZBM',width : 20,checkbox : true}, 
+                {field : 'JZWMC',title : '建筑物名称',width : 150}, 
+                {field : 'BMJC',title:'别名简称',width:100},
+                {field : 'XZQHMC',title:'最低一级行政区划',width:150},
+                {field : 'SSJLXXQ_DZBM11',title:'所属街路巷（小区）',width:150}
+			 ]],
+				columns : [ [ 
+				
+				{field : 'DYS',title : '单元数',width : 50}, 
+				{field : 'LCS',title : '楼层数',width : 50}, 
+				{field : 'ZXDHZB',title:'中心点横坐标',width:100},
+				{field : 'ZXDZZB',title:'中心点纵坐标',width:100},
+				{field : 'MDYMS',title : '每单元房间数',width : 80}, 
+				{field : 'ENABLE',title: '是否可用', width:80,formatter:function(value,row){
+					if(1==value){
+						return "<font color=green>可用<font>";
+					}else if(0==value){
+						return "<font color=red>不可用<font>";
+					}
+				}},
+				
+				{field : 'ZAGLSSJWZRQMC',title : '所属警务责任区',width : 100} 
+				] ],
+				onBeforeLoad : function() {
+					$(this).datagrid("clearSelections");
+				},
+				loadFilter : function(data, parentId) {
+					return KMCORE.ajaxDoneForServerError(data);
+				}
+			});
+		}
+		function addJzwJbxx(){
+			   var url="${ctx}/psam/jzwjbxx/enteraddJzwJbxx";
+				var options={title:"建筑物基本信息添加页面",width:800,height:500, url:url,params:{},onClosed:function(){loaddata('reload');}};
+				editDialog.open(options);
+		 }
+		function editJzwJbxx(){
+			 var rows = $("#jzwjbxxDataGrid").datagrid("getSelections");
+			 if(rows.length == 0){
+				alertMsg.warn("请选择要编辑的数据");return;
+			 }
+			 if(rows.length>1){
+				alertMsg.warn("请选择一条数据");return;
+			}
+			 if(rows[0].ENABLE=='0'){
+				 alertMsg.warn("该建筑物信息已注销，不允许修改！");return;
+			 }
+		    var url="${ctx}/psam/jzwjbxx/enterEditJzwJbxx";
+		    var param={dzbm:rows[0].DZBM};
+			var options={title:"建筑物基本信息编辑",width:800,height:500, url:url,params:param,onClosed:function(){loaddata('reload');}};
+			editDialog.open(options);
+	   }
+		
+	   
+       function Cancellation( ){
+    	   var rows= $("#jzwjbxxDataGrid").datagrid("getSelections");
+    	   if(rows.length==0){
+    			alertMsg.warn("请选择要操作的数据！");
+    			return;
+    	   }
+    	   if(rows[0].ENABLE=='0'){
+				 alertMsg.warn("该建筑物信息已注销！");return;
+			 }
+    	   var idArray =KMEASYUtil.rowsIdToArray(rows,"DZBM");
+    		alertMsg.confirm("确定要对该数据进行操作吗？", {
+    			cancelCall : function() {alertMsg.close();},
+    			okCall : function() {alertMsg.close();
+    					var ajaxUrl = "${ctx}/psam/jzwjbxx/Cancellation";
+    					var param = {"ids" : idArray,"flag" : "0"};
+    					KMAJAX.ajaxTodo(ajaxUrl, param, function(data) {
+    						if(data.statusCode!=200){
+    					  		 alertMsg.error(data.message);
+    					  		 return;
+    						}
+    						alertMsg.info(data.message);
+    						$("#jzwjbxxDataGrid").datagrid(reload);
+    						
+    					});
+    				}
+    			});
+    	   
+       }
+		function loaddata(reload) {
+			var queryParams = $("#jzwjbxxDataGrid").datagrid("options").queryParams;
+			KMEASYUtil.genQueryParams(queryParams, $("#jzwjbxxform").form().serializeArray());
+			$("#jzwjbxxDataGrid").datagrid(reload);
+			$("#jzwjbxxDataGrid").datagrid("clearSelections");
+		}
+	
+		function loadJzwjgDyLcInfo(){
+		       var rows = $("#jzwjbxxDataGrid").datagrid("getSelections");
+				 if(rows.length == 0){
+					alertMsg.warn("请选择要编辑的数据");return;
+				 }
+				 if(rows.length>1){
+					alertMsg.warn("请选择一条数据");return;
+				}
+				var url="${ctx}/psam/jzwjg/enterJzwjgDyLcInfo";
+				var param={jzwjgid:rows[0].DZBM};
+				var options={title:"建筑物结构信息编辑",width:800,height:600, url:url,params:param,onClosed:function(){loaddata('reload');}};
+				editDialog.open(options);
+		   }
+	//--------------------------------------------------------------------------------------------	
+
+	</script>
+</body>
+</html>

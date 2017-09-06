@@ -1,0 +1,82 @@
+.bordera {
+	position: absolute;
+	border: 0px none;
+	text-align: center;
+	line-height: 70px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+	background-image: url("back120701.png");
+	width: 120px;
+	height: 70px;
+	background-size: cover;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='back120701.png',
+		sizingMethod='scale');
+		-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+
+.borderb {
+	position: absolute;
+	width: 120px;
+	height: 70px;
+	border: 0px none;
+	text-align: center;
+	line-height: 70px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+	background-image: url("back120702.png");
+	background-size: cover;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='back120702.png',
+		sizingMethod='scale');
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+
+.tdx {
+	background-image: url("back2.png");
+	background-size: cover;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='back2.png',
+		sizingMethod='scale');
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+
+.lc {
+	color: white;
+	font-weight: bold;
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	border: 0px none;
+	text-align: center;
+	line-height: 70px;
+	background-image: url("lcback.png");
+	background-size: cover;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+    src='back1.png', sizingMethod='scale');
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+
+.dy {
+	color: white;
+	font-weight: bold;
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	border: 0px none;
+	text-align: center;
+	line-height: 30px;
+	background: url("dyback.png") repeat-x;
+}
+
+.subdiv {
+	 position: absolute;
+	width: 20px;
+	height: 20px;
+	background: url("subdiv.png") repeat-x;
+}

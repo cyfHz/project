@@ -1,0 +1,412 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ include file="/static/meta/taglib.jsp" %>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/TableNew.css"></link>
+<style>
+tr{
+	line-height: 20px;
+}
+</style>
+<script type="text/javascript">
+	function doSubmit(){
+		if(!KMAJAX.validateFromCallback($("#fm"),KMCORE.ajaxDoneAndCloseDialog)){
+			alertMsg.warn("请确认校验不通过数据");
+		}
+	}
+	function cancel(){
+		editDialog.close();
+	}
+</script>
+<t:DataDict code="qzzl" var="qzzlDict"></t:DataDict>
+<t:DataDict code="zjlx" var="zjlxDict"></t:DataDict>
+<t:DataDict code="gj" var="gjDict"></t:DataDict>
+<t:DataDict code="ZZMM" var="zzmmDict"></t:DataDict>
+<t:DataDict code="MZ" var="mzDict"></t:DataDict>
+<t:DataDict code="xb" var="xbDict"></t:DataDict> 
+<t:DataDict code="FWLB" var="fwlbDict"></t:DataDict>
+<t:DataDict code="FWXZ" var="fwxzDict"></t:DataDict>
+<t:DataDict code="FWYT" var="fwytDict"></t:DataDict>
+<t:DataDict code="fwlx" var="fwlxDict"></t:DataDict>
+<t:DataDict code="rygx" var="rygxDict"></t:DataDict>
+<div class="easyui-layout" data-options="fit:true,border:false">
+<div data-options="region:'center',border:false" title="" style="overflow-y:scroll; padding: 5px; " class="container">
+	<!-- <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 10px;"> -->
+		<form id="fm" method="post" class="form-horizontal" action="${ctx}/psam/fw/updateOrAddFW">
+		 <input type="hidden" id="fw_fwbh" name="fwid" value="${fw.fjbm}"/>
+	
+	<table class="mainTable" style="width: 100%;">
+				<tr>
+					<td class="mainTable_TitleTd" colspan="4" align="left">房屋基本信息
+					</td>
+				</tr>
+				<tr>
+					<td class="mainTable_LeftTd" width="15%" ><strong>详细地址</strong>
+					</td>
+					<td class="mainTable_RightTd" colspan="3" >
+						<strong> 
+							${fw.fwdz}
+						</strong>
+					</td>
+				</tr>
+				<tr>
+					    <td class="mainTable_LeftTd"><strong>房屋面积(平米)</strong></td>
+						<td class="mainTable_RightTd" colspan="3"><strong><c:out value="${fw.fwmj}"></c:out></strong></td>
+					 </tr>
+	</table>
+	<div id="tt" class="easyui-tabs" style="fit: true;">  
+    <div title="房屋基本信息" style="padding:10px;fit: true;" >  
+				 <table  border="2px solid"  cellspacing="0" cellpadding="0" class="mainTable" >
+					  <tr><td colspan="4"><div class="cap">房屋基本信息</div></td></tr>
+					  <tr>
+						<th>房屋号</th>
+						<td><c:out value="${fw.fjh}"></c:out></td>
+						<th>房屋类型</th>
+						<td>
+						<km:dataDic dictCode="fwlx" value="${fw.fwlx}"/>
+						<%--<input id="fwlx"  dict="fwlxDict" disabled="disabled" name="fwlx" value="${fw.fwlx}" class="form-control"/>  --%>
+						</td>
+					 </tr>
+					  <tr>
+					    <th>是否出租房屋</th>
+						<td >
+						<c:if test="${fw.sfczfw eq '0' }">否 </c:if>
+						<c:if test="${fw.sfczfw eq '1' }">是 </c:if>
+						<%-- <select id="sfczfw" name="sfczfw"  disabled="disabled" data-options=" ">
+								<option value="0" <c:if test="${fw.sfczfw eq '0' }">selected='selected' </c:if>>否</option>
+								<option value="1" <c:if test="${fw.sfczfw eq '1' }">selected='selected' </c:if>>是</option>
+							</select> --%>
+						</td>
+					    <th>房屋类别</th>
+						<td>
+						  <km:dataDic dictCode="FWLB" value="${fw.fwlb}"/>
+							<%-- <input id="fwlb" dict="fwlbDict" disabled="disabled" name="fwlb" value="${fw.fwlb}" class="form-control"/> --%>
+						</td>
+					</tr>
+					<tr>
+						<th>房屋性质</th>
+						<td>
+						  <km:dataDic dictCode="FWXZ" value="${fw.fwxz}"/>
+							<%-- <input id="fwxz" dict="fwxzDict" disabled="disabled" name="fwxz" value="${fw.fwxz}" class="form-control"/> --%>
+						</td>
+						<th>房屋用途</th>
+						<td>
+						  <km:dataDic dictCode="FWYT" value="${fw.fwyt}"/>
+							<%-- <input id="fwyt" dict="fwytDict" disabled="disabled" name="fwyt" value="${fw.fwyt}" class="form-control"/> --%>
+						</td>
+					 </tr>
+					 <tr>
+					    <th>户型(*室*厅)</th>
+						<td><c:out value="${fw.hx}"></c:out></td>
+						<th>房屋间数</th>
+						<td><c:out value="${fw.fwjs}"></c:out></td>
+					 </tr>
+					 
+					 <tr><td colspan="4"><div class="cap">房主信息</div></td></tr>
+					 <tr>
+					   	<th>房主姓名</th>
+						<td><c:out value="${fw.fzxm}"></c:out></td>
+						<th>房屋产权证号</th>
+						<td><c:out value="${fw.fwcqzh}"></c:out></td>
+					 </tr>
+					 <tr>
+						<th>房主身份证号</th>
+						<td><c:out value="${fw.fzsfzhm}"></c:out></td>
+						<th>房主联系电话</th>
+						<td><c:out value="${fw.fzlxdh}"></c:out></td>
+					</tr>
+					
+					 <tr><td colspan="4"><div class="cap">托管人信息</div></td></tr>
+					 <tr>
+					   	<th>托管人姓名</th>
+						<td><c:out value="${fw.tgrxm}"></c:out></td>
+						<th>托管人身份证号</th>
+						<td><c:out value="${fw.tgrsfzhm}"></c:out></td>
+					</tr>
+					<tr>
+					    <th>托管人联系电话</th>
+						<td><c:out value="${fw.tgrlxdh}"></c:out></td>
+					    <th>与房主关系</th>
+						<td>
+						  <div class="form-group">
+						      <km:dataDic dictCode="rygx" value="${fw.yfzgx}"/>
+								<%-- <input id="yfzgx" dict="rygxDict" disabled name="yfzgx" value="${fw.yfzgx}" class="form-control"/> --%>
+							</div>
+					</td>
+					</tr>
+					 
+				 </table>
+    </div>  
+    
+<div title="房间人员信息"  style="overflow:auto;fit: true;">  
+        <div id="tt" class="easyui-tabs" >  
+               <div title="常住人口信息" style="padding:10px;">  
+                   <!--常住人口    -->
+<br />
+<c:if test="${empty czrk}">
+  <table  border="2px solid"  cellspacing="0" cellpadding="0" class="mainTable">
+      <tr><td colspan="4"><div class="cap" style="color: red;">当前没有常住人口信息</div></td></tr>
+  </table>
+</c:if>
+
+<c:if test="${not empty czrk}">
+            <fieldset>
+		<table  border="2px solid "  cellspacing="0" cellpadding="0" class="mainTable">
+		<c:forEach var="czrklist" items="${czrk}" varStatus="cz">
+		<tr><td colspan="6"><div class="cap">第${cz.index+1}个常住人口信息</div></td></tr>
+		   <tr>
+		      <th>姓名</th>
+		      <td><c:out value="${czrklist.xm}"></c:out></td>
+		       <!-- <th rowspan="4" ></th>  -->
+				<td rowspan="4" colspan="2">
+				    <div style="width:60px;height:130px;float: left;text-align: center;margin: 0 auto;"><strong>照片</strong></div>
+				     <div style="width: 122px;height: 148px;border: 2px solid red; margin-left: 10px;padding: 2px;float: left;" >
+					 	<img name="showimg1" id="showimg1" src="${ctx}/psam/sy/syRkglPic/loadRkglPic?zjhm=${czrklist.gmsfhm }&rklx=czrk&Math.floor(Math.random()*100)" 
+					 	style="width: 120px; height: 144px;" alt="人口照片"/> 
+					 </div>
+				</td>
+		   </tr>
+		   <tr>
+		     <%-- <th  style="width: 100px;">曾用名</th>
+		     <td><c:out value="${czrklist.zym}"></c:out></td> --%>
+		     <th  >联系电话</th>
+		      <td><c:out value="${czrklist.lxfssj}"></c:out></td>
+		   </tr>
+		   <tr>
+		     <th>身份证号</th>
+			 <td ><c:out value="${czrklist.gmsfhm }"/></td>
+		   </tr>
+		   <tr>
+		      <th>出生日期</th>
+		      <td ><c:out  value="${czrklist.csrq }"/></td>
+		   </tr>
+		  <tr>
+		      <th>性别</th>
+			  <td>
+			  <km:dataDic dictCode="xb" value="${czrklist.xb}"/>
+			  <%-- <input id="xb" dict="xbDict" disabled name="xb" value="${czrklist.xb }" class="form-control"/> --%>
+			  </td>
+		      <th>民族</th>
+			  <td>
+			    <km:dataDic dictCode="MZ" value="${czrklist.mz}"/>
+				<%-- <input id="mz" dict="mzDict" disabled name="mz" value="${czrklist.mz}" class="form-control"/> --%>
+			  </td>
+		  </tr>
+		  <tr>
+		    <th>政治面貌</th>
+            <td>
+               <km:dataDic dictCode="ZZMM" value="${czrklist.zzmm}"/>
+			 <%--  <input id="zzmm" dict="zzmmDict" disabled name="zzmm" value="${czrklist.zzmm}" class="form-control"/> --%>
+			</td>
+		   <th>房间号</th>
+		   <td><c:out value="${fw.fjh}"></c:out></td>
+		  </tr>
+		  <tr>
+		    <th>详细地址</th>
+		   <td colspan="3"><c:out value="${fw.fwdz}"></c:out></td>
+		  </tr>
+		  <!--2016-08-10 新增修改，删除功能   -->
+		  <tr>
+		    <th>操作</th>
+		   <td colspan="3">
+		      <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editCzrk('czrk','${czrklist.gmsfhm }')">修改</a>
+		      <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteCzrk('czrk','${czrklist.gmsfhm }')">删除</a>
+		   </td>
+		  </tr>
+		  
+		   <tr>
+		   <td colspan="6"><hr> </td>
+		    
+		   </tr>
+		   </c:forEach>
+		   </table>
+           </fieldset>
+       </c:if>
+   </div>  
+   
+<div title="流动人口信息"  style="padding:10px;">  
+          <!--流动人口    -->
+<br />
+<c:if test="${empty ldrk}">
+  <table  border="2px solid"  cellspacing="0" cellpadding="0" class="mainTable">
+      <tr><td colspan="4"><div class="cap" style="color: red;">当前没有流动人口信息</div></td></tr>
+  </table>
+</c:if>
+<c:if test="${not empty ldrk}">
+            <fieldset>
+			<table  border="2px solid"  cellspacing="0" cellpadding="0" class="mainTable">
+		<c:forEach var="ldrklist" items="${ldrk}" varStatus="ld">
+		<tr><td colspan="6"><div class="cap">第${ld.index+1}个流动人口信息</div></td></tr>
+		   <tr>
+		    <th>姓名</th>
+		    <td><c:out value="${ldrklist.xm}"></c:out></td>
+				<td rowspan="4" colspan="2">
+				   <div style="width:60px;height:130px;float: left;text-align: center;margin: 0 auto;"><strong>照片</strong></div>
+				     <div style="width: 122px;height: 148px;border: 2px solid red; margin-left: 10px;padding: 2px;" >
+					 	<img name="showimg1" id="showimg1" src="${ctx}/psam/sy/syRkglPic/loadRkglPic?zjhm=${ldrklist.sfzh}&rklx=ldrk&Math.floor(Math.random()*100)"  
+					 	style="width: 120px; height: 144px;" alt="人口照片"/> 
+					 </div>
+				</td>
+		   </tr>
+		   <tr>
+		    <th>别名</th>
+		    <td><c:out value="${ldrklist.bm}"></c:out></td>
+		   </tr>
+		   <tr>
+		     <th>联系电话</th>
+		    <td><c:out value="${ldrklist.lxfsSj}"></c:out></td>
+		   </tr>
+		   <tr>
+		    <th>身份证号</th>
+		    <td><c:out value="${ldrklist.sfzh}"></c:out></td>
+		   </tr>
+		   <tr>
+		    <th>性别</th>
+			<td>
+			    <km:dataDic dictCode="xb" value="${ldrklist.xb}"/>
+				<%-- <input id="xb" dict="xbDict" disabled name="xb" value="${ldrklist.xb }" class="form-control"/> --%>
+			</td>
+		    <th>民族</th>
+		    <td>
+		         <km:dataDic dictCode="MZ" value="${ldrklist.mz}"/>
+				<%-- <input id="mz" dict="mzDict" disabled name="mz" value="${ldrklist.mz }" class="form-control"/> --%>
+		    </td>
+		   </tr>
+		  <tr>
+		    <th>出生日期</th>
+				<td ><c:out value="${ldldrklistrk.csrq}" /></td>
+		     <th>到达本地日期</th> 
+              <td><c:out value="${ldldrklistrk.ddbdrq}" /></td>
+		   </tr>
+		 <tr>
+		    <th>房间号</th>
+		     <td colspan="3"><c:out value="${fw.fjh}"></c:out></td>
+		 </tr>
+		 <tr>
+		   <th>详细地址</th>
+		     <td colspan="3"><c:out value="${fw.fwdz}"></c:out></td>
+		 </tr>
+		   <tr>
+		   <td colspan="6"><hr> </td>
+		    
+		   </tr>
+		   </c:forEach>
+		   </table>
+           </fieldset>
+      </c:if>
+</div>  
+
+<div title="境外人员信息"  style="padding:10px;">  
+<!--境外人口    -->
+
+<br />
+
+<c:if test="${empty jwry}">
+  <table  border="2px solid"  cellspacing="0" cellpadding="0" class="mainTable">
+      <tr><td colspan="4"><div class="cap" style="color: red;">当前没有境外人员信息</div></td></tr>
+  </table>
+</c:if>
+
+<c:if test="${not empty jwry}">
+            <fieldset>
+		<table  border="2px solid"  cellspacing="0" cellpadding="0" class="mainTable" >
+		<c:forEach var="jwrylist" items="${jwry}" varStatus="jw">
+		<tr><td colspan="6"><div class="cap">第${jw.index+1}个境外人员信息</div></td></tr>
+		   <tr>
+		    <th >中文名</th>
+		    <td><c:out value="${jwrylist.zwm}"></c:out></td>
+		    <td rowspan="4" colspan="2">
+				   <div style="width:60px;height:130px;float: left;text-align: center;margin: 0 auto;"><strong>照片</strong></div>
+					 <div style="width: 122px;height: 148px;border: 2px solid red; margin-left: 45px;padding: 2px;" >
+					 	<img name="showimg1" id="showimg1" src="${ctx}/psam/sy/syRkglPic/loadRkglPic?zjhm=${jwrylist.zjhm}&rklx=jwry&Math.floor(Math.random()*100)" 
+					 	style="width: 120px; height: 144px;" alt="人口照片"/> 
+					 </div>
+				</td>
+		   </tr>
+		   <tr>
+		    <th >国籍</th>
+		    <td>
+		        <km:dataDic dictCode="gj" value="${jwrylist.gj}"/>
+				<%-- <input id="gj" dict="gjDict" disabled name="gj" value="${jwrylist.gj}" class="form-control"/> --%>
+			</td>
+		   </tr>
+		   <tr>
+		    <th >英文名</th>
+		    <td><c:out value="${jwrylist.ywm}"></c:out></td>
+		   </tr>
+		  
+		   <tr>
+		   <th>证件种类</th>
+		     <td>
+				<div class="form-group">
+				<km:dataDic dictCode="zjlx" value="${jwrylist.zjzl}"/>
+				<%-- <input id="zjzl" dict="zjlxDict" disabled name="zjzl" value="${jwrylist.zjzl}" class="form-control"/> --%>
+				</div> 
+			</td>
+		  </tr>
+		  <tr>
+		    <th>证件号码</th>
+		    <td><c:out value="${jwrylist.zjhm}"></c:out></td>
+		    <th>签证种类</th>
+			<td>
+			<km:dataDic dictCode="qzzl" value="${jwrylist.qzzl}"/>
+			<%-- <input id="qzzl" dict="qzzlDict" disabled name="qzzl" value="${jwrylist.qzzl}" class="form-control"/> --%>
+			</td>
+		   </tr>
+		   
+		    <tr>
+		     <th>联系电话</th>
+		     <td><c:out value="${jwrylist.jwrylxdh}"></c:out></td>
+		     <th >房间号</th>
+		    <td><c:out value="${fw.fjh}"></c:out></td>
+		   </tr>
+		   <tr>
+		    <th>房屋房主姓名</th>
+		    <td ><c:out value="${jwrylist.fwfzxm}"></c:out></td>
+		    <th>房主身份证号</th>
+		    <td ><c:out value="${jwrylist.fzsfzh}"></c:out></td>
+		   </tr>
+		     <tr>
+		    <th>现居住地址</th>
+		   <td colspan="5"><c:out value="${fw.fwdz}"></c:out></td>
+		   
+		   </tr>
+		  
+		 
+		   <tr>
+		   <td colspan="6"><hr> </td>
+		    
+		   </tr>
+		   </c:forEach>
+		   </table>
+           </fieldset>
+</c:if>
+</div>  
+  </div>  
+    </div>  
+    <!--房间人员 end  -->
+    
+    <!--历史居住人员信息  -->
+    <div title="房间历史人员信息"  style="overflow:auto;fit: true;">
+       <div id="tt_lsry" class="easyui-tabs" style="fit: true;">  
+         <div title="常住人口信息" id="lsry_czrk" style="padding:10px;"> 
+           <table id="lsry_czrk_detail" ></table>
+         </div>
+           
+         <div title="流动人口信息" id="lsry_ldrk" style="padding:10px;" > 
+           <table id="lsry_ldrk_detail" ></table>
+         </div>
+         
+         <div title="境外人员信息" id="lsry_jwry" style="padding:10px;"> 
+            <table id="lsry_jwry_detail"  ></table>
+         </div>
+       </div>
+    </div>
+    
+</div>  
+	
+
+		</form>
+	</div>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/dict.util.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/common.util.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jzwjbxx/jzwcj.fwxx.js"></script>
+</div>

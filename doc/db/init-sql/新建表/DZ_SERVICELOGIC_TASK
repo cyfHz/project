@@ -1,0 +1,36 @@
+-- Create table
+create table DZ_SERVICELOGIC_TASK
+(
+  id          VARCHAR2(36) not null,
+  logicclass  VARCHAR2(40),
+  logicmethod VARCHAR2(80),
+  status      CHAR(1),
+  createtime  DATE,
+  createuser  VARCHAR2(36),
+  begintime   VARCHAR2(40),
+  endtime     VARCHAR2(40),
+  describe    VARCHAR2(200)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the columns 
+comment on column DZ_SERVICELOGIC_TASK.id
+  is '主键Id';
+comment on column DZ_SERVICELOGIC_TASK.logicclass
+  is '业务逻辑类';
+comment on column DZ_SERVICELOGIC_TASK.logicmethod
+  is '业务逻辑方法';
+comment on column DZ_SERVICELOGIC_TASK.status
+  is '状态';
+comment on column DZ_SERVICELOGIC_TASK.createtime
+  is '创建时间';
+comment on column DZ_SERVICELOGIC_TASK.createuser
+  is '创建用户';
+comment on column DZ_SERVICELOGIC_TASK.begintime
+  is '开始时间';
+comment on column DZ_SERVICELOGIC_TASK.endtime
+  is '结束时间';
+comment on column DZ_SERVICELOGIC_TASK.describe
+  is '描述';

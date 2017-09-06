@@ -1,0 +1,128 @@
+/*---------------------增加字典项yesorno ------------------------------*/
+insert into APP_DICTIONARY_TYPE (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('06698a78-955c-683a-915c-7c47d4d731ac', 'yesorno', '是否', '是否', '1', null, null);
+
+insert into APP_DICTIONARY (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('yesorno111', '06698a78-955c-683a-915c-7c47d4d731ac', 'yesorno', '1', '是', '是', '是', '1', '19-9月 -14', null, null);
+
+insert into APP_DICTIONARY (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('yesorno222', '06698a78-955c-683a-915c-7c47d4d731ac', 'yesorno', '0', '否', '否', '否', '1', '19-9月 -14', null, null);
+
+/*------------数据字典添加 审核配置代码---------------------------------------*/
+
+insert into app_dictionary_type (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('bb7c3131-0ddf-4b54-86eb-2e76ca4204f1', 'SHPZDM', '审核配置代码', '审核流程配置代码', '1', '20-10月-15', '1');
+
+insert into APP_DICTIONARY (dict_id, type_id, type_code, dict_code, dict_mc, dict_jc, dict_sm, enabled, opratetime, dict_order, area_id)
+values ('669e3763-10a5-44f1-bb4a-c43e18d1ac06', 'bb7c3131-0ddf-4b54-86eb-2e76ca4204f1', 'SHPZDM', '0', '不需要审核', null, null, '1', null, '1', null);
+
+insert into APP_DICTIONARY (dict_id, type_id, type_code, dict_code, dict_mc, dict_jc, dict_sm, enabled, opratetime, dict_order, area_id)
+values ('edb723d4-b9a8-4b67-b97d-130f4b7553a7', 'bb7c3131-0ddf-4b54-86eb-2e76ca4204f1', 'SHPZDM', '1', '派出所申请', null, null, '1', null, '2', null);
+
+insert into APP_DICTIONARY (dict_id, type_id, type_code, dict_code, dict_mc, dict_jc, dict_sm, enabled, opratetime, dict_order, area_id)
+values ('cc1bd488-9eda-4185-b1b5-8b14fdc32fca', 'bb7c3131-0ddf-4b54-86eb-2e76ca4204f1', 'SHPZDM', '2', '区县审核', null, null, '1', null, '3', null);
+
+insert into APP_DICTIONARY (dict_id, type_id, type_code, dict_code, dict_mc, dict_jc, dict_sm, enabled, opratetime, dict_order, area_id)
+values ('9e05ab93-060e-43ed-beb1-0ec7557193de', 'bb7c3131-0ddf-4b54-86eb-2e76ca4204f1', 'SHPZDM', '3', '市局审核', null, null, '1', null, '4', null);
+
+/*--------性别---国籍----证件类型-----签证种类---人员关系--- 兵役状况------------------------*/
+insert into APP_DICTIONARY_TYPE (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('xb', 'xb', '性别', '性别', '1', null, '1');
+
+insert into APP_DICTIONARY_TYPE (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('gj', 'gj', '国籍', '国籍', '1', null, '1');
+
+insert into APP_DICTIONARY_TYPE (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('zjlx', 'zjlx', '证件类型', '证件类型', '1', null, '2');
+
+insert into APP_DICTIONARY_TYPE (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('qzzl', 'qzzl', '签证种类', '签证种类', '1', null, '3');
+insert into APP_DICTIONARY_TYPE (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('rygx', 'rygx', '人员关系', '人员关系', '1', null, '3');
+
+insert into APP_DICTIONARY_TYPE (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('byzk', 'byzk', '兵役状况', '兵役状况', '1', null, '1');
+
+insert into APP_DICTIONARY_TYPE (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('mlphlx', 'mlphlx', '门楼牌号类型', '门楼牌号类型', '1', null, '1');
+-----------------------------------2016-03-22---------------------------------
+insert into app_dictionary (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('b201ac58-621a-4388-90a5-56ca1911a86e', '0b9a4893-83c4-4ba1-8986-afba6787276a', '', '2', '排', '排', '排', '1', '', '3', '');
+
+
+-----------------------------------206-04-05-------------------------
+insert into app_dictionary_type (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('fwyt', 'FWYT', '房屋用途', '房屋用途', '1', '2015-11-02 18:17:30', '');
+
+insert into app_dictionary_type (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('fwxz', 'FWXZ', '房屋性质', '房屋性质', '1', '2015-11-02 18:17:30', '');
+
+insert into app_dictionary_type (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('fwlx', 'fwlx', '房屋类型', '房屋类型', '1', '2015-11-02 18:17:30', '');
+
+insert into app_dictionary_type (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('fwlb', 'FWLB', '房屋类别', '房屋类别', '1', '2015-11-02 18:17:30', '');
+
+insert into app_dictionary_type (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('a5e38f33-8fee-4f45-8693-924c2ca6bafc', 'JWQXZ', '警务区性质', '警务区性质', '1', '', '23');
+
+insert into app_dictionary (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('100937c9-5b27-48be-a6ea-0b57452ee511', 'a5e38f33-8fee-4f45-8693-924c2ca6bafc', '', '0', '农村', '农村', '警务区性质-农村', '1', '', '1', '');
+
+insert into app_dictionary (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('f3b851bf-6f0e-4305-964d-e6ea7a691f2e', 'a5e38f33-8fee-4f45-8693-924c2ca6bafc', '', '1', '城市', '城市', '警务区性质-城市', '1', '', '', '');
+
+
+-------------------------------------2016--05--10----------------(0617 已增正式库)-------------
+-------WEBSERVICE 限制接口是否有效--- 正式库(无)-----
+insert into app_dictionary_type (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('qm8e0fb4-4fd9-26m7-9209-3a3da31d1fda', 'SFYY', '是否有用', '是否有用', '1', '2014-06-27 10:49:05', '');
+
+
+insert into app_dictionary (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('3df54fe5-3a53-4e2f-a681-dfbbce6533f4', 'qm8e0fb4-4fd9-26m7-9209-3a3da31d1fda', '0', '0', '有效', '有效', 'web接口限制IP是否有用', '', '', '', '');
+
+insert into app_dictionary (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('5d19d631-0960-438e-bad6-e7f8fb5cdf63', 'qm8e0fb4-4fd9-26m7-9209-3a3da31d1fda', '1', '1', '无效', '无效', 'web接口限制IP是否有用', '', '', '', '');
+
+-------2016--05--13-------------WEBSERVICE 接口地址(正式库无)-------------(0617 已增正式库)--
+insert into app_dictionary_type (TYPE_ID, TYPE_CODE, TYPE_MC, TYPE_SM, ENABLED, OPRATETIME, TYPE_ORDER)
+values ('7cf36969-8130-4ad7-a51d-44aae0d78145', 'XZJKDZ', 'IP限制接口地址', 'WEBSERVICE 的 IP限制接口地址', '1', 'XZJKDZ', '');
+
+
+insert into app_dictionary (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('e5281fca-e1d0-428f-bed9-140f031add24', '7cf36969-8130-4ad7-a51d-44aae0d78145', '001', '001', '全部', '全部', '限制web接口请求地址(限制全部)', '', '', '', '');
+
+insert into app_dictionary (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('b100f938-b7ce-4846-bd23-7a081d66b7da', '7cf36969-8130-4ad7-a51d-44aae0d78145', '002', '002', '/xzqhWebService', '/xzqhWebService', '限制web接口请求地址', '1', '', '', '');
+
+insert into app_dictionary (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('dfa1fc43-6767-4b2d-bba8-42f73da057d0', '7cf36969-8130-4ad7-a51d-44aae0d78145', '003', '003', '/bzdzWebService', '/bzdzWebService', '限制web接口请求地址', '1', '', '', '');
+
+insert into app_dictionary (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('04e4fb23-e97e-4dea-a95e-bbdb1e343aba', '7cf36969-8130-4ad7-a51d-44aae0d78145', '004', '004', '/xzjdWebService', '/xzjdWebService', '限制web接口请求地址', '1', '', '', '');
+
+insert into app_dictionary (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('34f4804f-22e2-43b7-aaa1-c5755337a999', '7cf36969-8130-4ad7-a51d-44aae0d78145', '005', '005', '/jlxWebService', '/jlxWebService', '限制web接口请求地址', '1', '', '', '');
+
+insert into app_dictionary (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('72d87f71-11be-46c7-8df6-0310c54afab7', '7cf36969-8130-4ad7-a51d-44aae0d78145', '006', '006', '/sqjcwhWebService', '/sqjcwhWebService', '限制web接口请求地址', '1', '', '', '');
+
+insert into app_dictionary (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('1dd72015-2fa6-4b40-958a-7e928c01b035', '7cf36969-8130-4ad7-a51d-44aae0d78145', '007', '007', '/dyxxWebService', '/dyxxWebService', '限制web接口请求地址', '1', '', '', '');
+
+insert into app_dictionary (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('2e29b0f7-3c44-4707-a46b-ed28771584a9', '7cf36969-8130-4ad7-a51d-44aae0d78145', '008', '008', '/lcxxWebService', '/lcxxWebService', '限制web接口请求地址', '1', '', '', '');
+
+insert into app_dictionary (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('e44dbc52-71bb-4860-ace0-d8fb1e1abf1b', '7cf36969-8130-4ad7-a51d-44aae0d78145', '009', '009', '/fwxxWebService', '/fwxxWebService', '限制web接口请求地址', '1', '', '', '');
+
+insert into app_dictionary (DICT_ID, TYPE_ID, TYPE_CODE, DICT_CODE, DICT_MC, DICT_JC, DICT_SM, ENABLED, OPRATETIME, DICT_ORDER, AREA_ID)
+values ('ef2005f5-5f57-4454-bdf1-64b98606d161', '7cf36969-8130-4ad7-a51d-44aae0d78145', '010', '010', '/authService', '/authService', '限制web接口请求地址', '1', '', '', '');
+
+
+
+
+
+
+

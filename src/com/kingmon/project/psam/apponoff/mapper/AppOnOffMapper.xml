@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.apponoff.mapper.AppOnOffMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.apponoff.model.AppOnOff" >
+    <id column="APP_ONOFF_ID" property="appOnoffId" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="ONOFF" property="onoff" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    APP_ONOFF_ID, CODE, ONOFF
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from APP_ONOFF
+    where APP_ONOFF_ID = #{appOnoffId,jdbcType=VARCHAR}
+  </select>
+  
+    <select id="selectStatusByAreaCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from APP_ONOFF
+    where CODE = #{code,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from APP_ONOFF
+    where APP_ONOFF_ID = #{appOnoffId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kingmon.project.psam.apponoff.model.AppOnOff" >
+    insert into APP_ONOFF (APP_ONOFF_ID, CODE, ONOFF
+      )
+    values (#{appOnoffId,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{onoff,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.apponoff.model.AppOnOff" >
+    insert into APP_ONOFF
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="appOnoffId != null" >
+        APP_ONOFF_ID,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="onoff != null" >
+        ONOFF,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="appOnoffId != null" >
+        #{appOnoffId,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="onoff != null" >
+        #{onoff,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.apponoff.model.AppOnOff" >
+    update APP_ONOFF
+    <set >
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="onoff != null" >
+        ONOFF = #{onoff,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where APP_ONOFF_ID = #{appOnoffId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.psam.apponoff.model.AppOnOff" >
+    update APP_ONOFF
+    set CODE = #{code,jdbcType=VARCHAR},
+      ONOFF = #{onoff,jdbcType=VARCHAR}
+    where APP_ONOFF_ID = #{appOnoffId,jdbcType=VARCHAR}
+  </update>
+</mapper>

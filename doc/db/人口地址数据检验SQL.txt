@@ -1,0 +1,7 @@
+常住人口：
+select t.jzwfjid from sy_rkgl_czrk t where t.JWZRQDM like '3701%' and t.jzwfjid not in (select d.jzwfjid from dz_jzwfj d );
+流动人口：
+select  l.fjbm from sy_rkgl_ldrkdjb l where l.ssjwq like '3701%' and l.fjbm not in (select d.jzwfjid from dz_jzwfj d );
+境外人员：
+
+select  l.fjbm from sy_syjwry l where l.jwzrq like '3701%' and l.fjbm not in (select d.jzwfjid from dz_jzwfj d );

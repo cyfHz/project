@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans 
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/task 
+          http://www.springframework.org/schema/task/spring-task.xsd">
+
+	
+    <task:executor id="txExecutor" pool-size="${executor.poolSize}" queue-capacity="${executor.queueCapacity}" />
+    
+    <task:scheduler id="txScheduler" pool-size="${scheduler.poolSize}"/>
+    
+    <task:annotation-driven scheduler="txScheduler" executor="txExecutor" proxy-target-class="true"/>
+    
+  <!-- 
+      relationClearTask ==> beanName  autoClearRelation==>methed
+      *(秒0-59) *(分钟0-59) *(小时0-23) *(日期1-31) *(月份1-12或是JAN-DEC) *(星期1-7或是SUN-SAT)
+        0          0        2          1/1       *                        ?
+    -->
+    <task:scheduled-tasks  scheduler="txScheduler">
+        <task:scheduled  ref="elasticSyncService" method="autoSync" cron="${elastic.sync.cron}"/>
+         <task:scheduled  ref="dataStatisticServiceImpl" method="scheduledStatisticTask" cron="0 3 14  * * ?"/><!--  -->
+          <task:scheduled  ref="dataStatisticServiceImpl" method="scheduledNewStatisticTask" cron="0 3 14  * * ?"/><!--  -->
+          <task:scheduled  ref="workloadServiceImpl" method="scheduledWorkLoadTask" cron="0 0 0/3  * * ?"/><!-- 0/10 * * * * ?-->
+    </task:scheduled-tasks>
+    
+<!-- 主线程中运行太影响性能， log记录异步执行，根据tomcat 同步配置线程数。。。。。不能执行后，放到主线程中执行##20160125-->
+	<task:executor id="logExecutor"  pool-size="5-200" queue-capacity="400" keep-alive="5" rejection-policy="CALLER_RUNS"/>
+
+
+	<!-- 异步任务
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="${taskExecutor.corePoolSize}" />
+		<property name="maxPoolSize" value="${taskExecutor.maxPoolSize}" />
+		<property name="queueCapacity" value="${taskExecutor.queueCapacity}" />
+	</bean>
+	 -->
+</beans>

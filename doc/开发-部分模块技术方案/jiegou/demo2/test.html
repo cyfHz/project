@@ -1,0 +1,325 @@
+<html>
+<head>
+	<meta charset="utf-8" >
+	<style>
+		.item{
+			display:inline-block;
+			_zoom:1;
+			*display:inline; 
+			margin-right:20px;
+		}
+		#moreOptionsDiv{
+			border: 1px #bcdeff solid;
+			padding: 5px;
+			margin-top: 5px;
+			width: 600px;
+		}
+		#box{
+			margin-top: 5px;
+		}
+		table{
+			width:300px;
+			cursor:pointer;
+			margin-bottom:0;
+		}
+		td{
+			border:1px solid black;
+			text-align: center;
+		}
+		p{
+			background:#abcdef;
+			text-align:center;
+			margin-top:0;
+		}
+		a{
+			text-decoration:none;
+			color: black;
+			border: 1px solid black;
+			padding:2px;
+		}
+		input{
+			width:30px;
+			text-align:center;
+		}
+		body{
+			margin-right:50px;
+		}
+		#infoBox{
+			width:200px;
+			height:300px;
+			border:#abcdef 1px solid;
+			position: absolute;
+			right:10px;
+			top:50px;
+		}
+		.infoItem{
+		
+		}
+		.infoItem input{
+			width:100px;
+			
+		}
+	</style>
+</head>
+<body>
+	<div id="infoBox">
+		<p id="infotitle">xxxx</p>
+		<span id="infofangjian">101</span>
+		<div class="infoItem">户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主:<input id="infohuzhu"></div>
+		<div class="infoItem">联系方式:<input id="infotel"></div>
+		<button onclick="saveInfo()">保存</button>
+		
+		
+	</div>
+	初始数据：共<input id="danyuan" />单元，
+	<input id="ceng" />层楼，每层
+	<input id="hu" />户
+	<a href="#" onclick="create()">生成</a>
+	<a href="#" onclick="splitBox()">拆分</a>
+	<a href="#" onclick="mergeBox()">合并</a>
+	<a href="#" onclick="removeBoxes()">删除房间</a>
+	<a href="#" id="moreBtn" onclick="moreOptions()">高级选项<span>+</span></a>
+	<div id="moreOptionsDiv" style="display:none">
+	地下共<input id="underfloor" value="0" >层， 单元（楼）编号规则：<input type="radio" name="notype" vlalue='0' checked="checked">重新编号 
+		<input type="radio" name="notype" value="1">从<input id="startfloor" value="1" >开始
+	</div>
+	
+	<div id="box">
+	</div>
+<script src="EventUtil.js"></script>
+<script>
+
+	function getRadioValue(name){
+		var temp = document.getElementsByName(name);
+		for(var i=0;i<temp.length;i++)
+		{
+			if(temp[i].checked)
+				return temp[i].value;
+		}
+	}
+	function setRadioValue(name,aValue){
+	var radio_oj = document.getElementsByName(name);
+		for(var i=0;i<radio_oj.length;i++) {
+			if(radio_oj[i].value==aValue){  
+				radio_oj[i].checked=true; 
+				break; 
+			}
+		}
+	}
+	function showInfo(){
+		var title = clickNowBox.parentNode.parentNode.parentNode.parentNode.getElementsByTagName('p')[0].innerHTML;
+		var fangjian = clickNowBox.innerHTML;
+		
+		var huzhu= clickNowBox.getAttribute('huzhu');
+		
+		var tel=clickNowBox.getAttribute('tel');
+		
+		document.getElementById('infotitle').innerHTML=title;
+		document.getElementById('infofangjian').innerHTML=fangjian;
+		
+		document.getElementById('infohuzhu').value=huzhu;
+		document.getElementById('infotel').value=tel;
+		document.getElementById('infoBox').style.display='block';
+		
+	}
+	function saveInfo(){		
+		var huzhu=document.getElementById('infohuzhu').value;
+		var tel=document.getElementById('infotel').value;
+		clickNowBox.setAttribute('huzhu',huzhu);
+		clickNowBox.setAttribute('tel',tel);
+		alert('保存成功');
+		document.getElementById('infoBox').style.display="none";
+	}
+	function create(){
+		var danyuan = document.getElementById('danyuan').value;
+		var hu = document.getElementById('hu').value;
+		var ceng = document.getElementById('ceng').value;
+		var box = document.getElementById('box');
+		
+		// 编号 从1开始 or 继续
+		var startNo=1;
+		if(getRadioValue('notype')=='1'){
+			startNo=document.getElementById('startfloor').value;
+		}
+		
+		// 地下楼层
+		var underfloor=document.getElementById('underfloor').value;
+		
+		for(var i=0;i<danyuan;i++,startNo++){
+			var item = document.createElement('div');
+			item.className="item";
+			for(var j=0; j<ceng; j++){
+				var table = document.createElement('table');
+				var tbody = document.createElement('tbody');
+				table.appendChild(tbody);
+				tbody.insertRow(0);
+				for(var k=0;k<hu;k++){
+					tbody.rows[0].insertCell(k);
+					tbody.rows[0].cells[k].appendChild(document.createTextNode((ceng-j)+(k+1>=10?'':'0')+(k+1)));
+				}
+				item.appendChild(table);
+			}
+			if(underfloor > 0){
+				var table = document.createElement('table');
+				var tbody = document.createElement('tbody');
+				table.appendChild(tbody);
+				tbody.insertRow(0);
+				
+				tbody.rows[0].insertCell(0);
+				tbody.rows[0].cells[0].appendChild(document.createElement('hr'));
+				tbody.rows[0].cells[0].style.border="none";
+				
+				item.appendChild(table);
+			}
+			for(var j=0; j<underfloor; j++){
+				var table = document.createElement('table');
+				var tbody = document.createElement('tbody');
+				table.appendChild(tbody);
+				tbody.insertRow(0);
+				for(var k=0;k<hu;k++){
+					tbody.rows[0].insertCell(k);
+					tbody.rows[0].cells[k].appendChild(document.createTextNode(-(j+1)+(k+1>=10?'':'0')+(k+1)));
+				}
+				item.appendChild(table);
+			}
+			var p = document.createElement('p');
+			p.appendChild(document.createTextNode('第'+startNo+'单元'));
+			item.appendChild(p);
+			box.appendChild(item);
+		}
+		
+		document.getElementById('startfloor').value = startNo;
+		setRadioValue('notype',1);
+		
+	}
+	
+	function moreOptions(){
+		var div=document.getElementById('moreOptionsDiv');
+		var btnico=document.getElementById('moreBtn').getElementsByTagName('span')[0];
+		if(div.style.display=="none"){
+			btnico.innerHTML='--';
+			div.style.display="block";
+		}else{
+			btnico.innerHTML='+';
+			div.style.display="none";
+		}
+	}
+	
+	var box=document.getElementById('box');
+	var selectedBox=[];
+	var clickNowBox;
+	EventUtil.addHandler(box,'click',function(event){
+		event = EventUtil.getEvent(event);
+		var target = EventUtil.getTarget(event);
+		
+		switch(target.tagName.toLowerCase()){
+			case 'td':	
+				clickNowBox=target;
+				showInfo();
+				var index=selectedBox.indexOf(target);
+				if(index==-1){
+					target.style.background= '#cdefff';
+					selectedBox.push(target);
+				}else{
+					target.style.background='';
+					selectedBox.splice(index,1);
+				}
+				break;
+			
+				
+		}
+	});
+	
+	
+	EventUtil.addHandler(box,'dblclick',function(event){
+		event = EventUtil.getEvent(event);
+		var target = EventUtil.getTarget(event);
+		
+		switch(target.tagName.toLowerCase()){
+			case 'p':
+				var name=target.innerHTML;
+				name=prompt('该单元由"'+name+'"重命名为',name);
+				if(name!=null)
+					target.innerHTML=name.trim();
+				break;
+			case 'td':
+				var name=target.innerHTML;
+				name=prompt('该房间由"'+name+'"重命名为',name);
+				if(name!=null)
+					target.innerHTML=name.trim();
+				target.click();
+				break;
+		}
+	});
+	
+	function removeBoxes(){
+		var len=selectedBox.length;
+		if(confirm('您选中了'+len+'个房间，确定将他们删除吗？')){
+			for(var i=0;i<len;i++){
+				selectedBox[i].parentNode.removeChild(selectedBox[i]);
+			}
+			selectedBox=[];
+			
+		}
+	}
+	function mergeBox(){
+		var names=[];
+		var tr=selectedBox[0].parentNode;
+		var len=selectedBox.length;
+		names.push(selectedBox[0].innerHTML);
+		for(var i=1;i<len;i++){
+			if(selectedBox[i].parentNode != tr){
+				alert('您所选'+len+'个房间不是同一层中的房间，不能进行合并');
+				return ;
+			}else{
+				names.push(selectedBox[i].innerHTML);
+			}
+		}
+		var name=prompt('合并后新房间的名称为',names.sort()[0]);
+		for(var i=1;i<len;i++){
+			selectedBox[i].parentNode.removeChild(selectedBox[i]);
+		}
+		selectedBox[0].innerHTML=name;
+		selectedBox[0].style.background="";
+		selectedBox=[];
+	}
+	function splitBox(){
+		var len=selectedBox.length;
+		if(len>1){
+			alert('只能选择一个房间进行拆分');
+			return ;
+		}
+		var name=selectedBox[0].innerHTML;
+		var namesstr=prompt('请输入拆分后的房间名称，使用英文逗号分隔',name+'-1,'+name+'-2');
+		var namearr=namesstr.split(',');
+		
+		len=namearr.length;
+		var tr=selectedBox[0].parentNode;
+		for(var  i=0;i<len-1;i++){
+			var td=document.createElement('td');
+			tr.insertBefore(td,selectedBox[0]);
+			td.appendChild(document.createTextNode(namearr[i].trim()));
+		}
+		selectedBox[0].innerHTML=namearr[len-1];
+		selectedBox[0].style.background="";
+		selectedBox=[];
+	}
+	// IE6 prototype扩展
+	if(!Array.prototype.indexOf){
+		Array.prototype.indexOf = function(val){
+		   var value = this;
+		   for(var i =0; i < value.length; i++){
+			  if(value[i] == val) return i;
+		   }
+		   return -1;
+		};
+	}
+	
+	if(typeof String.prototype.trim !== 'function') {
+		String.prototype.trim = function() {
+		return this.replace(/^\s+|\s+$/g, '');
+		}
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.appVersonUser.mapper.AppVersonUserMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.appVersonUser.model.AppVersonUser" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="VERSONINFO" property="versoninfo" jdbcType="VARCHAR" />
+    <result column="ISVALID" property="isvalid" jdbcType="CHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.kingmon.project.psam.appVersonUser.model.AppVersonUser" >
+    insert into DZ_APPVERSON_USER (ID, USERID, VERSONINFO, 
+      ISVALID)
+    values (#{id,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{versoninfo,jdbcType=VARCHAR}, 
+      #{isvalid,jdbcType=CHAR})
+  </insert>
+  
+  <select id="selectAppVersionUser" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    *
+    from DZ_APPVERSON_USER
+    where USERID = #{userid,jdbcType=VARCHAR}
+  </select>
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.appVersonUser.model.AppVersonUser" >
+    insert into DZ_APPVERSON_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="versoninfo != null" >
+        VERSONINFO,
+      </if>
+      <if test="isvalid != null" >
+        ISVALID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="versoninfo != null" >
+        #{versoninfo,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null" >
+        #{isvalid,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  
+   <update id="updatAppUserById" parameterType="com.kingmon.project.psam.appVersonUser.model.AppVersonUser" >
+    update DZ_APPVERSON_USER
+    <set >
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="versoninfo != null" >
+        VERSONINFO = #{versoninfo,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null" >
+        ISVALID = #{isvalid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

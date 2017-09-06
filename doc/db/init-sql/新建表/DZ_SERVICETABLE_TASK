@@ -1,0 +1,42 @@
+-- Create table
+create table DZ_SERVICETABLE_TASK
+(
+  id             VARCHAR2(36) not null,
+  biztable       VARCHAR2(80),
+  bizfiled       VARCHAR2(80),
+  reftable       VARCHAR2(80),
+  reffiled       VARCHAR2(80),
+  status         CHAR(1),
+  begintime      VARCHAR2(40),
+  endtime        VARCHAR2(40),
+  createtime     DATE,
+  createuser     VARCHAR2(36),
+  servicelogicid VARCHAR2(36)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the columns 
+comment on column DZ_SERVICETABLE_TASK.id
+  is '主键ID';
+comment on column DZ_SERVICETABLE_TASK.biztable
+  is '操作表';
+comment on column DZ_SERVICETABLE_TASK.bizfiled
+  is '操作字段';
+comment on column DZ_SERVICETABLE_TASK.reftable
+  is '涉及表';
+comment on column DZ_SERVICETABLE_TASK.reffiled
+  is '涉及字段';
+comment on column DZ_SERVICETABLE_TASK.status
+  is '状态';
+comment on column DZ_SERVICETABLE_TASK.begintime
+  is '开始时间';
+comment on column DZ_SERVICETABLE_TASK.endtime
+  is '结束时间';
+comment on column DZ_SERVICETABLE_TASK.createtime
+  is '创建时间';
+comment on column DZ_SERVICETABLE_TASK.createuser
+  is '创建人';
+comment on column DZ_SERVICETABLE_TASK.servicelogicid
+  is '外键关联的业务逻辑';

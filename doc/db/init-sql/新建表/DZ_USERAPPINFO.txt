@@ -1,0 +1,22 @@
+//2016-07-12提交正式库
+-- Create table
+create table DZ_USERAPPINFO
+(
+  ID         varchar2(36) not null,
+  USERID     varchar2(36) not null,
+  VERSONINFO varchar2(200),
+  UPDATETIME date
+)
+;
+-- Add comments to the columns 
+comment on column DZ_USERAPPINFO.ID
+  is '����';
+comment on column DZ_USERAPPINFO.USERID
+  is '�û�ID';
+comment on column DZ_USERAPPINFO.VERSONINFO
+  is '�汾��';
+comment on column DZ_USERAPPINFO.UPDATETIME
+  is '����ʱ��';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table DZ_USERAPPINFO
+  add constraint ID primary key ();

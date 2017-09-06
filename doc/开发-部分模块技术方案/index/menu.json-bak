@@ -1,0 +1,109 @@
+{
+"message":"",
+"statusCode":"200",
+"data":[ 
+{
+	"menuid" : "100",
+	"icon" : "icon-kmhome",
+	"menuname" : "基础数据",
+	"menus" : [
+	{
+		"menuid" : "120",
+		"menuname" : "行政区划管理",
+		"icon" : "icon-kmedit",
+		"url" : "psam/xzqh"
+	}, {
+		"menuid" : "121",
+		"menuname" : "乡镇街道管理",
+		"icon" : "icon-kmedit",
+		"url" : "psam/xzjd/enterXzjdPage"
+	},{
+		"menuid" : "122",
+		"menuname" : "社区居村委会管理",
+		"icon" : "icon-kmedit",
+		"url" : "psam/sqjcwh/enterSqjcwhPage"
+	},{
+		"menuid" : "123",
+		"menuname" : "街路巷（小区）管理",
+		"icon" : "icon-kmedit",
+		"url" : "psam/jlx/enterJlxPage"
+	} ,{
+		"menuid" : "124",
+		"menuname" : "门（楼）牌号管理",
+		"icon" : "icon-kmedit",
+		"url" : "psam/mlph"
+	},{
+		"menuid" : "125",
+		"menuname" : "建筑物基本信息",
+		"icon" : "icon-kmedit",
+		"url" : "psam/jzwjbxx"
+	},{
+		"menuid" : "126",
+		"menuname" : "房屋基本信息",
+		"icon" : "icon-kmedit",
+		"url" : "psam/fw/enterFwPage"
+	}
+	,{
+		"menuid" : "127",
+		"menuname" : "建筑物结构信息",
+		"icon" : "icon-kmedit",
+		"url" : "psam/jzwjg/enterJzwjgPage"
+	},	{
+		"menuid" : "128",
+		"menuname" : "房间基本信息",
+		"icon" : "icon-kmedit",
+		"url" : "psam/jzwfj/enterJzwFjManage"
+
+	},	{
+		"menuid" : "129",
+		"menuname" : "建筑物单元信息",
+		"icon" : "icon-kmedit",
+		"url" : "psam/jzwdy/enterJzwdyPage"
+
+	},	{
+		"menuid" : "130",
+		"menuname" : "建筑物楼层信息",
+		"icon" : "icon-kmedit",
+		"url" : "psam/jzwlc/enterJzwlcPage"
+
+	}   
+	  ]
+}, 
+
+{
+	"menuid" : "20",
+	"icon" : "icon-kmhome",
+	"menuname" : "公安组织机构管理",
+	"menus":[
+	{
+		"menuid" : "213",
+		"menuname" : "机构边界规划",
+		"icon" : "icon-kmedit",
+		"url" : "psam/jwq/enterJwqManage"
+	}, {
+		"menuid" : "214",
+		"menuname" : "警务区管理",
+		"icon" : "icon-kmedit",
+		"url" : "psam/jwq/enterJwqManage"
+	} ]
+},
+{
+	"menuid" : "30",
+	"icon" : "icon-kmhome",
+	"menuname" : "信息采集",
+	"menus":[ 
+	    {
+		"menuid" : "311",
+		"menuname" : "信息采集",
+		"icon" : "icon-kmedit",
+		"url" : "psam/jzwjbxx/inforAcquisition"
+	},
+	{
+		"menuid" : "555",
+		"menuname" : "Log",
+		"icon" : "icon-kmedit",
+		"url" : "common/log/enterLogPage"
+	}
+	]
+}
+]}

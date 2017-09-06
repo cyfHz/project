@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.datasync.mapper.DzDataSyncConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.datasync.model.DzDataSyncConfig" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="BIZ_TABLE" property="bizTable" jdbcType="VARCHAR" />
+    <result column="BIZ_FILED" property="bizFiled" jdbcType="VARCHAR" />
+    <result column="REFER_TABLE" property="referTable" jdbcType="VARCHAR" />
+    <result column="REFER_FILED" property="referFiled" jdbcType="VARCHAR" />
+     <result column="REFER_UPDATE_WHERE_FIELD" property="referUpdateWhereField" jdbcType="VARCHAR" />
+    <result column="ENABLED" property="enabled" jdbcType="CHAR" />
+<!--     <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="CREATEUSER" property="createuser" jdbcType="VARCHAR" /> -->
+    <result column="BIZ_ID" property="bizId" jdbcType="VARCHAR" />
+    <result column="IS_SYNC_SEARCH" property="isSyncSearch" jdbcType="CHAR" />
+    <result column="SEARCH_TYPE" property="searchType" jdbcType="VARCHAR" />
+    <result column="SEARCH_FIELD" property="searchField" jdbcType="VARCHAR" />
+     <result column="DESCRIBE" property="describe" jdbcType="VARCHAR" />
+     <result column="EXORDER" property="exorder" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, BIZ_TABLE, BIZ_FILED, REFER_TABLE, REFER_FILED, ENABLED,  BIZ_ID, IS_SYNC_SEARCH, SEARCH_TYPE, SEARCH_FIELD,DESCRIBE,EXORDER,REFER_UPDATE_WHERE_FIELD
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DZ_DATA_SYNC_CONFIG where ID = #{id,jdbcType=VARCHAR}
+  </select>
+    
+  <select id="selectByBizId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select  <include refid="Base_Column_List" />
+     from  DZ_DATA_SYNC_CONFIG  where 
+     BIZ_ID = #{syncBizId,jdbcType=VARCHAR} and ENABLED='1' order by EXORDER
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DZ_DATA_SYNC_CONFIG where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <select id="findConfigListByBizId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select   ID  from DZ_DATA_SYNC_CONFIG  where BIZ_ID = #{syncBizId,jdbcType=VARCHAR}
+  </select>
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.datasync.model.DzDataSyncConfig" >
+    insert into DZ_DATA_SYNC_CONFIG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="bizTable != null" >
+        BIZ_TABLE,
+      </if>
+      <if test="bizFiled != null" >
+        BIZ_FILED,
+      </if>
+      <if test="referTable != null" >
+        REFER_TABLE,
+      </if>
+      <if test="referFiled != null" >
+        REFER_FILED,
+      </if>
+      <if test="referUpdateWhereField != null" >
+        REFER_UPDATE_WHERE_FIELD,
+      </if>
+      <if test="enabled != null" >
+        ENABLED,
+      </if>
+    <!--   <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER,
+      </if> -->
+      <if test="bizId != null" >
+        BIZ_ID,
+      </if>
+      <if test="isSyncSearch != null" >
+        IS_SYNC_SEARCH,
+      </if>
+      <if test="searchType != null" >
+        SEARCH_TYPE,
+      </if>
+      <if test="searchField != null" >
+        SEARCH_FIELD,
+      </if>
+      <if test="describe != null" >
+        DESCRIBE,
+      </if>
+       <if test="exorder != null" >
+        EXORDER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="bizTable != null" >
+        #{bizTable,jdbcType=VARCHAR},
+      </if>
+      <if test="bizFiled != null" >
+        #{bizFiled,jdbcType=VARCHAR},
+      </if>
+      <if test="referTable != null" >
+        #{referTable,jdbcType=VARCHAR},
+      </if>
+      <if test="referFiled != null" >
+        #{referFiled,jdbcType=VARCHAR},
+      </if>
+      <if test="referUpdateWhereField != null" >
+         #{referUpdateWhereField,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=CHAR},
+      </if>
+   <!--    <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=VARCHAR},
+      </if> -->
+      <if test="bizId != null" >
+        #{bizId,jdbcType=VARCHAR},
+      </if>
+      <if test="isSyncSearch != null" >
+        #{isSyncSearch,jdbcType=CHAR},
+      </if>
+      <if test="searchType != null" >
+        #{searchType,jdbcType=VARCHAR},
+      </if>
+      <if test="searchField != null" >
+        #{searchField,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null" >
+        #{describe,jdbcType=VARCHAR},
+      </if>
+       <if test="exorder != null" >
+      #{exorder,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.datasync.model.DzDataSyncConfig" >
+    update DZ_DATA_SYNC_CONFIG
+    <set >
+      <if test="bizTable != null" >
+        BIZ_TABLE = #{bizTable,jdbcType=VARCHAR},
+      </if>
+      <if test="bizFiled != null" >
+        BIZ_FILED = #{bizFiled,jdbcType=VARCHAR},
+      </if>
+      <if test="referTable != null" >
+        REFER_TABLE = #{referTable,jdbcType=VARCHAR},
+      </if>
+      <if test="referFiled != null" >
+        REFER_FILED = #{referFiled,jdbcType=VARCHAR},
+      </if>
+        <if test="referUpdateWhereField != null" >
+         #{REFER_UPDATE_WHERE_FIELD,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        ENABLED = #{enabled,jdbcType=CHAR},
+      </if>
+     <!--  <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER = #{createuser,jdbcType=VARCHAR},
+      </if> -->
+      <if test="bizId != null" >
+        BIZ_ID = #{bizId,jdbcType=VARCHAR},
+      </if>
+      <if test="isSyncSearch != null" >
+        IS_SYNC_SEARCH = #{isSyncSearch,jdbcType=CHAR},
+      </if>
+      <if test="searchType != null" >
+        SEARCH_TYPE = #{searchType,jdbcType=VARCHAR},
+      </if>
+      <if test="searchField != null" >
+        SEARCH_FIELD = #{searchField,jdbcType=VARCHAR},
+      </if>
+        <if test="describe != null" >
+        #{DESCRIBE,jdbcType=VARCHAR},
+      </if>
+      <if test="exorder != null" >
+      #{EXORDER,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

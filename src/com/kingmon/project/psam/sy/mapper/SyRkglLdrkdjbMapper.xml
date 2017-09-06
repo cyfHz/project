@@ -1,0 +1,1747 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.sy.mapper.SyRkglLdrkdjbMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.sy.model.SyRkglLdrkdjb" >
+    <id column="LDID" property="ldid" jdbcType="VARCHAR" />
+    <result column="XLH" property="xlh" jdbcType="VARCHAR" />
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="XM" property="xm" jdbcType="VARCHAR" />
+    <result column="BM" property="bm" jdbcType="VARCHAR" />
+    <result column="XB" property="xb" jdbcType="VARCHAR" />
+    <result column="MZ" property="mz" jdbcType="VARCHAR" />
+    <result column="SFZH" property="sfzh" jdbcType="VARCHAR" />
+    <result column="CSRQ" property="csrq" jdbcType="TIMESTAMP" />
+    <result column="CZHKSZD" property="czhkszd" jdbcType="VARCHAR" />
+    <result column="CZHKSZDZZ" property="czhkszdzz" jdbcType="VARCHAR" />
+    <result column="CZHKSZDZZFJH" property="czhkszdzzfjh" jdbcType="VARCHAR" />
+    <result column="ZSLB" property="zslb" jdbcType="VARCHAR" />
+    <result column="FBYQK" property="fbyqk" jdbcType="CHAR" />
+    <result column="JZSY" property="jzsy" jdbcType="VARCHAR" />
+    <result column="HYZK" property="hyzk" jdbcType="VARCHAR" />
+    <result column="XL" property="xl" jdbcType="VARCHAR" />
+    <result column="ZZMM" property="zzmm" jdbcType="VARCHAR" />
+    <result column="LXFS_SJ" property="lxfsSj" jdbcType="VARCHAR" />
+    <result column="LXFS_GH" property="lxfsGh" jdbcType="VARCHAR" />
+    <result column="LXFS_XLT" property="lxfsXlt" jdbcType="VARCHAR" />
+    <result column="DDBDRQ" property="ddbdrq" jdbcType="TIMESTAMP" />
+    <result column="NJZQX" property="njzqx" jdbcType="VARCHAR" />
+    <result column="SFSLJZZ" property="sfsljzz" jdbcType="CHAR" />
+    <result column="JZDYWGZDW" property="jzdywgzdw" jdbcType="CHAR" />
+    <result column="CSZY" property="cszy" jdbcType="VARCHAR" />
+    <result column="ZYJSZW" property="zyjszw" jdbcType="VARCHAR" />
+    <result column="ZYZG" property="zyzg" jdbcType="VARCHAR" />
+    <result column="DSDM" property="dsdm" jdbcType="CHAR" />
+    <result column="SSJWQ" property="ssjwq" jdbcType="VARCHAR" />
+    <result column="SSPCS" property="sspcs" jdbcType="VARCHAR" />
+    <result column="QTLXFS_QQ" property="qtlxfsQq" jdbcType="VARCHAR" />
+    <result column="QTLXFS_EMAIL" property="qtlxfsEmail" jdbcType="VARCHAR" />
+    <result column="GZDW" property="gzdw" jdbcType="VARCHAR" />
+    <result column="DWSSFJ" property="dwssfj" jdbcType="VARCHAR" />
+    <result column="DWSSPCS" property="dwsspcs" jdbcType="VARCHAR" />
+    <result column="DWFZR" property="dwfzr" jdbcType="VARCHAR" />
+    <result column="DWLXDH" property="dwlxdh" jdbcType="VARCHAR" />
+    <result column="DWDZ" property="dwdz" jdbcType="VARCHAR" />
+    <result column="YGZNX" property="ygznx" jdbcType="VARCHAR" />
+    <result column="XJZD" property="xjzd" jdbcType="VARCHAR" />
+    <result column="XJZDZZ" property="xjzdzz" jdbcType="VARCHAR" />
+    <result column="XJZDZZFJH" property="xjzdzzfjh" jdbcType="VARCHAR" />
+    <result column="FZ" property="fz" jdbcType="VARCHAR" />
+    <result column="FZ_SFZH" property="fzSfzh" jdbcType="VARCHAR" />
+    <result column="LDHTQDQK" property="ldhtqdqk" jdbcType="VARCHAR" />
+    <result column="CBQK" property="cbqk" jdbcType="VARCHAR" />
+    <result column="SFSY" property="sfsy" jdbcType="VARCHAR" />
+    <result column="SYZN_NAN" property="syznNan" jdbcType="DECIMAL" />
+    <result column="SYZN_NV" property="syznNv" jdbcType="DECIMAL" />
+    <result column="HYZMBH" property="hyzmbh" jdbcType="VARCHAR" />
+    <result column="SFCQJYCS" property="sfcqjycs" jdbcType="VARCHAR" />
+    <result column="GAJGDM" property="gajgdm" jdbcType="VARCHAR" />
+    <result column="TBSJ" property="tbsj" jdbcType="TIMESTAMP" />
+    <result column="TBDWDM" property="tbdwdm" jdbcType="VARCHAR" />
+    <result column="TBRXM" property="tbrxm" jdbcType="VARCHAR" />
+    <result column="TBRSFZH" property="tbrsfzh" jdbcType="VARCHAR" />
+    <result column="DELTAG" property="deltag" jdbcType="VARCHAR" />
+    <result column="DELTIME" property="deltime" jdbcType="TIMESTAMP" />
+    <result column="MOVESIGN" property="movesign" jdbcType="VARCHAR" />
+    <result column="ZHXGSJ" property="zhxgsj" jdbcType="TIMESTAMP" />
+    <result column="SPZT" property="spzt" jdbcType="VARCHAR" />
+    <result column="SJLY" property="sjly" jdbcType="VARCHAR" />
+    <result column="HJDXZQH" property="hjdxzqh" jdbcType="VARCHAR" />
+    <result column="XZDXZQH" property="xzdxzqh" jdbcType="VARCHAR" />
+    <result column="SJYXX" property="sjyxx" jdbcType="VARCHAR" />
+    <result column="SFCJGZ" property="sfcjgz" jdbcType="VARCHAR" />
+    <result column="BZDZ" property="bzdz" jdbcType="OTHER" />
+    <result column="SJYXX_YZSJ" property="sjyxxYzsj" jdbcType="TIMESTAMP" />
+    <result column="SFLS" property="sfls" jdbcType="CHAR" />
+    <result column="SLSJ" property="slsj" jdbcType="TIMESTAMP" />
+    <result column="ZZZT" property="zzzt" jdbcType="CHAR" />
+    <result column="LSH" property="lsh" jdbcType="VARCHAR" />
+    <result column="CZLX" property="czlx" jdbcType="VARCHAR" />
+    <result column="ZXBZ" property="zxbz" jdbcType="VARCHAR" />
+    <result column="ZXSJ" property="zxsj" jdbcType="TIMESTAMP" />
+    <result column="SHR" property="shrxm" jdbcType="VARCHAR" />
+    <result column="SHSJ" property="shsj" jdbcType="TIMESTAMP" />
+    <result column="SHDWDM" property="shdwdm" jdbcType="VARCHAR" />
+    <result column="CZFW_ID" property="czfwId" jdbcType="VARCHAR" />
+    <result column="DYH" property="dyh" jdbcType="VARCHAR" />
+    <result column="FH" property="fh" jdbcType="VARCHAR" />
+    <result column="JLXXQ" property="jlxxq" jdbcType="VARCHAR" />
+    <result column="LH" property="lh" jdbcType="VARCHAR" />
+    <result column="MPH" property="mph" jdbcType="VARCHAR" />
+    <result column="QT" property="qt" jdbcType="VARCHAR" />
+    <result column="SQJCWH" property="sqjcwh" jdbcType="VARCHAR" />
+    <result column="XZJD" property="xzjd" jdbcType="VARCHAR" />
+    <result column="JZZYXQ" property="jzzyxq" jdbcType="TIMESTAMP" />
+    <result column="SFYXZZ" property="sfyxzz" jdbcType="CHAR" />
+    <result column="SFBD_ZT" property="sfbdZt" jdbcType="CHAR" />
+    <result column="SFBD_SD" property="sfbdSd" jdbcType="CHAR" />
+    <result column="SFBD_QK" property="sfbdQk" jdbcType="CHAR" />
+    <result column="QFBZ" property="qfbz" jdbcType="CHAR" />
+    <result column="QFSJ" property="qfsj" jdbcType="TIMESTAMP" />
+    <result column="QFR" property="qfr" jdbcType="VARCHAR" />
+    <result column="SFJZCQ" property="sfjzcq" jdbcType="VARCHAR" />
+    <result column="ZZBZ" property="zzbz" jdbcType="CHAR" />
+    <result column="ZZSJ" property="zzsj" jdbcType="TIMESTAMP" />
+    <result column="DRBZ" property="drbz" jdbcType="CHAR" />
+    <result column="BDSJ_ZT" property="bdsjZt" jdbcType="TIMESTAMP" />
+    <result column="BDSJ_SD" property="bdsjSd" jdbcType="TIMESTAMP" />
+    <result column="BDSJ_QK" property="bdsjQk" jdbcType="TIMESTAMP" />
+    <result column="DSDR" property="dsdr" jdbcType="VARCHAR" />
+    <result column="DSZJ" property="dszj" jdbcType="VARCHAR" />
+    <result column="FZSJ" property="fzsj" jdbcType="TIMESTAMP" />
+    <result column="SHRSFZH" property="shrsfzh" jdbcType="VARCHAR" />
+    <result column="DZXQ_SPZT" property="dzxqSpzt" jdbcType="VARCHAR" />
+    <result column="DZXQ_CZLX" property="dzxqCzlx" jdbcType="VARCHAR" />
+    <result column="SFEDZDQ" property="sfedzdq" jdbcType="CHAR" />
+    <result column="ETSFYFJZ" property="etsfyfjz" jdbcType="CHAR" />
+    <result column="SFEDTCQ" property="sfedtcq" jdbcType="VARCHAR" />
+    <result column="SFBHB" property="sfbhb" jdbcType="VARCHAR" />
+    <result column="HSBZ" property="hsbz" jdbcType="VARCHAR" />
+    <result column="HSSJ" property="hssj" jdbcType="TIMESTAMP" />
+    <result column="HSRSFZH" property="hsrsfzh" jdbcType="VARCHAR" />
+    <result column="GZDWSZFJ" property="gzdwszfj" jdbcType="VARCHAR" />
+    <result column="DWPCS" property="dwpcs" jdbcType="VARCHAR" />
+    <result column="DZ_SSXQ" property="dzSsxq" jdbcType="VARCHAR" />
+    <result column="DZ_XZJD" property="dzXzjd" jdbcType="VARCHAR" />
+    <result column="XXDZ" property="xxdz" jdbcType="VARCHAR" />
+    <result column="DZBM" property="dzbm" jdbcType="VARCHAR" />
+    <result column="FJBM" property="fjbm" jdbcType="VARCHAR" />
+    <result column="ZBX" property="zbx" jdbcType="DECIMAL" />
+    <result column="ZBY" property="zby" jdbcType="DECIMAL" />
+    <result column="ZBX_TDT" property="zbxTdt" jdbcType="DECIMAL" />
+    <result column="ZBY_TDT" property="zbyTdt" jdbcType="DECIMAL" />
+    <result column="ZBX_GPS" property="zbxGps" jdbcType="DECIMAL" />
+    <result column="ZBY_GPS" property="zbyGps" jdbcType="DECIMAL" />
+    <result column="OBJECTID" property="objectid" jdbcType="VARCHAR" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+    <result column="ZXZT" property="zxzt" jdbcType="VARCHAR" />
+    <result column="ZXRQ" property="zxrq" jdbcType="TIMESTAMP" />
+    <result column="DJR" property="djr" jdbcType="VARCHAR" />
+    <result column="DJRMC" property="djrmc" jdbcType="VARCHAR" />
+    <result column="DJDWMC" property="djdwmc" jdbcType="VARCHAR" />
+    <result column="DJDW" property="djdw" jdbcType="VARCHAR" />
+    <result column="DJSJ" property="djsj" jdbcType="TIMESTAMP" />
+    <result column="XGR" property="xgr" jdbcType="VARCHAR" />
+    <result column="XGDW" property="xgdw" jdbcType="VARCHAR" />
+    <result column="XGRMC" property="xgrmc" jdbcType="VARCHAR" />
+    <result column="XGDWMC" property="xgdwmc" jdbcType="VARCHAR" />
+    <result column="GXSJ" property="gxsj" jdbcType="TIMESTAMP" />
+    <result column="SBID" property="sbid" jdbcType="VARCHAR" />
+    <result column="LRJS" property="lrjs" jdbcType="CHAR" />
+    <result column="LRFS" property="lrfs" jdbcType="CHAR" />
+    <result column="LRWL" property="lrwl" jdbcType="CHAR" />
+    
+    <!--新增0606  -->
+     <result column="MAC_ADDRESS" property="macAddress" jdbcType="VARCHAR" />
+     <result column="TF_CARD_NUM" property="tfCardNum" jdbcType="VARCHAR" />
+     <result column="IMEI_NUM" property="imeiNum" jdbcType="VARCHAR" />
+     <result column="SIM_NUM" property="simNum" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.kingmon.project.psam.sy.model.SyRkglLdrkdjb" extends="BaseResultMap" >
+    <result column="ZP" property="zp" jdbcType="BLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    LDID, XLH, ID, XM, BM, XB, MZ, SFZH, CSRQ, CZHKSZD, CZHKSZDZZ, CZHKSZDZZFJH, ZSLB, 
+    FBYQK, JZSY, HYZK, XL, ZZMM, LXFS_SJ, LXFS_GH, LXFS_XLT, DDBDRQ, NJZQX, SFSLJZZ, 
+    JZDYWGZDW, CSZY, ZYJSZW, ZYZG, DSDM, SSJWQ, SSPCS, QTLXFS_QQ, QTLXFS_EMAIL, GZDW, 
+    DWSSFJ, DWSSPCS, DWFZR, DWLXDH, DWDZ, YGZNX, XJZD, XJZDZZ, XJZDZZFJH, FZ, FZ_SFZH, 
+    LDHTQDQK, CBQK, SFSY, SYZN_NAN, SYZN_NV, HYZMBH, SFCQJYCS, GAJGDM, TBSJ, TBDWDM, 
+    TBRXM, TBRSFZH, DELTAG, DELTIME, MOVESIGN, ZHXGSJ, SPZT, SJLY, HJDXZQH, XZDXZQH, 
+    SJYXX, SFCJGZ, BZDZ, SJYXX_YZSJ, SFLS, SLSJ, ZZZT, LSH, CZLX, ZXBZ, ZXSJ, SHR, SHSJ, 
+    SHDWDM, CZFW_ID, DYH, FH, JLXXQ, LH, MPH, QT, SQJCWH, XZJD, JZZYXQ, SFYXZZ, SFBD_ZT, 
+    SFBD_SD, SFBD_QK, QFBZ, QFSJ, QFR, SFJZCQ, ZZBZ, ZZSJ, DRBZ, BDSJ_ZT, BDSJ_SD, BDSJ_QK, 
+    DSDR, DSZJ, FZSJ, SHRSFZH, DZXQ_SPZT, DZXQ_CZLX, SFEDZDQ, ETSFYFJZ, SFEDTCQ, SFBHB, 
+    HSBZ, HSSJ, HSRSFZH, GZDWSZFJ, DWPCS, DZ_SSXQ, DZ_XZJD, XXDZ, DZBM, FJBM, ZBX, ZBY, 
+    ZBX_TDT, ZBY_TDT, ZBX_GPS, ZBY_GPS, OBJECTID, BZ, ZXZT, ZXRQ, DJR, DJRMC, DJDWMC, 
+    DJDW, DJSJ, XGR, XGDW, XGRMC, XGDWMC, GXSJ, SBID, LRJS, LRFS, LRWL
+  </sql>
+ <sql id="Alias_Base_Column_List" >
+    ${alias}.LDID,${alias}.XLH,${alias}.ID,${alias}.XM,${alias}.BM,${alias}.XB,${alias}.MZ,${alias}.SFZH,${alias}.CSRQ,${alias}.CZHKSZD,${alias}.CZHKSZDZZ,${alias}.CZHKSZDZZFJH,${alias}.ZSLB,
+    ${alias}.FBYQK,${alias}.JZSY,${alias}.HYZK,${alias}.XL,${alias}.ZZMM,${alias}.LXFS_SJ,${alias}.LXFS_GH,${alias}.LXFS_XLT,${alias}.DDBDRQ,${alias}.NJZQX,${alias}.SFSLJZZ,
+    ${alias}.JZDYWGZDW,${alias}.CSZY,${alias}.ZYJSZW,${alias}.ZYZG,${alias}.DSDM,${alias}.SSJWQ,${alias}.SSPCS,${alias}.QTLXFS_QQ,${alias}.QTLXFS_EMAIL,${alias}.GZDW,
+    ${alias}.DWSSFJ,${alias}.DWSSPCS,${alias}.DWFZR,${alias}.DWLXDH,${alias}.DWDZ,${alias}.YGZNX,${alias}.XJZD,${alias}.XJZDZZ,${alias}.XJZDZZFJH,${alias}.FZ,${alias}.FZ_SFZH,
+    ${alias}.LDHTQDQK,${alias}.CBQK,${alias}.SFSY,${alias}.SYZN_NAN,${alias}.SYZN_NV,${alias}.HYZMBH,${alias}.SFCQJYCS,${alias}.GAJGDM,${alias}.TBSJ,${alias}.TBDWDM,
+    ${alias}.TBRXM,${alias}.TBRSFZH,${alias}.DELTAG,${alias}.DELTIME,${alias}.MOVESIGN,${alias}.ZHXGSJ,${alias}.SPZT,${alias}.SJLY,${alias}.HJDXZQH,${alias}.XZDXZQH,
+    ${alias}.SJYXX,${alias}.SFCJGZ,${alias}.BZDZ,${alias}.SJYXX_YZSJ,${alias}.SFLS,${alias}.SLSJ,${alias}.ZZZT,${alias}.LSH,${alias}.CZLX,${alias}.ZXBZ,${alias}.ZXSJ,${alias}.SHR,${alias}.SHSJ,
+    ${alias}.SHDWDM,${alias}.CZFW_ID,${alias}.DYH,${alias}.FH,${alias}.JLXXQ,${alias}.LH,${alias}.MPH,${alias}.QT,${alias}.SQJCWH,${alias}.XZJD,${alias}.JZZYXQ,${alias}.SFYXZZ,${alias}.SFBD_ZT,
+    ${alias}.SFBD_SD,${alias}.SFBD_QK,${alias}.QFBZ,${alias}.QFSJ,${alias}.QFR,${alias}.SFJZCQ,${alias}.ZZBZ,${alias}.ZZSJ,${alias}.DRBZ,${alias}.BDSJ_ZT,${alias}.BDSJ_SD,${alias}.BDSJ_QK,
+    ${alias}.DSDR,${alias}.DSZJ,${alias}.FZSJ,${alias}.SHRSFZH,${alias}.DZXQ_SPZT,${alias}.DZXQ_CZLX,${alias}.SFEDZDQ,${alias}.ETSFYFJZ,${alias}.SFEDTCQ,${alias}.SFBHB,
+    ${alias}.HSBZ,${alias}.HSSJ,${alias}.HSRSFZH,${alias}.GZDWSZFJ,${alias}.DWPCS,${alias}.DZ_SSXQ,${alias}.DZ_XZJD,${alias}.XXDZ,${alias}.DZBM,${alias}.FJBM,${alias}.ZBX,${alias}.ZBY,
+    ${alias}.ZBX_TDT,${alias}.ZBY_TDT,${alias}.ZBX_GPS,${alias}.ZBY_GPS,${alias}.OBJECTID,${alias}.BZ,${alias}.ZXZT,${alias}.ZXRQ,${alias}.DJR,${alias}.DJRMC,${alias}.DJDWMC,
+    ${alias}.DJDW,${alias}.DJSJ,${alias}.XGR,${alias}.XGDW,${alias}.XGRMC,${alias}.XGDWMC,${alias}.GXSJ,${alias}.SBID,${alias}.LRJS,${alias}.LRFS,${alias}.LRWL
+  </sql>
+  <sql id="Blob_Column_List" >
+    ZP
+  </sql>
+
+   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select <include refid="Base_Column_List" /> from SY_RKGL_LDRKDJB where LDID = #{ldid,jdbcType=VARCHAR}
+  </select>
+  	<update id="cancelLdrk" parameterType="java.util.Map" >
+   update SY_RKGL_LDRKDJB
+   set  
+        ZZBZ = #{zzbz,jdbcType=VARCHAR},
+        ZXSJ= #{zxsj,jdbcType=DATE}
+        where LDID = #{ldid,jdbcType=VARCHAR}     
+  </update>
+  	<update id="activatesyLdrk" parameterType="java.util.Map" >
+   update SY_RKGL_LDRKDJB
+   set  
+        ZZBZ = #{zzbz,jdbcType=VARCHAR},
+        ZXSJ= #{zxsj,jdbcType=DATE}
+        where LDID = #{ldid,jdbcType=VARCHAR}     
+  </update>
+ <!-- ################################################################ -->  
+<!--通用分页 -->
+	<sql id="Paging_Start">
+		SELECT * FROM (
+		SELECT T_.*, rownum rn_ FROM (
+	</sql>
+	<sql id="Paging_end">
+		) T_ WHERE rownum &lt;= ${pageend}
+		) WHERE rn_ &gt; ${pagestart}
+	</sql>
+
+<!-- #######################page query start ###########################################-->
+ 	  <select id="selectglldrkById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+  	 from SY_RKGL_LDRKDJB where SFZH = #{sfzh,jdbcType=VARCHAR}
+  </select>
+ 	  <select id="selectLdrkByJzwfjId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+  	 from SY_RKGL_LDRKDJB where FJBM = #{jzwfjid,jdbcType=VARCHAR}
+  </select>
+  
+ 	<select id="selectSyLdrklist" resultType="java.util.Map" parameterType="java.util.Map">
+		<include refid="Paging_Start" />
+		SELECT
+		<include refid="Alias_Base_Column_List">
+			<property name="alias" value="T1" />
+		</include>
+		FROM  SY_RKGL_LDRKDJB T1 WHERE 1=1
+		<include refid="syLdrkList_where">
+			<property name="alias" value="T1" />
+		</include>
+		<if test="sort != null">
+			ORDER BY T1.${sort} ${order}
+		</if>
+		<include refid="Paging_end" />
+	</select>
+	
+	<select id="selectSyLdrkCount" resultType="java.lang.Long" parameterType="java.util.Map">
+		select count(1) FROM   SY_RKGL_LDRKDJB T1 WHERE 1=1
+		<include refid="syLdrkList_where">
+			<property name="alias" value="T1" />
+		</include>
+	</select>
+	
+	<!--   <select id="selectSyLdrkInfoByJzwfjId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select XM,BM,SFZH,LXFS_SJ,XJZDZZ,FH,XXDZ
+  	 from SY_RKGL_LDRKDJB where FJBM = #{jzwfjid,jdbcType=VARCHAR}
+  	 
+  </select> -->
+    <select id="selectSyLdrkInfoByJzwfjId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select gl.XM,gl.BM,gl.SFZH,gl.LXFS_SJ,gl.XJZDZZ,gl.FH,gl.XXDZ
+  	 from SY_RKGL_LDRKDJB gl  where gl.LDID in (select fw.RYID from SY_FW_LDRK fw where fw.FJBH=#{jzwfjid,jdbcType=VARCHAR})
+  	 
+  </select>
+  
+<select id="selectSyLdrkInfoByJzwfjIdKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+        <include refid="Alias_Base_Column_List">
+			<property name="alias" value="T1" />
+		</include>
+  	 from SY_RKGL_LDRKDJB T1  where T1.LDID in (select fw.RYID from SY_FW_LDRK fw where fw.FJBH=#{jzwfjid,jdbcType=VARCHAR})
+  	 
+</select>
+  
+  
+  <!--2016-0811 当前房屋内 所住流动人员信息  -->
+  <select id="selectSyLdrkInfoFwByJzwfjIdKey"  resultMap="BaseResultMap" parameterType="java.lang.String">
+     select 
+        <include refid="Alias_Base_Column_List">
+			<property name="alias" value="T1" />
+		</include>
+  	 from SY_RKGL_LDRKDJB T1  where T1.LDID in (select fw.RYID from SY_FW_LDRK fw where fw.FJBH=#{jzwfjid,jdbcType=VARCHAR}
+  	 and fw.deltag!=1)
+  
+  </select>
+  
+ 	<sql id="syLdrkList_where">
+		<if test="xm != null">
+			AND ${alias}.XM like #{xm,jdbcType=VARCHAR}
+		</if>
+		<if test="sfzh != null">
+			AND ${alias}.SFZH like #{sfzh,jdbcType=VARCHAR}
+		</if>
+		<if test="ssjwq != null">
+			AND ${alias}.SSJWQ like #{ssjwq,jdbcType=VARCHAR}
+		</if>
+	</sql> 
+  <!-- #######################page query end ###########################################--> 
+  
+  <!--####################### 2016-08-16 当期房屋 所住(历史) 人口信息 ####################### -->  
+  <select id="selectSyLdrkForFwLsry" resultType="java.util.Map" parameterType="java.util.Map" >
+    <include refid="Paging_Start" />
+     select 
+        <include refid="Alias_Base_Column_List">
+			<property name="alias" value="T1" />
+		</include>
+  	 from SY_RKGL_LDRKDJB T1  where T1.LDID in (select fw.RYID from SY_FW_LDRK fw where fw.FJBH=#{jzwfjid,jdbcType=VARCHAR})
+ <include refid="Paging_end" />
+  </select>
+  
+  <select id="selectSyLdrkForFwLsryCount" resultType="java.lang.Long" parameterType="java.util.Map">
+		select count(1)
+		from SY_RKGL_LDRKDJB T1  where T1.LDID in (select fw.RYID from SY_FW_LDRK fw where fw.FJBH=#{jzwfjid,jdbcType=VARCHAR})
+	</select>
+  
+  <select id="selectSyLdrkForFw" resultType="java.util.Map" parameterType="java.util.Map">
+   <include refid="Paging_Start" />
+    select 
+        <include refid="Alias_Base_Column_List">
+			<property name="alias" value="T1" />
+		</include>
+  	 from SY_RKGL_LDRKDJB T1  where T1.LDID in (select fw.RYID from SY_FW_LDRK fw where fw.FJBH=#{jzwfjid,jdbcType=VARCHAR}
+  	 and fw.deltag!=1)
+  <include refid="Paging_end" />
+  </select>
+ 
+  <select id="selectSyLdrkForFwCount" resultType="java.lang.Long" parameterType="java.util.Map">
+		select count(1)
+  	  from SY_RKGL_LDRKDJB T1  where T1.LDID in (select fw.RYID from SY_FW_LDRK fw where fw.FJBH=#{jzwfjid,jdbcType=VARCHAR}
+  	 and fw.deltag!=1)
+	</select>
+<!-- ####################### 2016-08-16 当期房屋 所住(历史) 人口信息   END#######################-->   
+  
+<!-- ################################################################ -->
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.sy.model.SyRkglLdrkdjb" >
+    insert into SY_RKGL_LDRKDJB
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ldid != null" >
+        LDID,
+      </if>
+      <if test="xlh != null" >
+        XLH,
+      </if>
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="xm != null" >
+        XM,
+      </if>
+      <if test="bm != null" >
+        BM,
+      </if>
+      <if test="xb != null" >
+        XB,
+      </if>
+      <if test="mz != null" >
+        MZ,
+      </if>
+      <if test="sfzh != null" >
+        SFZH,
+      </if>
+      <if test="csrq != null" >
+        CSRQ,
+      </if>
+      <if test="czhkszd != null" >
+        CZHKSZD,
+      </if>
+      <if test="czhkszdzz != null" >
+        CZHKSZDZZ,
+      </if>
+      <if test="czhkszdzzfjh != null" >
+        CZHKSZDZZFJH,
+      </if>
+      <if test="zslb != null" >
+        ZSLB,
+      </if>
+      <if test="fbyqk != null" >
+        FBYQK,
+      </if>
+      <if test="jzsy != null" >
+        JZSY,
+      </if>
+      <if test="hyzk != null" >
+        HYZK,
+      </if>
+      <if test="xl != null" >
+        XL,
+      </if>
+      <if test="zzmm != null" >
+        ZZMM,
+      </if>
+      <if test="lxfsSj != null" >
+        LXFS_SJ,
+      </if>
+      <if test="lxfsGh != null" >
+        LXFS_GH,
+      </if>
+      <if test="lxfsXlt != null" >
+        LXFS_XLT,
+      </if>
+      <if test="ddbdrq != null" >
+        DDBDRQ,
+      </if>
+      <if test="njzqx != null" >
+        NJZQX,
+      </if>
+      <if test="sfsljzz != null" >
+        SFSLJZZ,
+      </if>
+      <if test="jzdywgzdw != null" >
+        JZDYWGZDW,
+      </if>
+      <if test="cszy != null" >
+        CSZY,
+      </if>
+      <if test="zyjszw != null" >
+        ZYJSZW,
+      </if>
+      <if test="zyzg != null" >
+        ZYZG,
+      </if>
+      <if test="dsdm != null" >
+        DSDM,
+      </if>
+      <if test="ssjwq != null" >
+        SSJWQ,
+      </if>
+      <if test="sspcs != null" >
+        SSPCS,
+      </if>
+      <if test="qtlxfsQq != null" >
+        QTLXFS_QQ,
+      </if>
+      <if test="qtlxfsEmail != null" >
+        QTLXFS_EMAIL,
+      </if>
+      <if test="gzdw != null" >
+        GZDW,
+      </if>
+      <if test="dwssfj != null" >
+        DWSSFJ,
+      </if>
+      <if test="dwsspcs != null" >
+        DWSSPCS,
+      </if>
+      <if test="dwfzr != null" >
+        DWFZR,
+      </if>
+      <if test="dwlxdh != null" >
+        DWLXDH,
+      </if>
+      <if test="dwdz != null" >
+        DWDZ,
+      </if>
+      <if test="ygznx != null" >
+        YGZNX,
+      </if>
+      <if test="xjzd != null" >
+        XJZD,
+      </if>
+      <if test="xjzdzz != null" >
+        XJZDZZ,
+      </if>
+      <if test="xjzdzzfjh != null" >
+        XJZDZZFJH,
+      </if>
+      <if test="fz != null" >
+        FZ,
+      </if>
+      <if test="fzSfzh != null" >
+        FZ_SFZH,
+      </if>
+      <if test="ldhtqdqk != null" >
+        LDHTQDQK,
+      </if>
+      <if test="cbqk != null" >
+        CBQK,
+      </if>
+      <if test="sfsy != null" >
+        SFSY,
+      </if>
+      <if test="syznNan != null" >
+        SYZN_NAN,
+      </if>
+      <if test="syznNv != null" >
+        SYZN_NV,
+      </if>
+      <if test="hyzmbh != null" >
+        HYZMBH,
+      </if>
+      <if test="sfcqjycs != null" >
+        SFCQJYCS,
+      </if>
+      <if test="gajgdm != null" >
+        GAJGDM,
+      </if>
+      <if test="tbsj != null" >
+        TBSJ,
+      </if>
+      <if test="tbdwdm != null" >
+        TBDWDM,
+      </if>
+      <if test="tbrxm != null" >
+        TBRXM,
+      </if>
+      <if test="tbrsfzh != null" >
+        TBRSFZH,
+      </if>
+      <if test="deltag != null" >
+        DELTAG,
+      </if>
+      <if test="deltime != null" >
+        DELTIME,
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN,
+      </if>
+      <if test="zhxgsj != null" >
+        ZHXGSJ,
+      </if>
+      <if test="spzt != null" >
+        SPZT,
+      </if>
+      <if test="sjly != null" >
+        SJLY,
+      </if>
+      <if test="hjdxzqh != null" >
+        HJDXZQH,
+      </if>
+      <if test="xzdxzqh != null" >
+        XZDXZQH,
+      </if>
+      <if test="sjyxx != null" >
+        SJYXX,
+      </if>
+      <if test="sfcjgz != null" >
+        SFCJGZ,
+      </if>
+      <if test="bzdz != null" >
+        BZDZ,
+      </if>
+      <if test="sjyxxYzsj != null" >
+        SJYXX_YZSJ,
+      </if>
+      <if test="sfls != null" >
+        SFLS,
+      </if>
+      <if test="slsj != null" >
+        SLSJ,
+      </if>
+      <if test="zzzt != null" >
+        ZZZT,
+      </if>
+      <if test="lsh != null" >
+        LSH,
+      </if>
+      <if test="czlx != null" >
+        CZLX,
+      </if>
+      <if test="zxbz != null" >
+        ZXBZ,
+      </if>
+      <if test="zxsj != null" >
+        ZXSJ,
+      </if>
+      <if test="shrxm != null" >
+        SHR,
+      </if>
+      <if test="shsj != null" >
+        SHSJ,
+      </if>
+      <if test="shdwdm != null" >
+        SHDWDM,
+      </if>
+      <if test="czfwId != null" >
+        CZFW_ID,
+      </if>
+      <if test="dyh != null" >
+        DYH,
+      </if>
+      <if test="fh != null" >
+        FH,
+      </if>
+      <if test="jlxxq != null" >
+        JLXXQ,
+      </if>
+      <if test="lh != null" >
+        LH,
+      </if>
+      <if test="mph != null" >
+        MPH,
+      </if>
+      <if test="qt != null" >
+        QT,
+      </if>
+      <if test="sqjcwh != null" >
+        SQJCWH,
+      </if>
+      <if test="xzjd != null" >
+        XZJD,
+      </if>
+      <if test="jzzyxq != null" >
+        JZZYXQ,
+      </if>
+      <if test="sfyxzz != null" >
+        SFYXZZ,
+      </if>
+      <if test="sfbdZt != null" >
+        SFBD_ZT,
+      </if>
+      <if test="sfbdSd != null" >
+        SFBD_SD,
+      </if>
+      <if test="sfbdQk != null" >
+        SFBD_QK,
+      </if>
+      <if test="qfbz != null" >
+        QFBZ,
+      </if>
+      <if test="qfsj != null" >
+        QFSJ,
+      </if>
+      <if test="qfr != null" >
+        QFR,
+      </if>
+      <if test="sfjzcq != null" >
+        SFJZCQ,
+      </if>
+      <if test="zzbz != null" >
+        ZZBZ,
+      </if>
+      <if test="zzsj != null" >
+        ZZSJ,
+      </if>
+      <if test="drbz != null" >
+        DRBZ,
+      </if>
+      <if test="bdsjZt != null" >
+        BDSJ_ZT,
+      </if>
+      <if test="bdsjSd != null" >
+        BDSJ_SD,
+      </if>
+      <if test="bdsjQk != null" >
+        BDSJ_QK,
+      </if>
+      <if test="dsdr != null" >
+        DSDR,
+      </if>
+      <if test="dszj != null" >
+        DSZJ,
+      </if>
+      <if test="fzsj != null" >
+        FZSJ,
+      </if>
+      <if test="shrsfzh != null" >
+        SHRSFZH,
+      </if>
+      <if test="dzxqSpzt != null" >
+        DZXQ_SPZT,
+      </if>
+      <if test="dzxqCzlx != null" >
+        DZXQ_CZLX,
+      </if>
+      <if test="sfedzdq != null" >
+        SFEDZDQ,
+      </if>
+      <if test="etsfyfjz != null" >
+        ETSFYFJZ,
+      </if>
+      <if test="sfedtcq != null" >
+        SFEDTCQ,
+      </if>
+      <if test="sfbhb != null" >
+        SFBHB,
+      </if>
+      <if test="hsbz != null" >
+        HSBZ,
+      </if>
+      <if test="hssj != null" >
+        HSSJ,
+      </if>
+      <if test="hsrsfzh != null" >
+        HSRSFZH,
+      </if>
+      <if test="gzdwszfj != null" >
+        GZDWSZFJ,
+      </if>
+      <if test="dwpcs != null" >
+        DWPCS,
+      </if>
+      <if test="dzSsxq != null" >
+        DZ_SSXQ,
+      </if>
+      <if test="dzXzjd != null" >
+        DZ_XZJD,
+      </if>
+      <if test="xxdz != null" >
+        XXDZ,
+      </if>
+      <if test="dzbm != null" >
+        DZBM,
+      </if>
+      <if test="fjbm != null" >
+        FJBM,
+      </if>
+      <if test="zbx != null" >
+        ZBX,
+      </if>
+      <if test="zby != null" >
+        ZBY,
+      </if>
+      <if test="zbxTdt != null" >
+        ZBX_TDT,
+      </if>
+      <if test="zbyTdt != null" >
+        ZBY_TDT,
+      </if>
+      <if test="zbxGps != null" >
+        ZBX_GPS,
+      </if>
+      <if test="zbyGps != null" >
+        ZBY_GPS,
+      </if>
+      <if test="objectid != null" >
+        OBJECTID,
+      </if>
+      <if test="bz != null" >
+        BZ,
+      </if>
+      <if test="zxzt != null" >
+        ZXZT,
+      </if>
+      <if test="zxrq != null" >
+        ZXRQ,
+      </if>
+      <if test="djr != null" >
+        DJR,
+      </if>
+      <if test="djrmc != null" >
+        DJRMC,
+      </if>
+      <if test="djdwmc != null" >
+        DJDWMC,
+      </if>
+      <if test="djdw != null" >
+        DJDW,
+      </if>
+      <if test="djsj != null" >
+        DJSJ,
+      </if>
+      <if test="xgr != null" >
+        XGR,
+      </if>
+      <if test="xgdw != null" >
+        XGDW,
+      </if>
+      <if test="xgrmc != null" >
+        XGRMC,
+      </if>
+      <if test="xgdwmc != null" >
+        XGDWMC,
+      </if>
+      <if test="gxsj != null" >
+        GXSJ,
+      </if>
+      <if test="sbid != null" >
+        SBID,
+      </if>
+      <if test="lrjs != null" >
+        LRJS,
+      </if>
+      <if test="lrfs != null" >
+        LRFS,
+      </if>
+      <if test="lrwl != null" >
+        LRWL,
+      </if>
+      <if test="zp != null" >
+        ZP,
+      </if>
+      <if test="macAddress != null" >
+        MAC_ADDRESS,
+      </if>
+      <if test="tfCardNum != null" >
+        TF_CARD_NUM,
+      </if>
+      <if test="imeiNum != null" >
+        IMEI_NUM,
+      </if>
+      <if test="simNum != null" >
+        SIM_NUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ldid != null" >
+        #{ldid,jdbcType=VARCHAR},
+      </if>
+      <if test="xlh != null" >
+        #{xlh,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="bm != null" >
+        #{bm,jdbcType=VARCHAR},
+      </if>
+      <if test="xb != null" >
+        #{xb,jdbcType=VARCHAR},
+      </if>
+      <if test="mz != null" >
+        #{mz,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzh != null" >
+        #{sfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="csrq != null" >
+        #{csrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="czhkszd != null" >
+        #{czhkszd,jdbcType=VARCHAR},
+      </if>
+      <if test="czhkszdzz != null" >
+        #{czhkszdzz,jdbcType=VARCHAR},
+      </if>
+      <if test="czhkszdzzfjh != null" >
+        #{czhkszdzzfjh,jdbcType=VARCHAR},
+      </if>
+      <if test="zslb != null" >
+        #{zslb,jdbcType=VARCHAR},
+      </if>
+      <if test="fbyqk != null" >
+        #{fbyqk,jdbcType=CHAR},
+      </if>
+      <if test="jzsy != null" >
+        #{jzsy,jdbcType=VARCHAR},
+      </if>
+      <if test="hyzk != null" >
+        #{hyzk,jdbcType=VARCHAR},
+      </if>
+      <if test="xl != null" >
+        #{xl,jdbcType=VARCHAR},
+      </if>
+      <if test="zzmm != null" >
+        #{zzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="lxfsSj != null" >
+        #{lxfsSj,jdbcType=VARCHAR},
+      </if>
+      <if test="lxfsGh != null" >
+        #{lxfsGh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxfsXlt != null" >
+        #{lxfsXlt,jdbcType=VARCHAR},
+      </if>
+      <if test="ddbdrq != null" >
+        #{ddbdrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="njzqx != null" >
+        #{njzqx,jdbcType=VARCHAR},
+      </if>
+      <if test="sfsljzz != null" >
+        #{sfsljzz,jdbcType=CHAR},
+      </if>
+      <if test="jzdywgzdw != null" >
+        #{jzdywgzdw,jdbcType=CHAR},
+      </if>
+      <if test="cszy != null" >
+        #{cszy,jdbcType=VARCHAR},
+      </if>
+      <if test="zyjszw != null" >
+        #{zyjszw,jdbcType=VARCHAR},
+      </if>
+      <if test="zyzg != null" >
+        #{zyzg,jdbcType=VARCHAR},
+      </if>
+      <if test="dsdm != null" >
+        #{dsdm,jdbcType=CHAR},
+      </if>
+      <if test="ssjwq != null" >
+        #{ssjwq,jdbcType=VARCHAR},
+      </if>
+      <if test="sspcs != null" >
+        #{sspcs,jdbcType=VARCHAR},
+      </if>
+      <if test="qtlxfsQq != null" >
+        #{qtlxfsQq,jdbcType=VARCHAR},
+      </if>
+      <if test="qtlxfsEmail != null" >
+        #{qtlxfsEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="gzdw != null" >
+        #{gzdw,jdbcType=VARCHAR},
+      </if>
+      <if test="dwssfj != null" >
+        #{dwssfj,jdbcType=VARCHAR},
+      </if>
+      <if test="dwsspcs != null" >
+        #{dwsspcs,jdbcType=VARCHAR},
+      </if>
+      <if test="dwfzr != null" >
+        #{dwfzr,jdbcType=VARCHAR},
+      </if>
+      <if test="dwlxdh != null" >
+        #{dwlxdh,jdbcType=VARCHAR},
+      </if>
+      <if test="dwdz != null" >
+        #{dwdz,jdbcType=VARCHAR},
+      </if>
+      <if test="ygznx != null" >
+        #{ygznx,jdbcType=VARCHAR},
+      </if>
+      <if test="xjzd != null" >
+        #{xjzd,jdbcType=VARCHAR},
+      </if>
+      <if test="xjzdzz != null" >
+        #{xjzdzz,jdbcType=VARCHAR},
+      </if>
+      <if test="xjzdzzfjh != null" >
+        #{xjzdzzfjh,jdbcType=VARCHAR},
+      </if>
+      <if test="fz != null" >
+        #{fz,jdbcType=VARCHAR},
+      </if>
+      <if test="fzSfzh != null" >
+        #{fzSfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="ldhtqdqk != null" >
+        #{ldhtqdqk,jdbcType=VARCHAR},
+      </if>
+      <if test="cbqk != null" >
+        #{cbqk,jdbcType=VARCHAR},
+      </if>
+      <if test="sfsy != null" >
+        #{sfsy,jdbcType=VARCHAR},
+      </if>
+      <if test="syznNan != null" >
+        #{syznNan,jdbcType=DECIMAL},
+      </if>
+      <if test="syznNv != null" >
+        #{syznNv,jdbcType=DECIMAL},
+      </if>
+      <if test="hyzmbh != null" >
+        #{hyzmbh,jdbcType=VARCHAR},
+      </if>
+      <if test="sfcqjycs != null" >
+        #{sfcqjycs,jdbcType=VARCHAR},
+      </if>
+      <if test="gajgdm != null" >
+        #{gajgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsj != null" >
+        #{tbsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbdwdm != null" >
+        #{tbdwdm,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrxm != null" >
+        #{tbrxm,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrsfzh != null" >
+        #{tbrsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="deltag != null" >
+        #{deltag,jdbcType=VARCHAR},
+      </if>
+      <if test="deltime != null" >
+        #{deltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=VARCHAR},
+      </if>
+      <if test="zhxgsj != null" >
+        #{zhxgsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spzt != null" >
+        #{spzt,jdbcType=VARCHAR},
+      </if>
+      <if test="sjly != null" >
+        #{sjly,jdbcType=VARCHAR},
+      </if>
+      <if test="hjdxzqh != null" >
+        #{hjdxzqh,jdbcType=VARCHAR},
+      </if>
+      <if test="xzdxzqh != null" >
+        #{xzdxzqh,jdbcType=VARCHAR},
+      </if>
+      <if test="sjyxx != null" >
+        #{sjyxx,jdbcType=VARCHAR},
+      </if>
+      <if test="sfcjgz != null" >
+        #{sfcjgz,jdbcType=VARCHAR},
+      </if>
+      <if test="bzdz != null" >
+        #{bzdz,jdbcType=OTHER},
+      </if>
+      <if test="sjyxxYzsj != null" >
+        #{sjyxxYzsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sfls != null" >
+        #{sfls,jdbcType=CHAR},
+      </if>
+      <if test="slsj != null" >
+        #{slsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zzzt != null" >
+        #{zzzt,jdbcType=CHAR},
+      </if>
+      <if test="lsh != null" >
+        #{lsh,jdbcType=VARCHAR},
+      </if>
+      <if test="czlx != null" >
+        #{czlx,jdbcType=VARCHAR},
+      </if>
+      <if test="zxbz != null" >
+        #{zxbz,jdbcType=VARCHAR},
+      </if>
+      <if test="zxsj != null" >
+        #{zxsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shrxm != null" >
+        #{shrxm,jdbcType=VARCHAR},
+      </if>
+      <if test="shsj != null" >
+        #{shsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shdwdm != null" >
+        #{shdwdm,jdbcType=VARCHAR},
+      </if>
+      <if test="czfwId != null" >
+        #{czfwId,jdbcType=VARCHAR},
+      </if>
+      <if test="dyh != null" >
+        #{dyh,jdbcType=VARCHAR},
+      </if>
+      <if test="fh != null" >
+        #{fh,jdbcType=VARCHAR},
+      </if>
+      <if test="jlxxq != null" >
+        #{jlxxq,jdbcType=VARCHAR},
+      </if>
+      <if test="lh != null" >
+        #{lh,jdbcType=VARCHAR},
+      </if>
+      <if test="mph != null" >
+        #{mph,jdbcType=VARCHAR},
+      </if>
+      <if test="qt != null" >
+        #{qt,jdbcType=VARCHAR},
+      </if>
+      <if test="sqjcwh != null" >
+        #{sqjcwh,jdbcType=VARCHAR},
+      </if>
+      <if test="xzjd != null" >
+        #{xzjd,jdbcType=VARCHAR},
+      </if>
+      <if test="jzzyxq != null" >
+        #{jzzyxq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sfyxzz != null" >
+        #{sfyxzz,jdbcType=CHAR},
+      </if>
+      <if test="sfbdZt != null" >
+        #{sfbdZt,jdbcType=CHAR},
+      </if>
+      <if test="sfbdSd != null" >
+        #{sfbdSd,jdbcType=CHAR},
+      </if>
+      <if test="sfbdQk != null" >
+        #{sfbdQk,jdbcType=CHAR},
+      </if>
+      <if test="qfbz != null" >
+        #{qfbz,jdbcType=CHAR},
+      </if>
+      <if test="qfsj != null" >
+        #{qfsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qfr != null" >
+        #{qfr,jdbcType=VARCHAR},
+      </if>
+      <if test="sfjzcq != null" >
+        #{sfjzcq,jdbcType=VARCHAR},
+      </if>
+      <if test="zzbz != null" >
+        #{zzbz,jdbcType=CHAR},
+      </if>
+      <if test="zzsj != null" >
+        #{zzsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drbz != null" >
+        #{drbz,jdbcType=CHAR},
+      </if>
+      <if test="bdsjZt != null" >
+        #{bdsjZt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bdsjSd != null" >
+        #{bdsjSd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bdsjQk != null" >
+        #{bdsjQk,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dsdr != null" >
+        #{dsdr,jdbcType=VARCHAR},
+      </if>
+      <if test="dszj != null" >
+        #{dszj,jdbcType=VARCHAR},
+      </if>
+      <if test="fzsj != null" >
+        #{fzsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shrsfzh != null" >
+        #{shrsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="dzxqSpzt != null" >
+        #{dzxqSpzt,jdbcType=VARCHAR},
+      </if>
+      <if test="dzxqCzlx != null" >
+        #{dzxqCzlx,jdbcType=VARCHAR},
+      </if>
+      <if test="sfedzdq != null" >
+        #{sfedzdq,jdbcType=CHAR},
+      </if>
+      <if test="etsfyfjz != null" >
+        #{etsfyfjz,jdbcType=CHAR},
+      </if>
+      <if test="sfedtcq != null" >
+        #{sfedtcq,jdbcType=VARCHAR},
+      </if>
+      <if test="sfbhb != null" >
+        #{sfbhb,jdbcType=VARCHAR},
+      </if>
+      <if test="hsbz != null" >
+        #{hsbz,jdbcType=VARCHAR},
+      </if>
+      <if test="hssj != null" >
+        #{hssj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hsrsfzh != null" >
+        #{hsrsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="gzdwszfj != null" >
+        #{gzdwszfj,jdbcType=VARCHAR},
+      </if>
+      <if test="dwpcs != null" >
+        #{dwpcs,jdbcType=VARCHAR},
+      </if>
+      <if test="dzSsxq != null" >
+        #{dzSsxq,jdbcType=VARCHAR},
+      </if>
+      <if test="dzXzjd != null" >
+        #{dzXzjd,jdbcType=VARCHAR},
+      </if>
+      <if test="xxdz != null" >
+        #{xxdz,jdbcType=VARCHAR},
+      </if>
+      <if test="dzbm != null" >
+        #{dzbm,jdbcType=VARCHAR},
+      </if>
+      <if test="fjbm != null" >
+        #{fjbm,jdbcType=VARCHAR},
+      </if>
+      <if test="zbx != null" >
+        #{zbx,jdbcType=DECIMAL},
+      </if>
+      <if test="zby != null" >
+        #{zby,jdbcType=DECIMAL},
+      </if>
+      <if test="zbxTdt != null" >
+        #{zbxTdt,jdbcType=DECIMAL},
+      </if>
+      <if test="zbyTdt != null" >
+        #{zbyTdt,jdbcType=DECIMAL},
+      </if>
+      <if test="zbxGps != null" >
+        #{zbxGps,jdbcType=DECIMAL},
+      </if>
+      <if test="zbyGps != null" >
+        #{zbyGps,jdbcType=DECIMAL},
+      </if>
+      <if test="objectid != null" >
+        #{objectid,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null" >
+        #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="zxzt != null" >
+        #{zxzt,jdbcType=VARCHAR},
+      </if>
+      <if test="zxrq != null" >
+        #{zxrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="djr != null" >
+        #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djrmc != null" >
+        #{djrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djdwmc != null" >
+        #{djdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw != null" >
+        #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xgr != null" >
+        #{xgr,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdw != null" >
+        #{xgdw,jdbcType=VARCHAR},
+      </if>
+      <if test="xgrmc != null" >
+        #{xgrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdwmc != null" >
+        #{xgdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="gxsj != null" >
+        #{gxsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sbid != null" >
+        #{sbid,jdbcType=VARCHAR},
+      </if>
+      <if test="lrjs != null" >
+        #{lrjs,jdbcType=CHAR},
+      </if>
+      <if test="lrfs != null" >
+        #{lrfs,jdbcType=CHAR},
+      </if>
+      <if test="lrwl != null" >
+        #{lrwl,jdbcType=CHAR},
+      </if>
+      <if test="zp != null" >
+        #{zp,jdbcType=BLOB},
+      </if>
+      <if test="macAddress != null" >
+         #{macAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tfCardNum != null" >
+         #{tfCardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="imeiNum != null" >
+         #{imeiNum,jdbcType=VARCHAR},
+      </if>
+      <if test="simNum != null" >
+         #{simNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.sy.model.SyRkglLdrkdjb" >
+    update SY_RKGL_LDRKDJB
+    <set >
+      <if test="xlh != null" >
+        XLH = #{xlh,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        ID = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null" >
+        XM = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="bm != null" >
+        BM = #{bm,jdbcType=VARCHAR},
+      </if>
+      <if test="xb != null" >
+        XB = #{xb,jdbcType=VARCHAR},
+      </if>
+      <if test="mz != null" >
+        MZ = #{mz,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzh != null" >
+        SFZH = #{sfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="csrq != null" >
+        CSRQ = #{csrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="czhkszd != null" >
+        CZHKSZD = #{czhkszd,jdbcType=VARCHAR},
+      </if>
+      <if test="czhkszdzz != null" >
+        CZHKSZDZZ = #{czhkszdzz,jdbcType=VARCHAR},
+      </if>
+      <if test="czhkszdzzfjh != null" >
+        CZHKSZDZZFJH = #{czhkszdzzfjh,jdbcType=VARCHAR},
+      </if>
+      <if test="zslb != null" >
+        ZSLB = #{zslb,jdbcType=VARCHAR},
+      </if>
+      <if test="fbyqk != null" >
+        FBYQK = #{fbyqk,jdbcType=CHAR},
+      </if>
+      <if test="jzsy != null" >
+        JZSY = #{jzsy,jdbcType=VARCHAR},
+      </if>
+      <if test="hyzk != null" >
+        HYZK = #{hyzk,jdbcType=VARCHAR},
+      </if>
+      <if test="xl != null" >
+        XL = #{xl,jdbcType=VARCHAR},
+      </if>
+      <if test="zzmm != null" >
+        ZZMM = #{zzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="lxfsSj != null" >
+        LXFS_SJ = #{lxfsSj,jdbcType=VARCHAR},
+      </if>
+      <if test="lxfsGh != null" >
+        LXFS_GH = #{lxfsGh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxfsXlt != null" >
+        LXFS_XLT = #{lxfsXlt,jdbcType=VARCHAR},
+      </if>
+      <if test="ddbdrq != null" >
+        DDBDRQ = #{ddbdrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="njzqx != null" >
+        NJZQX = #{njzqx,jdbcType=VARCHAR},
+      </if>
+      <if test="sfsljzz != null" >
+        SFSLJZZ = #{sfsljzz,jdbcType=CHAR},
+      </if>
+      <if test="jzdywgzdw != null" >
+        JZDYWGZDW = #{jzdywgzdw,jdbcType=CHAR},
+      </if>
+      <if test="cszy != null" >
+        CSZY = #{cszy,jdbcType=VARCHAR},
+      </if>
+      <if test="zyjszw != null" >
+        ZYJSZW = #{zyjszw,jdbcType=VARCHAR},
+      </if>
+      <if test="zyzg != null" >
+        ZYZG = #{zyzg,jdbcType=VARCHAR},
+      </if>
+      <if test="dsdm != null" >
+        DSDM = #{dsdm,jdbcType=CHAR},
+      </if>
+      <if test="ssjwq != null" >
+        SSJWQ = #{ssjwq,jdbcType=VARCHAR},
+      </if>
+      <if test="sspcs != null" >
+        SSPCS = #{sspcs,jdbcType=VARCHAR},
+      </if>
+      <if test="qtlxfsQq != null" >
+        QTLXFS_QQ = #{qtlxfsQq,jdbcType=VARCHAR},
+      </if>
+      <if test="qtlxfsEmail != null" >
+        QTLXFS_EMAIL = #{qtlxfsEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="gzdw != null" >
+        GZDW = #{gzdw,jdbcType=VARCHAR},
+      </if>
+      <if test="dwssfj != null" >
+        DWSSFJ = #{dwssfj,jdbcType=VARCHAR},
+      </if>
+      <if test="dwsspcs != null" >
+        DWSSPCS = #{dwsspcs,jdbcType=VARCHAR},
+      </if>
+      <if test="dwfzr != null" >
+        DWFZR = #{dwfzr,jdbcType=VARCHAR},
+      </if>
+      <if test="dwlxdh != null" >
+        DWLXDH = #{dwlxdh,jdbcType=VARCHAR},
+      </if>
+      <if test="dwdz != null" >
+        DWDZ = #{dwdz,jdbcType=VARCHAR},
+      </if>
+      <if test="ygznx != null" >
+        YGZNX = #{ygznx,jdbcType=VARCHAR},
+      </if>
+      <if test="xjzd != null" >
+        XJZD = #{xjzd,jdbcType=VARCHAR},
+      </if>
+      <if test="xjzdzz != null" >
+        XJZDZZ = #{xjzdzz,jdbcType=VARCHAR},
+      </if>
+      <if test="xjzdzzfjh != null" >
+        XJZDZZFJH = #{xjzdzzfjh,jdbcType=VARCHAR},
+      </if>
+      <if test="fz != null" >
+        FZ = #{fz,jdbcType=VARCHAR},
+      </if>
+      <if test="fzSfzh != null" >
+        FZ_SFZH = #{fzSfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="ldhtqdqk != null" >
+        LDHTQDQK = #{ldhtqdqk,jdbcType=VARCHAR},
+      </if>
+      <if test="cbqk != null" >
+        CBQK = #{cbqk,jdbcType=VARCHAR},
+      </if>
+      <if test="sfsy != null" >
+        SFSY = #{sfsy,jdbcType=VARCHAR},
+      </if>
+      <if test="syznNan != null" >
+        SYZN_NAN = #{syznNan,jdbcType=DECIMAL},
+      </if>
+      <if test="syznNv != null" >
+        SYZN_NV = #{syznNv,jdbcType=DECIMAL},
+      </if>
+      <if test="hyzmbh != null" >
+        HYZMBH = #{hyzmbh,jdbcType=VARCHAR},
+      </if>
+      <if test="sfcqjycs != null" >
+        SFCQJYCS = #{sfcqjycs,jdbcType=VARCHAR},
+      </if>
+      <if test="gajgdm != null" >
+        GAJGDM = #{gajgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsj != null" >
+        TBSJ = #{tbsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbdwdm != null" >
+        TBDWDM = #{tbdwdm,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrxm != null" >
+        TBRXM = #{tbrxm,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrsfzh != null" >
+        TBRSFZH = #{tbrsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="deltag != null" >
+        DELTAG = #{deltag,jdbcType=VARCHAR},
+      </if>
+      <if test="deltime != null" >
+        DELTIME = #{deltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=VARCHAR},
+      </if>
+      <if test="zhxgsj != null" >
+        ZHXGSJ = #{zhxgsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spzt != null" >
+        SPZT = #{spzt,jdbcType=VARCHAR},
+      </if>
+      <if test="sjly != null" >
+        SJLY = #{sjly,jdbcType=VARCHAR},
+      </if>
+      <if test="hjdxzqh != null" >
+        HJDXZQH = #{hjdxzqh,jdbcType=VARCHAR},
+      </if>
+      <if test="xzdxzqh != null" >
+        XZDXZQH = #{xzdxzqh,jdbcType=VARCHAR},
+      </if>
+      <if test="sjyxx != null" >
+        SJYXX = #{sjyxx,jdbcType=VARCHAR},
+      </if>
+      <if test="sfcjgz != null" >
+        SFCJGZ = #{sfcjgz,jdbcType=VARCHAR},
+      </if>
+      <if test="bzdz != null" >
+        BZDZ = #{bzdz,jdbcType=OTHER},
+      </if>
+      <if test="sjyxxYzsj != null" >
+        SJYXX_YZSJ = #{sjyxxYzsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sfls != null" >
+        SFLS = #{sfls,jdbcType=CHAR},
+      </if>
+      <if test="slsj != null" >
+        SLSJ = #{slsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zzzt != null" >
+        ZZZT = #{zzzt,jdbcType=CHAR},
+      </if>
+      <if test="lsh != null" >
+        LSH = #{lsh,jdbcType=VARCHAR},
+      </if>
+      <if test="czlx != null" >
+        CZLX = #{czlx,jdbcType=VARCHAR},
+      </if>
+      <if test="zxbz != null" >
+        ZXBZ = #{zxbz,jdbcType=VARCHAR},
+      </if>
+      <if test="zxsj != null" >
+        ZXSJ = #{zxsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shrxm != null" >
+        SHR = #{shrxm,jdbcType=VARCHAR},
+      </if>
+      <if test="shsj != null" >
+        SHSJ = #{shsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shdwdm != null" >
+        SHDWDM = #{shdwdm,jdbcType=VARCHAR},
+      </if>
+      <if test="czfwId != null" >
+        CZFW_ID = #{czfwId,jdbcType=VARCHAR},
+      </if>
+      <if test="dyh != null" >
+        DYH = #{dyh,jdbcType=VARCHAR},
+      </if>
+      <if test="fh != null" >
+        FH = #{fh,jdbcType=VARCHAR},
+      </if>
+      <if test="jlxxq != null" >
+        JLXXQ = #{jlxxq,jdbcType=VARCHAR},
+      </if>
+      <if test="lh != null" >
+        LH = #{lh,jdbcType=VARCHAR},
+      </if>
+      <if test="mph != null" >
+        MPH = #{mph,jdbcType=VARCHAR},
+      </if>
+      <if test="qt != null" >
+        QT = #{qt,jdbcType=VARCHAR},
+      </if>
+      <if test="sqjcwh != null" >
+        SQJCWH = #{sqjcwh,jdbcType=VARCHAR},
+      </if>
+      <if test="xzjd != null" >
+        XZJD = #{xzjd,jdbcType=VARCHAR},
+      </if>
+      <if test="jzzyxq != null" >
+        JZZYXQ = #{jzzyxq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sfyxzz != null" >
+        SFYXZZ = #{sfyxzz,jdbcType=CHAR},
+      </if>
+      <if test="sfbdZt != null" >
+        SFBD_ZT = #{sfbdZt,jdbcType=CHAR},
+      </if>
+      <if test="sfbdSd != null" >
+        SFBD_SD = #{sfbdSd,jdbcType=CHAR},
+      </if>
+      <if test="sfbdQk != null" >
+        SFBD_QK = #{sfbdQk,jdbcType=CHAR},
+      </if>
+      <if test="qfbz != null" >
+        QFBZ = #{qfbz,jdbcType=CHAR},
+      </if>
+      <if test="qfsj != null" >
+        QFSJ = #{qfsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="qfr != null" >
+        QFR = #{qfr,jdbcType=VARCHAR},
+      </if>
+      <if test="sfjzcq != null" >
+        SFJZCQ = #{sfjzcq,jdbcType=VARCHAR},
+      </if>
+      <if test="zzbz != null" >
+        ZZBZ = #{zzbz,jdbcType=CHAR},
+      </if>
+      <if test="zzsj != null" >
+        ZZSJ = #{zzsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="drbz != null" >
+        DRBZ = #{drbz,jdbcType=CHAR},
+      </if>
+      <if test="bdsjZt != null" >
+        BDSJ_ZT = #{bdsjZt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bdsjSd != null" >
+        BDSJ_SD = #{bdsjSd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bdsjQk != null" >
+        BDSJ_QK = #{bdsjQk,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dsdr != null" >
+        DSDR = #{dsdr,jdbcType=VARCHAR},
+      </if>
+      <if test="dszj != null" >
+        DSZJ = #{dszj,jdbcType=VARCHAR},
+      </if>
+      <if test="fzsj != null" >
+        FZSJ = #{fzsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shrsfzh != null" >
+        SHRSFZH = #{shrsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="dzxqSpzt != null" >
+        DZXQ_SPZT = #{dzxqSpzt,jdbcType=VARCHAR},
+      </if>
+      <if test="dzxqCzlx != null" >
+        DZXQ_CZLX = #{dzxqCzlx,jdbcType=VARCHAR},
+      </if>
+      <if test="sfedzdq != null" >
+        SFEDZDQ = #{sfedzdq,jdbcType=CHAR},
+      </if>
+      <if test="etsfyfjz != null" >
+        ETSFYFJZ = #{etsfyfjz,jdbcType=CHAR},
+      </if>
+      <if test="sfedtcq != null" >
+        SFEDTCQ = #{sfedtcq,jdbcType=VARCHAR},
+      </if>
+      <if test="sfbhb != null" >
+        SFBHB = #{sfbhb,jdbcType=VARCHAR},
+      </if>
+      <if test="hsbz != null" >
+        HSBZ = #{hsbz,jdbcType=VARCHAR},
+      </if>
+      <if test="hssj != null" >
+        HSSJ = #{hssj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hsrsfzh != null" >
+        HSRSFZH = #{hsrsfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="gzdwszfj != null" >
+        GZDWSZFJ = #{gzdwszfj,jdbcType=VARCHAR},
+      </if>
+      <if test="dwpcs != null" >
+        DWPCS = #{dwpcs,jdbcType=VARCHAR},
+      </if>
+      <if test="dzSsxq != null" >
+        DZ_SSXQ = #{dzSsxq,jdbcType=VARCHAR},
+      </if>
+      <if test="dzXzjd != null" >
+        DZ_XZJD = #{dzXzjd,jdbcType=VARCHAR},
+      </if>
+      <if test="xxdz != null" >
+        XXDZ = #{xxdz,jdbcType=VARCHAR},
+      </if>
+      <if test="dzbm != null" >
+        DZBM = #{dzbm,jdbcType=VARCHAR},
+      </if>
+      <if test="fjbm != null" >
+        FJBM = #{fjbm,jdbcType=VARCHAR},
+      </if>
+      <if test="zbx != null" >
+        ZBX = #{zbx,jdbcType=DECIMAL},
+      </if>
+      <if test="zby != null" >
+        ZBY = #{zby,jdbcType=DECIMAL},
+      </if>
+      <if test="zbxTdt != null" >
+        ZBX_TDT = #{zbxTdt,jdbcType=DECIMAL},
+      </if>
+      <if test="zbyTdt != null" >
+        ZBY_TDT = #{zbyTdt,jdbcType=DECIMAL},
+      </if>
+      <if test="zbxGps != null" >
+        ZBX_GPS = #{zbxGps,jdbcType=DECIMAL},
+      </if>
+      <if test="zbyGps != null" >
+        ZBY_GPS = #{zbyGps,jdbcType=DECIMAL},
+      </if>
+      <if test="objectid != null" >
+        OBJECTID = #{objectid,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null" >
+        BZ = #{bz,jdbcType=VARCHAR},
+      </if>
+      <if test="zxzt != null" >
+        ZXZT = #{zxzt,jdbcType=VARCHAR},
+      </if>
+      <if test="zxrq != null" >
+        ZXRQ = #{zxrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="djr != null" >
+        DJR = #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djrmc != null" >
+        DJRMC = #{djrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djdwmc != null" >
+        DJDWMC = #{djdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw != null" >
+        DJDW = #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        DJSJ = #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xgr != null" >
+        XGR = #{xgr,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdw != null" >
+        XGDW = #{xgdw,jdbcType=VARCHAR},
+      </if>
+      <if test="xgrmc != null" >
+        XGRMC = #{xgrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdwmc != null" >
+        XGDWMC = #{xgdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="gxsj != null" >
+        GXSJ = #{gxsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sbid != null" >
+        SBID = #{sbid,jdbcType=VARCHAR},
+      </if>
+      <if test="lrjs != null" >
+        LRJS = #{lrjs,jdbcType=CHAR},
+      </if>
+      <if test="lrfs != null" >
+        LRFS = #{lrfs,jdbcType=CHAR},
+      </if>
+      <if test="lrwl != null" >
+        LRWL = #{lrwl,jdbcType=CHAR},
+      </if>
+      <if test="zp != null" >
+        ZP = #{zp,jdbcType=BLOB},
+      </if>
+      
+       <if test="macAddress != null" >
+        MAC_ADDRESS= #{macAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tfCardNum != null" >
+        TF_CARD_NUM= #{tfCardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="imeiNum != null" >
+        IMEI_NUM= #{imeiNum,jdbcType=VARCHAR},
+      </if>
+      <if test="simNum != null" >
+        SIM_NUM= #{simNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where LDID = #{ldid,jdbcType=VARCHAR}
+  </update>
+  <select id="loadldrkWorkCount" resultType="java.lang.Long" parameterType="java.util.Map">
+		select count(1) FROM   SY_RKGL_LDRKDJB  T1 WHERE 1=1
+	
+		<if test="djr != null">
+			AND T1.DJR = #{djr,jdbcType=VARCHAR}
+		</if>
+		<if test="djsj != null">
+			AND T1.DJSJ &gt;= #{djsj,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+	<select id="selectSyLdrkWorkDetail" resultType="java.util.Map" parameterType="java.util.Map">
+		
+		SELECT
+		<include refid="Alias_Base_Column_List">
+			<property name="alias" value="T1" />
+		</include>
+		FROM  SY_RKGL_LDRKDJB T1 WHERE 1=1
+	    <if test="djr != null">
+			AND T1.DJR = #{djr,jdbcType=VARCHAR}
+		</if>
+		<if test="djsj != null">
+			AND T1.DJSJ &gt;= #{djsj,jdbcType=TIMESTAMP}
+		</if>
+		<if test="sort != null">
+			ORDER BY T1.${sort} ${order}
+		</if>
+		
+	</select>
+	
+</mapper>

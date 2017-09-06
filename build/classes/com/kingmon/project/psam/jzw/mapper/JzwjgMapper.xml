@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.jzw.mapper.JzwjgMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.jzw.model.Jzwjg" >
+    <id column="JZWJGID" property="jzwjgid" jdbcType="VARCHAR" />
+    <result column="DZBM" property="dzbm" jdbcType="VARCHAR" />
+    <result column="JZWID" property="jzwid" jdbcType="VARCHAR" />
+    <result column="LCS" property="lcs" jdbcType="DECIMAL" />
+    <result column="DYS" property="dys" jdbcType="DECIMAL" />
+    <result column="MDYMS" property="mdyms" jdbcType="DECIMAL" />
+    <result column="SCSJ" property="scsj" jdbcType="TIMESTAMP" />
+    <result column="SFLCXT" property="sflcxt" jdbcType="CHAR" />
+    <result column="SFMSXT" property="sfmsxt" jdbcType="CHAR" />
+    <result column="ZHGXRQ" property="zhgxrq" jdbcType="TIMESTAMP" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+    <result column="DXCS" property="dxcs" jdbcType="DECIMAL" />
+    <result column="DXMCMS" property="dxmcms" jdbcType="DECIMAL" />
+    <result column="ISVALID" property="isvalid" jdbcType="CHAR" />
+    <result column="ISBUILD" property="isbuild" jdbcType="CHAR" />
+    <result column="DX_TYPE" property="dxType" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    JZWJGID, DZBM, JZWID, LCS, DYS, MDYMS, SCSJ, SFLCXT, SFMSXT, ZHGXRQ, MOVESIGN, DXCS, 
+    DXMCMS,ISVALID,ISBUILD,DX_TYPE
+  </sql>
+    <sql id="Alias_Base_Column_List" >
+    ${alias}.JZWJGID, ${alias}.DZBM, ${alias}.JZWID, ${alias}.LCS, ${alias}.DYS, ${alias}.MDYMS, 
+    ${alias}.SCSJ, ${alias}.SFLCXT, ${alias}.SFMSXT, ${alias}.ZHGXRQ, ${alias}.MOVESIGN, ${alias}.DXCS, 
+    ${alias}.DXMCMS, ${alias}.ISVALID, ${alias}.ISBUILD,${alias}.DX_TYPE
+  </sql>
+  
+<!--通用分页 -->
+	<sql id="Paging_Start">
+		SELECT * FROM (
+		SELECT T_.*, rownum rn_ FROM (
+	</sql>
+	
+	<sql id="Paging_end">
+		) T_ WHERE rownum &lt;= ${pageend}
+		) WHERE rn_ &gt; ${pagestart}
+	</sql>
+	
+  
+  <!-- #######################page query end ########################################### -->   
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DZ_JZWJG  where JZWJGID = #{jzwjgid,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="selectByJzwId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DZ_JZWJG  where jzwid = #{jzwid,jdbcType=VARCHAR}
+  </select>
+  <!-- #######################insertSelective ########################################### -->   
+  
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwjg">
+		insert into DZ_JZWJG
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="jzwjgid != null"> JZWJGID, </if>
+    		<if test="dzbm != null"> DZBM, </if>
+			<if test="jzwid != null"> JZWID, </if>
+			<if test="lcs != null"> LCS, </if>
+			<if test="dys != null"> DYS, </if>
+			<if test="mdyms != null"> MDYMS, </if>
+			<if test="scsj != null"> SCSJ, </if>
+			<if test="sflcxt != null"> SFLCXT, </if>
+			<if test="sfmsxt != null"> SFMSXT, </if>
+			<if test="zhgxrq != null"> ZHGXRQ, </if>
+			<if test="movesign != null"> MOVESIGN, </if>
+			<if test="dxcs != null"> DXCS, </if>
+			<if test="dxmcms != null"> DXMCMS, </if>
+			<if test="isvalid != null"> ISVALID, </if>
+			<if test="isbuild != null"> ISBUILD, </if>
+			<if test="dxType != null"> DX_TYPE, </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="jzwjgid != null"> #{jzwjgid,jdbcType=VARCHAR}, </if>
+    		<if test="dzbm != null"> #{dzbm,jdbcType=VARCHAR}, </if>
+			<if test="jzwid != null"> #{jzwid,jdbcType=VARCHAR}, </if>
+			<if test="lcs != null"> #{lcs,jdbcType=VARCHAR}, </if>
+			<if test="dys != null"> #{dys,jdbcType=VARCHAR}, </if>
+			<if test="mdyms != null"> #{mdyms,jdbcType=VARCHAR}, </if>
+			<if test="scsj != null"> #{scsj,jdbcType=DATE}, </if>
+			<if test="sflcxt != null"> #{sflcxt,jdbcType=CHAR}, </if>
+			<if test="sfmsxt != null"> #{sfmsxt,jdbcType=CHAR}, </if>
+			<if test="zhgxrq != null"> #{zhgxrq,jdbcType=DATE}, </if>
+			<if test="movesign != null"> #{movesign,jdbcType=CHAR}, </if>
+			<if test="dxcs != null"> #{dxcs,jdbcType=VARCHAR}, </if>
+			<if test="dxmcms != null"> #{dxmcms,jdbcType=VARCHAR}, </if>
+			<if test="isvalid != null">#{isvalid,jdbcType=CHAR}, </if>
+			<if test="isbuild != null"> #{isbuild,jdbcType=CHAR}, </if>
+			<if test="dxType != null">#{dxType,jdbcType=CHAR}, </if>
+		</trim>
+	</insert>
+	 <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwjg" >
+    update DZ_JZWJG
+    <set >
+      <if test="dzbm != null" >
+        DZBM = #{dzbm,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwid != null" >
+        JZWID = #{jzwid,jdbcType=VARCHAR},
+      </if>
+      <if test="lcs != null" >
+        LCS = #{lcs,jdbcType=DECIMAL},
+      </if>
+      <if test="dys != null" >
+        DYS = #{dys,jdbcType=DECIMAL},
+      </if>
+      <if test="mdyms != null" >
+        MDYMS = #{mdyms,jdbcType=DECIMAL},
+      </if>
+      <if test="scsj != null" >
+        SCSJ = #{scsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sflcxt != null" >
+        SFLCXT = #{sflcxt,jdbcType=CHAR},
+      </if>
+      <if test="sfmsxt != null" >
+        SFMSXT = #{sfmsxt,jdbcType=CHAR},
+      </if>
+      <if test="zhgxrq != null" >
+        ZHGXRQ = #{zhgxrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="dxcs != null" >
+        DXCS = #{dxcs,jdbcType=DECIMAL},
+      </if>
+      <if test="dxmcms != null" >
+        DXMCMS = #{dxmcms,jdbcType=DECIMAL},
+      </if>
+      <if test="isvalid != null">
+      	ISVALID = #{isvalid,jdbcType=CHAR},
+      </if>
+      <if test="isbuild != null">
+       	ISBUILD = #{isbuild,jdbcType=CHAR}, 
+      </if>
+      <if test="dxType != null">
+       	DX_TYPE = #{dxType,jdbcType=CHAR}, 
+      </if>
+    </set>
+    where JZWJGID = #{jzwjgid,jdbcType=VARCHAR}
+  </update>
+  	 <update id="resetJzwjg" parameterType="com.kingmon.project.psam.jzw.model.Jzwjg" >
+    update DZ_JZWJG
+    set	ISVALID = null,
+       	ISBUILD = null
+    where JZWJGID = #{jzwjgid,jdbcType=VARCHAR}
+  </update>
+  	<select id="selectJgpicIdsByjgId" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT PICID FROM DZ_JZWJG_PIC WHERE JZWJGID =#{jzwjgid,jdbcType=VARCHAR}
+	</select>
+  <!-- ************************************************* -->
+    <select id="selectJzwjgDyLcInfo" resultType="java.util.Map" parameterType="java.util.Map">
+	  select 
+	    tmp."_parentId" as "_parentId",
+	      tmp."id" as "id",
+	      tmp.mc as "mc",
+	      tmp.xh as "xh",
+	      tmp.lcs as "lcs",
+	      tmp.state as "state",
+	      tmp.jgtype as "jgtype"
+	    from 
+	 ( 
+	   select dy.dymc as mc ,dy.dyxh as xh ,null as "_parentId" ,dy.jzwdyid as "id" , dy.lcs as lcs,'closed' as state,'dy' as jgtype 
+	   from Dz_Jzwdy dy where  dy.JZWJGID =#{jzwjgid,jdbcType=VARCHAR}
+	    UNION
+	    select lc.lcmc as mc ,lc.lcxh as xh , lc.jzwdyid as "_parentId",lc.jzwlcid as "id" ,  (select count(1) from dz_Jzwfj f where f.jzwjgid=#{jzwjgid,jdbcType=VARCHAR}  and f.jzwlcid=lc.jzwlcid 
+	      and CHANGESIGN is null and (DELTAG is null or DELTAG='0')) as  lcs, '' as state, 'lc' as jgtype
+	    from dz_Jzwlc lc where  lc.jzwjgid=#{jzwjgid,jdbcType=VARCHAR}
+	    UNION
+	    
+	    select fj.fjmc as mc,fj.fjxh as xh,fj.jzwlcid as "_parentId" ,fj.jzwfjid as "id" ,0 as lcs,'open' as state,'fj' as jgtype from dz_jzwfj fj 
+	    where fj.jzwjgid= #{jzwjgid,jdbcType=VARCHAR} and CHANGESIGN is null and (DELTAG is null or DELTAG='0')
+	  
+	  )tmp 
+	</select>
+	
+	<select id="selectJzwjgDyLcCount" resultType="java.lang.Long" parameterType="java.util.Map">
+		select count(1)  from 
+			( 
+	   select dy.dymc as mc ,dy.dyxh as xh ,null as "_parentId" ,dy.jzwdyid as "id" , dy.lcs as lcs,'closed' as state,'dy' as jgtype 
+	   from Dz_Jzwdy dy where  dy.JZWJGID =#{jzwjgid,jdbcType=VARCHAR}
+	    UNION
+	    select lc.lcmc as mc ,lc.lcxh as xh , lc.jzwdyid as "_parentId",lc.jzwlcid as "id" ,  (select count(1) from dz_Jzwfj f where f.jzwjgid=#{jzwjgid,jdbcType=VARCHAR}  and f.jzwlcid=lc.jzwlcid 
+	     and CHANGESIGN is null and (DELTAG is null or DELTAG='0')) as  lcs, '' as state, 'lc' as jgtype
+	    from dz_Jzwlc lc where  lc.jzwjgid=#{jzwjgid,jdbcType=VARCHAR}
+	    UNION
+	    
+	    select fj.fjmc as mc,fj.fjxh as xh,fj.jzwlcid as "_parentId" ,fj.jzwfjid as "id" ,0 as lcs,'closed' as state,'fj' as jgtype from dz_jzwfj fj 
+	    where fj.jzwjgid= #{jzwjgid,jdbcType=VARCHAR} and CHANGESIGN is null and (DELTAG is null or DELTAG='0')
+	  
+	  )tmp
+	</select>
+	
+	<!-- 
+  <select id="selectJzwjgDyLcInfo" resultType="java.util.Map" parameterType="java.util.Map">
+	select 
+	  tmp."_parentId" as "_parentId",
+      tmp."id" as "id",
+      tmp.mc as "mc",
+      tmp.xh as "xh",
+      tmp.lcs as "lcs",
+      tmp.state as "state",
+      tmp.jgtype as "jgtype"
+    from 
+ ( 
+   select dy.dymc as mc ,dy.dyxh as xh ,null as "_parentId" ,dy.jzwdyid as "id" , dy.lcs as lcs,'closed' as state,'dy' as jgtype
+    from Dz_Jzwdy dy where  dy.JZWJGID =#{jzwjgid,jdbcType=VARCHAR}
+    UNION
+   select lc.lcmc as mc ,lc.lcxh as xh , lc.jzwdyid as "_parentId",lc.jzwlcid as "id"  ,
+   (select count(1) from dz_Jzwfj f where f.jzwjgid=#{jzwjgid,jdbcType=VARCHAR} and f.jzwdyid=dyx.jzwdyid and f.jzwlcid=lc.jzwlcid) as  lcs, 
+   '' as state,'lc' as jgtype
+    from dz_Jzwlc lc,Dz_Jzwdy dyx where  lc.jzwdyid=dyx.jzwdyid and dyx.jzwjgid=#{jzwjgid,jdbcType=VARCHAR}
+  )tmp 
+	</select>
+	
+	<select id="selectJzwjgDyLcCount" resultType="java.lang.Long" parameterType="java.util.Map">
+		select count(*)  from 
+			 ( 
+			   select dy.dymc as mc ,dy.dyxh as xh ,dy.jzwdyid as "_parentId" ,dy.jzwdyid as "id" 
+			    from Dz_Jzwdy dy where  dy.JZWJGID =#{jzwjgid,jdbcType=VARCHAR}
+			    UNION
+			   select lc.lcmc as mc ,lc.lcxh as xh , lc.jzwdyid as "_parentId",lc.jzwlcid as "id" 
+			    from dz_Jzwlc lc,Dz_Jzwdy dyx where  lc.jzwdyid=dyx.jzwdyid and dyx.jzwjgid=#{jzwjgid,jdbcType=VARCHAR}
+			  )tmp  
+	</select>
+	
+	 -->
+  <select id="selectJzwidByJzwjgid"  resultType="java.lang.String" parameterType="java.lang.String">
+  		select  JZWID 
+    	from DZ_JZWJG  
+    	where JZWJGID =#{jzwjgid,jdbcType=VARCHAR}
+  </select>
+    <select id="selectJzwjgidByJzwid"  resultType="java.lang.String" parameterType="java.lang.String">
+  		select  JZWJGID 
+    	from DZ_JZWJG  
+    	where JZWID =#{jzwid,jdbcType=VARCHAR}
+  </select>
+</mapper>

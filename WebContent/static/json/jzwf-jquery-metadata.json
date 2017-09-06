@@ -1,0 +1,22 @@
+[{
+	"id":1,
+	"text":"功能选项",
+	"children":[{
+		"id":11,
+		"text":"人口管理",
+		"children":[{
+			"id":"/psam/sy/syfwCzrk/loadCzrkFj",
+			"valuex":"czrk",
+			"iconCls":"icon-add",
+			"text":"常住人口"
+		},{
+			"id":"/psam/sy/syfwLdrk/loadLdrkFj",
+			"valuex":"ldrk",
+			"text":"流动人口"
+		},{
+			"id":"/psam/sy/syFwJwry/loadJwryFj",
+			"valuex":"jwry",
+			"text":"境外人员"
+		}]
+	}]
+}]

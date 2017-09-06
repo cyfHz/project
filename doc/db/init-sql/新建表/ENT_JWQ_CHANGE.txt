@@ -1,0 +1,24 @@
+-- Create table
+create table ENT_JWQ_CHANGE
+(
+  id          VARCHAR2(36) not null,
+  fromid      VARCHAR2(36),
+  toid        VARCHAR2(36),
+  changesign  CHAR(1),
+  createdby   VARCHAR2(36),
+  create_time DATE
+);
+-- Add comments to the columns 
+comment on column ENT_JWQ_CHANGE.id  is '主键';
+comment on column ENT_JWQ_CHANGE.fromid is '被拆分/合并警务区ID';
+comment on column ENT_JWQ_CHANGE.toid  is '拆分/合并后警务区ID';
+comment on column ENT_JWQ_CHANGE.changesign  is '记录拆分还是合并';
+comment on column ENT_JWQ_CHANGE.createdby is '创建人';
+comment on column ENT_JWQ_CHANGE.create_time  is '时间';
+-- Create/Recreate indexes 
+create index I_ENT_JWQ_CHANGE_FROMID on ENT_JWQ_CHANGE (FROMID);
+ 
+create index I_ENT_JWQ_CHANGE_TOID on ENT_JWQ_CHANGE (TOID);
+ 
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table ENT_JWQ_CHANGE  add constraint PK_ENT_JWQ_CHANGE primary key (ID);

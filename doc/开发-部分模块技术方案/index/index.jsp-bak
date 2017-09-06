@@ -1,0 +1,41 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" " http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>标准地住址管理系统</title>
+<%@ include file="/static/meta/includeall.jsp" %>
+<link href="${ctx}/static/layout/leftmenu.css" rel="stylesheet" type="text/css"></link>
+<script src="static/layout/leftmenu.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+	$.cookie('jzwfj_show_wid', '', { expires: -1 }); // 删除 cookie
+	$.cookie('jzwfj_show_hei', '', { expires: -1 }); // 删除 cookie
+	
+	var explorer = window.navigator.userAgent;
+	if (explorer.indexOf("MSIE") >= 0) {
+		$.cookie('jzwfj_show_wid',$(window).width());
+		$.cookie('jzwfj_show_hei',$(window).height());
+ 	 	/* alert($(document.body).width()+"-"+$(document).height()+"-"+$(window).width()+"-"+$(window).height()+"-"+document.documentElement.clientHeight);
+	 	alert("ie");  */
+	}else{
+		$.cookie('jzwfj_show_wid',document.body.scrollWidth);
+		$.cookie('jzwfj_show_hei',document.body.scrollHeight);
+	/* 	alert("not ie"); */
+	}
+//	alert($.cookie('jzwfj_show_wid'));
+});
+</script>
+</head>
+<body class="easyui-layout" id="main_page_body_layout_PKjC58slRXqte7eALgbjjA">
+
+<div href="static/layout/north.jsp" data-options="region:'north',border:false,split:true" style="height:60px;padding:0px;overflow: hidden;" ></div>
+<div href="static/layout/center.jsp" data-options="region:'center',plain:true,title:''" style="overflow: hidden;padding:3px;overflow: hidden;" ></div>
+
+<div data-options="region:'west',split:true,title:'系统菜单'" style="width:160px;">
+	<div id="leftSideMenuAccordion" class="easyui-accordion"  data-options="fit:true" >
+	</div>
+</div> 
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>行政区划管理</title>
+<link rel="stylesheet" type="text/css" href="./static/libs/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="./static/libs/easyui/themes/icon.css">
+<script type="text/javascript" src="./static/libs/easyui/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="./static/libs/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="./static/libs/easyui/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body class="easyui-layout">
+	<div data-options="region:'west',title:'行政区划',split:true" style="width: 200px;">
+		<ul id="tt" class="easyui-tree">
+			<li>
+				<span>山东省</span>
+				<ul>
+					<li>
+						<span>济南市</span>
+						<ul>
+							<li>
+								<span>市中区</span>
+							</li>
+							<li>
+								<span>历下区</span>
+							</li>
+						</ul>
+					</li>
+					<li data-options="state:'closed'">
+						<span>青岛市</span>
+						<ul>
+							<li>
+								<span>市中区</span>
+							</li>
+							<li>
+								<span>历下区</span>
+							</li>
+						</ul>
+					</li>
+					<li data-options="state:'closed'">
+						<span>潍坊市</span>
+						<ul>
+							<li>
+								<span>市中区</span>
+							</li>
+							<li>
+								<span>历下区</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div  data-options="region:'center',title:''">
+		<table id="dg" title="行政区划管理" class="easyui-datagrid" url="data.json" toolbar="#toolbar" rownumbers="true" fit="true" pagination="true" fitColumns="true" singleSelect="true">
+			<thead>
+				<tr>
+					<th field="xzqhdm" width="50">行政区划代码</th>
+					<th field="jc" width="50">简称</th>
+					<th field="xzqhmc" width="50">行政区划名称</th>
+				</tr>
+			</thead>
+		</table>
+		<div id="toolbar">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="">增加</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="">详细信息</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="">删除</a>
+		</div>
+	</div>
+	<script type="text/javascript">
+		
+	</script>
+</body>
+</html>

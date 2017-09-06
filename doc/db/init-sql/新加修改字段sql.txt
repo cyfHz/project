@@ -1,0 +1,412 @@
+/*----------------------DZ_XZQH-----------------------------------------------------*/
+alter table DZ_XZQH add CXR VARCHAR2(36);
+comment on column DZ_XZQH.CXR is '撤销人';
+
+alter table DZ_XZQH add CXDW VARCHAR2(36);
+comment on column DZ_XZQH.CXDW is '撤销单位';
+
+alter table DZ_XZQH add CXBJ CHAR(1);
+comment on column DZ_XZQH.CXBJ is '撤销（注销）标记';
+
+
+/*----------------------DZ_XZJD-----------------------------------------------------*/
+
+alter table DZ_XZJD add CXR VARCHAR2(36);
+comment on column DZ_XZJD.CXR is '撤销人';
+
+alter table DZ_XZJD add CXDW VARCHAR2(36);
+comment on column DZ_XZJD.CXDW is '撤销单位';
+
+alter table DZ_XZJD add CXBJ CHAR(1);
+comment on column DZ_XZJD.CXBJ is '撤销（注销）标记';
+
+/*----------------------DZ_SQJCWH-----------------------------------------------------*/
+
+alter table DZ_SQJCWH add SJSQJCWH_DZBM VARCHAR2(36);
+comment on column DZ_SQJCWH.SJSQJCWH_DZBM is '所属社区居村委会代码（可能是树形结构）';
+
+alter table DZ_SQJCWH add CXR VARCHAR2(36);
+comment on column DZ_SQJCWH.CXR is '撤销人';
+
+alter table DZ_SQJCWH add CXDW VARCHAR2(36);
+comment on column DZ_SQJCWH.CXDW is '撤销单位';
+
+alter table DZ_SQJCWH add CXBJ CHAR(1);
+comment on column DZ_SQJCWH.CXBJ is '撤销（注销）标记';
+
+/*-----------------------dz_jlx------------------------------------------------------*/
+
+
+alter table dz_jlx add CXR VARCHAR2(36);
+comment on column dz_jlx.CXR is '撤销人';
+
+alter table dz_jlx add CXDW VARCHAR2(36);
+comment on column dz_jlx.CXDW is '撤销单位';
+
+alter table dz_jlx add CXBJ CHAR(1);
+comment on column dz_jlx.CXBJ is '撤销（注销）标记';
+
+alter table dz_jlx add SPZT CHAR(1);
+comment on column dz_jlx.SPZT is '审批结果(0正在审批1：未通过审批2：审核通过)';
+
+alter table dz_jlx add SHPZDM CHAR(1);
+comment on column dz_jlx.SHPZDM is '审核配置代码(0,1,2,3)';
+
+/*--------------------------DZ_MLPH---------------------------------------------------*/ 
+ -- Add/modify columns 
+ 
+ alter table DZ_MLPH add QR_CODE CLOB;
+comment on column DZ_MLPH.QR_CODE is '二维码';
+  
+alter table DZ_MLPH add MAC_ADDRESS varchar2(20);
+comment on column DZ_MLPH.MAC_ADDRESS is 'Mac地址';
+  
+alter table DZ_MLPH add TF_CARD_NUM varchar2(36);
+comment on column DZ_MLPH.TF_CARD_NUM is 'TF卡号';
+  
+  alter table DZ_MLPH add IMEI_NUM varchar2(20);
+comment on column DZ_MLPH.IMEI_NUM is 'IMEI号';
+
+  alter table DZ_MLPH add SIM_NUM varchar2(20);
+comment on column DZ_MLPH.SIM_NUM is 'SIM卡号';
+ 
+alter table DZ_MLPH add SPZT CHAR(1);
+comment on column DZ_MLPH.SPZT is '审批结果(0正在审批1：未通过审批2：审核通过)';
+
+alter table DZ_MLPH add SHPZDM CHAR(1);
+comment on column DZ_MLPH.SHPZDM is '审核配置代码(0,1,2,3)';
+
+
+alter table DZ_MLPH add is_indexed CHAR(1) default 0;
+comment on column DZ_MLPH.is_indexed  is '是否已经加入到elastic';
+  
+alter table DZ_MLPH add create_time timestamp default systimestamp;
+comment on column DZ_MLPH.create_time  is '创建时间';
+
+alter table DZ_MLPH add CXYY VARCHAR2(100);
+comment on column DZ_MLPH.CXYY is '撤销原因 ';
+
+create index INDEX_DZ_MLPH_SSJZW_DZBM on DZ_MLPH (SSJZW_DZBM);
+
+@unrun 20160224
+alter table DZ_MLPH add ROWLINE VARCHAR2(40);
+comment on column DZ_XZJD.CXR is '所属排--20160224 添加';
+
+/*--------------------------dz_jzwjbxx---------------------------------------------------*/
+
+alter table DZ_JZWJBXX add QR_CODE CLOB;
+comment on column DZ_JZWJBXX.QR_CODE is '二维码';
+  
+alter table DZ_JZWJBXX add MAC_ADDRESS varchar2(20);
+comment on column DZ_JZWJBXX.MAC_ADDRESS is 'Mac地址';
+  
+alter table DZ_JZWJBXX add TF_CARD_NUM varchar2(36);
+comment on column DZ_JZWJBXX.TF_CARD_NUM is 'TF卡号';
+  
+  alter table DZ_JZWJBXX add IMEI_NUM varchar2(20);
+comment on column DZ_JZWJBXX.IMEI_NUM is 'IMEI号';
+
+  alter table DZ_JZWJBXX add SIM_NUM varchar2(20);
+comment on column DZ_JZWJBXX.SIM_NUM is 'SIM卡号';
+
+  alter table DZ_JZWJBXX add GPS_X NUMBER(11,8);
+comment on column DZ_JZWJBXX.GPS_X is 'GPS_X';
+
+  alter table DZ_JZWJBXX add GPS_Y NUMBER(11,8);
+comment on column DZ_JZWJBXX.GPS_Y is 'GPS_Y';
+
+alter table DZ_JZWJBXX add is_indexed CHAR(1) default 0;
+comment on column DZ_JZWJBXX.is_indexed
+  is '是否已经加入到elastic';
+  
+alter table DZ_JZWJBXX add create_time timestamp default systimestamp;
+-- Add comments to the columns 
+
+comment on column DZ_JZWJBXX.create_time
+  is '创建时间';
+  
+  -- Add/modify columns 
+alter table DZ_JZWJBXX modify zjf VARCHAR2(100);
+
+
+/*-----------------------DZ_JZWJG------------------------------------------------------*/
+
+alter table DZ_JZWJG add ISVALID CHAR(1);
+comment on column DZ_JZWJG.ISVALID is '未进行过校验:null，检验通过：1 校验不通过：2';
+
+alter table DZ_JZWJG add ISBUILD CHAR(1);
+comment on column DZ_JZWJG.ISBUILD is '建筑物中所有房间是否已经生成坐标(left top width height) 生成：1 未生成：null';
+
+create index I_DZ_JZWJG_JZWID on DZ_JZWJG (JZWID);
+  
+/*--------------------------dz_jzwfj---------------------------------------------------*/
+
+ alter table dz_jzwfj add QR_CODE CLOB;
+comment on column dz_jzwfj.QR_CODE is '二维码';
+  
+alter table dz_jzwfj add MAC_ADDRESS varchar2(20);
+comment on column dz_jzwfj.MAC_ADDRESS is 'Mac地址';
+  
+alter table dz_jzwfj add TF_CARD_NUM varchar2(36);
+comment on column dz_jzwfj.TF_CARD_NUM is 'TF卡号';
+  
+  alter table dz_jzwfj add IMEI_NUM varchar2(20);
+comment on column dz_jzwfj.IMEI_NUM is 'IMEI号';
+
+  alter table dz_jzwfj add SIM_NUM varchar2(20);
+comment on column dz_jzwfj.SIM_NUM is 'SIM卡号';
+
+  alter table dz_jzwfj add GPS_X NUMBER(11,8);
+comment on column dz_jzwfj.GPS_X is 'GPS_X';
+
+  alter table dz_jzwfj add GPS_Y NUMBER(11,8);
+comment on column dz_jzwfj.GPS_Y is 'GPS_Y';
+
+
+alter table dz_jzwfj add SHOWINFO VARCHAR2(100);
+comment on column dz_jzwfj.SHOWINFO is '显示位置标注';
+
+alter table dz_jzwfj add SHOWMODE VARCHAR2(2);
+comment on column dz_jzwfj.SHOWMODE is '显示方案';
+
+alter table dz_jzwfj add CHANGESIGN CHAR(1);
+comment on column dz_jzwfj.CHANGESIGN is '拆分合并标识：1:被拆分 2：被合并';
+
+-- Create/Recreate indexes 
+create index index_dz_jzwjg_id on DZ_JZWFJ (jzwjgid);
+
+
+/*-----------------------sy_fwjbxx-----------------------------------------------------*/
+ alter table sy_fwjbxx add QR_CODE CLOB;
+comment on column sy_fwjbxx.QR_CODE is '二维码';
+  
+alter table sy_fwjbxx add MAC_ADDRESS varchar2(20);
+comment on column sy_fwjbxx.MAC_ADDRESS is 'Mac地址';
+  
+alter table sy_fwjbxx add TF_CARD_NUM varchar2(36);
+comment on column sy_fwjbxx.TF_CARD_NUM is 'TF卡号';
+  
+  alter table sy_fwjbxx add IMEI_NUM varchar2(20);
+comment on column sy_fwjbxx.IMEI_NUM is 'IMEI号';
+
+  alter table sy_fwjbxx add SIM_NUM varchar2(20);
+comment on column sy_fwjbxx.SIM_NUM is 'SIM卡号';
+
+  alter table sy_fwjbxx add GPS_X NUMBER(11,8);
+comment on column sy_fwjbxx.GPS_X is 'GPS_X';
+
+  alter table sy_fwjbxx add GPS_Y NUMBER(11,8);
+comment on column sy_fwjbxx.GPS_Y is 'GPS_Y';
+
+/*---------------------DZ_JZWLC ----DZ_JZWDY--------------------------*/
+
+alter table DZ_JZWLC  add constraint pk_jzwlcid primary key (JZWLCID);
+create index I_DZ_JZWLC_JZWDYID on DZ_JZWLC (JZWDYID);
+create index I_DZ_JZWLC_JZWJGID on DZ_JZWLC (JZWJGID);
+
+   
+alter table DZ_JZWDY  add constraint pk_dz_jzwdy primary key (JZWDYID);
+create index I_JZWJGID on DZ_JZWDY (JZWJGID);
+
+/*------------------APP_LOG_ERROR---------------------------------------------*/
+
+alter table APP_LOG_ERROR add IMEI varchar2(50);
+alter table APP_LOG_ERROR add TF varchar2(50);
+alter table APP_LOG_ERROR add GPS_X varchar2(50);
+alter table APP_LOG_ERROR add GPS_Y varchar2(50);
+
+/*------------------ENT_JWQ---------------------------------------------*/
+-- Add/modify columns 
+alter table ENT_JWQ add is_indexed CHAR(1) default 0;
+alter table ENT_JWQ add create_time TIMESTAMP(6) default systimestamp;
+
+-- Add comments to the columns 
+comment on column ENT_JWQ.is_indexed
+  is '是否已经加入到elastic';
+comment on column ENT_JWQ.create_time
+  is '创建时间';
+
+
+/*-------SY_FW_CZRK-----SY_FW_JWRY----SY_FW_LDRK---------------------------*/
+
+-- Add/modify columns 
+alter table SY_FW_CZRK add jzwid varchar2(36);
+alter table SY_FW_CZRK add tf varchar2(40);
+alter table SY_FW_CZRK add imei varchar2(40);
+alter table SY_FW_CZRK add sim varchar2(40);
+alter table SY_FW_CZRK add ZJBH varchar2(40);
+
+-- Add comments to the columns 
+comment on column SY_FW_CZRK.jzwid  is '建筑物ID';
+comment on column SY_FW_CZRK.ZJBH is '证件编号';
+-- Create/Recreate indexes 
+create index index_sy_fw_czrk_ryid on SY_FW_CZRK (ryid);
+create index index_sy_fw_czrk_fjbh on SY_FW_CZRK (fjbh);
+create index index_sy_fw_czrk_zjbh on SY_FW_CZRK (zjbh);
+
+/*------------SY_FW_JWRY-------------------------------*/  
+  -- Add/modify columns 
+alter table SY_FW_JWRY add jzwid varchar2(36);
+alter table SY_FW_JWRY add tf varchar2(40);
+alter table SY_FW_JWRY add imei varchar2(40);
+alter table SY_FW_JWRY add sim varchar2(40);
+alter table SY_FW_JWRY add ZJBH varchar2(40);
+-- Add comments to the columns 
+comment on column SY_FW_JWRY.jzwid  is '建筑物ID';
+comment on column SY_FW_JWRY.ZJBH is '证件编号';
+-- Create/Recreate indexes   
+create index index_sy_fw_jwry_ryid on SY_FW_JWRY (ryid);
+create index index_sy_fw_jwry_fjbh on SY_FW_JWRY (fjbh);
+create index index_sy_fw_jwry_zjbh on SY_FW_JWRY (zjbh);  
+
+/*----------------SY_FW_LDRK---------------------------*/  
+-- Add/modify columns 
+alter table SY_FW_LDRK add jzwid varchar2(36);
+alter table SY_FW_LDRK add tf varchar2(40);
+alter table SY_FW_LDRK add imei varchar2(40);
+alter table SY_FW_LDRK add sim varchar2(40);
+alter table SY_FW_LDRK add ZJBH varchar2(40);
+-- Add comments to the columns 
+comment on column SY_FW_LDRK.jzwid is '建筑物ID';
+comment on column SY_FW_LDRK.ZJBH is '证件编号';
+-- Create/Recreate indexes   
+create index index_sy_fw_ldrk_ryid on SY_FW_LDRK (ryid);
+create index index_sy_fw_ldrk_fjbh on SY_FW_LDRK (fjbh);
+create index index_sy_fw_ldrk_zjbh on SY_FW_LDRK (zjbh);  
+
+/*----------------SY_RKGL_CZRK---------------------------*/  
+-- Create/Recreate indexes 
+create index INDEX_SY_RKGL_CZRK_JZWFJID on SY_RKGL_CZRK (JZWFJID);
+create index index_sy_rkgl_czrk_gmsfhm on SY_RKGL_CZRK (gmsfhm);
+
+/**********************20160316**(DZ_MLPH)(DZ_JZWJBXX)********************************/
+-- Add/modify columns 
+alter table DZ_JZWJBXX add originaljwqbh VARCHAR2(36);
+-- Add comments to the columns 
+comment on column DZ_JZWJBXX.originaljwqbh
+  is '原警务区编码(20160316)';
+  
+  -- Add/modify columns 
+alter table DZ_MLPH add originaljwqbh VARCHAR2(36);
+-- Add comments to the columns 
+comment on column DZ_MLPH.originaljwqbh
+  is '原警务区编码(20160316)';
+  
+  
+/*************************2016-04-20**添加归属代码*****************************/
+alter table DZ_XZQH add XZQHGSDM varchar2(36);
+comment on column DZ_XZQH.XZQHGSDM is '归属代码';
+
+alter table DZ_XZJD add XZJDGSDM varchar2(36);
+comment on column DZ_XZJD.XZJDGSDM is '归属代码';
+
+alter table DZ_JLX add JLXGSDM varchar2(36);
+comment on column DZ_JLX.JLXGSDM is '归属代码';
+
+alter table DZ_MLPH add MLPHGSDM varchar2(36);
+comment on column DZ_MLPH.MLPHGSDM is '归属代码';
+
+alter table DZ_SQJCWH add SQJCWHGSDM varchar2(36);
+comment on column DZ_SQJCWH.SQJCWHGSDM is '归属代码';
+
+alter table DZ_JZWJBXX add JZWGSDM varchar2(36);
+comment on column DZ_JZWJBXX.JZWGSDM is '归属代码';
+
+alter table ENT_JWQ add JWQGSDM varchar2(36);
+comment on column ENT_JWQ.JWQGSDM is '归属代码';
+
+alter table SY_FWJBXX add FWGSDM varchar2(36);
+comment on column SY_FWJBXX.FWGSDM is '归属代码';
+
+alter table APP_ORGANIZATION add ORGNA_GSDM varchar2(36);
+comment on column APP_ORGANIZATION.ORGNA_GSDM is '应用组织机构归属代码';
+
+
+
+/***************************2016-05-13******新增开放接口涉及表 表 字段*********已增*****
+--表名：SERVICE_BZDZ_USER
+-- Add/modify columns 
+alter table SERVICE_BZDZ_USER add REJECT_COUNT VARCHAR2(200);
+alter table SERVICE_BZDZ_USER add TOKENID VARCHAR2(200);
+-- Add comments to the columns 
+comment on column SERVICE_BZDZ_USER.REJECT_COUNT
+  is '新增 --限制请求次数(分钟) 空为不限次数';
+comment on column SERVICE_BZDZ_USER.TOKENID
+  is '存储登录时 TOKENID ';
+  
+/*************************建筑物结构 DX_TYPE*****************
+-- Add/modify columns 
+alter table DZ_JZWJG add DX_TYPE CHAR(1);
+
+
+/*********************************2016-06-06(新增)************已增**********
+--人口管理新增字段 Mac地址，TF卡号，IMEI号，SIM卡号
+
+--房屋 常住人口
+-- Add/modify columns 
+alter table SY_FW_CZRK add MAC_ADDRESS VARCHAR2(20);
+-- Add comments to the columns 
+comment on column SY_FW_CZRK.MAC_ADDRESS
+  is 'Mac地址';
+  
+--房屋 境外人员
+ -- Add/modify columns 
+alter table SY_FW_JWRY add MAC_ADDRESS VARCHAR2(20);
+-- Add comments to the columns 
+comment on column SY_FW_JWRY.MAC_ADDRESS
+  is 'Mac地址';
+ 
+--房屋 流动人口 
+-- Add/modify columns 
+alter table SY_FW_LDRK add MAC_ADDRESS VARCHAR2(20);
+-- Add comments to the columns 
+comment on column SY_FW_LDRK.MAC_ADDRESS
+  is 'Mac地址';
+
+--人口管理 常住人口 
+-- Add/modify columns 
+alter table SY_RKGL_CZRK add MAC_ADDRESS VARCHAR2(20);
+alter table SY_RKGL_CZRK add TF_CARD_NUM VARCHAR2(36);
+alter table SY_RKGL_CZRK add IMEI_NUM VARCHAR2(20);
+alter table SY_RKGL_CZRK add SIM_NUM VARCHAR2(20);
+-- Add comments to the columns 
+comment on column SY_RKGL_CZRK.MAC_ADDRESS
+  is 'Mac地址';
+comment on column SY_RKGL_CZRK.TF_CARD_NUM
+  is 'TF卡号';
+comment on column SY_RKGL_CZRK.IMEI_NUM
+  is 'IMEI号';
+comment on column SY_RKGL_CZRK.SIM_NUM
+  is 'SIM卡号';
+  
+--人口管理 流动人口  
+-- Add/modify columns 
+alter table SY_RKGL_LDRKDJB add MAC_ADDRESS VARCHAR2(20);
+alter table SY_RKGL_LDRKDJB add IMEI_NUM VARCHAR2(20);
+alter table SY_RKGL_LDRKDJB add SIM_NUM VARCHAR2(20);
+alter table SY_RKGL_LDRKDJB add TF_CARD_NUM VARCHAR2(36);
+-- Add comments to the columns 
+comment on column SY_RKGL_LDRKDJB.MAC_ADDRESS
+  is 'Mac地址';
+comment on column SY_RKGL_LDRKDJB.IMEI_NUM
+  is 'IMEI号';
+comment on column SY_RKGL_LDRKDJB.SIM_NUM
+  is 'SIM卡号';
+comment on column SY_RKGL_LDRKDJB.TF_CARD_NUM
+  is 'TF卡号';
+  
+--人口管理 境外人口  
+-- Add/modify columns 
+alter table SY_SYJWRY add MAC_ADDRESS VARCHAR2(20);
+alter table SY_SYJWRY add TF_CARD_NUM VARCHAR2(36);
+alter table SY_SYJWRY add IMEI_NUM VARCHAR2(20);
+alter table SY_SYJWRY add SIM_NUM VARCHAR2(20);
+-- Add comments to the columns 
+comment on column SY_SYJWRY.MAC_ADDRESS
+  is 'Mac地址';
+comment on column SY_SYJWRY.TF_CARD_NUM
+  is 'TF卡号';
+comment on column SY_SYJWRY.IMEI_NUM
+  is 'IMEI号';
+comment on column SY_SYJWRY.SIM_NUM
+  is 'SIM卡号';

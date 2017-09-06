@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.sy.mapper.SyFwLdrkMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.sy.model.SyFwLdrk" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="RYID" property="ryid" jdbcType="VARCHAR" />
+    <result column="FJBH" property="fjbh" jdbcType="VARCHAR" />
+    <result column="DJR" property="djr" jdbcType="VARCHAR" />
+    <result column="DJDW" property="djdw" jdbcType="VARCHAR" />
+    <result column="DJRMC" property="djrmc" jdbcType="VARCHAR" />
+    <result column="DJDWMC" property="djdwmc" jdbcType="VARCHAR" />
+    <result column="DJSJ" property="djsj" jdbcType="TIMESTAMP" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+    <result column="SBID" property="sbid" jdbcType="VARCHAR" />
+    <result column="LRJS" property="lrjs" jdbcType="CHAR" />
+    <result column="LRFS" property="lrfs" jdbcType="CHAR" />
+    <result column="LRWL" property="lrwl" jdbcType="CHAR" />
+    <result column="DELTAG" property="deltag" jdbcType="CHAR" />
+    <result column="DELTIME" property="deltime" jdbcType="TIMESTAMP" />
+    <result column="DELUSER" property="deluser" jdbcType="VARCHAR" />
+    <result column="GPSX" property="gpsx" jdbcType="VARCHAR" />
+    <result column="GPSY" property="gpsy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, RYID, FJBH, DJR, DJDW, DJRMC, DJDWMC, DJSJ, MOVESIGN, SBID, LRJS, LRFS, LRWL, 
+    DELTAG, DELTIME, DELUSER, GPSX, GPSY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SY_FW_LDRK
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SY_FW_LDRK
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kingmon.project.psam.sy.model.SyFwLdrk" >
+    insert into SY_FW_LDRK (ID, RYID, FJBH, 
+      DJR, DJDW, DJRMC, DJDWMC, 
+      DJSJ, MOVESIGN, SBID, 
+      LRJS, LRFS, LRWL, DELTAG, 
+      DELTIME, DELUSER, GPSX, 
+      GPSY)
+    values (#{id,jdbcType=VARCHAR}, #{ryid,jdbcType=VARCHAR}, #{fjbh,jdbcType=VARCHAR}, 
+      #{djr,jdbcType=VARCHAR}, #{djdw,jdbcType=VARCHAR}, #{djrmc,jdbcType=VARCHAR}, #{djdwmc,jdbcType=VARCHAR}, 
+      #{djsj,jdbcType=TIMESTAMP}, #{movesign,jdbcType=CHAR}, #{sbid,jdbcType=VARCHAR}, 
+      #{lrjs,jdbcType=CHAR}, #{lrfs,jdbcType=CHAR}, #{lrwl,jdbcType=CHAR}, #{deltag,jdbcType=CHAR}, 
+      #{deltime,jdbcType=TIMESTAMP}, #{deluser,jdbcType=VARCHAR}, #{gpsx,jdbcType=VARCHAR}, 
+      #{gpsy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.sy.model.SyFwLdrk" >
+    insert into SY_FW_LDRK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="ryid != null" >
+        RYID,
+      </if>
+      <if test="fjbh != null" >
+        FJBH,
+      </if>
+      <if test="djr != null" >
+        DJR,
+      </if>
+      <if test="djdw != null" >
+        DJDW,
+      </if>
+      <if test="djrmc != null" >
+        DJRMC,
+      </if>
+      <if test="djdwmc != null" >
+        DJDWMC,
+      </if>
+      <if test="djsj != null" >
+        DJSJ,
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN,
+      </if>
+      <if test="sbid != null" >
+        SBID,
+      </if>
+      <if test="lrjs != null" >
+        LRJS,
+      </if>
+      <if test="lrfs != null" >
+        LRFS,
+      </if>
+      <if test="lrwl != null" >
+        LRWL,
+      </if>
+      <if test="deltag != null" >
+        DELTAG,
+      </if>
+      <if test="deltime != null" >
+        DELTIME,
+      </if>
+      <if test="deluser != null" >
+        DELUSER,
+      </if>
+      <if test="gpsx != null" >
+        GPSX,
+      </if>
+      <if test="gpsy != null" >
+        GPSY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="ryid != null" >
+        #{ryid,jdbcType=VARCHAR},
+      </if>
+      <if test="fjbh != null" >
+        #{fjbh,jdbcType=VARCHAR},
+      </if>
+      <if test="djr != null" >
+        #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw != null" >
+        #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="djrmc != null" >
+        #{djrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djdwmc != null" >
+        #{djdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="sbid != null" >
+        #{sbid,jdbcType=VARCHAR},
+      </if>
+      <if test="lrjs != null" >
+        #{lrjs,jdbcType=CHAR},
+      </if>
+      <if test="lrfs != null" >
+        #{lrfs,jdbcType=CHAR},
+      </if>
+      <if test="lrwl != null" >
+        #{lrwl,jdbcType=CHAR},
+      </if>
+      <if test="deltag != null" >
+        #{deltag,jdbcType=CHAR},
+      </if>
+      <if test="deltime != null" >
+        #{deltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deluser != null" >
+        #{deluser,jdbcType=VARCHAR},
+      </if>
+      <if test="gpsx != null" >
+        #{gpsx,jdbcType=VARCHAR},
+      </if>
+      <if test="gpsy != null" >
+        #{gpsy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.sy.model.SyFwLdrk" >
+    update SY_FW_LDRK
+    <set >
+      <if test="ryid != null" >
+        RYID = #{ryid,jdbcType=VARCHAR},
+      </if>
+      <if test="fjbh != null" >
+        FJBH = #{fjbh,jdbcType=VARCHAR},
+      </if>
+      <if test="djr != null" >
+        DJR = #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw != null" >
+        DJDW = #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="djrmc != null" >
+        DJRMC = #{djrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djdwmc != null" >
+        DJDWMC = #{djdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        DJSJ = #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="sbid != null" >
+        SBID = #{sbid,jdbcType=VARCHAR},
+      </if>
+      <if test="lrjs != null" >
+        LRJS = #{lrjs,jdbcType=CHAR},
+      </if>
+      <if test="lrfs != null" >
+        LRFS = #{lrfs,jdbcType=CHAR},
+      </if>
+      <if test="lrwl != null" >
+        LRWL = #{lrwl,jdbcType=CHAR},
+      </if>
+      <if test="deltag != null" >
+        DELTAG = #{deltag,jdbcType=CHAR},
+      </if>
+      <if test="deltime != null" >
+        DELTIME = #{deltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deluser != null" >
+        DELUSER = #{deluser,jdbcType=VARCHAR},
+      </if>
+      <if test="gpsx != null" >
+        GPSX = #{gpsx,jdbcType=VARCHAR},
+      </if>
+      <if test="gpsy != null" >
+        GPSY = #{gpsy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.psam.sy.model.SyFwLdrk" >
+    update SY_FW_LDRK
+    set RYID = #{ryid,jdbcType=VARCHAR},
+      FJBH = #{fjbh,jdbcType=VARCHAR},
+      DJR = #{djr,jdbcType=VARCHAR},
+      DJDW = #{djdw,jdbcType=VARCHAR},
+      DJRMC = #{djrmc,jdbcType=VARCHAR},
+      DJDWMC = #{djdwmc,jdbcType=VARCHAR},
+      DJSJ = #{djsj,jdbcType=TIMESTAMP},
+      MOVESIGN = #{movesign,jdbcType=CHAR},
+      SBID = #{sbid,jdbcType=VARCHAR},
+      LRJS = #{lrjs,jdbcType=CHAR},
+      LRFS = #{lrfs,jdbcType=CHAR},
+      LRWL = #{lrwl,jdbcType=CHAR},
+      DELTAG = #{deltag,jdbcType=CHAR},
+      DELTIME = #{deltime,jdbcType=TIMESTAMP},
+      DELUSER = #{deluser,jdbcType=VARCHAR},
+      GPSX = #{gpsx,jdbcType=VARCHAR},
+      GPSY = #{gpsy,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.jzw.mapper.JzwjgMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.jzw.model.Jzwjg" >
+    <id column="JZWJGID" property="jzwjgid" jdbcType="VARCHAR" />
+    <result column="DZBM" property="dzbm" jdbcType="VARCHAR" />
+    <result column="JZWID" property="jzwid" jdbcType="VARCHAR" />
+    <result column="LCS" property="lcs" jdbcType="DECIMAL" />
+    <result column="DYS" property="dys" jdbcType="DECIMAL" />
+    <result column="MDYMS" property="mdyms" jdbcType="DECIMAL" />
+    <result column="SCSJ" property="scsj" jdbcType="TIMESTAMP" />
+    <result column="SFLCXT" property="sflcxt" jdbcType="CHAR" />
+    <result column="SFMSXT" property="sfmsxt" jdbcType="CHAR" />
+    <result column="ZHGXRQ" property="zhgxrq" jdbcType="TIMESTAMP" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+    <result column="DXCS" property="dxcs" jdbcType="DECIMAL" />
+    <result column="DXMCMS" property="dxmcms" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    JZWJGID, DZBM, JZWID, LCS, DYS, MDYMS, SCSJ, SFLCXT, SFMSXT, ZHGXRQ, MOVESIGN, DXCS, 
+    DXMCMS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DZ_JZWJG
+    where JZWJGID = #{jzwjgid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DZ_JZWJG
+    where JZWJGID = #{jzwjgid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kingmon.project.psam.jzw.model.Jzwjg" >
+    insert into DZ_JZWJG (JZWJGID, DZBM, JZWID, 
+      LCS, DYS, MDYMS, SCSJ, 
+      SFLCXT, SFMSXT, ZHGXRQ, 
+      MOVESIGN, DXCS, DXMCMS
+      )
+    values (#{jzwjgid,jdbcType=VARCHAR}, #{dzbm,jdbcType=VARCHAR}, #{jzwid,jdbcType=VARCHAR}, 
+      #{lcs,jdbcType=DECIMAL}, #{dys,jdbcType=DECIMAL}, #{mdyms,jdbcType=DECIMAL}, #{scsj,jdbcType=TIMESTAMP}, 
+      #{sflcxt,jdbcType=CHAR}, #{sfmsxt,jdbcType=CHAR}, #{zhgxrq,jdbcType=TIMESTAMP}, 
+      #{movesign,jdbcType=CHAR}, #{dxcs,jdbcType=DECIMAL}, #{dxmcms,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwjg" >
+    insert into DZ_JZWJG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jzwjgid != null" >
+        jzwjgid,
+      </if>
+      <if test="dzbm != null" >
+        dzbm,
+      </if>
+      <if test="jzwid != null" >
+        jzwid,
+      </if>
+      <if test="lcs != null" >
+        lcs,
+      </if>
+      <if test="dys != null" >
+        dys,
+      </if>
+      <if test="mdyms != null" >
+        mdyms,
+      </if>
+      <if test="scsj != null" >
+        scsj,
+      </if>
+      <if test="sflcxt != null" >
+        sflcxt,
+      </if>
+      <if test="sfmsxt != null" >
+        sfmsxt,
+      </if>
+      <if test="zhgxrq != null" >
+        zhgxrq,
+      </if>
+      <if test="movesign != null" >
+        movesign,
+      </if>
+      <if test="dxcs != null" >
+        dxcs,
+      </if>
+      <if test="dxmcms != null" >
+        dxmcms,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jzwjgid != null" >
+        #{jzwjgid,jdbcType=VARCHAR},
+      </if>
+      <if test="dzbm != null" >
+        #{dzbm,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwid != null" >
+        #{jzwid,jdbcType=VARCHAR},
+      </if>
+      <if test="lcs != null" >
+        #{lcs,jdbcType=DECIMAL},
+      </if>
+      <if test="dys != null" >
+        #{dys,jdbcType=DECIMAL},
+      </if>
+      <if test="mdyms != null" >
+        #{mdyms,jdbcType=DECIMAL},
+      </if>
+      <if test="scsj != null" >
+        #{scsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sflcxt != null" >
+        #{sflcxt,jdbcType=CHAR},
+      </if>
+      <if test="sfmsxt != null" >
+        #{sfmsxt,jdbcType=CHAR},
+      </if>
+      <if test="zhgxrq != null" >
+        #{zhgxrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="dxcs != null" >
+        #{dxcs,jdbcType=DECIMAL},
+      </if>
+      <if test="dxmcms != null" >
+        #{dxmcms,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.jzw.model.Jzwjg" >
+    update DZ_JZWJG
+    <set >
+      <if test="dzbm != null" >
+        DZBM = #{dzbm,jdbcType=VARCHAR},
+      </if>
+      <if test="jzwid != null" >
+        JZWID = #{jzwid,jdbcType=VARCHAR},
+      </if>
+      <if test="lcs != null" >
+        LCS = #{lcs,jdbcType=DECIMAL},
+      </if>
+      <if test="dys != null" >
+        DYS = #{dys,jdbcType=DECIMAL},
+      </if>
+      <if test="mdyms != null" >
+        MDYMS = #{mdyms,jdbcType=DECIMAL},
+      </if>
+      <if test="scsj != null" >
+        SCSJ = #{scsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sflcxt != null" >
+        SFLCXT = #{sflcxt,jdbcType=CHAR},
+      </if>
+      <if test="sfmsxt != null" >
+        SFMSXT = #{sfmsxt,jdbcType=CHAR},
+      </if>
+      <if test="zhgxrq != null" >
+        ZHGXRQ = #{zhgxrq,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="dxcs != null" >
+        DXCS = #{dxcs,jdbcType=DECIMAL},
+      </if>
+      <if test="dxmcms != null" >
+        DXMCMS = #{dxmcms,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where JZWJGID = #{jzwjgid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.psam.jzw.model.Jzwjg" >
+    update DZ_JZWJG
+    set DZBM = #{dzbm,jdbcType=VARCHAR},
+      JZWID = #{jzwid,jdbcType=VARCHAR},
+      LCS = #{lcs,jdbcType=DECIMAL},
+      DYS = #{dys,jdbcType=DECIMAL},
+      MDYMS = #{mdyms,jdbcType=DECIMAL},
+      SCSJ = #{scsj,jdbcType=TIMESTAMP},
+      SFLCXT = #{sflcxt,jdbcType=CHAR},
+      SFMSXT = #{sfmsxt,jdbcType=CHAR},
+      ZHGXRQ = #{zhgxrq,jdbcType=TIMESTAMP},
+      MOVESIGN = #{movesign,jdbcType=CHAR},
+      DXCS = #{dxcs,jdbcType=DECIMAL},
+      DXMCMS = #{dxmcms,jdbcType=DECIMAL}
+    where JZWJGID = #{jzwjgid,jdbcType=VARCHAR}
+  </update>
+</mapper>

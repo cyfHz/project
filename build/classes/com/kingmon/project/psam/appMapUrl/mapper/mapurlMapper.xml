@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingmon.project.psam.appMapUrl.mapper.mapurlMapper" >
+  <resultMap id="BaseResultMap" type="com.kingmon.project.psam.appMapUrl.model.mapurl" >
+    <id column="MAP_URL_ID" property="mapUrlId" jdbcType="VARCHAR" />
+    <result column="MAP_TYPE" property="mapType" jdbcType="VARCHAR" />
+    <result column="INTOWEB" property="intoweb" jdbcType="VARCHAR" />
+    <result column="AREA_CODE" property="areaCode" jdbcType="VARCHAR" />
+    <result column="MAPURL" property="mapurl" jdbcType="VARCHAR" />
+    <result column="DJR" property="djr" jdbcType="VARCHAR" />
+    <result column="DJDW" property="djdw" jdbcType="VARCHAR" />
+    <result column="DJSJ" property="djsj" jdbcType="TIMESTAMP" />
+    <result column="DJRMC" property="djrmc" jdbcType="VARCHAR" />
+    <result column="DJDWMC" property="djdwmc" jdbcType="VARCHAR" />
+    <result column="XGRMC" property="xgrmc" jdbcType="VARCHAR" />
+    <result column="XGDWMC" property="xgdwmc" jdbcType="VARCHAR" />
+    <result column="XGR" property="xgr" jdbcType="VARCHAR" />
+    <result column="XGDW" property="xgdw" jdbcType="VARCHAR" />
+    <result column="GXSJ" property="gxsj" jdbcType="TIMESTAMP" />
+    <result column="MOVESIGN" property="movesign" jdbcType="CHAR" />
+    <result column="SBID" property="sbid" jdbcType="VARCHAR" />
+    <result column="LRJS" property="lrjs" jdbcType="CHAR" />
+    <result column="LRFS" property="lrfs" jdbcType="CHAR" />
+    <result column="LRWL" property="lrwl" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MAP_URL_ID, MAP_TYPE, INTOWEB, AREA_CODE, MAPURL, DJR, DJDW, DJSJ, DJRMC, DJDWMC, 
+    XGRMC, XGDWMC, XGR, XGDW, GXSJ, MOVESIGN, SBID, LRJS, LRFS, LRWL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from MAP_URL
+    where MAP_URL_ID = #{mapUrlId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from MAP_URL
+    where MAP_URL_ID = #{mapUrlId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kingmon.project.psam.appMapUrl.model.mapurl" >
+    insert into MAP_URL (MAP_URL_ID, MAP_TYPE, INTOWEB, 
+      AREA_CODE, MAPURL, DJR, 
+      DJDW, DJSJ, DJRMC, 
+      DJDWMC, XGRMC, XGDWMC, 
+      XGR, XGDW, GXSJ, 
+      MOVESIGN, SBID, LRJS, LRFS, 
+      LRWL)
+    values (#{mapUrlId,jdbcType=VARCHAR}, #{mapType,jdbcType=VARCHAR}, #{intoweb,jdbcType=VARCHAR}, 
+      #{areaCode,jdbcType=VARCHAR}, #{mapurl,jdbcType=VARCHAR}, #{djr,jdbcType=VARCHAR}, 
+      #{djdw,jdbcType=VARCHAR}, #{djsj,jdbcType=TIMESTAMP}, #{djrmc,jdbcType=VARCHAR}, 
+      #{djdwmc,jdbcType=VARCHAR}, #{xgrmc,jdbcType=VARCHAR}, #{xgdwmc,jdbcType=VARCHAR}, 
+      #{xgr,jdbcType=VARCHAR}, #{xgdw,jdbcType=VARCHAR}, #{gxsj,jdbcType=TIMESTAMP}, 
+      #{movesign,jdbcType=CHAR}, #{sbid,jdbcType=VARCHAR}, #{lrjs,jdbcType=CHAR}, #{lrfs,jdbcType=CHAR}, 
+      #{lrwl,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kingmon.project.psam.appMapUrl.model.mapurl" >
+    insert into MAP_URL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mapUrlId != null" >
+        MAP_URL_ID,
+      </if>
+      <if test="mapType != null" >
+        MAP_TYPE,
+      </if>
+      <if test="intoweb != null" >
+        INTOWEB,
+      </if>
+      <if test="areaCode != null" >
+        AREA_CODE,
+      </if>
+      <if test="mapurl != null" >
+        MAPURL,
+      </if>
+      <if test="djr != null" >
+        DJR,
+      </if>
+      <if test="djdw != null" >
+        DJDW,
+      </if>
+      <if test="djsj != null" >
+        DJSJ,
+      </if>
+      <if test="djrmc != null" >
+        DJRMC,
+      </if>
+      <if test="djdwmc != null" >
+        DJDWMC,
+      </if>
+      <if test="xgrmc != null" >
+        XGRMC,
+      </if>
+      <if test="xgdwmc != null" >
+        XGDWMC,
+      </if>
+      <if test="xgr != null" >
+        XGR,
+      </if>
+      <if test="xgdw != null" >
+        XGDW,
+      </if>
+      <if test="gxsj != null" >
+        GXSJ,
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN,
+      </if>
+      <if test="sbid != null" >
+        SBID,
+      </if>
+      <if test="lrjs != null" >
+        LRJS,
+      </if>
+      <if test="lrfs != null" >
+        LRFS,
+      </if>
+      <if test="lrwl != null" >
+        LRWL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mapUrlId != null" >
+        #{mapUrlId,jdbcType=VARCHAR},
+      </if>
+      <if test="mapType != null" >
+        #{mapType,jdbcType=VARCHAR},
+      </if>
+      <if test="intoweb != null" >
+        #{intoweb,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mapurl != null" >
+        #{mapurl,jdbcType=VARCHAR},
+      </if>
+      <if test="djr != null" >
+        #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw != null" >
+        #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="djrmc != null" >
+        #{djrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djdwmc != null" >
+        #{djdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgrmc != null" >
+        #{xgrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdwmc != null" >
+        #{xgdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgr != null" >
+        #{xgr,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdw != null" >
+        #{xgdw,jdbcType=VARCHAR},
+      </if>
+      <if test="gxsj != null" >
+        #{gxsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="sbid != null" >
+        #{sbid,jdbcType=VARCHAR},
+      </if>
+      <if test="lrjs != null" >
+        #{lrjs,jdbcType=CHAR},
+      </if>
+      <if test="lrfs != null" >
+        #{lrfs,jdbcType=CHAR},
+      </if>
+      <if test="lrwl != null" >
+        #{lrwl,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kingmon.project.psam.appMapUrl.model.mapurl" >
+    update MAP_URL
+    <set >
+      <if test="mapType != null" >
+        MAP_TYPE = #{mapType,jdbcType=VARCHAR},
+      </if>
+      <if test="intoweb != null" >
+        INTOWEB = #{intoweb,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mapurl != null" >
+        MAPURL = #{mapurl,jdbcType=VARCHAR},
+      </if>
+      <if test="djr != null" >
+        DJR = #{djr,jdbcType=VARCHAR},
+      </if>
+      <if test="djdw != null" >
+        DJDW = #{djdw,jdbcType=VARCHAR},
+      </if>
+      <if test="djsj != null" >
+        DJSJ = #{djsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="djrmc != null" >
+        DJRMC = #{djrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="djdwmc != null" >
+        DJDWMC = #{djdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgrmc != null" >
+        XGRMC = #{xgrmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdwmc != null" >
+        XGDWMC = #{xgdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xgr != null" >
+        XGR = #{xgr,jdbcType=VARCHAR},
+      </if>
+      <if test="xgdw != null" >
+        XGDW = #{xgdw,jdbcType=VARCHAR},
+      </if>
+      <if test="gxsj != null" >
+        GXSJ = #{gxsj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="movesign != null" >
+        MOVESIGN = #{movesign,jdbcType=CHAR},
+      </if>
+      <if test="sbid != null" >
+        SBID = #{sbid,jdbcType=VARCHAR},
+      </if>
+      <if test="lrjs != null" >
+        LRJS = #{lrjs,jdbcType=CHAR},
+      </if>
+      <if test="lrfs != null" >
+        LRFS = #{lrfs,jdbcType=CHAR},
+      </if>
+      <if test="lrwl != null" >
+        LRWL = #{lrwl,jdbcType=CHAR},
+      </if>
+    </set>
+    where MAP_URL_ID = #{mapUrlId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kingmon.project.psam.appMapUrl.model.mapurl" >
+    update MAP_URL
+    set MAP_TYPE = #{mapType,jdbcType=VARCHAR},
+      INTOWEB = #{intoweb,jdbcType=VARCHAR},
+      AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      MAPURL = #{mapurl,jdbcType=VARCHAR},
+      DJR = #{djr,jdbcType=VARCHAR},
+      DJDW = #{djdw,jdbcType=VARCHAR},
+      DJSJ = #{djsj,jdbcType=TIMESTAMP},
+      DJRMC = #{djrmc,jdbcType=VARCHAR},
+      DJDWMC = #{djdwmc,jdbcType=VARCHAR},
+      XGRMC = #{xgrmc,jdbcType=VARCHAR},
+      XGDWMC = #{xgdwmc,jdbcType=VARCHAR},
+      XGR = #{xgr,jdbcType=VARCHAR},
+      XGDW = #{xgdw,jdbcType=VARCHAR},
+      GXSJ = #{gxsj,jdbcType=TIMESTAMP},
+      MOVESIGN = #{movesign,jdbcType=CHAR},
+      SBID = #{sbid,jdbcType=VARCHAR},
+      LRJS = #{lrjs,jdbcType=CHAR},
+      LRFS = #{lrfs,jdbcType=CHAR},
+      LRWL = #{lrwl,jdbcType=CHAR}
+    where MAP_URL_ID = #{mapUrlId,jdbcType=VARCHAR}
+  </update>
+    <select id="selectMapUrlByCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    *
+    from MAP_URL
+    where AREA_CODE = #{areacode,jdbcType=VARCHAR}
+  </select>
+</mapper>

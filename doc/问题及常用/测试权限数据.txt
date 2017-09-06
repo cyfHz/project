@@ -1,0 +1,40 @@
+user:
+	admin
+	user_test_01
+	user_test_02
+	user_test_03
+	user_test_04
+	user_test_05
+	
+role:
+	role_test_01
+	role_test_02
+	role_test_03
+	role_test_04
+	role_test_05
+
+APP_DATARULE:
+	用户级别:cdf80e8c-fb77-4e1a-aa80-14398bf28d2f
+	
+app_role_user
+	user_test_role_01
+	user_test_role_02
+	user_test_role_03
+	user_test_role_04
+	user_test_role_05
+	
+app_role_res_drule
+	app_role_res_drule_01
+	app_role_res_drule_02
+	app_role_res_drule_03
+	app_role_res_drule_04
+	app_role_res_drule_05
+	
+54	app_role_res_drule_01	cdf80e8c-fb77-4e1a-aa80-14398bf28d2f	2	role_test_01	1				
+53	app_role_res_drule_02	cdf80e8c-fb77-4e1a-aa80-14398bf28d2f	4	role_test_02	1				
+52	app_role_res_drule_03	cdf80e8c-fb77-4e1a-aa80-14398bf28d2f	6	role_test_03	1				
+51	app_role_res_drule_04	cdf80e8c-fb77-4e1a-aa80-14398bf28d2f	10	role_test_04	1				
+50	app_role_res_drule_05	cdf80e8c-fb77-4e1a-aa80-14398bf28d2f	12	role_test_05	1				
+
+
+	

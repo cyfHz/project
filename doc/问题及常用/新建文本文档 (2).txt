@@ -1,0 +1,62 @@
+街路巷 :
+1.所属最低一级行政区域为空
+2.所属最低一级行政区域 找不到对应值
+
+----------------------------------------------------------------
+社区居村委会， 代码 是否严格  xzjd+3位
+select s.sqjcwhdm,s.sqjcwhmc,s.sjxzqy_dzbm from dz_sqjcwh s where s.sjxzqy_dzbm is null;
+
+select count(*) from dz_sqjcwh;--167662
+
+--119025
+select count(*) from 
+(select x.xzjddm as xxxxs ,x.xzjdmc, s.sqjcwhdm,s.sqjcwhmc,s.sjxzqy_dzbm from  dz_sqjcwh s left join dz_xzjd x 
+
+on s.sjxzqy_dzbm=x.dzbm where 1=1 ) where xxxxs is null
+
+--48637
+select * from 
+(select x.xzjddm as xxxxs ,x.xzjdmc, s.sqjcwhdm,s.sqjcwhmc,s.sjxzqy_dzbm from  dz_sqjcwh s left join dz_xzjd x 
+
+on s.sjxzqy_dzbm=x.dzbm where 1=1 order by xxxxs desc) where xxxxs is not  null
+
+--48634
+select * from 
+(select x.xzjddm as xxxxs ,x.xzjdmc, s.sqjcwhdm,s.sqjcwhmc,s.sjxzqy_dzbm from  dz_sqjcwh s left join dz_xzjd x 
+
+on s.sjxzqy_dzbm=x.dzbm where 1=1 order by xxxxs desc) where xxxxs is not  null
+
+and substr(sqjcwhdm, 0,9)=xxxxs;
+--------------------------------------------------------------------------------
+乡镇街道
+select count(*) from dz_xzjd;--2375
+
+--458
+select count(*) from 
+(select q.xzqhdm as xxxxs ,q.xzqhmc, x.xzjddm,x.xzjdmc,x.sjxzqy_dzbm from  dz_xzjd x left join dz_xzqh q 
+
+on x.sjxzqy_dzbm=q.dzbm where 1=1 ) where xxxxs is null
+
+--458
+select * from 
+(select q.xzqhdm as xxxxs ,q.xzqhmc, x.xzjddm,x.xzjdmc,x.sjxzqy_dzbm from  dz_xzjd x left join dz_xzqh q 
+
+on x.sjxzqy_dzbm=q.dzbm where 1=1 order by xxxxs desc) where xxxxs is null
+
+--1912
+select * from 
+(select q.xzqhdm as xxxxs ,q.xzqhmc, x.xzjddm,x.xzjdmc,x.sjxzqy_dzbm from  dz_xzjd x left join dz_xzqh q 
+
+on x.sjxzqy_dzbm=q.dzbm where 1=1 order by xxxxs desc) where xxxxs is not  null
+
+and substr(xzjddm, 0,6)=xxxxs;
+--5
+select * from 
+(select q.xzqhdm as xxxxs ,q.xzqhmc, x.xzjddm,x.xzjdmc,x.sjxzqy_dzbm from  dz_xzjd x left join dz_xzqh q 
+
+on x.sjxzqy_dzbm=q.dzbm where 1=1 order by xxxxs desc) where xxxxs is not  null
+
+and substr(xzjddm, 0,6)!=xxxxs;
+
+-------------------------------------------------------------------
+注解修改后，页面对应要修改

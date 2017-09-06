@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.kingmon.project.common.log.mapper.LogErrorMapper" >
+  
+  <resultMap id="BaseResultMap" type="com.kingmon.project.common.log.model.LogError" >
+    <result column="CLASSES" property="classes" jdbcType="VARCHAR" />
+    <result column="MOTHOD" property="mothod" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="VARCHAR" />
+    <result column="LOGLEVEL" property="loglevel" jdbcType="VARCHAR" />
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="LX" property="lx" jdbcType="VARCHAR" />
+    <result column="SBID" property="sbid" jdbcType="VARCHAR" />
+    <result column="MSG" property="msg" jdbcType="CLOB" />
+    
+    <result column="IMEI" property="imei" jdbcType="VARCHAR" />
+    <result column="TF" property="tf" jdbcType="VARCHAR" />
+    <result column="GPS_X" property="gpsX" jdbcType="VARCHAR" />
+    <result column="GPS_Y" property="gpsY" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <sql id="Blob_Column_List" >
+    CLASSES,MOTHOD,CREATETIME,LOGLEVEL,ID,LX,SBID,MSG,IMEI,TF,GPS_X,GPS_Y
+  </sql>
+  
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Blob_Column_List" />
+    from APP_LOG  where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <insert id="addLogError" parameterType="com.kingmon.project.common.log.model.LogError" >
+    insert into APP_LOG_ERROR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="classes != null" >CLASSES, </if>
+      <if test="mothod != null" >MOTHOD,</if>
+      <if test="createtime != null" >CREATETIME,</if>
+      <if test="loglevel != null" >LOGLEVEL,</if>
+      <if test="id != null" >ID,</if>
+      <if test="lx != null" >LX,</if>
+      <if test="sbid != null" >SBID,</if>
+      <if test="msg != null" >MSG,</if>
+      <if test="imei != null" >IMEI,</if>
+      <if test="tf != null" >TF,</if>
+      <if test="gpsX != null" >GPS_X,</if>
+      <if test="gpsY != null" >GPS_Y,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="classes != null" >#{classes,jdbcType=VARCHAR},</if>
+      <if test="mothod != null" >#{mothod,jdbcType=VARCHAR},</if>
+      <if test="createtime != null" >#{createtime,jdbcType=VARCHAR},</if>
+      <if test="loglevel != null" >#{loglevel,jdbcType=VARCHAR},</if>
+      <if test="id != null" >#{id,jdbcType=VARCHAR},</if>
+      <if test="lx != null" > #{lx,jdbcType=VARCHAR}, </if>
+      <if test="sbid != null" >#{sbid,jdbcType=VARCHAR},</if>
+      <if test="msg != null" > #{msg,jdbcType=CLOB},</if>
+      <if test="imei != null" >#{imei,jdbcType=CLOB},</if>
+      <if test="tf != null" >#{tf,jdbcType=CLOB},</if>
+      <if test="gpsX != null" >#{gpsX,jdbcType=CLOB},</if>
+      <if test="gpsY != null" >#{gpsY,jdbcType=CLOB},</if>
+    </trim>
+  </insert>
+  
+  <!--通用分页 -->
+	<sql id="Paging_Start">
+		SELECT * FROM (
+		SELECT T_.*, rownum rn_ FROM (
+	</sql>
+
+	<sql id="Paging_end">
+		) T_ WHERE rownum &lt;= ${pageend}
+		) WHERE rn_ &gt;
+		${pagestart}
+	</sql>
+
+	<!-- #######################page query start ########################################### -->
+	<sql id="Alias_Base_Column_List">
+		${alias}.ID,
+		${alias}.CLASSES, 
+		${alias}.MOTHOD,
+		${alias}.CREATETIME,
+		${alias}.LOGLEVEL, 
+		${alias}.LX,
+		${alias}.SBID,
+		${alias}.MSG,
+		${alias}.IMEI,
+		${alias}.TF,
+		${alias}.GPS_X,
+		${alias}.GPS_Y
+	</sql>
+
+	<select id="selectLogErrorList" resultType="java.util.Map"
+		parameterType="java.util.Map">
+		<include refid="Paging_Start" />
+		SELECT
+		<include refid="Alias_Base_Column_List">
+			<property name="alias" value="T1" />
+		</include>
+		FROM APP_LOG_ERROR T1 WHERE 1=1
+		<include refid="LogErrorList_where">
+			<property name="alias" value="T1" />
+		</include>
+		<if test="sort != null">
+			ORDER BY T1.${sort} ${order}
+		</if>
+		<include refid="Paging_end" />
+	</select>
+
+	<select id="selectLogErrorCount" resultType="java.lang.Long"
+		parameterType="java.util.Map">
+		select count(1) from APP_LOG_ERROR T1 WHERE 1=1
+		<include refid="LogErrorList_where">
+			<property name="alias" value="T1" />
+		</include>
+	</select>
+
+	<sql id="LogErrorList_where">
+		<if test="sbid != null">
+			AND ${alias}.SBID = #{sbid,jdbcType=VARCHAR}
+		</if>
+	 <!--    <if test="start_time != null">
+			AND  to_char(${alias}.CREATETIME ,'yyyy-mm-dd hh24:mm:ss')  &gt;=#{start_time,jdbcType=VARCHAR}
+		</if>
+		<if test="end_time != null">
+			AND to_char(${alias}.CREATETIME ,'yyyy-mm-dd hh24:mm:ss')  &lt;=#{end_time,jdbcType=VARCHAR}
+		</if> -->	
+		
+		 <if test="start_time != null">
+			AND  ${alias}.CREATETIME &gt;=#{start_time,jdbcType=VARCHAR}
+		</if>
+		<if test="end_time != null">
+			AND ${alias}.CREATETIME &lt;=#{end_time,jdbcType=VARCHAR}
+		</if>	
+	</sql>
+
+	<!-- #######################page query end ########################################### -->
+</mapper>

@@ -1,0 +1,18 @@
+-- Create table
+create table DZ_SERVICEERROR_TASK
+(
+  id             VARCHAR2(36) not null,
+  servicevalueid VARCHAR2(36),
+  errotime       DATE
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the columns 
+comment on column DZ_SERVICEERROR_TASK.id
+  is '主键ID';
+comment on column DZ_SERVICEERROR_TASK.servicevalueid
+  is '出错数据(外键)';
+comment on column DZ_SERVICEERROR_TASK.errotime
+  is '出错时间';
